@@ -7,25 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D31B35B1F65992C00B9DDD7 /* s2d_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */; };
 		B6A7F0781F656F3800E1CE26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F0771F656F3800E1CE26 /* main.m */; };
 		B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */; };
-		B6A7F07E1F656F3800E1CE26 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07D1F656F3800E1CE26 /* ViewController.m */; };
+		B6A7F07E1F656F3800E1CE26 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07D1F656F3800E1CE26 /* ViewController.mm */; };
 		B6A7F0811F656F3800E1CE26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A7F07F1F656F3800E1CE26 /* Main.storyboard */; };
 		B6A7F0831F656F3800E1CE26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6A7F0821F656F3800E1CE26 /* Assets.xcassets */; };
 		B6A7F0861F656F3800E1CE26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A7F0841F656F3800E1CE26 /* LaunchScreen.storyboard */; };
+		B6A7F0931F656FD700E1CE26 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0921F656FD700E1CE26 /* OpenGLES.framework */; };
+		B6A7F0951F656FDB00E1CE26 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0941F656FDB00E1CE26 /* GLKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_sprite.cpp; sourceTree = "<group>"; };
+		4D31B35A1F65992C00B9DDD7 /* s2d_sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_sprite.h; sourceTree = "<group>"; };
 		B6A7F0731F656F3800E1CE26 /* hello-world.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-world.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A7F0771F656F3800E1CE26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6A7F0791F656F3800E1CE26 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B6A7F07C1F656F3800E1CE26 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B6A7F07D1F656F3800E1CE26 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B6A7F07D1F656F3800E1CE26 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		B6A7F0801F656F3800E1CE26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B6A7F0821F656F3800E1CE26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6A7F0851F656F3800E1CE26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6A7F0871F656F3800E1CE26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6A7F0921F656FD700E1CE26 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		B6A7F0941F656FDB00E1CE26 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +40,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6A7F0951F656FDB00E1CE26 /* GLKit.framework in Frameworks */,
+				B6A7F0931F656FD700E1CE26 /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D31B3581F65992C00B9DDD7 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */,
+				4D31B35A1F65992C00B9DDD7 /* s2d_sprite.h */,
+			);
+			name = src;
+			path = ../../../src;
+			sourceTree = "<group>";
+		};
 		B6A7F06A1F656F3800E1CE26 = {
 			isa = PBXGroup;
 			children = (
+				4D31B3581F65992C00B9DDD7 /* src */,
 				B6A7F0751F656F3800E1CE26 /* hello-world */,
 				B6A7F0741F656F3800E1CE26 /* Products */,
+				B6A7F0911F656FD700E1CE26 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,7 +82,7 @@
 				B6A7F0791F656F3800E1CE26 /* AppDelegate.h */,
 				B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */,
 				B6A7F07C1F656F3800E1CE26 /* ViewController.h */,
-				B6A7F07D1F656F3800E1CE26 /* ViewController.m */,
+				B6A7F07D1F656F3800E1CE26 /* ViewController.mm */,
 				B6A7F07F1F656F3800E1CE26 /* Main.storyboard */,
 				B6A7F0821F656F3800E1CE26 /* Assets.xcassets */,
 				B6A7F0841F656F3800E1CE26 /* LaunchScreen.storyboard */,
@@ -77,6 +98,15 @@
 				B6A7F0771F656F3800E1CE26 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B6A7F0911F656FD700E1CE26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6A7F0941F656FDB00E1CE26 /* GLKit.framework */,
+				B6A7F0921F656FD700E1CE26 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,6 +140,7 @@
 				TargetAttributes = {
 					B6A7F0721F656F3800E1CE26 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = GH4YBKBN58;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -150,8 +181,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6A7F07E1F656F3800E1CE26 /* ViewController.m in Sources */,
+				B6A7F07E1F656F3800E1CE26 /* ViewController.mm in Sources */,
 				B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */,
+				4D31B35B1F65992C00B9DDD7 /* s2d_sprite.cpp in Sources */,
 				B6A7F0781F656F3800E1CE26 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +306,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GH4YBKBN58;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/src";
 				INFOPLIST_FILE = "hello-world/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.levelmax.hello-world";
@@ -285,6 +319,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GH4YBKBN58;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/src";
 				INFOPLIST_FILE = "hello-world/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.levelmax.hello-world";
@@ -311,6 +347,7 @@
 				B6A7F08C1F656F3800E1CE26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
