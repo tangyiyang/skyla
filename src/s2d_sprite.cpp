@@ -109,7 +109,7 @@ static GLuint create_shader(GLenum shader_type, const char* shader_data)
     return shader;
 }
 
-namespace s2d {
+NS_S2D
 
 void sprite::init()
 {
@@ -134,11 +134,17 @@ void sprite::init()
 
     printf("sprite.init vs, fs, program = %d, %d, %d\n", vs, fs, _program);
 
+    _vbo = 0;
+    _vao = 0;
     glGenBuffers(1, &_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
+    glGenVertexArrays(1, &_vao);
+    glBindVertexArray(_vao);
     glEnableVertexAttribArray(0);
     glBindAttribLocation(_program, 0, "vertex_pos");
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_TRUE, sizeof(float)*2, 0);
+    glBindVertexArray(0);
 
     CHECK_GL_ERROR;
 }
@@ -149,7 +155,8 @@ void sprite::update()
     glBufferData(GL_ARRAY_BUFFER, sizeof(float)*6, _vertex, GL_DYNAMIC_DRAW);
 
     glUseProgram(_program);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_TRUE, sizeof(float)*2, 0);
+
+    glBindVertexArray(_vao);
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
     CHECK_GL_ERROR;
@@ -159,4 +166,5 @@ void sprite::draw()
 {
 
 }
-}
+
+NS_S2D_END

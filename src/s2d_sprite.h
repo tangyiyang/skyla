@@ -23,9 +23,9 @@ THE SOFTWARE.
 #ifndef s2d_sprite_h
 #define s2d_sprite_h
 
-#include <OpenGLES/ES2/glext.h>
+#include "s2d_common.h"
 
-namespace s2d {
+NS_S2D
 
 class sprite {
 public:
@@ -37,7 +37,8 @@ public:
     float _vertex[6];
     GLuint _program;
     GLuint _vbo;
+    GLuint _vao;
 };
 
-}
+NS_S2D_END
 #endif /* s2d_sprite_h */

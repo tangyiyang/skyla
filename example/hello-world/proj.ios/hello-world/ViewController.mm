@@ -10,13 +10,15 @@
 #import "ViewController.h"
 #import <OpenGLES/ES2/glext.h>
 
-#include "s2d_sprite.h"
+#include "s2d.h"
 
 @interface ViewController () {
 
 }
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
+
+@property s2d::s2d_context *game_context;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -25,7 +27,7 @@
 
 @implementation ViewController
 
-static s2d::sprite* _spr;
+
 
 - (void)viewDidLoad
 {
@@ -44,8 +46,9 @@ static s2d::sprite* _spr;
 
     [self setupGL];
 
-    _spr = new s2d::sprite();
-    _spr->init();
+    self.game_context = new s2d::s2d_context();
+    self.game_context->init();
+
 }
 
 - (void)viewDidLayoutSubviews
@@ -54,9 +57,6 @@ static s2d::sprite* _spr;
     [view bindDrawable];
     
     self.preferredFramesPerSecond = 60.0f;
-
-    CGSize viewSize = [view bounds].size;
-    CGFloat scaleFactor = [view contentScaleFactor];
 }
 
 - (void)dealloc
@@ -66,6 +66,8 @@ static s2d::sprite* _spr;
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
+
+    self.game_context->shutdown();
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,7 +107,7 @@ static s2d::sprite* _spr;
 
 - (void)update
 {
-
+    self.game_context->update();
 
 }
 
@@ -115,11 +117,9 @@ static s2d::sprite* _spr;
     
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
-
-
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
-    _spr->update();
-    _spr->draw();
+    
+    self.game_context->draw();
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

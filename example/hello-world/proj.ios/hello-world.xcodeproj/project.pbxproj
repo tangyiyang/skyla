@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43DF78D41F66694E00EC6747 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0941F656FDB00E1CE26 /* GLKit.framework */; };
+		43DF78D81F667C3400EC6747 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DF78D71F667C3400EC6747 /* QuartzCore.framework */; };
+		43FC6B671F6634E100934F03 /* s2d_context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43FC6B621F6634E100934F03 /* s2d_context.cpp */; };
+		43FC6B681F6634E100934F03 /* s2d_gl_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43FC6B641F6634E100934F03 /* s2d_gl_util.cpp */; };
 		4D31B35B1F65992C00B9DDD7 /* s2d_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */; };
 		B6A7F0781F656F3800E1CE26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F0771F656F3800E1CE26 /* main.m */; };
 		B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */; };
@@ -15,10 +19,16 @@
 		B6A7F0831F656F3800E1CE26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6A7F0821F656F3800E1CE26 /* Assets.xcassets */; };
 		B6A7F0861F656F3800E1CE26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A7F0841F656F3800E1CE26 /* LaunchScreen.storyboard */; };
 		B6A7F0931F656FD700E1CE26 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0921F656FD700E1CE26 /* OpenGLES.framework */; };
-		B6A7F0951F656FDB00E1CE26 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0941F656FDB00E1CE26 /* GLKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43DF78D71F667C3400EC6747 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		43FC6B611F6634E100934F03 /* s2d_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_common.h; sourceTree = "<group>"; };
+		43FC6B621F6634E100934F03 /* s2d_context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_context.cpp; sourceTree = "<group>"; };
+		43FC6B631F6634E100934F03 /* s2d_context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_context.h; sourceTree = "<group>"; };
+		43FC6B641F6634E100934F03 /* s2d_gl_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_gl_util.cpp; sourceTree = "<group>"; };
+		43FC6B651F6634E100934F03 /* s2d_gl_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_gl_util.h; sourceTree = "<group>"; };
+		43FC6B661F6634E100934F03 /* s2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d.h; sourceTree = "<group>"; };
 		4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_sprite.cpp; sourceTree = "<group>"; };
 		4D31B35A1F65992C00B9DDD7 /* s2d_sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_sprite.h; sourceTree = "<group>"; };
 		B6A7F0731F656F3800E1CE26 /* hello-world.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-world.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,7 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6A7F0951F656FDB00E1CE26 /* GLKit.framework in Frameworks */,
+				43DF78D81F667C3400EC6747 /* QuartzCore.framework in Frameworks */,
+				43DF78D41F66694E00EC6747 /* GLKit.framework in Frameworks */,
 				B6A7F0931F656FD700E1CE26 /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,6 +62,12 @@
 		4D31B3581F65992C00B9DDD7 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				43FC6B611F6634E100934F03 /* s2d_common.h */,
+				43FC6B621F6634E100934F03 /* s2d_context.cpp */,
+				43FC6B631F6634E100934F03 /* s2d_context.h */,
+				43FC6B641F6634E100934F03 /* s2d_gl_util.cpp */,
+				43FC6B651F6634E100934F03 /* s2d_gl_util.h */,
+				43FC6B661F6634E100934F03 /* s2d.h */,
 				4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */,
 				4D31B35A1F65992C00B9DDD7 /* s2d_sprite.h */,
 			);
@@ -103,6 +120,7 @@
 		B6A7F0911F656FD700E1CE26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43DF78D71F667C3400EC6747 /* QuartzCore.framework */,
 				B6A7F0941F656FDB00E1CE26 /* GLKit.framework */,
 				B6A7F0921F656FD700E1CE26 /* OpenGLES.framework */,
 			);
@@ -182,6 +200,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6A7F07E1F656F3800E1CE26 /* ViewController.mm in Sources */,
+				43FC6B671F6634E100934F03 /* s2d_context.cpp in Sources */,
+				43FC6B681F6634E100934F03 /* s2d_gl_util.cpp in Sources */,
 				B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */,
 				4D31B35B1F65992C00B9DDD7 /* s2d_sprite.cpp in Sources */,
 				B6A7F0781F656F3800E1CE26 /* main.m in Sources */,
