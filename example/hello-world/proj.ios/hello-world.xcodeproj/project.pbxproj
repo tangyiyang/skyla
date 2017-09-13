@@ -32,6 +32,7 @@
 		43DF79071F68E52600EC6747 /* s2d_matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_matrix4.h; sourceTree = "<group>"; };
 		43DF79091F68E93800EC6747 /* s2d_math.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_math.cpp; sourceTree = "<group>"; };
 		43DF790A1F68E93800EC6747 /* s2d_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_math.h; sourceTree = "<group>"; };
+		43DF790C1F690FB300EC6747 /* s2d_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_macro.h; sourceTree = "<group>"; };
 		43FC6B611F6634E100934F03 /* s2d_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_common.h; sourceTree = "<group>"; };
 		43FC6B621F6634E100934F03 /* s2d_context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_context.cpp; sourceTree = "<group>"; };
 		43FC6B631F6634E100934F03 /* s2d_context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_context.h; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 				43DF79071F68E52600EC6747 /* s2d_matrix4.h */,
 				43DF79091F68E93800EC6747 /* s2d_math.cpp */,
 				43DF790A1F68E93800EC6747 /* s2d_math.h */,
+				43DF790C1F690FB300EC6747 /* s2d_macro.h */,
 			);
 			name = src;
 			path = ../../../src;

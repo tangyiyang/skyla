@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "s2d_sprite.h"
-#include <stdio.h>
+#include "s2d_context.h"
 
 #define STRINGFY(x) #x
 
@@ -113,12 +113,12 @@ NS_S2D
 
 void sprite::init()
 {
-    _vertex[0] = 0.0f;
-    _vertex[1] = 0.0f;
-    _vertex[2] = 0.5f;
-    _vertex[3] = 1.0f;
-    _vertex[4] = 1.0f;
-    _vertex[5] = 0.0f;
+    _vertex[0].x = 0;
+    _vertex[0].y = 0;
+    _vertex[1].x = 100;
+    _vertex[1].y = 100;
+    _vertex[2].x = 200;
+    _vertex[2].y = 0;
 
     int index = 0;
     const char* shaders[] = {
@@ -151,8 +151,30 @@ void sprite::init()
 
 void sprite::update()
 {
+    context* ctx = context::_global_context;
+    camera* c = ctx->_camera;
+
+
+    vec2 tmp[3];
+    tmp[0] = matrix4::multiply_vec2(&c->_m, _vertex[0]);
+    tmp[1] = matrix4::multiply_vec2(&c->_m, _vertex[1]);
+    tmp[2] = matrix4::multiply_vec2(&c->_m, _vertex[2]);
+
+    matrix4* mv = &ctx->_model_view_matrix;
+
+
+    _buffer[0] = matrix4::multiply_vec2_trans(mv, tmp[0]);
+    _buffer[1] = matrix4::multiply_vec2_trans(mv, tmp[1]);
+    _buffer[2] = matrix4::multiply_vec2_trans(mv, tmp[2]);
+
+
+
+    printf("%.2f, %.2f\n", _buffer[0].x, _buffer[0].y);
+    printf("%.2f, %.2f\n", _buffer[1].x, _buffer[1].y);
+    printf("%.2f, %.2f\n", _buffer[2].x, _buffer[2].y);
+
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*6, _vertex, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*6, tmp, GL_DYNAMIC_DRAW);
 
     glUseProgram(_program);
 

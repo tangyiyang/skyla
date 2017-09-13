@@ -34,7 +34,8 @@ public:
     void draw();
 
 public:
-    float _vertex[6];
+    vec2 _vertex[3];
+    vec2 _buffer[3];
     GLuint _program;
     GLuint _vbo;
     GLuint _vao;

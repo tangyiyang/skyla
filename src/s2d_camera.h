@@ -15,9 +15,10 @@ public:
     void init_orthographic(float width, float height);
     void translate(const vec2& offset);
 
-private:
+public:
     matrix4 _m;
 
+    size _size;
 };
 
 NS_S2D_END

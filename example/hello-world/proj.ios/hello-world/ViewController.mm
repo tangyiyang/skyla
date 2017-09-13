@@ -18,7 +18,7 @@
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 
-@property s2d::s2d_context *game_context;
+@property s2d::context *game_context;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -46,7 +46,7 @@
 
     [self setupGL];
 
-    self.game_context = new s2d::s2d_context();
+    self.game_context = new s2d::context();
 }
 
 - (void)viewDidLayoutSubviews
@@ -111,7 +111,6 @@
 
 - (void)update
 {
-    self.game_context->update();
 
 }
 
@@ -122,7 +121,7 @@
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
-    
+    self.game_context->update();
     self.game_context->draw();
 }
 

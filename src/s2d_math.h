@@ -5,7 +5,7 @@
 #ifndef s2d_math_h
 #define s2d_math_h
 
-#include "s2d_common.h"
+#include "s2d_macro.h"
 
 NS_S2D
 
@@ -14,6 +14,18 @@ struct vec2 {
     float y;
 };
 
+struct vec3 {
+    float x;
+    float y;
+    float z;
+};
+
+struct vec4 {
+    float x;
+    float y;
+    float z;
+    float w;
+};
 
 struct size {
     float width;

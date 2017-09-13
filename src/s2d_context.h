@@ -10,17 +10,20 @@
 #include "s2d_camera.h"
 
 NS_S2D
-class s2d_context {
+class context {
 public:
     void init(float width, float height);
     void update();
     void draw();
     void shutdown();
 
-
-private:
+public:
     sprite* _root;
     camera* _camera;
+
+    matrix4 _model_view_matrix;
+public:
+    static context* _global_context;
 };
 
 NS_S2D_END
