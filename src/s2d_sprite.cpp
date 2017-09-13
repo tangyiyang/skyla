@@ -113,6 +113,13 @@ NS_S2D
 
 void sprite::init()
 {
+    _local_transform = affine_transform::mk_identity();
+    _pos = {200, 200};
+    _scale = {1.0, 2.0};
+    _rotaion = {0, 0};
+    _anchor = {0, 0};
+    _size = {200, 100};
+
     _vertex[0].x = 0;
     _vertex[0].y = 0;
     _vertex[1].x = 100;
@@ -149,32 +156,56 @@ void sprite::init()
     CHECK_GL_ERROR;
 }
 
+void sprite::update_srt()
+{
+    _local_transform = affine_transform::mk_identity();
+
+    float anchor_x = _size.width * _anchor.x;
+    float anchor_y = _size.height * _anchor.y;
+
+    affine_transform anchor_to = affine_transform::mk_translate(-anchor_x, -anchor_y);
+    affine_transform scale = affine_transform::mk_scale(_scale.x, _scale.y);
+    affine_transform rotation = affine_transform::mk_rotation(_rotaion.x, _rotaion.y);
+    affine_transform translate = affine_transform::mk_translate(_pos.x, _pos.y);
+
+    affine_transform::inplace_concat(_local_transform, anchor_to);
+    affine_transform::inplace_concat(_local_transform, scale);
+    affine_transform::inplace_concat(_local_transform, rotation);
+    affine_transform::inplace_concat(_local_transform, translate);
+}
+
 void sprite::update()
 {
-    context* ctx = context::_global_context;
-    camera* c = ctx->_camera;
+    this->update_srt();
 
+    context* ctx = context::_global_context;
 
     vec2 tmp[3];
-    tmp[0] = matrix4::multiply_vec2(&c->_m, _vertex[0]);
-    tmp[1] = matrix4::multiply_vec2(&c->_m, _vertex[1]);
-    tmp[2] = matrix4::multiply_vec2(&c->_m, _vertex[2]);
+    tmp[0] = affine_transform::apply_transform(_local_transform, _vertex[0].x, _vertex[0].y);
+    tmp[1] = affine_transform::apply_transform(_local_transform, _vertex[1].x, _vertex[1].y);
+    tmp[2] = affine_transform::apply_transform(_local_transform, _vertex[2].x, _vertex[2].y);
 
     matrix4* mv = &ctx->_model_view_matrix;
 
+    tmp[0] = matrix4::multiply_vec2_trans(mv, tmp[0]);
+    tmp[1] = matrix4::multiply_vec2_trans(mv, tmp[1]);
+    tmp[2] = matrix4::multiply_vec2_trans(mv, tmp[2]);
 
-    _buffer[0] = matrix4::multiply_vec2_trans(mv, tmp[0]);
-    _buffer[1] = matrix4::multiply_vec2_trans(mv, tmp[1]);
-    _buffer[2] = matrix4::multiply_vec2_trans(mv, tmp[2]);
+    camera* c = ctx->_camera;
+    matrix4* cm = &c->_m;
+    _buffer[0] = matrix4::multiply_vec2(cm, tmp[0]);
+    _buffer[1] = matrix4::multiply_vec2(cm, tmp[1]);
+    _buffer[2] = matrix4::multiply_vec2(cm, tmp[2]);
+}
 
-
-
+void sprite::draw()
+{
     printf("%.2f, %.2f\n", _buffer[0].x, _buffer[0].y);
     printf("%.2f, %.2f\n", _buffer[1].x, _buffer[1].y);
     printf("%.2f, %.2f\n", _buffer[2].x, _buffer[2].y);
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*6, tmp, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*6, _buffer, GL_DYNAMIC_DRAW);
 
     glUseProgram(_program);
 
@@ -182,11 +213,6 @@ void sprite::update()
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
     CHECK_GL_ERROR;
-}
-
-void sprite::draw()
-{
-
 }
 
 NS_S2D_END

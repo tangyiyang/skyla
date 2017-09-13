@@ -33,12 +33,22 @@ public:
     void update();
     void draw();
 
+    void update_srt();
+
 public:
     vec2 _vertex[3];
     vec2 _buffer[3];
     GLuint _program;
     GLuint _vbo;
     GLuint _vao;
+
+    vec2 _pos;
+    vec2 _scale;
+    vec2 _rotaion;
+    vec2 _anchor;
+    size _size;
+
+    affine_transform _local_transform;
 };
 
 NS_S2D_END

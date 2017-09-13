@@ -111,6 +111,7 @@
 
 - (void)update
 {
+    self.game_context->update();
 
 }
 
@@ -120,8 +121,9 @@
     
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
+    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.37, 0.37, 0.37, 1.0);
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
-    self.game_context->update();
     self.game_context->draw();
 }
 

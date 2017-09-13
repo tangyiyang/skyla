@@ -29,7 +29,7 @@ void context::update()
 }
 void context::draw()
 {
-
+    _root->draw();
 }
 
 void context::shutdown()
