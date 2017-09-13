@@ -16,5 +16,7 @@
 #define NS_S2D_END }
 
 #include "s2d_gl_util.h"
+#include "s2d_math.h"
+#include "s2d_matrix4.h"
 
 #endif /* s2d_common_h */

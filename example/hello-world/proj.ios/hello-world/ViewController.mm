@@ -47,8 +47,6 @@
     [self setupGL];
 
     self.game_context = new s2d::s2d_context();
-    self.game_context->init();
-
 }
 
 - (void)viewDidLayoutSubviews
@@ -57,6 +55,12 @@
     [view bindDrawable];
     
     self.preferredFramesPerSecond = 60.0f;
+
+    CGSize viewSize = [view bounds].size;
+    CGFloat scaleFactor = [view contentScaleFactor];
+
+    self.game_context->init(viewSize.width * scaleFactor, viewSize.height * scaleFactor);
+
 }
 
 - (void)dealloc

@@ -7,17 +7,20 @@
 
 #include "s2d_common.h"
 #include "s2d_sprite.h"
+#include "s2d_camera.h"
 
 NS_S2D
 class s2d_context {
 public:
-    void init();
+    void init(float width, float height);
     void update();
     void draw();
     void shutdown();
 
+
 private:
     sprite* _root;
+    camera* _camera;
 };
 
 NS_S2D_END

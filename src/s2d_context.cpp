@@ -5,12 +5,15 @@
 #include "s2d_context.h"
 
 NS_S2D
-void s2d_context::init()
+void s2d_context::init(float width, float height)
 {
     s2d_gl_util::check_gl_extension();
 
-    _root = new s2d::sprite();
+    _root = new sprite();
     _root->init();
+
+    _camera = new camera();
+    _camera->init_orthographic(width, height);
 }
 
 void s2d_context::update()
