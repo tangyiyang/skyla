@@ -21,7 +21,7 @@ public:
     sprite* _root;
     camera* _camera;
 
-    matrix4 _model_view_matrix;
+    affine_transform _model_view_affine_transform;
 public:
     static context* _global_context;
 };

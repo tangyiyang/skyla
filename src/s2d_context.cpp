@@ -20,7 +20,7 @@ void context::init(float width, float height)
     _camera = new camera();
     _camera->init_orthographic(width, height);
 
-    matrix4::init_translate(&_model_view_matrix, -width/2, -height/2, 0);
+    _model_view_affine_transform = affine_transform::mk_translate(-width/2, -height/2);
 }
 
 void context::update()

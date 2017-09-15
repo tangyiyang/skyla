@@ -114,7 +114,8 @@ NS_S2D
 void sprite::init()
 {
     _local_transform = affine_transform::mk_identity();
-    _pos = {200, 200};
+    _pos = {0, 0};
+
     _scale = {1.0, 2.0};
     _rotaion = {0, 0};
     _anchor = {0, 0};
@@ -185,11 +186,11 @@ void sprite::update()
     tmp[1] = affine_transform::apply_transform(_local_transform, _vertex[1].x, _vertex[1].y);
     tmp[2] = affine_transform::apply_transform(_local_transform, _vertex[2].x, _vertex[2].y);
 
-    matrix4* mv = &ctx->_model_view_matrix;
+    const affine_transform& mv = ctx->_model_view_affine_transform;
 
-    tmp[0] = matrix4::multiply_vec2_trans(mv, tmp[0]);
-    tmp[1] = matrix4::multiply_vec2_trans(mv, tmp[1]);
-    tmp[2] = matrix4::multiply_vec2_trans(mv, tmp[2]);
+    tmp[0] = affine_transform::apply_transform(mv, tmp[0].x, tmp[0].y);
+    tmp[1] = affine_transform::apply_transform(mv, tmp[1].x, tmp[1].y);
+    tmp[2] = affine_transform::apply_transform(mv, tmp[2].x, tmp[2].y);
 
     camera* c = ctx->_camera;
     matrix4* cm = &c->_m;
