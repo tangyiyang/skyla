@@ -27,7 +27,7 @@ THE SOFTWARE.
 
 #define CHECK_GL_ERROR check_gl_error(__FILE__, __LINE__);
 
-
+#define USE_UNIFORM
 void check_gl_error(const char* file, int line)
 {
     GLenum err = GL_NO_ERROR;
@@ -36,14 +36,31 @@ void check_gl_error(const char* file, int line)
     }
 }
 
+#ifdef USE_UNIFORM
 static const char* vs_primitive = STRINGFY(\n
                                            precision lowp float;\n
                                            attribute mediump vec2 vertex_pos;\n
-
+//                                           uniform mat4 u_model_view1; \n
+                                           mat3 model;
                                            void main() {\n
-                                               gl_Position = vec4(vertex_pos.x, vertex_pos.y, 0.0, 1.0); \n
+                                               model[0] = vec3(0.00312500005,0, 0); \n
+                                               model[1] = vec3(0, 0.00176056335, 0); \n
+                                               model[2] = vec3(0, 0 ,1);     \n
+                                               vec3 pos = model * vec3(vertex_pos.x, vertex_pos.y, 1.0); \n
+
+                                               gl_Position = vec4(pos.x, pos.y, -0.99, 1.0); \n
                                            }\n
                                            );
+#else
+static const char* vs_primitive = STRINGFY(\n
+                                           precision lowp float;\n
+                                           attribute mediump vec2 vertex_pos;\n
+                                           void main() {\n
+                                               gl_Position = vec4(vertex_pos.x, vertex_pos.y, 1.0, 1.0); \n
+                                           }\n
+                                           );
+#endif
+
 
 static const char* fs_primitive = STRINGFY(\n
                                            precision lowp float;\n
@@ -139,6 +156,7 @@ void sprite::init()
     GLuint fs = create_shader(GL_FRAGMENT_SHADER, shaders[index+1]);
 
     _program = create_program(vs, fs);
+    CHECK_GL_ERROR;
 
     printf("sprite.init vs, fs, program = %d, %d, %d\n", vs, fs, _program);
 
@@ -186,7 +204,14 @@ void sprite::update()
     tmp[1] = affine_transform::apply_transform(_local_transform, _vertex[1].x, _vertex[1].y);
     tmp[2] = affine_transform::apply_transform(_local_transform, _vertex[2].x, _vertex[2].y);
 
-    const affine_transform& mv = ctx->_model_view_affine_transform;
+#ifdef USE_UNIFORM
+    const affine_transform& mv = ctx->_world_view_affine_transform;
+
+    _buffer[0] = affine_transform::apply_transform(mv, tmp[0].x, tmp[0].y);
+    _buffer[1] = affine_transform::apply_transform(mv, tmp[1].x, tmp[1].y);
+    _buffer[2] = affine_transform::apply_transform(mv, tmp[2].x, tmp[2].y);
+#else
+    const affine_transform& mv = ctx->_world_view_affine_transform;
 
     tmp[0] = affine_transform::apply_transform(mv, tmp[0].x, tmp[0].y);
     tmp[1] = affine_transform::apply_transform(mv, tmp[1].x, tmp[1].y);
@@ -197,10 +222,14 @@ void sprite::update()
     _buffer[0] = matrix4::multiply_vec2(cm, tmp[0]);
     _buffer[1] = matrix4::multiply_vec2(cm, tmp[1]);
     _buffer[2] = matrix4::multiply_vec2(cm, tmp[2]);
+#endif
+
 }
 
 void sprite::draw()
 {
+    glEnable(GL_DEPTH_TEST);
+
     printf("%.2f, %.2f\n", _buffer[0].x, _buffer[0].y);
     printf("%.2f, %.2f\n", _buffer[1].x, _buffer[1].y);
     printf("%.2f, %.2f\n", _buffer[2].x, _buffer[2].y);
@@ -209,7 +238,16 @@ void sprite::draw()
     glBufferData(GL_ARRAY_BUFFER, sizeof(float)*6, _buffer, GL_DYNAMIC_DRAW);
 
     glUseProgram(_program);
+    CHECK_GL_ERROR;
 
+#ifdef USE_UNIFORM
+//    _model_view_uniform_location = glGetUniformLocation(_program, "u_model_view1");
+
+//    context* ctx = context::_global_context;
+//    camera* c = ctx->_camera;
+
+//    glUniformMatrix4fv(_model_view_uniform_location, 1, GL_FALSE, c->_m.m);
+#endif
     glBindVertexArray(_vao);
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
