@@ -20,50 +20,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#ifndef s2d_sprite_h
-#define s2d_sprite_h
+#ifndef s2d_sprite_renderer_h
+#define s2d_sprite_renderer_h
 
 #include "s2d_common.h"
-#include "s2d_texture.h"
 #include "s2d_vertex_buffer.h"
 
 NS_S2D
 
-//#define USE_SPRITE_VERTEX
-
-class sprite {
+class sprite_renderer {
 public:
+    sprite_renderer();
+
     void init();
-    void update();
-    void draw();
-
-    void update_srt();
 
 public:
+    void submit();
 
-
-#ifdef USE_SPRITE_VERTEX
-    pos_tex_color_vertex _quad[4];
-#else
-    vec2 _vertex[3];
-    vec2 _buffer[3];
-#endif
-
+private:
+    sprite_vertex_buffer* _vertex_buffer;
+    
     GLuint _program;
     GLuint _vbo;
     GLuint _vao;
     GLint _u_projection;
-
-    vec2 _pos;
-    vec2 _scale;
-    vec2 _rotaion;
-    vec2 _anchor;
-    size _size;
-
-    affine_transform _local_transform;
-    
-    texture* _texture;
 };
 
 NS_S2D_END
-#endif /* s2d_sprite_h */
+
+#endif /* s2d_sprite_renderer_h */
