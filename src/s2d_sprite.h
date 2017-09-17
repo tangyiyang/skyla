@@ -41,7 +41,7 @@ public:
     GLuint _program;
     GLuint _vbo;
     GLuint _vao;
-    GLint _model_view_uniform_location;
+    GLint _u_projection;
 
     vec2 _pos;
     vec2 _scale;

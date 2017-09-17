@@ -42,8 +42,8 @@ static const char* vs_primitive = STRINGFY(\n
                                            attribute mediump vec2 vertex_pos;\n
                                            uniform mat3 u_projection; \n
                                            void main() {\n
-                                               vec3 pos = u_projection * vec3(vertex_pos.x, vertex_pos.y, 1.0); \n
-                                               gl_Position = vec4(pos.x, pos.y, pos.z, 1.0); \n
+                                               vec3 pos = u_projection * vec3(vertex_pos.x, vertex_pos.y, 0.0); \n
+                                               gl_Position = vec4(pos.x, pos.y, 0.0, 1.0); \n
                                            }\n
                                            );
 #else
@@ -51,7 +51,7 @@ static const char* vs_primitive = STRINGFY(\n
                                            precision lowp float;\n
                                            attribute mediump vec2 vertex_pos;\n
                                            void main() {\n
-                                               gl_Position = vec4(vertex_pos.x, vertex_pos.y, 1.0, 1.0); \n
+                                               gl_Position = vec4(vertex_pos.x, vertex_pos.y, 0.0, 1.0); \n
                                            }\n
                                            );
 #endif
@@ -213,10 +213,10 @@ void sprite::update()
     tmp[2] = affine_transform::apply_transform(mv, tmp[2].x, tmp[2].y);
 
     camera* c = ctx->_camera;
-    matrix4* cm = &c->_m;
-    _buffer[0] = matrix4::multiply_vec2(cm, tmp[0]);
-    _buffer[1] = matrix4::multiply_vec2(cm, tmp[1]);
-    _buffer[2] = matrix4::multiply_vec2(cm, tmp[2]);
+    matrix3* cm = &c->_matrix;
+    _buffer[0] = matrix3::multiply_vec2(cm, &tmp[0]);
+    _buffer[1] = matrix3::multiply_vec2(cm, &tmp[1]);
+    _buffer[2] = matrix3::multiply_vec2(cm, &tmp[2]);
 #endif
 
 }
@@ -236,12 +236,12 @@ void sprite::draw()
     CHECK_GL_ERROR;
 
 #ifdef USE_UNIFORM
-//    _model_view_uniform_location = glGetUniformLocation(_program, "u_model_view1");
+    _u_projection = glGetUniformLocation(_program, "u_projection");
 
-//    context* ctx = context::_global_context;
-//    camera* c = ctx->_camera;
+    context* ctx = context::_global_context;
+    camera* c = ctx->_camera;
 
-//    glUniformMatrix4fv(_model_view_uniform_location, 1, GL_FALSE, c->_m.m);
+    glUniformMatrix3fv(_u_projection, 1, GL_FALSE, c->_matrix.m);
 #endif
     glBindVertexArray(_vao);
 
