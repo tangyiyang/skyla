@@ -8,8 +8,23 @@ NS_S2D
 
 void camera::init_orthographic(float width, float height)
 {
+    float* m = _matrix.m;
+
+    float left = 0;
+    float right = width;
+    float bottom = 0;
+    float top = height;
+    m[0] = 2 / (right - left);
+    m[1] = 0;
+    m[2] = 0;
+    m[3] = 0;
+    m[4] = 2 / (top - bottom);
+    m[5] = 0;
+    m[6] = (left + right) / (left - right);
+    m[7] = (top + bottom) / (bottom - top);
+    m[8] = 1;
+
     _size = { width, height };
-    matrix4::init_orthograic(&this->_m, 0, width, 0, height, -1.0, 1.0);
 }
 
 void camera::translate(const vec2& offset)

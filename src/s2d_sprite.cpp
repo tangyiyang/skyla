@@ -40,15 +40,10 @@ void check_gl_error(const char* file, int line)
 static const char* vs_primitive = STRINGFY(\n
                                            precision lowp float;\n
                                            attribute mediump vec2 vertex_pos;\n
-//                                           uniform mat4 u_model_view1; \n
-                                           mat3 model;
+                                           uniform mat3 u_projection; \n
                                            void main() {\n
-                                               model[0] = vec3(0.00312500005,0, 0); \n
-                                               model[1] = vec3(0, 0.00176056335, 0); \n
-                                               model[2] = vec3(0, 0 ,1);     \n
-                                               vec3 pos = model * vec3(vertex_pos.x, vertex_pos.y, 1.0); \n
-
-                                               gl_Position = vec4(pos.x, pos.y, -0.99, 1.0); \n
+                                               vec3 pos = u_projection * vec3(vertex_pos.x, vertex_pos.y, 1.0); \n
+                                               gl_Position = vec4(pos.x, pos.y, pos.z, 1.0); \n
                                            }\n
                                            );
 #else

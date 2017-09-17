@@ -16,7 +16,7 @@ public:
     void translate(const vec2& offset);
 
 public:
-    matrix4 _m;
+    matrix3 _matrix;
 
     size _size;
 };

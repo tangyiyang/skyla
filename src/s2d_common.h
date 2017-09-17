@@ -11,12 +11,13 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 #include <OpenGLES/ES3/glext.h>
 
 #include "s2d_macro.h"
 #include "s2d_gl_util.h"
 #include "s2d_math.h"
-#include "s2d_matrix4.h"
+#include "s2d_matrix3.h"
 
 
 #endif /* s2d_common_h */
