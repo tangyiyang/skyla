@@ -8,6 +8,7 @@
 #include "s2d_common.h"
 #include "s2d_sprite.h"
 #include "s2d_camera.h"
+#include "s2d_file_system.h"
 
 NS_S2D
 class context {
@@ -18,8 +19,9 @@ public:
     void shutdown();
 
 public:
-    sprite* _root;
-    camera* _camera;
+    file_system* _file_system;
+    sprite*      _root;
+    camera*      _camera;
 
     affine_transform _world_view_affine_transform;
 public:

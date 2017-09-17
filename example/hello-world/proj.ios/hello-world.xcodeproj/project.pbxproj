@@ -10,12 +10,12 @@
 		43DF78D41F66694E00EC6747 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0941F656FDB00E1CE26 /* GLKit.framework */; };
 		43DF78D81F667C3400EC6747 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DF78D71F667C3400EC6747 /* QuartzCore.framework */; };
 		43DF79051F68E36F00EC6747 /* s2d_camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DF79031F68E36F00EC6747 /* s2d_camera.cpp */; };
-		43DF79081F68E52600EC6747 /* s2d_matrix4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DF79061F68E52600EC6747 /* s2d_matrix4.cpp */; };
-		43DF790B1F68E93800EC6747 /* s2d_math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DF79091F68E93800EC6747 /* s2d_math.cpp */; };
 		43FC6B671F6634E100934F03 /* s2d_context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43FC6B621F6634E100934F03 /* s2d_context.cpp */; };
 		43FC6B681F6634E100934F03 /* s2d_gl_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43FC6B641F6634E100934F03 /* s2d_gl_util.cpp */; };
 		4D31B35B1F65992C00B9DDD7 /* s2d_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */; };
-		B6948E721F6DF40400C1A264 /* s2d_matrix3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6948E701F6DF40400C1A264 /* s2d_matrix3.cpp */; };
+		4DDD0AF21F6E0DC40021E4DB /* s2d_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD0AF01F6E0DC40021E4DB /* s2d_texture.cpp */; };
+		4DDD0B011F6E2D270021E4DB /* s2d_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD0AFF1F6E2D270021E4DB /* s2d_util.cpp */; };
+		4DDD0B0A1F6E32F60021E4DB /* s2d_file_system.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD0B081F6E32F60021E4DB /* s2d_file_system.mm */; };
 		B6A7F0781F656F3800E1CE26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F0771F656F3800E1CE26 /* main.m */; };
 		B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */; };
 		B6A7F07E1F656F3800E1CE26 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07D1F656F3800E1CE26 /* ViewController.mm */; };
@@ -29,9 +29,6 @@
 		43DF78D71F667C3400EC6747 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		43DF79031F68E36F00EC6747 /* s2d_camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_camera.cpp; sourceTree = "<group>"; };
 		43DF79041F68E36F00EC6747 /* s2d_camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_camera.h; sourceTree = "<group>"; };
-		43DF79061F68E52600EC6747 /* s2d_matrix4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_matrix4.cpp; sourceTree = "<group>"; };
-		43DF79071F68E52600EC6747 /* s2d_matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_matrix4.h; sourceTree = "<group>"; };
-		43DF79091F68E93800EC6747 /* s2d_math.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_math.cpp; sourceTree = "<group>"; };
 		43DF790A1F68E93800EC6747 /* s2d_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_math.h; sourceTree = "<group>"; };
 		43DF790C1F690FB300EC6747 /* s2d_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_macro.h; sourceTree = "<group>"; };
 		43FC6B611F6634E100934F03 /* s2d_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_common.h; sourceTree = "<group>"; };
@@ -42,8 +39,15 @@
 		43FC6B661F6634E100934F03 /* s2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d.h; sourceTree = "<group>"; };
 		4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_sprite.cpp; sourceTree = "<group>"; };
 		4D31B35A1F65992C00B9DDD7 /* s2d_sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_sprite.h; sourceTree = "<group>"; };
-		B6948E701F6DF40400C1A264 /* s2d_matrix3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_matrix3.cpp; sourceTree = "<group>"; };
-		B6948E711F6DF40400C1A264 /* s2d_matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_matrix3.h; sourceTree = "<group>"; };
+		4DDD0AF01F6E0DC40021E4DB /* s2d_texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_texture.cpp; sourceTree = "<group>"; };
+		4DDD0AF11F6E0DC40021E4DB /* s2d_texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_texture.h; sourceTree = "<group>"; };
+		4DDD0AF51F6E0EF30021E4DB /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		4DDD0AF71F6E149F0021E4DB /* s2d_ref_counter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_ref_counter.h; sourceTree = "<group>"; };
+		4DDD0AFF1F6E2D270021E4DB /* s2d_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_util.cpp; sourceTree = "<group>"; };
+		4DDD0B001F6E2D270021E4DB /* s2d_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_util.h; sourceTree = "<group>"; };
+		4DDD0B041F6E32540021E4DB /* s2d_platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_platform.h; sourceTree = "<group>"; };
+		4DDD0B081F6E32F60021E4DB /* s2d_file_system.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = s2d_file_system.mm; sourceTree = "<group>"; };
+		4DDD0B091F6E32F60021E4DB /* s2d_file_system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_file_system.h; sourceTree = "<group>"; };
 		B6A7F0731F656F3800E1CE26 /* hello-world.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-world.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A7F0771F656F3800E1CE26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6A7F0791F656F3800E1CE26 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -75,31 +79,60 @@
 		4D31B3581F65992C00B9DDD7 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				43FC6B661F6634E100934F03 /* s2d.h */,
+				43DF790C1F690FB300EC6747 /* s2d_macro.h */,
 				43FC6B611F6634E100934F03 /* s2d_common.h */,
+				4DDD0B021F6E322A0021E4DB /* platform */,
 				43FC6B621F6634E100934F03 /* s2d_context.cpp */,
 				43FC6B631F6634E100934F03 /* s2d_context.h */,
 				43FC6B641F6634E100934F03 /* s2d_gl_util.cpp */,
 				43FC6B651F6634E100934F03 /* s2d_gl_util.h */,
-				43FC6B661F6634E100934F03 /* s2d.h */,
 				4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */,
 				4D31B35A1F65992C00B9DDD7 /* s2d_sprite.h */,
 				43DF79031F68E36F00EC6747 /* s2d_camera.cpp */,
 				43DF79041F68E36F00EC6747 /* s2d_camera.h */,
-				43DF79061F68E52600EC6747 /* s2d_matrix4.cpp */,
-				43DF79071F68E52600EC6747 /* s2d_matrix4.h */,
-				B6948E701F6DF40400C1A264 /* s2d_matrix3.cpp */,
-				B6948E711F6DF40400C1A264 /* s2d_matrix3.h */,
-				43DF79091F68E93800EC6747 /* s2d_math.cpp */,
 				43DF790A1F68E93800EC6747 /* s2d_math.h */,
-				43DF790C1F690FB300EC6747 /* s2d_macro.h */,
+				4DDD0AF01F6E0DC40021E4DB /* s2d_texture.cpp */,
+				4DDD0AF11F6E0DC40021E4DB /* s2d_texture.h */,
+				4DDD0AF71F6E149F0021E4DB /* s2d_ref_counter.h */,
+				4DDD0AFF1F6E2D270021E4DB /* s2d_util.cpp */,
+				4DDD0B001F6E2D270021E4DB /* s2d_util.h */,
 			);
 			name = src;
 			path = ../../../src;
 			sourceTree = "<group>";
 		};
+		4DDD0AF31F6E0EF30021E4DB /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				4DDD0AF41F6E0EF30021E4DB /* stb_image */,
+			);
+			name = libs;
+			path = ../../../libs;
+			sourceTree = "<group>";
+		};
+		4DDD0AF41F6E0EF30021E4DB /* stb_image */ = {
+			isa = PBXGroup;
+			children = (
+				4DDD0AF51F6E0EF30021E4DB /* stb_image.h */,
+			);
+			path = stb_image;
+			sourceTree = "<group>";
+		};
+		4DDD0B021F6E322A0021E4DB /* platform */ = {
+			isa = PBXGroup;
+			children = (
+				4DDD0B041F6E32540021E4DB /* s2d_platform.h */,
+				4DDD0B081F6E32F60021E4DB /* s2d_file_system.mm */,
+				4DDD0B091F6E32F60021E4DB /* s2d_file_system.h */,
+			);
+			name = platform;
+			sourceTree = "<group>";
+		};
 		B6A7F06A1F656F3800E1CE26 = {
 			isa = PBXGroup;
 			children = (
+				4DDD0AF31F6E0EF30021E4DB /* libs */,
 				4D31B3581F65992C00B9DDD7 /* src */,
 				B6A7F0751F656F3800E1CE26 /* hello-world */,
 				B6A7F0741F656F3800E1CE26 /* Products */,
@@ -222,15 +255,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6A7F07E1F656F3800E1CE26 /* ViewController.mm in Sources */,
-				43DF79081F68E52600EC6747 /* s2d_matrix4.cpp in Sources */,
-				43DF790B1F68E93800EC6747 /* s2d_math.cpp in Sources */,
+				4DDD0B011F6E2D270021E4DB /* s2d_util.cpp in Sources */,
+				4DDD0AF21F6E0DC40021E4DB /* s2d_texture.cpp in Sources */,
 				43FC6B671F6634E100934F03 /* s2d_context.cpp in Sources */,
-				B6948E721F6DF40400C1A264 /* s2d_matrix3.cpp in Sources */,
 				43FC6B681F6634E100934F03 /* s2d_gl_util.cpp in Sources */,
 				B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */,
 				4D31B35B1F65992C00B9DDD7 /* s2d_sprite.cpp in Sources */,
 				43DF79051F68E36F00EC6747 /* s2d_camera.cpp in Sources */,
 				B6A7F0781F656F3800E1CE26 /* main.m in Sources */,
+				4DDD0B0A1F6E32F60021E4DB /* s2d_file_system.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +386,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/src";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/src",
+					"$(SRCROOT)/libs/stb_image",
+				);
 				INFOPLIST_FILE = "hello-world/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.levelmax.hello-world";
@@ -366,7 +402,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/src";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/src",
+					"$(SRCROOT)/libs/stb_image",
+				);
 				INFOPLIST_FILE = "hello-world/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.levelmax.hello-world";
