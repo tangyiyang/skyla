@@ -16,11 +16,11 @@ void s2d_gl_util::check_gl_extension()
     glGetIntegerv(GL_NUM_EXTENSIONS, &n);
 
     for (int i = 0; i < n; ++i) {
-        LOGD("%d: %s\n", i, (const char*)glGetStringi(GL_EXTENSIONS, i));
+        LOGD("%d: %s", i, (const char*)glGetStringi(GL_EXTENSIONS, i));
     }
 
-    LOGD("gl_vendor = %s\n", gl_vendor);
-    LOGD("gl_renderer = %s\n", gl_renderer);
-    LOGD("gl_version = %s\n", gl_version);
-    LOGD("gl_extension = %s\n", gl_extension);
+    LOGD("gl_vendor = %s", gl_vendor);
+    LOGD("gl_renderer = %s", gl_renderer);
+    LOGD("gl_version = %s", gl_version);
+    LOGD("gl_extension = %s", gl_extension);
 }

@@ -92,6 +92,9 @@ void file_system::init()
     _writable_path = sys_writable_path();
     _sandbox_path = sys_sandbox_path();
     
+    _writable_path += "/";
+    _sandbox_path += "/";
+    
     if (_prefer_external) {
         _search_path.push_back(_writable_path);
         _search_path.push_back(_sandbox_path);
@@ -114,10 +117,10 @@ file_entry* file_system::read(const char* path)
     }
     std::vector<std::string>::iterator it = _search_path.begin();
     for (; it != _search_path.end(); ++it) {
-        const char* full_path = (*it + path).c_str();
-        if (this->exist(full_path)) {
+        std::string full_path = *it + path;
+        if (this->exist(full_path.c_str())) {
             size_t size;
-            uint8_t* buffer = sys_read(full_path, nullptr, &size);
+            uint8_t* buffer = sys_read(full_path.c_str(), nullptr, &size);
             file_entry* f = new file_entry(_file_counter++);
             f->_buffer = buffer;
             f->_path = full_path;

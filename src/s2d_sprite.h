@@ -24,6 +24,7 @@ THE SOFTWARE.
 #define s2d_sprite_h
 
 #include "s2d_common.h"
+#include "s2d_texture.h"
 
 NS_S2D
 
@@ -50,6 +51,8 @@ public:
     size _size;
 
     affine_transform _local_transform;
+    
+    texture* _texture;
 };
 
 NS_S2D_END

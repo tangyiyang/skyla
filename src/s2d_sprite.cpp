@@ -168,6 +168,10 @@ void sprite::init()
     glBindVertexArray(0);
 
     CHECK_GL_ERROR;
+    
+    _texture = new texture();
+    _texture->init("res/seal2d-opacity.png");
+    
 }
 
 void sprite::update_srt()

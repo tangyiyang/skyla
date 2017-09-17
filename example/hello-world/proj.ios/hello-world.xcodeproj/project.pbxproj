@@ -16,6 +16,7 @@
 		4DDD0AF21F6E0DC40021E4DB /* s2d_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD0AF01F6E0DC40021E4DB /* s2d_texture.cpp */; };
 		4DDD0B011F6E2D270021E4DB /* s2d_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD0AFF1F6E2D270021E4DB /* s2d_util.cpp */; };
 		4DDD0B0A1F6E32F60021E4DB /* s2d_file_system.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD0B081F6E32F60021E4DB /* s2d_file_system.mm */; };
+		4DDD0B101F6E727E0021E4DB /* res in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD0B0F1F6E727E0021E4DB /* res */; };
 		B6A7F0781F656F3800E1CE26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F0771F656F3800E1CE26 /* main.m */; };
 		B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */; };
 		B6A7F07E1F656F3800E1CE26 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07D1F656F3800E1CE26 /* ViewController.mm */; };
@@ -48,6 +49,7 @@
 		4DDD0B041F6E32540021E4DB /* s2d_platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_platform.h; sourceTree = "<group>"; };
 		4DDD0B081F6E32F60021E4DB /* s2d_file_system.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = s2d_file_system.mm; sourceTree = "<group>"; };
 		4DDD0B091F6E32F60021E4DB /* s2d_file_system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_file_system.h; sourceTree = "<group>"; };
+		4DDD0B0F1F6E727E0021E4DB /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
 		B6A7F0731F656F3800E1CE26 /* hello-world.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-world.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A7F0771F656F3800E1CE26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6A7F0791F656F3800E1CE26 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				4DDD0AF31F6E0EF30021E4DB /* libs */,
 				4D31B3581F65992C00B9DDD7 /* src */,
+				4DDD0B0F1F6E727E0021E4DB /* res */,
 				B6A7F0751F656F3800E1CE26 /* hello-world */,
 				B6A7F0741F656F3800E1CE26 /* Products */,
 				B6A7F0911F656FD700E1CE26 /* Frameworks */,
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6A7F0861F656F3800E1CE26 /* LaunchScreen.storyboard in Resources */,
+				4DDD0B101F6E727E0021E4DB /* res in Resources */,
 				B6A7F0831F656F3800E1CE26 /* Assets.xcassets in Resources */,
 				B6A7F0811F656F3800E1CE26 /* Main.storyboard in Resources */,
 			);

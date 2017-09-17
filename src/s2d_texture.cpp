@@ -23,8 +23,8 @@
 #include "s2d_texture.h"
 #include "s2d_util.h"
 
-#include "stb_image.h"
 #define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 NS_S2D
 
@@ -49,6 +49,29 @@ void texture::init(const char* file)
     
     file_entry* f = util::load_file(file);
     f->retain();
+    
+    int x = 0;
+    int y = 0;
+    int channels_in_file = 0;
+    uint8_t* data = stbi_load_from_memory(f->_buffer, (int)f->_size, &x, &y, &channels_in_file, 4);
+    
+    if (!data) {
+        LOGE("unable to parse the texture file: %s", file);
+        f->release();
+        return;
+    }
+    
+    GLuint tex_id;
+    glGenTextures(1, &tex_id);
+    
+    glBindTexture(GL_TEXTURE_2D, tex_id);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    
+    _size.width = x;
+    _size.height = y;
 }
 
 NS_S2D_END

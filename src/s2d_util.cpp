@@ -32,7 +32,7 @@ void util::log(int level, const char* format, ...)
     if (level >= S2D_LOG_LEVEL) {
         va_list ap;
         va_start(ap, format);
-        printf(format, ap);
+        vprintf(format, ap);
         va_end(ap);
     }
 }
