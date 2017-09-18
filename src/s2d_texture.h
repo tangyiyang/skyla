@@ -36,7 +36,7 @@ public:
     
     void init(const char* file);
     
-private:
+public:
     file_entry* _file_entry;
     size        _size;
     GLint       _gl_handle;

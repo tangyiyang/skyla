@@ -27,9 +27,15 @@ THE SOFTWARE.
 
 NS_S2D
 
+//#define UV_FLOAT
 struct uv_t {
     uint16_t u;
     uint16_t v;
+};
+
+struct uv_f_t {
+    float u;
+    float v;
 };
 
 struct vertex_attr {
@@ -42,7 +48,11 @@ struct vertex_attr {
 
 struct pos_tex_color_vertex {
     vec2 pos;
+#ifdef UV_FLOAT
+    uv_f_t uv;
+#else
     uv_t uv;
+#endif
     uint32_t color;
 
     static vertex_attr* attr()
@@ -51,19 +61,19 @@ struct pos_tex_color_vertex {
             {.size = 2,
              .type = GL_FLOAT,
              .normalized = false,
-             .stride = sizeof(vertex_attr),
+             .stride = sizeof(pos_tex_color_vertex),
              .offset = (void*)offsetof(pos_tex_color_vertex, pos)},
 
             {.size = 2,
              .type = GL_UNSIGNED_SHORT,
-             .normalized = false,
-             .stride = sizeof(vertex_attr),
+             .normalized = true,
+             .stride = sizeof(pos_tex_color_vertex),
              .offset = (void*)offsetof(pos_tex_color_vertex, uv)},
 
             {.size = 4,
-             .type = GL_BYTE,
-             .normalized = false,
-             .stride = sizeof(vertex_attr),
+             .type = GL_UNSIGNED_BYTE,
+             .normalized = true,
+             .stride = sizeof(pos_tex_color_vertex),
              .offset = (void*)offsetof(pos_tex_color_vertex, color)}
         };
         return _attr;

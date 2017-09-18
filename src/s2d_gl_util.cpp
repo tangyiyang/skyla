@@ -5,6 +5,15 @@
 #include "s2d_gl_util.h"
 #include "s2d_util.h"
 
+
+void s2d_gl_util::check_gl_error(const char* file, int line)
+{
+    GLenum err = GL_NO_ERROR;
+    if((err = glGetError()) != GL_NO_ERROR) {
+        LOGE("gl error: %04x. file = %s, line = %d\n", err, file, line);
+    }
+}
+
 void s2d_gl_util::check_gl_extension()
 {
     const char* gl_vendor = (const char*)glGetString(GL_VENDOR);

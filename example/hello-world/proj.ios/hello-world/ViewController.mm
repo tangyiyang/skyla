@@ -11,6 +11,7 @@
 #import <OpenGLES/ES2/glext.h>
 
 #include "s2d.h"
+#include "s2d_gl_util.h"
 
 @interface ViewController () {
 
@@ -121,9 +122,13 @@
     
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
-    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    CHECK_GL_ERROR
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    CHECK_GL_ERROR
     glClearColor(0.37, 0.37, 0.37, 1.0);
+    CHECK_GL_ERROR
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
+    CHECK_GL_ERROR
     self.game_context->draw();
 }
 
