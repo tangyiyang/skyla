@@ -56,9 +56,9 @@ public:
 
     vec2 _pos;
     vec2 _scale;
-    vec2 _rotaion;
     vec2 _anchor;
     size _size;
+    float _rotation;
 
     affine_transform _local_transform;
     

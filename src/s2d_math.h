@@ -36,6 +36,11 @@ struct size {
 };
 
 struct affine_transform {
+    /*
+     a b 0
+     c d 0
+     x y 1
+     */
     float a, b, c, d;
     float x, y;
 
@@ -59,12 +64,12 @@ struct affine_transform {
         return affine_transform(x, 0, 0, y, 0, 0);
     }
 
-    static inline affine_transform mk_rotation(float x, float y)
+    static inline affine_transform mk_rotation(float angle)
     {
-        float sin = sinf(x * PI / 180.0f);
-        float cos = cosf(y * PI / 180.0f);
+        float sin = sinf(angle * PI / 180.0f);
+        float cos = cosf(angle * PI / 180.0f);
 
-        return affine_transform(cos, -sin, sin, cos, 0, 0);
+        return affine_transform(cos, sin, -sin, cos, 0, 0);
     }
 
     static inline vec2 apply_transform(const affine_transform& t,
@@ -77,32 +82,29 @@ struct affine_transform {
         return p;
     }
 
-    static inline void inplace_concat(affine_transform& t1,
-                                      const affine_transform& t2)
+    static inline void inplace_concat(affine_transform& left,
+                                      const affine_transform& right)
     {
-        float a = t1.a * t2.a + t1.b * t2.c;
-        float b = t1.a * t2.b + t1.b * t2.d;
-        float x = t1.x * t2.a + t1.y * t2.c + t2.x;
-
-        float c = t1.c * t2.a + t1.d * t2.c;
-        float d = t1.c * t2.b + t1.d * t2.d;
-        float y = t1.x * t2.b + t1.y * t2.d + t2.y;
-
-        t1.a = a; t1.b = b; t1.x = x;
-        t1.c = c; t1.d = d; t1.y = y;
+        float a = left.a * right.a + left.b * right.c;
+        float b = left.a * right.b + left.b * right.d;
+        float c = left.c * right.a + left.d * right.c;
+        float d = left.c * right.b + left.d * right.d;
+        float x = left.x * right.a + left.y * right.c + right.x;
+        float y = left.x * right.b + left.y * right.d + right.y;
+        
+        left.a = a; left.b = b; left.c = c; left.d = d; left.x = x; left.y = y;
     }
 
-    static inline affine_transform concat(const affine_transform& t1,
-                                          const affine_transform& t2)
+    static inline affine_transform concat(const affine_transform& left,
+                                          const affine_transform& right)
     {
-        float a = t1.a * t2.a + t1.b * t2.c;
-        float b = t1.a * t2.b + t1.b * t2.d;
-        float x = t1.x * t2.a + t1.y * t2.c + t2.x;
-
-        float c = t1.c * t2.a + t1.d * t2.c;
-        float d = t1.c * t2.b + t1.d * t2.d;
-        float y = t1.x * t2.b + t1.y * t2.d + t2.y;
-
+        float a = left.a * right.a + left.b * right.c;
+        float b = left.a * right.b + left.b * right.d;
+        float c = left.c * right.a + left.d * right.c;
+        float d = left.c * right.b + left.d * right.d;
+        float x = left.x * right.a + left.y * right.c + right.x;
+        float y = left.x * right.b + left.y * right.d + right.y;
+        
         return affine_transform(a, b, c, d, x, y);
     }
 };

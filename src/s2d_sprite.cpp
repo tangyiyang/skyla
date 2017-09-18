@@ -145,10 +145,10 @@ NS_S2D
 void sprite::init()
 {
     _local_transform = affine_transform::mk_identity();
-    _pos = {0, 0};
+    _pos = {300, 300};
 
-    _scale = {1.0, 2.0};
-    _rotaion = {0, 0};
+    _scale = {1.0, 1.0};
+    _rotation = 30;
     _anchor = {0, 0};
     _size = {200, 100};
 
@@ -180,7 +180,7 @@ void sprite::init()
     _vertex[0].x = 0;
     _vertex[0].y = 0;
     _vertex[1].x = 100;
-    _vertex[1].y = 100;
+    _vertex[1].y = 400;
     _vertex[2].x = 200;
     _vertex[2].y = 0;
 #endif
@@ -242,12 +242,12 @@ void sprite::update_srt()
     float anchor_x = _size.width * _anchor.x;
     float anchor_y = _size.height * _anchor.y;
 
-    affine_transform anchor_to = affine_transform::mk_translate(-anchor_x, -anchor_y);
+//    affine_transform anchor_to = affine_transform::mk_translate(-anchor_x, -anchor_y);
     affine_transform scale = affine_transform::mk_scale(_scale.x, _scale.y);
-    affine_transform rotation = affine_transform::mk_rotation(_rotaion.x, _rotaion.y);
+    affine_transform rotation = affine_transform::mk_rotation(_rotation);
     affine_transform translate = affine_transform::mk_translate(_pos.x, _pos.y);
 
-    affine_transform::inplace_concat(_local_transform, anchor_to);
+//    affine_transform::inplace_concat(_local_transform, anchor_to);
     affine_transform::inplace_concat(_local_transform, scale);
     affine_transform::inplace_concat(_local_transform, rotation);
     affine_transform::inplace_concat(_local_transform, translate);
@@ -260,19 +260,29 @@ void sprite::update()
     context* ctx = context::_global_context;
 
 #ifdef USE_SPRITE_VERTEX
-
+    vec2 tmp[3];
+    tmp[0] = affine_transform::apply_transform(_local_transform, _quad[0].pos.x, _quad[0].pos.y);
+    tmp[1] = affine_transform::apply_transform(_local_transform, _quad[1].pos.x, _quad[1].pos.y);
+    tmp[2] = affine_transform::apply_transform(_local_transform, _quad[2].pos.x, _quad[2].pos.y);
 #else
+    const affine_transform& mv = ctx->_world_view_affine_transform;
+    
+//    affine_transform t = affine_transform::concat(mv, _local_transform);
+//    
+//    _buffer[0] = affine_transform::apply_transform(t, _vertex[0].x, _vertex[0].y);
+//    _buffer[1] = affine_transform::apply_transform(t, _vertex[1].x, _vertex[1].y);
+//    _buffer[2] = affine_transform::apply_transform(t, _vertex[2].x, _vertex[2].y);
+    
     vec2 tmp[3];
     tmp[0] = affine_transform::apply_transform(_local_transform, _vertex[0].x, _vertex[0].y);
     tmp[1] = affine_transform::apply_transform(_local_transform, _vertex[1].x, _vertex[1].y);
     tmp[2] = affine_transform::apply_transform(_local_transform, _vertex[2].x, _vertex[2].y);
-
-    const affine_transform& mv = ctx->_world_view_affine_transform;
-
+//
+//    
+//
     _buffer[0] = affine_transform::apply_transform(mv, tmp[0].x, tmp[0].y);
     _buffer[1] = affine_transform::apply_transform(mv, tmp[1].x, tmp[1].y);
     _buffer[2] = affine_transform::apply_transform(mv, tmp[2].x, tmp[2].y);
-
 #endif
 }
 
