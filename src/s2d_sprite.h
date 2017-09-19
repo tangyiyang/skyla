@@ -29,8 +29,6 @@ THE SOFTWARE.
 
 NS_S2D
 
-#define USE_SPRITE_VERTEX
-
 class sprite {
 public:
     void init();
@@ -40,15 +38,8 @@ public:
     void update_srt();
 
 public:
-
-
-#ifdef USE_SPRITE_VERTEX
     pos_tex_color_vertex _quad[4];
     pos_tex_color_vertex _vertex[6];
-#else
-    vec2 _vertex[3];
-    vec2 _buffer[3];
-#endif
 
     GLuint _program;
     GLuint _vbo;

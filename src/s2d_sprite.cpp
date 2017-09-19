@@ -27,7 +27,6 @@ THE SOFTWARE.
 
 #define STRINGFY(x) #x
 
-#ifdef USE_SPRITE_VERTEX
 static const char* vs_primitive = STRINGFY(\n
                                            attribute mediump vec2 pos;      \n
                                            attribute highp   vec2 tex_coord;\n
@@ -53,29 +52,8 @@ static const char* fs_primitive = STRINGFY(\n
                                            uniform sampler2D texture0;
                                            void main() {\n
                                                gl_FragColor = texture2D(texture0, v_tex_coord) * v_color;
-//                                               gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-
                                            }\n
                                            );
-#else
-static const char* vs_primitive = STRINGFY(\n
-                                           precision lowp float;\n
-                                           attribute mediump vec2 vertex_pos;\n
-                                           uniform mat3 u_projection; \n
-                                           void main() {\n
-                                               vec3 pos = u_projection * vec3(vertex_pos.x, vertex_pos.y, 0.0); \n
-                                               gl_Position = vec4(pos.x, pos.y, 0.0, 1.0); \n
-                                           }\n
-                                           );
-
-static const char* fs_primitive = STRINGFY(\n
-                                           precision lowp float;\n
-
-                                           void main() {\n
-                                               gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-                                           }\n
-                                           );
-#endif
 
 static GLuint create_program(GLuint vs, GLuint fs)
 {
@@ -144,8 +122,6 @@ void sprite::init()
     _anchor = {0, 0};
     _size = {200*_scale.x, 400};
 
-
-#ifdef USE_SPRITE_VERTEX
     _quad[0].pos.x = 0;
     _quad[0].pos.y = 0;
     _quad[0].uv.u = 0;
@@ -155,42 +131,22 @@ void sprite::init()
     _quad[1].pos.x = 0;
     _quad[1].pos.y = 158;
     _quad[1].uv.u = 0;
-#ifdef UV_FLOAT
-    _quad[1].uv.v = 1.0;
-#else
     _quad[1].uv.v = (1 <<16)-1;
-#endif
     _quad[1].color = 0xffffff;
 
     _quad[2].pos.x = 256;
     _quad[2].pos.y = 0;
-#ifdef UV_FLOAT
-    _quad[2].uv.u = 1.0;
-    
-#else
     _quad[2].uv.u = (1 <<16)-1;
-#endif    
     _quad[2].uv.v = 0;
     _quad[2].color = 0xffffff;
 
     _quad[3].pos.x = 256;
     _quad[3].pos.y = 158;
-#ifdef UV_FLOAT
-    _quad[3].uv.u = 1.0;
-    _quad[3].uv.v = 1.0;
-#else
+
     _quad[3].uv.u = (1<<16)-1;
     _quad[3].uv.v = (1<<16)-1;
-#endif
+
     _quad[3].color = 0xffffff;
-#else
-    _vertex[0].x = 0;
-    _vertex[0].y = 0;
-    _vertex[1].x = 100;
-    _vertex[1].y = 400;
-    _vertex[2].x = 200;
-    _vertex[2].y = 0;
-#endif
     int index = 0;
     const char* shaders[] = {
         vs_primitive,
@@ -200,9 +156,7 @@ void sprite::init()
 
     GLuint vs = create_shader(GL_VERTEX_SHADER, shaders[index]);
     GLuint fs = create_shader(GL_FRAGMENT_SHADER, shaders[index+1]);
-
     _program = create_program(vs, fs);
-    CHECK_GL_ERROR;
 
     LOGD("sprite.init vs, fs, program = %d, %d, %d\n", vs, fs, _program);
 
@@ -211,8 +165,6 @@ void sprite::init()
     _vao = 0;
     glGenBuffers(1, &_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    CHECK_GL_ERROR
-#ifdef USE_SPRITE_VERTEX
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
     GLint loc_pos =  glGetAttribLocation(_program, "pos");
@@ -223,37 +175,17 @@ void sprite::init()
     GLint loc_texcoord = glGetAttribLocation(_program, "tex_coord");
     glEnableVertexAttribArray(loc_texcoord);
     glBindAttribLocation(_program, loc_texcoord, "tex_coord");
-#ifdef UV_FLOAT
-    glVertexAttribPointer(loc_texcoord, 2, GL_FLOAT, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, uv));
-#else
     glVertexAttribPointer(loc_texcoord, 2, GL_UNSIGNED_SHORT, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, uv));
-#endif
-    
     GLint loc_color = glGetAttribLocation(_program, "color");
     glEnableVertexAttribArray(loc_color);
     glBindAttribLocation(_program, loc_color, "color");
     glVertexAttribPointer(loc_color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, color));
-    
-    CHECK_GL_ERROR
+
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-#else
-    glGenVertexArrays(1, &_vao);
-    glBindVertexArray(_vao);
-    glEnableVertexAttribArray(0);
-    glBindAttribLocation(_program, 0, "vertex_pos");
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float)*2, 0);
-    glBindVertexArray(0);
-#endif
 
-
-
-
-    CHECK_GL_ERROR;
-    
     _texture = new texture();
     _texture->init("res/seal2d-opacity-half.png");
-    
 }
 
 void sprite::update_srt()
@@ -281,7 +213,6 @@ void sprite::update()
 
     context* ctx = context::_global_context;
 
-#ifdef USE_SPRITE_VERTEX
     const affine_transform& mv = ctx->_world_view_affine_transform;
     affine_transform t = affine_transform::concat(_local_transform, mv);
 
@@ -306,56 +237,14 @@ void sprite::update()
     _vertex[3].uv = _quad[2].uv;
     _vertex[4].uv = _quad[3].uv;
     _vertex[5].uv = _quad[1].uv;
-
-#else
-    const affine_transform& mv = ctx->_world_view_affine_transform;
-    
-#if 1
-    // TODO: figure out why
-    affine_transform t = affine_transform::concat(_local_transform, mv);
-
-    _buffer[0] = affine_transform::apply_transform(t, _vertex[0].x, _vertex[0].y);
-    _buffer[1] = affine_transform::apply_transform(t, _vertex[1].x, _vertex[1].y);
-    _buffer[2] = affine_transform::apply_transform(t, _vertex[2].x, _vertex[2].y);
-#else
-    vec2 tmp[3];
-    tmp[0] = affine_transform::apply_transform(_local_transform, _vertex[0].x, _vertex[0].y);
-    tmp[1] = affine_transform::apply_transform(_local_transform, _vertex[1].x, _vertex[1].y);
-    tmp[2] = affine_transform::apply_transform(_local_transform, _vertex[2].x, _vertex[2].y);
-    _buffer[0] = affine_transform::apply_transform(mv, tmp[0].x, tmp[0].y);
-    _buffer[1] = affine_transform::apply_transform(mv, tmp[1].x, tmp[1].y);
-    _buffer[2] = affine_transform::apply_transform(mv, tmp[2].x, tmp[2].y);
-    
-#endif
-#endif
 }
 
 void sprite::draw()
 {
-    glEnable(GL_DEPTH_TEST);
-    
-
-
-#ifdef USE_SPRITE_VERTEX
     glUseProgram(_program);
     glBindTexture(GL_TEXTURE_2D, _texture->_gl_handle);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex)*6, _vertex, GL_DYNAMIC_DRAW);
-
-#else
-    printf("%.2f, %.2f\n", _buffer[0].x, _buffer[0].y);
-    printf("%.2f, %.2f\n", _buffer[1].x, _buffer[1].y);
-    printf("%.2f, %.2f\n", _buffer[2].x, _buffer[2].y);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*6, _buffer, GL_DYNAMIC_DRAW);
-#endif
-    
-//    printf("%.2f, %.2f\n", _vertex[0].pos.x, _vertex[0].pos.y);
-//    printf("%.2f, %.2f\n", _vertex[1].pos.x, _vertex[1].pos.y);
-//    printf("%.2f, %.2f\n", _vertex[2].pos.x, _vertex[2].pos.y);
-
-
-    CHECK_GL_ERROR;
 
     _u_projection = glGetUniformLocation(_program, "u_projection");
     context* ctx = context::_global_context;

@@ -123,7 +123,7 @@
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
     CHECK_GL_ERROR
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     CHECK_GL_ERROR
     glClearColor(0.37, 0.37, 0.37, 1.0);
     CHECK_GL_ERROR
