@@ -44,11 +44,7 @@ public:
     pos_tex_color_vertex _quad[4];
     pos_tex_color_vertex _vertex[6];
 
-#ifdef USE_PROGRAM
     program* _program;
-#else
-    GLuint _program;
-#endif
     GLuint _vbo;
     GLuint _vao;
     GLint _u_projection;
