@@ -24,92 +24,6 @@ THE SOFTWARE.
 #include "s2d_context.h"
 #include "s2d_util.h"
 
-
-#define STRINGFY(x) #x
-
-static const char* vs_primitive = STRINGFY(\n
-                                           attribute mediump vec2 pos;      \n
-                                           attribute highp   vec2 tex_coord;\n
-                                           attribute lowp    vec4 color; \n
-
-                                           varying highp vec2 v_tex_coord; \n
-                                           varying lowp vec4 v_color; \n
-
-                                           uniform mat3 u_projection; \n
-                                           void main() {              \n
-                                               vec3 tmp = u_projection * vec3(pos.x, pos.y, 0.0); \n
-                                               gl_Position = vec4(tmp.x, tmp.y, 0.0, 1.0); \n
-
-                                               v_tex_coord = vec2(tex_coord.x, 1.0 - tex_coord.y);
-                                               v_color = color;
-                                           }\n
-                                           );
-
-static const char* fs_primitive = STRINGFY(\n
-                                           varying highp vec2 v_tex_coord; \n
-                                           varying lowp vec4 v_color; \n
-
-                                           uniform sampler2D texture0;
-                                           void main() {\n
-                                               gl_FragColor = texture2D(texture0, v_tex_coord) * v_color;
-                                           }\n
-                                           );
-
-static GLuint create_program(GLuint vs, GLuint fs)
-{
-    GLuint program = glCreateProgram();
-    glAttachShader(program, vs);
-    glAttachShader(program, fs);
-
-    glLinkProgram(program);
-
-    GLint status;
-    glGetProgramiv (program, GL_LINK_STATUS, &status);
-    if (status == GL_FALSE) {
-        GLint infoLogLength;
-        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &infoLogLength);
-
-        GLchar strInfoLog[4096] = "";
-        glGetProgramInfoLog(program, infoLogLength, NULL, strInfoLog);
-        printf("Linker failure: %s\n", strInfoLog);
-    }
-    glDetachShader(program, vs);
-    glDetachShader(program, fs);
-
-    CHECK_GL_ERROR;
-    return program;
-}
-
-static GLuint create_shader(GLenum shader_type, const char* shader_data)
-{
-    GLuint shader = glCreateShader(shader_type);
-
-    glShaderSource(shader, 1, &shader_data, NULL);
-    glCompileShader(shader);
-    GLint status;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-    if (status == GL_FALSE)
-        {
-        GLint infoLogLength;
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
-
-        GLchar strInfoLog[4096] = "";
-        glGetShaderInfoLog(shader, infoLogLength, NULL, strInfoLog);
-
-        const char *strShaderType = NULL;
-        switch(shader_type) {
-            case GL_VERTEX_SHADER: strShaderType = "vertex"; break;
-            case GL_FRAGMENT_SHADER: strShaderType = "fragment"; break;
-            default: strShaderType = "unkown"; break;
-        }
-
-        printf("Compile failure in %s shader:\n%s\n shader_src = %s",
-             strShaderType, strInfoLog, shader_data);
-        }
-    
-    return shader;
-}
-
 NS_S2D
 
 void sprite::init()
@@ -147,19 +61,8 @@ void sprite::init()
     _quad[3].uv.v = (1<<16)-1;
 
     _quad[3].color = 0xffffff;
-    int index = 0;
-    const char* shaders[] = {
-        vs_primitive,
-        fs_primitive,
-    };
 
-
-    GLuint vs = create_shader(GL_VERTEX_SHADER, shaders[index]);
-    GLuint fs = create_shader(GL_FRAGMENT_SHADER, shaders[index+1]);
-    _program = create_program(vs, fs);
-
-    LOGD("sprite.init vs, fs, program = %d, %d, %d\n", vs, fs, _program);
-
+    _program = program::load_default_program(program::EMBEDED_PROGRAM_SPRITE_DEFAULT);
 
     _vbo = 0;
     _vao = 0;
@@ -167,18 +70,14 @@ void sprite::init()
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
-    GLint loc_pos =  glGetAttribLocation(_program, "pos");
-    glEnableVertexAttribArray(loc_pos);
-    glBindAttribLocation(_program, loc_pos, "pos");
+
+    GLuint loc_pos =  _program->enable_attribute("pos");
     glVertexAttribPointer(loc_pos, 2, GL_FLOAT, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, pos));
 
-    GLint loc_texcoord = glGetAttribLocation(_program, "tex_coord");
-    glEnableVertexAttribArray(loc_texcoord);
-    glBindAttribLocation(_program, loc_texcoord, "tex_coord");
+    GLuint loc_texcoord =  _program->enable_attribute("tex_coord");
     glVertexAttribPointer(loc_texcoord, 2, GL_UNSIGNED_SHORT, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, uv));
-    GLint loc_color = glGetAttribLocation(_program, "color");
-    glEnableVertexAttribArray(loc_color);
-    glBindAttribLocation(_program, loc_color, "color");
+
+    GLuint loc_color = _program->enable_attribute("color");
     glVertexAttribPointer(loc_color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, color));
 
     glBindVertexArray(0);
@@ -204,7 +103,6 @@ void sprite::update_srt()
     affine_transform::inplace_concat(_local_transform, rotation);
     affine_transform::inplace_concat(_local_transform, translate);
     affine_transform::inplace_concat(_local_transform, anchor_to);
-
 }
 
 void sprite::update()
@@ -241,12 +139,15 @@ void sprite::update()
 
 void sprite::draw()
 {
-    glUseProgram(_program);
+
+    _program->use();
+
     glBindTexture(GL_TEXTURE_2D, _texture->_gl_handle);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex)*6, _vertex, GL_DYNAMIC_DRAW);
 
-    _u_projection = glGetUniformLocation(_program, "u_projection");
+    _u_projection = glGetUniformLocation(_program->get_handle(), "u_projection");
+
     context* ctx = context::_global_context;
     camera* c = ctx->_camera;
     glUniformMatrix3fv(_u_projection, 1, GL_FALSE, c->_matrix.m);

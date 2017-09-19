@@ -20,4 +20,54 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "s2d_sprite_renderer.h"
+#ifndef s2d_program_h
+#define s2d_program_h
+
+#include "s2d_common.h"
+#include "s2d_gl_util.h"
+#include "s2d_util.h"
+
+NS_S2D
+
+class program : public ref_counter {
+public:
+    program() : _program_handle(0) {}
+
+    enum EMBEDED_PROGRAMS {
+        EMBEDED_PROGRAM_SPRITE_DEFAULT = 0,
+
+        EMBEDED_PROGRAM_MAX
+    };
+
+public:
+    static program* load_default_program(EMBEDED_PROGRAMS type);
+    static GLuint load_shader(GLenum shader_type, const char* shader_data);
+    static GLuint load_program(GLuint vs, GLuint fs);
+
+public:
+    void init(GLuint vs, GLuint fs);
+    GLuint enable_attribute(const char* attr_name);
+
+    inline void use()
+    {
+        S2D_ASSERT(_program_handle > 0);
+        glUseProgram(_program_handle);
+    }
+
+    inline void unuse()
+    {
+        glUseProgram(0);
+    }
+
+    inline GLuint get_handle()
+    {
+        return _program_handle;
+    }
+
+private:
+    GLuint _program_handle;
+};
+
+NS_S2D_END
+
+#endif /* s2d_program_h */

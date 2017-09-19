@@ -19,6 +19,7 @@
 		4DDD0B101F6E727E0021E4DB /* res in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD0B0F1F6E727E0021E4DB /* res */; };
 		B61968341F6EC95C00970B10 /* s2d_vertex_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B61968321F6EC95C00970B10 /* s2d_vertex_buffer.cpp */; };
 		B61968381F6ED0AC00970B10 /* s2d_sprite_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B61968361F6ED0AC00970B10 /* s2d_sprite_renderer.cpp */; };
+		B62FA8191F7164A300600A58 /* s2d_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B62FA8171F7164A300600A58 /* s2d_program.cpp */; };
 		B6A7F0781F656F3800E1CE26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F0771F656F3800E1CE26 /* main.m */; };
 		B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */; };
 		B6A7F07E1F656F3800E1CE26 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07D1F656F3800E1CE26 /* ViewController.mm */; };
@@ -56,6 +57,8 @@
 		B61968331F6EC95C00970B10 /* s2d_vertex_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_vertex_buffer.h; sourceTree = "<group>"; };
 		B61968361F6ED0AC00970B10 /* s2d_sprite_renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_sprite_renderer.cpp; sourceTree = "<group>"; };
 		B61968371F6ED0AC00970B10 /* s2d_sprite_renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_sprite_renderer.h; sourceTree = "<group>"; };
+		B62FA8171F7164A300600A58 /* s2d_program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_program.cpp; sourceTree = "<group>"; };
+		B62FA8181F7164A300600A58 /* s2d_program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_program.h; sourceTree = "<group>"; };
 		B6A7F0731F656F3800E1CE26 /* hello-world.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-world.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A7F0771F656F3800E1CE26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6A7F0791F656F3800E1CE26 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				B61968331F6EC95C00970B10 /* s2d_vertex_buffer.h */,
 				B61968361F6ED0AC00970B10 /* s2d_sprite_renderer.cpp */,
 				B61968371F6ED0AC00970B10 /* s2d_sprite_renderer.h */,
+				B62FA8171F7164A300600A58 /* s2d_program.cpp */,
+				B62FA8181F7164A300600A58 /* s2d_program.h */,
 			);
 			name = renderer;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				43FC6B671F6634E100934F03 /* s2d_context.cpp in Sources */,
 				43FC6B681F6634E100934F03 /* s2d_gl_util.cpp in Sources */,
 				B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */,
+				B62FA8191F7164A300600A58 /* s2d_program.cpp in Sources */,
 				B61968341F6EC95C00970B10 /* s2d_vertex_buffer.cpp in Sources */,
 				4D31B35B1F65992C00B9DDD7 /* s2d_sprite.cpp in Sources */,
 				43DF79051F68E36F00EC6747 /* s2d_camera.cpp in Sources */,

@@ -40,13 +40,6 @@ static const char* LOG_LEVEL_STR[] = {
 #define NS_S2D namespace s2d {
 #define NS_S2D_END }
 
-#define S2D_ASSERT(cond)      do { \
-                                if (!(cond)) { \
-                                    S2D_LOG(STRINGIFY(cond)); \
-                                } \
-                                assert(cond); \
-                              } while(0);
-
 #define SAFE_RELEASE(obj) do { if(obj) { obj->release(); }}while(0);
 
 #endif 

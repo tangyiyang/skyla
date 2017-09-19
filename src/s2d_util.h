@@ -27,6 +27,13 @@
 
 NS_S2D
 
+#define S2D_ASSERT(cond) do { \
+                            if (!(cond)) { \
+                                LOGD(STRINGIFY(cond)); \
+                            } \
+                            assert(cond); \
+                            } while(0);
+
 #define LOGD(format, ...) s2d::util::log(S2D_LOG_DEBUG, format "\n", ##__VA_ARGS__);
 #define LOGE(format, ...) s2d::util::log(S2D_LOG_ERROR, format "\n", ##__VA_ARGS__);
 
