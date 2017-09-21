@@ -5,6 +5,10 @@
 #include "s2d_gl_util.h"
 #include "s2d_util.h"
 
+NS_S2D
+
+uint64_t s2d_gl_util::_gl_cap_bits = 0;
+uint32_t s2d_gl_util::_gl_version = 3;
 
 void s2d_gl_util::check_gl_error(const char* file, int line)
 {
@@ -14,8 +18,16 @@ void s2d_gl_util::check_gl_error(const char* file, int line)
     }
 }
 
-void s2d_gl_util::check_gl_extension()
+void s2d_gl_util::check_gl_extension(uint32_t glversion)
 {
+    _gl_version = glversion;
+
+    if (glversion == 3) {
+
+    } else {
+        LOGE("not check opengles 2.0 yet.");
+        S2D_ASSERT(false);
+    }
     const char* gl_vendor = (const char*)glGetString(GL_VENDOR);
     const char* gl_renderer = (const char*)glGetString(GL_RENDERER);
     const char* gl_version = (const char*)glGetString(GL_VERSION);
@@ -33,3 +45,5 @@ void s2d_gl_util::check_gl_extension()
     LOGD("gl_version = %s", gl_version);
     LOGD("gl_extension = %s", gl_extension);
 }
+
+NS_S2D_END

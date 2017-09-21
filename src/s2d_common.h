@@ -16,6 +16,7 @@
 #include <vector>
 #include <map>
 
+#include "s2d_config.h"
 #include "s2d_macro.h"
 #include "s2d_ref_counter.h"
 #include "s2d_math.h"

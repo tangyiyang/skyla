@@ -59,6 +59,7 @@
 		B61968371F6ED0AC00970B10 /* s2d_sprite_renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_sprite_renderer.h; sourceTree = "<group>"; };
 		B62FA8171F7164A300600A58 /* s2d_program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_program.cpp; sourceTree = "<group>"; };
 		B62FA8181F7164A300600A58 /* s2d_program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_program.h; sourceTree = "<group>"; };
+		B65E54331F7411970036BD41 /* s2d_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_config.h; sourceTree = "<group>"; };
 		B6A7F0731F656F3800E1CE26 /* hello-world.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-world.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A7F0771F656F3800E1CE26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6A7F0791F656F3800E1CE26 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 			children = (
 				B61968351F6EC96200970B10 /* renderer */,
 				43FC6B661F6634E100934F03 /* s2d.h */,
+				B65E54331F7411970036BD41 /* s2d_config.h */,
 				43DF790C1F690FB300EC6747 /* s2d_macro.h */,
 				43FC6B611F6634E100934F03 /* s2d_common.h */,
 				4DDD0B021F6E322A0021E4DB /* platform */,

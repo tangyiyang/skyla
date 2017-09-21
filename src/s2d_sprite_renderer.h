@@ -24,6 +24,7 @@ THE SOFTWARE.
 #define s2d_sprite_renderer_h
 
 #include "s2d_common.h"
+#include "s2d_program.h"
 #include "s2d_vertex_buffer.h"
 
 NS_S2D
@@ -39,9 +40,8 @@ public:
 
 private:
     sprite_vertex_buffer* _vertex_buffer;
-    
-    GLuint _program;
-    GLuint _vbo;
+    program*              _program;
+
     GLuint _vao;
     GLint _u_projection;
 };

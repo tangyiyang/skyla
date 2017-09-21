@@ -99,6 +99,7 @@ private:
     std::vector<pos_tex_color_vertex> _vertex_buffer;
     int32_t                           _num_vertices;
     int32_t                           _max_vertices;
+    GLuint                            _vbo;
 };
 
 NS_S2D_END

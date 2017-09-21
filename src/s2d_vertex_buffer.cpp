@@ -21,3 +21,31 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "s2d_vertex_buffer.h"
+#include "s2d_util.h"
+
+NS_S2D
+
+void sprite_vertex_buffer::init()
+{
+    _num_vertices = 0;
+    _max_vertices = S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE;
+
+    glGenBuffers(1, &_vbo);
+    S2D_ASSERT(_vbo > 0);
+}
+
+bool sprite_vertex_buffer::append_quad(pos_tex_color_vertex quad[4])
+{
+    if (_num_vertices + 4 > _max_vertices) {
+        return false;
+    }
+
+    _num_vertices += 4;
+    pos_tex_color_vertex* p = (pos_tex_color_vertex*)quad;
+    for (int i = 0; i < 4; ++i) {
+        _vertex_buffer.emplace_back(*(p + i));
+    }
+    return true;
+}
+
+NS_S2D_END
