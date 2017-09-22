@@ -47,7 +47,7 @@
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 
     [self setupGL];
-    s2d::s2d_gl_util::check_gl_extension(3);
+    s2d::gl_util::check_gl_extension(3);
 
     self.game_context = new s2d::context();
 }

@@ -15,11 +15,13 @@ void context::init(float width, float height)
     _global_context = this;
 
     util::init(_global_context);
-    
+
+    _sprite_renderer = new sprite_renderer();
     _file_system = new file_system();
     _camera = new camera();
     _root = new sprite();
-    
+
+    _sprite_renderer->init();
     _file_system->init();
     _camera->init_orthographic(width, height);
     _root->init();
@@ -33,7 +35,7 @@ void context::update()
 }
 void context::draw()
 {
-    _root->draw();
+    _sprite_renderer->flush();
 }
 
 void context::shutdown()

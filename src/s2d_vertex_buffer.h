@@ -27,57 +27,15 @@ THE SOFTWARE.
 
 NS_S2D
 
-//#define UV_FLOAT
 struct uv_t {
     uint16_t u;
     uint16_t v;
 };
 
-struct uv_f_t {
-    float u;
-    float v;
-};
-
-struct vertex_attr {
-    GLint size;
-    GLenum type;
-    GLboolean normalized;
-    GLsizei stride;
-    GLvoid* offset;
-};
-
 struct pos_tex_color_vertex {
     vec2 pos;
-#ifdef UV_FLOAT
-    uv_f_t uv;
-#else
     uv_t uv;
-#endif
     uint32_t color;
-
-    static vertex_attr* attr()
-    {
-        static vertex_attr _attr[3] = {
-            {.size = 2,
-             .type = GL_FLOAT,
-             .normalized = false,
-             .stride = sizeof(pos_tex_color_vertex),
-             .offset = (void*)offsetof(pos_tex_color_vertex, pos)},
-
-            {.size = 2,
-             .type = GL_UNSIGNED_SHORT,
-             .normalized = true,
-             .stride = sizeof(pos_tex_color_vertex),
-             .offset = (void*)offsetof(pos_tex_color_vertex, uv)},
-
-            {.size = 4,
-             .type = GL_UNSIGNED_BYTE,
-             .normalized = true,
-             .stride = sizeof(pos_tex_color_vertex),
-             .offset = (void*)offsetof(pos_tex_color_vertex, color)}
-        };
-        return _attr;
-    }
 };
 
 union sprite_quad {
@@ -93,14 +51,26 @@ union sprite_quad {
 class sprite_vertex_buffer {
 public:
     void init();
-    bool append_quad(pos_tex_color_vertex quad[4]);
+    void shutdown();
+
+    inline void bind()
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    }
+
+    inline pos_tex_color_vertex* get_vertex_buffer()
+    {
+        return _vertex_buffer;
+    }
+
+    bool append_quad(pos_tex_color_vertex* quad);
+    void submit();
 
 private:
-    std::vector<pos_tex_color_vertex> _vertex_buffer;
+    pos_tex_color_vertex*             _vertex_buffer;
     int32_t                           _num_vertices;
     int32_t                           _max_vertices;
     GLuint                            _vbo;
-    GLuint                            _vao;
 };
 
 NS_S2D_END

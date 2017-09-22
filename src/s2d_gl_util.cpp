@@ -7,10 +7,10 @@
 
 NS_S2D
 
-uint64_t s2d_gl_util::_gl_cap_bits = 0;
-uint32_t s2d_gl_util::_gl_version = 3;
+uint64_t gl_util::_gl_cap_bits = 0;
+uint32_t gl_util::_gl_version = 3;
 
-void s2d_gl_util::check_gl_error(const char* file, int line)
+void gl_util::check_gl_error(const char* file, int line)
 {
     GLenum err = GL_NO_ERROR;
     if((err = glGetError()) != GL_NO_ERROR) {
@@ -18,7 +18,7 @@ void s2d_gl_util::check_gl_error(const char* file, int line)
     }
 }
 
-void s2d_gl_util::check_gl_extension(uint32_t glversion)
+void gl_util::check_gl_extension(uint32_t glversion)
 {
     _gl_version = glversion;
 

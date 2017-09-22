@@ -68,16 +68,18 @@ void sprite::init()
     _vao = 0;
     glGenBuffers(1, &_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    GLuint loc_pos =  _program->enable_attribute("pos");
+    GLuint loc_texcoord =  _program->enable_attribute("tex_coord");
+    GLuint loc_color = _program->enable_attribute("color");
+
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
+    glEnableVertexAttribArray(loc_pos);
+    glEnableVertexAttribArray(loc_texcoord);
+    glEnableVertexAttribArray(loc_color);
 
-    GLuint loc_pos =  _program->enable_attribute("pos");
     glVertexAttribPointer(loc_pos, 2, GL_FLOAT, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, pos));
-
-    GLuint loc_texcoord =  _program->enable_attribute("tex_coord");
     glVertexAttribPointer(loc_texcoord, 2, GL_UNSIGNED_SHORT, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, uv));
-
-    GLuint loc_color = _program->enable_attribute("color");
     glVertexAttribPointer(loc_color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, color));
 
     glBindVertexArray(0);
@@ -135,23 +137,13 @@ void sprite::update()
     _vertex[3].uv = _quad[2].uv;
     _vertex[4].uv = _quad[3].uv;
     _vertex[5].uv = _quad[1].uv;
+
+    this->draw();
 }
 
 void sprite::draw()
 {
-    _program->use();
-
-    glBindTexture(GL_TEXTURE_2D, _texture->_gl_handle);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex)*6, _vertex, GL_DYNAMIC_DRAW);
-
-    _program->set_uniform("u_projection",
-                          program::UNIFORM_TYPE_MATRIX_3_FV,
-                          context::_global_context->_camera->_matrix.m);
-
-    glBindVertexArray(_vao);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    CHECK_GL_ERROR;
+    context::_global_context->_sprite_renderer->draw(_vertex);
 }
 
 NS_S2D_END

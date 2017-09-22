@@ -130,6 +130,11 @@ void program::init(GLuint vs, GLuint fs)
     _program_handle = load_program(vs, fs);
 }
 
+void program::shutdown()
+{
+    glDeleteProgram(_program_handle);
+}
+
 GLuint program::enable_attribute(const char* attr_name)
 {
     S2D_ASSERT(_program_handle > 0 && attr_name);
@@ -137,6 +142,8 @@ GLuint program::enable_attribute(const char* attr_name)
     GLint location = glGetAttribLocation(_program_handle, attr_name);
     glEnableVertexAttribArray(location);
     glBindAttribLocation(_program_handle, location, attr_name);
+
+    _map_vertex_attribute_location[attr_name] = location;
     return location;
 }
 

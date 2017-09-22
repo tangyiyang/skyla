@@ -43,6 +43,7 @@ public:
     pos_tex_color_vertex _vertex[6];
 
     program* _program;
+    
     GLuint _vbo;
     GLuint _vao;
     GLint _u_projection;
@@ -59,4 +60,5 @@ public:
 };
 
 NS_S2D_END
+
 #endif /* s2d_sprite_h */

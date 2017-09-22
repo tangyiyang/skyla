@@ -53,6 +53,8 @@ public:
 
 public:
     void init(GLuint vs, GLuint fs);
+    void shutdown();
+    
     GLuint enable_attribute(const char* attr_name);
     void set_uniform(const char* name, UNIFORM_TYPE type, float* value, bool transpose = false);
 
@@ -72,8 +74,14 @@ public:
         return _program_handle;
     }
 
+    inline GLuint get_vertex_attr_location(const char* name)
+    {
+        return _map_vertex_attribute_location[name];
+    }
+
 private:
     GLuint _program_handle;
+    std::map<std::string, GLuint> _map_vertex_attribute_location;
     std::map<std::string, GLint> _map_uniform_location;
 };
 

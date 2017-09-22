@@ -33,14 +33,22 @@ class sprite_renderer {
 public:
     sprite_renderer();
 
-    void init();
-
 public:
-    void submit();
+    void init();
+    void shutdown();
+    void draw(pos_tex_color_vertex* quad);
+    void flush();
+
+private:
+    void setup_vertex_attr();
+
 
 private:
     sprite_vertex_buffer* _vertex_buffer;
     program*              _program;
+
+    GLuint                _vao;
+    GLuint                _vs_attr_locations[3];
 };
 
 NS_S2D_END

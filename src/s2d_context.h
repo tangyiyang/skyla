@@ -9,6 +9,7 @@
 #include "s2d_sprite.h"
 #include "s2d_camera.h"
 #include "s2d_file_system.h"
+#include "s2d_sprite_renderer.h"
 
 NS_S2D
 class context {
@@ -19,7 +20,10 @@ public:
     void shutdown();
 
 public:
+    sprite_renderer* _sprite_renderer;
     file_system* _file_system;
+
+
     sprite*      _root;
     camera*      _camera;
 
