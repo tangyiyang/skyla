@@ -41,9 +41,6 @@ public:
 private:
     sprite_vertex_buffer* _vertex_buffer;
     program*              _program;
-
-    GLuint _vao;
-    GLint _u_projection;
 };
 
 NS_S2D_END

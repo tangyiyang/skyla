@@ -140,4 +140,26 @@ GLuint program::enable_attribute(const char* attr_name)
     return location;
 }
 
+void program::set_uniform(const char* name, UNIFORM_TYPE type, float* value)
+{
+    std::map<std::string, GLint>::iterator it = _map_uniform_location.find(name);
+    GLint location = -1;
+    if (it == _map_uniform_location.end()) {
+        location = glGetUniformLocation(_program_handle, name);
+        _map_uniform_location[name] = location;
+    } else {
+        location = _map_uniform_location[name];
+    }
+
+    switch (type) {
+        case UNIFORM_TYPE_FLOAT_1:
+            glUniform1f(location, *value);
+            break;
+
+        default:
+            LOGD("unknown uniform name = %s, type = %d", name, type);
+            break;
+    }
+}
+
 NS_S2D_END

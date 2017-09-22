@@ -29,9 +29,11 @@ void sprite_vertex_buffer::init()
 {
     _num_vertices = 0;
     _max_vertices = S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE;
-
+    _vertex_buffer.clear();
+    
     glGenBuffers(1, &_vbo);
     S2D_ASSERT(_vbo > 0);
+    
 }
 
 bool sprite_vertex_buffer::append_quad(pos_tex_color_vertex quad[4])

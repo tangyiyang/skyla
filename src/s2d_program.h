@@ -39,6 +39,12 @@ public:
         EMBEDED_PROGRAM_MAX
     };
 
+    enum UNIFORM_TYPE {
+        UNIFORM_TYPE_FLOAT_1 = 0,
+
+        UNIFORM_TYPE_MAX,
+    };
+
 public:
     static program* load_default_program(EMBEDED_PROGRAMS type);
     static GLuint load_shader(GLenum shader_type, const char* shader_data);
@@ -47,6 +53,7 @@ public:
 public:
     void init(GLuint vs, GLuint fs);
     GLuint enable_attribute(const char* attr_name);
+    void set_uniform(const char* name, UNIFORM_TYPE type, float* value);
 
     inline void use()
     {
@@ -66,6 +73,7 @@ public:
 
 private:
     GLuint _program_handle;
+    std::map<std::string, GLint> _map_uniform_location;
 };
 
 NS_S2D_END

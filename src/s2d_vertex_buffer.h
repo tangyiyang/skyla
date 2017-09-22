@@ -100,6 +100,7 @@ private:
     int32_t                           _num_vertices;
     int32_t                           _max_vertices;
     GLuint                            _vbo;
+    GLuint                            _vao;
 };
 
 NS_S2D_END
