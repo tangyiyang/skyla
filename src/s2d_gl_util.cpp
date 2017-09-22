@@ -23,11 +23,12 @@ void s2d_gl_util::check_gl_extension(uint32_t glversion)
     _gl_version = glversion;
 
     if (glversion == 3) {
-
+        _gl_cap_bits |= GL_CAP_SUPPORT_VAO;
     } else {
         LOGE("not check opengles 2.0 yet.");
         S2D_ASSERT(false);
     }
+
     const char* gl_vendor = (const char*)glGetString(GL_VENDOR);
     const char* gl_renderer = (const char*)glGetString(GL_RENDERER);
     const char* gl_version = (const char*)glGetString(GL_VERSION);
@@ -44,6 +45,7 @@ void s2d_gl_util::check_gl_extension(uint32_t glversion)
     LOGD("gl_renderer = %s", gl_renderer);
     LOGD("gl_version = %s", gl_version);
     LOGD("gl_extension = %s", gl_extension);
+    LOGD("gl: support vao = %s", support_vao() ? "true" : "false");
 }
 
 NS_S2D_END

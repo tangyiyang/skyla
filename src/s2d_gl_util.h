@@ -24,6 +24,11 @@ public:
     static void check_gl_extension(uint32_t glversion);
     static void check_gl_error(const char* file, int line);
 
+    static inline bool support_vao()
+    {
+        return _gl_cap_bits & GL_CAP_SUPPORT_VAO;
+    }
+
 private:
     static uint64_t _gl_cap_bits;
     static uint32_t _gl_version;

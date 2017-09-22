@@ -14,7 +14,6 @@ void context::init(float width, float height)
 {
     _global_context = this;
 
-    s2d_gl_util::check_gl_extension();
     util::init(_global_context);
     
     _file_system = new file_system();
