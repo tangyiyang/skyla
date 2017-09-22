@@ -140,7 +140,7 @@ GLuint program::enable_attribute(const char* attr_name)
     return location;
 }
 
-void program::set_uniform(const char* name, UNIFORM_TYPE type, float* value)
+void program::set_uniform(const char* name, UNIFORM_TYPE type, float* value, bool transpose /*= false*/)
 {
     std::map<std::string, GLint>::iterator it = _map_uniform_location.find(name);
     GLint location = -1;
@@ -152,8 +152,11 @@ void program::set_uniform(const char* name, UNIFORM_TYPE type, float* value)
     }
 
     switch (type) {
-        case UNIFORM_TYPE_FLOAT_1:
+        case UNIFORM_TYPE_1_F:
             glUniform1f(location, *value);
+            break;
+        case UNIFORM_TYPE_MATRIX_3_FV:
+            glUniformMatrix3fv(location, 1, transpose, value);
             break;
 
         default:

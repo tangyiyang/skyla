@@ -30,8 +30,6 @@ THE SOFTWARE.
 
 NS_S2D
 
-#define USE_PROGRAM
-
 class sprite {
 public:
     void init();

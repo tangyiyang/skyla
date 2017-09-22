@@ -139,18 +139,15 @@ void sprite::update()
 
 void sprite::draw()
 {
-
     _program->use();
 
     glBindTexture(GL_TEXTURE_2D, _texture->_gl_handle);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex)*6, _vertex, GL_DYNAMIC_DRAW);
 
-    _u_projection = glGetUniformLocation(_program->get_handle(), "u_projection");
-
-    context* ctx = context::_global_context;
-    camera* c = ctx->_camera;
-    glUniformMatrix3fv(_u_projection, 1, GL_FALSE, c->_matrix.m);
+    _program->set_uniform("u_projection",
+                          program::UNIFORM_TYPE_MATRIX_3_FV,
+                          context::_global_context->_camera->_matrix.m);
 
     glBindVertexArray(_vao);
     glDrawArrays(GL_TRIANGLES, 0, 6);

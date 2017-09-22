@@ -40,7 +40,8 @@ public:
     };
 
     enum UNIFORM_TYPE {
-        UNIFORM_TYPE_FLOAT_1 = 0,
+        UNIFORM_TYPE_1_F = 0,
+        UNIFORM_TYPE_MATRIX_3_FV,
 
         UNIFORM_TYPE_MAX,
     };
@@ -53,7 +54,7 @@ public:
 public:
     void init(GLuint vs, GLuint fs);
     GLuint enable_attribute(const char* attr_name);
-    void set_uniform(const char* name, UNIFORM_TYPE type, float* value);
+    void set_uniform(const char* name, UNIFORM_TYPE type, float* value, bool transpose = false);
 
     inline void use()
     {
