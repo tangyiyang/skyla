@@ -30,7 +30,7 @@
 
 NS_S2D
 
-class sprite : public node {
+class sprite: public node {
 public:
     void init() override;
     void update(float dt) override;

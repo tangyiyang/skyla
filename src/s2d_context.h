@@ -21,7 +21,7 @@ public:
 public:
     file_system*     _file_system;
     sprite_renderer* _sprite_renderer;
-    sprite*          _root;
+    node*            _root;
     camera*          _camera;
 
     affine_transform _world_view_affine_transform;
