@@ -25,8 +25,8 @@ THE SOFTWARE.
 
 #include "s2d_common.h"
 #include "s2d_texture.h"
-#include "s2d_vertex_buffer.h"
 #include "s2d_program.h"
+#include "s2d_sprite_renderer.h"
 
 NS_S2D
 

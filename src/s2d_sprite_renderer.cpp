@@ -35,14 +35,21 @@ _vao(0)
 
 void sprite_renderer::init()
 {
-    _vertex_buffer = new sprite_vertex_buffer();
-    _vertex_buffer->init();
-
     _program = program::load_default_program(program::EMBEDED_PROGRAM_SPRITE_DEFAULT);
     _program->enable_attribute("pos");
     _program->enable_attribute("tex_coord");
     _program->enable_attribute("color");
-
+    
+    _num_vertices = 0;
+    _max_vertices = S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE;
+    _vertex_buffer = (pos_tex_color_vertex*)malloc(sizeof(pos_tex_color_vertex) * _max_vertices);
+    
+    glGenBuffers(1, &_vbo); S2D_ASSERT(_vbo > 0);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex) * _max_vertices, nullptr, GL_DYNAMIC_DRAW);
+    
+    CHECK_GL_ERROR
+    
     if (gl_util::support_vao()) {
         glGenVertexArrays(1, &_vao);
         glBindVertexArray(_vao);
@@ -55,25 +62,33 @@ void sprite_renderer::init()
 
 void sprite_renderer::shutdown()
 {
-    _vertex_buffer->shutdown();
     _program->shutdown();
+    
+    glDeleteBuffers(1, &_vbo);
+    free(_vertex_buffer);
 }
 
 void sprite_renderer::draw(pos_tex_color_vertex* quad)
 {
-    bool full = _vertex_buffer->append_quad(quad);
-    if (full) {
+    if (_num_vertices + 6 > _max_vertices) {
         this->flush();
-        _vertex_buffer->append_quad(quad);
     }
+    
+    pos_tex_color_vertex* p = (pos_tex_color_vertex*)quad;
+    
+    int n = _num_vertices;
+    for (int i = 0; i < 6; ++i) {
+        _vertex_buffer[n+i] = *(p+i);
+    }
+    _num_vertices += 6;
 }
 
 void sprite_renderer::flush()
 {
     _program->use();
 
-    _vertex_buffer->bind();
-    _vertex_buffer->submit();
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_tex_color_vertex), _vertex_buffer);
 
     _program->set_uniform("u_projection",
                           program::UNIFORM_TYPE_MATRIX_3_FV,

@@ -25,9 +25,29 @@ THE SOFTWARE.
 
 #include "s2d_common.h"
 #include "s2d_program.h"
-#include "s2d_vertex_buffer.h"
 
 NS_S2D
+
+struct uv_t {
+    uint16_t u;
+    uint16_t v;
+};
+
+struct pos_tex_color_vertex {
+    vec2 pos;
+    uv_t uv;
+    uint32_t color;
+};
+
+union sprite_quad {
+    struct {
+        pos_tex_color_vertex tl;
+        pos_tex_color_vertex tr;
+        pos_tex_color_vertex br;
+        pos_tex_color_vertex bl;
+    };
+    pos_tex_color_vertex v[4];
+};
 
 class sprite_renderer {
 public:
@@ -44,11 +64,12 @@ private:
 
 
 private:
-    sprite_vertex_buffer* _vertex_buffer;
     program*              _program;
-
+    pos_tex_color_vertex* _vertex_buffer;
+    int32_t               _num_vertices;
+    int32_t               _max_vertices;
+    GLuint                _vbo;
     GLuint                _vao;
-    GLuint                _vs_attr_locations[3];
 };
 
 NS_S2D_END
