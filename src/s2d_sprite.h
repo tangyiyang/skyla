@@ -39,24 +39,16 @@ public:
     void update_srt();
 
 public:
+    vec2                 _pos;
+    vec2                 _scale;
+    vec2                 _anchor;
+    size                 _size;
+    float                _rotation;
+    affine_transform     _local_transform;
+
     pos_tex_color_vertex _quad[4];
-    pos_tex_color_vertex _vertex[6];
-
-    program* _program;
-    
-    GLuint _vbo;
-    GLuint _vao;
-    GLint _u_projection;
-
-    vec2 _pos;
-    vec2 _scale;
-    vec2 _anchor;
-    size _size;
-    float _rotation;
-
-    affine_transform _local_transform;
-    
-    texture* _texture;
+    program*             _program;
+    texture*             _texture;
 };
 
 NS_S2D_END

@@ -29,6 +29,7 @@ THE SOFTWARE.
 
 NS_S2D
 
+#define MAX_TEX_COORD ((1<<16)-1)
 typedef uint16_t index_t;
 struct uv_t {
     uint16_t u;

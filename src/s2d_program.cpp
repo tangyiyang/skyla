@@ -36,7 +36,7 @@ static const char* vs_sprite = STRINGIFY
      vec3 tmp = u_projection * vec3(pos.x, pos.y, 0.0); \n
      gl_Position = vec4(tmp.x, tmp.y, 0.0, 1.0); \n
 
-     v_tex_coord = vec2(tex_coord.x, 1.0 - tex_coord.y);
+     v_tex_coord = vec2(tex_coord.x, tex_coord.y);
      v_color = color;
  }\n
  );

@@ -39,26 +39,26 @@ void sprite::init()
     _quad[0].pos.x = 0;
     _quad[0].pos.y = 0;
     _quad[0].uv.u = 0;
-    _quad[0].uv.v = 0;
+    _quad[0].uv.v = MAX_TEX_COORD;
     _quad[0].color = 0xffffff;
 
     _quad[1].pos.x = 0;
     _quad[1].pos.y = 158;
     _quad[1].uv.u = 0;
-    _quad[1].uv.v = (1 <<16)-1;
+    _quad[1].uv.v = MAX_TEX_COORD - MAX_TEX_COORD;
     _quad[1].color = 0xffffff;
 
     _quad[2].pos.x = 256;
     _quad[2].pos.y = 0;
     _quad[2].uv.u = (1 <<16)-1;
-    _quad[2].uv.v = 0;
+    _quad[2].uv.v = MAX_TEX_COORD;
     _quad[2].color = 0xffffff;
 
     _quad[3].pos.x = 256;
     _quad[3].pos.y = 158;
 
     _quad[3].uv.u = (1<<16)-1;
-    _quad[3].uv.v = (1<<16)-1;
+    _quad[3].uv.v = MAX_TEX_COORD - MAX_TEX_COORD;
 
     _quad[3].color = 0xffffff;
 
