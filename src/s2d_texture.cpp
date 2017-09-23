@@ -53,7 +53,11 @@ void texture::init(const char* file)
     int x = 0;
     int y = 0;
     int channels_in_file = 0;
-    uint8_t* data = stbi_load_from_memory(f->_buffer, (int)f->_size, &x, &y, &channels_in_file, 4);
+    uint8_t* data = stbi_load_from_memory(f->_buffer,
+                                          (int)f->_size,
+                                          &x, &y,
+                                          &channels_in_file,
+                                          STBI_rgb_alpha);
     
     if (!data) {
         LOGE("unable to parse the texture file: %s", file);

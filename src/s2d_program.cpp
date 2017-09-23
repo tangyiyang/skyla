@@ -48,7 +48,13 @@ static const char* fs_sprite = STRINGIFY
 
  uniform sampler2D texture0;
  void main() {\n
-     gl_FragColor = texture2D(texture0, v_tex_coord) * v_color;
+//     lowp vec4 color = v_color * texture2D(texture0, v_tex_coord); \n
+//     if (color.a > 0.01) { \n
+//         gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n
+//     } else { \n
+//         gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \n
+//     } \n
+     gl_FragColor = v_color * texture2D(texture0, v_tex_coord); \n
  }\n
  );
 

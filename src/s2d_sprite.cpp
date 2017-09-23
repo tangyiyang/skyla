@@ -57,7 +57,7 @@ void sprite::init()
     _quad[3].color = 0xffffff;
 
     _texture = new texture();
-    _texture->init("res/seal2d-opacity-half.png");
+    _texture->init("res/seal2d-transparent.png");
 }
 
 void sprite::update(float dt)

@@ -25,12 +25,15 @@ void context::init(float width, float height)
     _file_system->init();
     _camera->init_orthographic(width, height);
     _root->init();
+    _root->set_pos(100, 100);
+    _root->set_scale(1.5);
 
     _world_view_affine_transform = affine_transform::mk_translate(-width/2, -height/2);
 
     // TODO: move this to somewhere else after finish the basic needs of the engine.
     sprite* first = new sprite();
     first->init();
+    first->set_scale(0.5);
     _root->add_child(first);
 }
 

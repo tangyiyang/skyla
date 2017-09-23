@@ -125,10 +125,14 @@ void sprite_renderer::draw(const affine_transform& world_transform,
 
 void sprite_renderer::flush()
 {
+    
     this->update_indexes();
     _program->use();
     _texture->bind();
     CHECK_GL_ERROR;
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_tex_color_vertex), _vertex_buffer);
     
@@ -143,7 +147,7 @@ void sprite_renderer::flush()
     }
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, _num_indexes * sizeof(index_t), _index_buffer);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_TRIANGLES, _num_indexes, GL_UNSIGNED_SHORT, 0);
     CHECK_GL_ERROR;
 
     _program->unuse();

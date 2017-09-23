@@ -44,6 +44,8 @@
 
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
+    view.opaque = NO;
+    view.drawableColorFormat = GLKViewDrawableColorFormatRGBA8888;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 
     [self setupGL];
@@ -126,11 +128,10 @@
     CHECK_GL_ERROR
     glClear(GL_COLOR_BUFFER_BIT);
     CHECK_GL_ERROR
-    glClearColor(0.37, 0.37, 0.37, 1.0);
+    glClearColor(0.37, 0.37, 0.37, 0.0);
     CHECK_GL_ERROR
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
     CHECK_GL_ERROR
-
     NSTimeInterval interval = [self timeSinceLastDraw];
     self.game_context->loop(interval);
 }
