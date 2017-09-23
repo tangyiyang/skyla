@@ -15,19 +15,17 @@ NS_S2D
 class context {
 public:
     void init(float width, float height);
-    void update();
-    void draw();
+    void loop(float dt);
     void shutdown();
 
 public:
+    file_system*     _file_system;
     sprite_renderer* _sprite_renderer;
-    file_system* _file_system;
-
-
-    sprite*      _root;
-    camera*      _camera;
+    sprite*          _root;
+    camera*          _camera;
 
     affine_transform _world_view_affine_transform;
+    
 public:
     static context* _global_context;
 };

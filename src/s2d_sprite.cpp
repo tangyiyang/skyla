@@ -28,13 +28,7 @@ NS_S2D
 
 void sprite::init()
 {
-    _local_transform = affine_transform::mk_identity();
-    _pos = {0, 0};
-
-    _scale = {1.0, 1.0};
-    _rotation = 0;
-    _anchor = {0, 0};
-    _size = {200*_scale.x, 400};
+    node::init();
 
     _quad[0].pos.x = 0;
     _quad[0].pos.y = 0;
@@ -66,28 +60,9 @@ void sprite::init()
     _texture->init("res/seal2d-opacity-half.png");
 }
 
-void sprite::update_srt()
+void sprite::update(float dt)
 {
-    _local_transform = affine_transform::mk_identity();
-
-    float anchor_x = _size.width * _anchor.x;
-    float anchor_y = _size.height * _anchor.y;
-
-// TODO: optimize this code
-    affine_transform scale = affine_transform::mk_scale(_scale.x, _scale.y);
-    affine_transform rotation = affine_transform::mk_rotation(_rotation);
-    affine_transform translate = affine_transform::mk_translate(_pos.x, _pos.y);
-    affine_transform anchor_to = affine_transform::mk_translate(-anchor_x, -anchor_y);
-
-    affine_transform::inplace_concat(_local_transform, scale);
-    affine_transform::inplace_concat(_local_transform, rotation);
-    affine_transform::inplace_concat(_local_transform, translate);
-    affine_transform::inplace_concat(_local_transform, anchor_to);
-}
-
-void sprite::update()
-{
-    this->update_srt();
+    node::update(dt);
     this->draw();
 }
 

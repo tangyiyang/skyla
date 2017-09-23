@@ -145,6 +145,9 @@ void sprite_renderer::flush()
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, _num_indexes * sizeof(index_t), _index_buffer);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
     CHECK_GL_ERROR;
+
+    _program->unuse();
+    _texture->unbind();
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     if (gl_util::support_vao()) {

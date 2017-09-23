@@ -41,6 +41,11 @@ public:
         glBindTexture(GL_TEXTURE_2D, _gl_handle);
     }
 
+    inline void unbind()
+    {
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
 public:
     file_entry* _file_entry;
     size        _size;

@@ -29,12 +29,9 @@ void context::init(float width, float height)
     _world_view_affine_transform = affine_transform::mk_translate(-width/2, -height/2);
 }
 
-void context::update()
+void context::loop(float dt)
 {
-    _root->update();
-}
-void context::draw()
-{
+    _root->update(dt);
     _sprite_renderer->flush();
 }
 

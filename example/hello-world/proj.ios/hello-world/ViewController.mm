@@ -114,7 +114,6 @@
 
 - (void)update
 {
-    self.game_context->update();
 
 }
 
@@ -131,7 +130,9 @@
     CHECK_GL_ERROR
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
     CHECK_GL_ERROR
-    self.game_context->draw();
+
+    NSTimeInterval interval = [self timeSinceLastDraw];
+    self.game_context->loop(interval);
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
