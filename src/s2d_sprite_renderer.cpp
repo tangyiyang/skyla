@@ -60,6 +60,10 @@ void sprite_renderer::init()
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex) * _max_vertices, nullptr, GL_DYNAMIC_DRAW);
 
     CHECK_GL_ERROR
+
+    glGenBuffers(1, &_ibo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_t) * _max_indexes, nullptr, GL_DYNAMIC_DRAW);
     
     if (gl_util::support_vao()) {
         glGenVertexArrays(1, &_vao);
@@ -68,11 +72,12 @@ void sprite_renderer::init()
         glEnableVertexAttribArray(loc_texcoord);
         glEnableVertexAttribArray(loc_color);
         setup_vertex_attr();
-        glGenBuffers(1, &_ibo);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_t) * _max_indexes, nullptr, GL_DYNAMIC_DRAW);
+
+        glBindVertexArray(0);
         CHECK_GL_ERROR;
     }
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 }
 
@@ -140,6 +145,11 @@ void sprite_renderer::flush()
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, _num_indexes * sizeof(index_t), _index_buffer);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
     CHECK_GL_ERROR;
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    if (gl_util::support_vao()) {
+        glBindVertexArray(0);
+    }
     _num_indexes = 0;
     _num_vertices = 0;
 }
