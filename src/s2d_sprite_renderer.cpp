@@ -99,20 +99,12 @@ void sprite_renderer::draw(const affine_transform& world_transform, pos_tex_colo
 
 void sprite_renderer::flush()
 {
-    for (int i = 0, j = 0; i < _num_vertices; i += 4, j+=6) {
-        _index_buffer[j+0] = j+0;
-        _index_buffer[j+1] = j+1;
-        _index_buffer[j+2] = j+2;
-        _index_buffer[j+3] = j+2;
-        _index_buffer[j+4] = j+3;
-        _index_buffer[j+5] = j+1;
-    }
-    _num_indexes = _num_vertices/4*6;
+    this->update_indexes();
     _program->use();
-
+    
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_tex_color_vertex), _vertex_buffer);
-
+    
     _program->set_uniform("u_projection",
                           program::UNIFORM_TYPE_MATRIX_3_FV,
                           context::_global_context->_camera->_matrix.m);
@@ -152,6 +144,19 @@ void sprite_renderer::setup_vertex_attr()
                           GL_TRUE,
                           sizeof(pos_tex_color_vertex),
                           (void*)offsetof(pos_tex_color_vertex, color));
+}
+
+void sprite_renderer::update_indexes()
+{
+    for (int i = 0, j = 0; i < _num_vertices; i += 4, j+=6) {
+        _index_buffer[j+0] = j+0;
+        _index_buffer[j+1] = j+1;
+        _index_buffer[j+2] = j+2;
+        _index_buffer[j+3] = j+2;
+        _index_buffer[j+4] = j+3;
+        _index_buffer[j+5] = j+1;
+    }
+    _num_indexes = _num_vertices/4*6;
 }
 
 NS_S2D_END

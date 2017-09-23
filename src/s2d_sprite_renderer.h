@@ -62,7 +62,7 @@ public:
 
 private:
     void setup_vertex_attr();
-
+    void update_indexes();
 
 private:
     program*              _program;
