@@ -74,6 +74,8 @@ void texture::init(const char* file)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     CHECK_GL_ERROR;
+    glBindTexture(GL_TEXTURE_2D, 0);
+
     _gl_handle = tex_id;
     _size.width = x;
     _size.height = y;

@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "s2d_common.h"
 #include "s2d_program.h"
+#include "s2d_texture.h"
 
 NS_S2D
 
@@ -57,7 +58,9 @@ public:
 public:
     void init();
     void shutdown();
-    void draw(const affine_transform& world_transform, pos_tex_color_vertex* quad);
+    void draw(const affine_transform& world_transform,
+              pos_tex_color_vertex* quad,
+              texture* tex);
     void flush();
 
 private:
@@ -66,6 +69,7 @@ private:
 
 private:
     program*              _program;
+    texture*              _texture;
     pos_tex_color_vertex* _vertex_buffer;
     index_t*              _index_buffer;
     int32_t               _num_indexes;

@@ -1,24 +1,24 @@
 /****************************************************************************
-Copyright (c) Yiyang Tang
+ Copyright (c) Yiyang Tang
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-****************************************************************************/
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ ****************************************************************************/
 
 #include "s2d_sprite.h"
 #include "s2d_context.h"
@@ -30,7 +30,7 @@ void sprite::init()
 {
     _local_transform = affine_transform::mk_identity();
     _pos = {0, 0};
-    
+
     _scale = {1.0, 1.0};
     _rotation = 0;
     _anchor = {0, 0};
@@ -62,29 +62,6 @@ void sprite::init()
 
     _quad[3].color = 0xffffff;
 
-    _program = program::load_default_program(program::EMBEDED_PROGRAM_SPRITE_DEFAULT);
-
-    _vbo = 0;
-    _vao = 0;
-    glGenBuffers(1, &_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    GLuint loc_pos =  _program->enable_attribute("pos");
-    GLuint loc_texcoord =  _program->enable_attribute("tex_coord");
-    GLuint loc_color = _program->enable_attribute("color");
-
-    glGenVertexArrays(1, &_vao);
-    glBindVertexArray(_vao);
-    glEnableVertexAttribArray(loc_pos);
-    glEnableVertexAttribArray(loc_texcoord);
-    glEnableVertexAttribArray(loc_color);
-
-    glVertexAttribPointer(loc_pos, 2, GL_FLOAT, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, pos));
-    glVertexAttribPointer(loc_texcoord, 2, GL_UNSIGNED_SHORT, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, uv));
-    glVertexAttribPointer(loc_color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(pos_tex_color_vertex), (void*)offsetof(pos_tex_color_vertex, color));
-
-    glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
     _texture = new texture();
     _texture->init("res/seal2d-opacity-half.png");
 }
@@ -95,6 +72,7 @@ void sprite::update_srt()
 
     float anchor_x = _size.width * _anchor.x;
     float anchor_y = _size.height * _anchor.y;
+
 // TODO: optimize this code
     affine_transform scale = affine_transform::mk_scale(_scale.x, _scale.y);
     affine_transform rotation = affine_transform::mk_rotation(_rotation);
@@ -115,7 +93,10 @@ void sprite::update()
 
 void sprite::draw()
 {
-    context::_global_context->_sprite_renderer->draw(_local_transform, _quad);
+    context::_global_context->_sprite_renderer->draw(
+                                                     _local_transform,
+                                                     _quad,
+                                                     _texture);
 }
 
 NS_S2D_END

@@ -35,7 +35,12 @@ public:
     ~texture();
     
     void init(const char* file);
-    
+    inline void bind()
+    {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, _gl_handle);
+    }
+
 public:
     file_entry* _file_entry;
     size        _size;

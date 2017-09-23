@@ -26,9 +26,17 @@
 NS_S2D
 
 sprite_renderer::sprite_renderer() :
-_vertex_buffer(nullptr),
 _program(nullptr),
-_vao(0)
+_texture(nullptr),
+_vertex_buffer(nullptr),
+_index_buffer(nullptr),
+_vbo(0),
+_ibo(0),
+_vao(0),
+_num_indexes(0),
+_max_indexes(0),
+_num_vertices(0),
+_max_vertices(0)
 {
 
 }
@@ -36,9 +44,9 @@ _vao(0)
 void sprite_renderer::init()
 {
     _program = program::load_default_program(program::EMBEDED_PROGRAM_SPRITE_DEFAULT);
-    _program->enable_attribute("pos");
-    _program->enable_attribute("tex_coord");
-    _program->enable_attribute("color");
+    GLuint loc_pos = _program->enable_attribute("pos");
+    GLuint loc_texcoord = _program->enable_attribute("tex_coord");
+    GLuint loc_color = _program->enable_attribute("color");
     
     _num_vertices = 0;
     _max_vertices = S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE;
@@ -51,12 +59,14 @@ void sprite_renderer::init()
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex) * _max_vertices, nullptr, GL_DYNAMIC_DRAW);
 
-    
     CHECK_GL_ERROR
     
     if (gl_util::support_vao()) {
         glGenVertexArrays(1, &_vao);
         glBindVertexArray(_vao);
+        glEnableVertexAttribArray(loc_pos);
+        glEnableVertexAttribArray(loc_texcoord);
+        glEnableVertexAttribArray(loc_color);
         setup_vertex_attr();
         glGenBuffers(1, &_ibo);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
@@ -77,8 +87,19 @@ void sprite_renderer::shutdown()
     free(_index_buffer);
 }
 
-void sprite_renderer::draw(const affine_transform& world_transform, pos_tex_color_vertex* quad)
+void sprite_renderer::draw(const affine_transform& world_transform,
+                           pos_tex_color_vertex* quad,
+                           texture* tex)
 {
+    if (_texture == nullptr) {
+        _texture = tex;
+    } else {
+        if (_texture != tex) {
+            this->flush();
+            _texture = tex;
+        }
+    }
+
     if (_num_vertices + 4 > _max_vertices) {
         this->flush();
     }
@@ -101,7 +122,8 @@ void sprite_renderer::flush()
 {
     this->update_indexes();
     _program->use();
-    
+    _texture->bind();
+    CHECK_GL_ERROR;
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_tex_color_vertex), _vertex_buffer);
     
@@ -117,7 +139,7 @@ void sprite_renderer::flush()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, _num_indexes * sizeof(index_t), _index_buffer);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
-    
+    CHECK_GL_ERROR;
     _num_indexes = 0;
     _num_vertices = 0;
 }
