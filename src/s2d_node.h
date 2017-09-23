@@ -21,6 +21,22 @@ public:
     void remove_from_parent();
 
 public:
+    inline void set_pos(float x, float y)
+    {
+        _pos = {x, y};
+    }
+
+    inline void set_scale(float scale)
+    {
+        _scale.x = _scale.y = scale;
+    }
+
+    inline void set_scale(float sx, float sy)
+    {
+        _scale.x = sx;
+        _scale.y = sy;
+    }
+
     inline uint32_t get_zorder()
     {
         return _z_order;

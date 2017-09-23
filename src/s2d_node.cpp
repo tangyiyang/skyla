@@ -46,7 +46,11 @@ void node::update(float dt)
 
 void node::update_srt()
 {
-    _local_transform = affine_transform::mk_identity();
+    if (this->_parent) {
+        _local_transform = _parent->_local_transform;
+    } else {
+        _local_transform = affine_transform::mk_identity();
+    }
 
     float anchor_x = _size.width * _anchor.x;
     float anchor_y = _size.height * _anchor.y;
@@ -80,6 +84,7 @@ void node::add_child(node* child, uint32_t z_order/*= 0*/)
 {
     child->_z_counter++;
 
+    child->_parent = this;
     _children.push_back(child);
 }
 
