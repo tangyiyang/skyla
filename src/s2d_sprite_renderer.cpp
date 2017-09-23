@@ -42,11 +42,15 @@ void sprite_renderer::init()
     
     _num_vertices = 0;
     _max_vertices = S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE;
+    _num_indexes = 0;
+    _max_indexes = _max_vertices/4*6;
     _vertex_buffer = (pos_tex_color_vertex*)malloc(sizeof(pos_tex_color_vertex) * _max_vertices);
+    _index_buffer = (index_t*)malloc(sizeof(index_t) * _max_indexes);
     
     glGenBuffers(1, &_vbo); S2D_ASSERT(_vbo > 0);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex) * _max_vertices, nullptr, GL_DYNAMIC_DRAW);
+
     
     CHECK_GL_ERROR
     
@@ -54,7 +58,9 @@ void sprite_renderer::init()
         glGenVertexArrays(1, &_vao);
         glBindVertexArray(_vao);
         setup_vertex_attr();
-
+        glGenBuffers(1, &_ibo);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_t) * _max_indexes, nullptr, GL_DYNAMIC_DRAW);
         CHECK_GL_ERROR;
     }
 
@@ -65,26 +71,43 @@ void sprite_renderer::shutdown()
     _program->shutdown();
     
     glDeleteBuffers(1, &_vbo);
+    glDeleteBuffers(1, &_ibo);
+    glDeleteVertexArrays(1, &_vao);
     free(_vertex_buffer);
+    free(_index_buffer);
 }
 
-void sprite_renderer::draw(pos_tex_color_vertex* quad)
+void sprite_renderer::draw(const affine_transform& world_transform, pos_tex_color_vertex* quad)
 {
-    if (_num_vertices + 6 > _max_vertices) {
+    if (_num_vertices + 4 > _max_vertices) {
         this->flush();
     }
     
-    pos_tex_color_vertex* p = (pos_tex_color_vertex*)quad;
-    
-    int n = _num_vertices;
-    for (int i = 0; i < 6; ++i) {
-        _vertex_buffer[n+i] = *(p+i);
+    context* ctx = context::_global_context;
+    const affine_transform& mv = ctx->_world_view_affine_transform;
+    affine_transform t = affine_transform::concat(world_transform, mv);
+
+    pos_tex_color_vertex* p = _vertex_buffer + _num_vertices;
+    for (int i = 0; i < 4; ++i) {
+        (p+i)->pos = affine_transform::apply_transform(t, quad[i].pos.x, quad[i].pos.y);
+        (p+i)->color = quad[i].color;
+        (p+i)->uv = quad[i].uv;
     }
-    _num_vertices += 6;
+    
+    _num_vertices += 4;
 }
 
 void sprite_renderer::flush()
 {
+    for (int i = 0, j = 0; i < _num_vertices; i += 4, j+=6) {
+        _index_buffer[j+0] = j+0;
+        _index_buffer[j+1] = j+1;
+        _index_buffer[j+2] = j+2;
+        _index_buffer[j+3] = j+2;
+        _index_buffer[j+4] = j+3;
+        _index_buffer[j+5] = j+1;
+    }
+    _num_indexes = _num_vertices/4*6;
     _program->use();
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -99,9 +122,12 @@ void sprite_renderer::flush()
     } else {
         setup_vertex_attr();
     }
-    CHECK_GL_ERROR;
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
+    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, _num_indexes * sizeof(index_t), _index_buffer);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+    
+    _num_indexes = 0;
+    _num_vertices = 0;
 }
 
 void sprite_renderer::setup_vertex_attr()

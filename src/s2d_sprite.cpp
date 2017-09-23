@@ -110,40 +110,12 @@ void sprite::update_srt()
 void sprite::update()
 {
     this->update_srt();
-
-    context* ctx = context::_global_context;
-
-    const affine_transform& mv = ctx->_world_view_affine_transform;
-    affine_transform t = affine_transform::concat(_local_transform, mv);
-
-    
-    _vertex[0].pos = affine_transform::apply_transform(t, _quad[0].pos.x, _quad[0].pos.y);
-    _vertex[1].pos = affine_transform::apply_transform(t, _quad[1].pos.x, _quad[1].pos.y);
-    _vertex[2].pos = affine_transform::apply_transform(t, _quad[2].pos.x, _quad[2].pos.y);
-    _vertex[3].pos = affine_transform::apply_transform(t, _quad[2].pos.x, _quad[2].pos.y);
-    _vertex[4].pos = affine_transform::apply_transform(t, _quad[3].pos.x, _quad[3].pos.y);
-    _vertex[5].pos = affine_transform::apply_transform(t, _quad[1].pos.x, _quad[1].pos.y);
-    
-    _vertex[0].color = _quad[0].color;
-    _vertex[1].color = _quad[1].color;
-    _vertex[2].color = _quad[2].color;
-    _vertex[3].color = _quad[2].color;
-    _vertex[4].color = _quad[3].color;
-    _vertex[5].color = _quad[1].color;
-    
-    _vertex[0].uv = _quad[0].uv;
-    _vertex[1].uv = _quad[1].uv;
-    _vertex[2].uv = _quad[2].uv;
-    _vertex[3].uv = _quad[2].uv;
-    _vertex[4].uv = _quad[3].uv;
-    _vertex[5].uv = _quad[1].uv;
-
     this->draw();
 }
 
 void sprite::draw()
 {
-    context::_global_context->_sprite_renderer->draw(_vertex);
+    context::_global_context->_sprite_renderer->draw(_local_transform, _quad);
 }
 
 NS_S2D_END

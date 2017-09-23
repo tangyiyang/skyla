@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 NS_S2D
 
+typedef uint16_t index_t;
 struct uv_t {
     uint16_t u;
     uint16_t v;
@@ -56,7 +57,7 @@ public:
 public:
     void init();
     void shutdown();
-    void draw(pos_tex_color_vertex* quad);
+    void draw(const affine_transform& world_transform, pos_tex_color_vertex* quad);
     void flush();
 
 private:
@@ -66,8 +67,12 @@ private:
 private:
     program*              _program;
     pos_tex_color_vertex* _vertex_buffer;
+    index_t*              _index_buffer;
+    int32_t               _num_indexes;
     int32_t               _num_vertices;
     int32_t               _max_vertices;
+    int32_t               _max_indexes;
+    GLuint                _ibo;
     GLuint                _vbo;
     GLuint                _vao;
 };
