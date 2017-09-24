@@ -43,10 +43,6 @@ void context::init(int opengles_version, float width, float height)
     _camera->init_orthographic(width, height);
     _root->init();
 
-    sprite* logo = new sprite();
-    logo->init();
-    _root->add_child(logo);
-    
     _world_view_affine_transform = affine_transform::mk_translate(-width/2, -height/2);
 
     LOGD("context initialized.");

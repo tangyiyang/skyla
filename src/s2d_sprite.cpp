@@ -26,9 +26,15 @@
 
 NS_S2D
 
-void sprite::init()
+void sprite::init(const char* tex_file)
 {
+    S2D_ASSERT(tex_file);
+    
     node::init();
+
+    _texture = new texture();
+    _texture->init(tex_file);
+    _size = _texture->_size;
 
     _quad[0].pos.x = 0;
     _quad[0].pos.y = 0;
@@ -37,26 +43,23 @@ void sprite::init()
     _quad[0].color = 0xffffffff;
 
     _quad[1].pos.x = 0;
-    _quad[1].pos.y = 158;
+    _quad[1].pos.y = _size.height;
     _quad[1].uv.u = 0;
     _quad[1].uv.v = MAX_TEX_COORD - MAX_TEX_COORD;
     _quad[1].color = 0xffffffff;
 
-    _quad[2].pos.x = 256;
+    _quad[2].pos.x = _size.width;
     _quad[2].pos.y = 0;
     _quad[2].uv.u = (1 <<16)-1;
     _quad[2].uv.v = MAX_TEX_COORD;
     _quad[2].color = 0xffffffff;
 
-    _quad[3].pos.x = 256;
-    _quad[3].pos.y = 158;
+    _quad[3].pos.x = _size.width;
+    _quad[3].pos.y = _size.height;
 
     _quad[3].uv.u = (1<<16)-1;
     _quad[3].uv.v = MAX_TEX_COORD - MAX_TEX_COORD;
     _quad[3].color = 0xffffffff;
-
-    _texture = new texture();
-    _texture->init("res/seal2d-transparent.png");
 }
 
 void sprite::update(float dt)

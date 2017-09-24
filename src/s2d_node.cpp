@@ -40,7 +40,7 @@ void node::init()
 
     _scale = {1.0, 1.0};
     _rotation = 0;
-    _anchor = {0, 0};
+    _anchor = {0.5, 0.5};
     _size = {0, 0};
 
     _z_order = 0;

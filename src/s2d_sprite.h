@@ -32,7 +32,7 @@ NS_S2D
 
 class sprite: public node {
 public:
-    void init() override;
+    void init(const char* tex_file);
     void update(float dt) override;
 
 protected:

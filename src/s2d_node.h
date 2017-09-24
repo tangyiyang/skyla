@@ -60,6 +60,17 @@ public:
         _scale.y = sy;
     }
 
+    inline void set_anchor(float ax, float ay)
+    {
+        _anchor.x = ax;
+        _anchor.y = ay;
+    }
+
+    inline void set_rotation(float rotation)
+    {
+        _rotation = rotation;
+    }
+
     inline uint32_t get_zorder()
     {
         return _z_order;

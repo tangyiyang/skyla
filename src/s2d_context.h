@@ -50,6 +50,11 @@ public:
     void pause();
     void resume();
     void shutdown();
+
+    inline node* get_root()
+    {
+        return _root;
+    }
     
 public:
     app_protocol*    _app;
