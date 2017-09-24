@@ -44,8 +44,6 @@
 
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
-    view.opaque = NO;
-    view.drawableColorFormat = GLKViewDrawableColorFormatRGBA8888;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 
     [self setupGL];
@@ -58,12 +56,12 @@
 {
     GLKView* view = (GLKView*)self.view;
     [view bindDrawable];
-    
+
     self.preferredFramesPerSecond = 60.0f;
 
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
-
+CHECK_GL_ERROR
     self.game_context->init(viewSize.width * scaleFactor, viewSize.height * scaleFactor);
 
 }
@@ -122,13 +120,13 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    
+
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
     CHECK_GL_ERROR
+    glClearColor(0.5, 0.5, 0.5, 0);
     glClear(GL_COLOR_BUFFER_BIT);
-    CHECK_GL_ERROR
-    glClearColor(0.37, 0.37, 0.37, 0.0);
+
     CHECK_GL_ERROR
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
     CHECK_GL_ERROR
@@ -153,7 +151,7 @@
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+
 }
 
 @end

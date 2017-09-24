@@ -1,24 +1,24 @@
 /****************************************************************************
- Copyright (c) Yiyang Tang
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ****************************************************************************/
+ * Copyright (c) Yiyang Tang
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * ****************************************************************************/
 
 #include "s2d_program.h"
 
@@ -48,12 +48,6 @@ static const char* fs_sprite = STRINGIFY
 
  uniform sampler2D texture0;
  void main() {\n
-//     lowp vec4 color = v_color * texture2D(texture0, v_tex_coord); \n
-//     if (color.a > 0.01) { \n
-//         gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n
-//     } else { \n
-//         gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \n
-//     } \n
      gl_FragColor = v_color * texture2D(texture0, v_tex_coord); \n
  }\n
  );
@@ -66,12 +60,13 @@ program* program::load_default_program(EMBEDED_PROGRAMS type)
         vs_sprite,
         fs_sprite
     };
-
+CHECK_GL_ERROR
     int vs_index = type*2;
     int fs_index = type*2 + 1;
     GLuint vs = load_shader(GL_VERTEX_SHADER, shaders[vs_index]);
+    CHECK_GL_ERROR
     GLuint fs = load_shader(GL_FRAGMENT_SHADER, shaders[fs_index]);
-
+CHECK_GL_ERROR
     program* p = new program();
     p->init(vs, fs);
     return p;
@@ -127,7 +122,7 @@ GLuint program::load_program(GLuint vs, GLuint fs)
     }
     glDetachShader(program, vs);
     glDetachShader(program, fs);
-
+    CHECK_GL_ERROR
     return program;
 }
 

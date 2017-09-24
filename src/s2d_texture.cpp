@@ -23,8 +23,14 @@
 #include "s2d_texture.h"
 #include "s2d_util.h"
 
+#define USE_LODE_PNG
+
+#ifdef USE_LODE_PNG
+#include "lodepng.h"
+#else
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#endif
 
 NS_S2D
 
@@ -50,6 +56,39 @@ void texture::init(const char* file)
     file_entry* f = util::load_file(file);
     f->retain();
     
+
+#ifdef USE_LODE_PNG
+
+#if 1
+    std::vector<unsigned char> image; //the raw pixels
+    unsigned width, height;
+    lodepng::State state; //optionally customize this one
+
+    unsigned char* data = nullptr;
+    lodepng_decode32(&data, &width, &height, (const unsigned char*)f->_buffer, (size_t)f->_size);
+#else
+
+    unsigned int w = 1024;
+    unsigned int h = 1024;
+
+    unsigned int width = w / 4;
+    unsigned int height = h / 4;
+
+    uint8_t* data = new uint8_t[w * h];
+    uint32_t *p = (uint32_t*)data;
+    for (int i = 0; i < height; ++i) {
+        for (int j = 0; j < width; ++j) {
+            int index = i * width + j;
+            if (i < 128 && j < 128) {
+                p[index] = 0x77000077;
+            } else {
+                p[index] = 0x00000000a22;
+            }
+        }
+    }
+#endif
+
+#else
     int x = 0;
     int y = 0;
     int channels_in_file = 0;
@@ -58,31 +97,39 @@ void texture::init(const char* file)
                                           &x, &y,
                                           &channels_in_file,
                                           STBI_rgb_alpha);
-    
     if (!data) {
         LOGE("unable to parse the texture file: %s", file);
         f->release();
         return;
     }
-    
+#endif
+
     GLuint tex_id;
     glGenTextures(1, &tex_id);
     
     glBindTexture(GL_TEXTURE_2D, tex_id);
     CHECK_GL_ERROR
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-    CHECK_GL_ERROR
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    CHECK_GL_ERROR
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    CHECK_GL_ERROR;
-    glBindTexture(GL_TEXTURE_2D, 0);
+#ifdef USE_LODE_PNG
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+#else
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+#endif
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glBindTexture(GL_TEXTURE_2D, 0);
+CHECK_GL_ERROR
     _gl_handle = tex_id;
+#ifdef USE_LODE_PNG
+    _size.width = width;
+    _size.height = height;
+#else
     _size.width = x;
     _size.height = y;
+#endif
 }
 
 NS_S2D_END
