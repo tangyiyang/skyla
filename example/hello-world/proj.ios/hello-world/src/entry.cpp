@@ -1,6 +1,5 @@
 #include "entry.h"
 
-
 void entry::on_init(context* ctx)
 {
     LOGD("entry:: on_init");

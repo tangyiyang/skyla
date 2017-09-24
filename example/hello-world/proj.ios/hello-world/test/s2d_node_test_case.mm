@@ -28,7 +28,7 @@ using namespace s2d;
 void node_test::setup()
 {
     _ctx = new context();
-    _ctx->init(1136, 640);
+    _ctx->init(3, 1136, 640);
 }
 
 void node_test::tear_down()
