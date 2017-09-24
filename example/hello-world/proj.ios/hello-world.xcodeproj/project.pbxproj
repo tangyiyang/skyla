@@ -7,10 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		432456671F775B5300BD0C04 /* s2d_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433691671F766A4700B0728E /* s2d_node.cpp */; };
+		432456681F775B5800BD0C04 /* s2d_gl_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43FC6B641F6634E100934F03 /* s2d_gl_util.cpp */; };
+		432456691F775B5800BD0C04 /* s2d_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD0AF01F6E0DC40021E4DB /* s2d_texture.cpp */; };
+		4324566A1F775B5800BD0C04 /* s2d_sprite_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B61968361F6ED0AC00970B10 /* s2d_sprite_renderer.cpp */; };
+		4324566B1F775B5800BD0C04 /* s2d_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B62FA8171F7164A300600A58 /* s2d_program.cpp */; };
+		4324566C1F775B6100BD0C04 /* s2d_file_system.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD0B081F6E32F60021E4DB /* s2d_file_system.mm */; };
+		4324566D1F775B6100BD0C04 /* s2d_context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43FC6B621F6634E100934F03 /* s2d_context.cpp */; };
+		4324566E1F775B6100BD0C04 /* s2d_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */; };
+		4324566F1F775B6100BD0C04 /* s2d_camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DF79031F68E36F00EC6747 /* s2d_camera.cpp */; };
+		432456701F775B6100BD0C04 /* s2d_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD0AFF1F6E2D270021E4DB /* s2d_util.cpp */; };
+		432456711F775B7200BD0C04 /* lodepng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96891F7684F900E6CF36 /* lodepng.cpp */; };
+		432456721F775B8E00BD0C04 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0921F656FD700E1CE26 /* OpenGLES.framework */; };
+		432456771F7762E400BD0C04 /* s2d_test_common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432456751F7762E400BD0C04 /* s2d_test_common.cpp */; };
 		433691691F766A4700B0728E /* s2d_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433691671F766A4700B0728E /* s2d_node.cpp */; };
 		43CB968B1F7684F900E6CF36 /* lodepng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96891F7684F900E6CF36 /* lodepng.cpp */; };
 		43CB96A51F76B3FE00E6CF36 /* s2d_node_test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96A41F76B3FE00E6CF36 /* s2d_node_test.mm */; };
-		43CB96A81F76B66000E6CF36 /* s2d_node_test_case.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96A61F76B66000E6CF36 /* s2d_node_test_case.cpp */; };
+		43CB96A81F76B66000E6CF36 /* s2d_node_test_case.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96A61F76B66000E6CF36 /* s2d_node_test_case.mm */; };
 		43DF78D41F66694E00EC6747 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0941F656FDB00E1CE26 /* GLKit.framework */; };
 		43DF78D81F667C3400EC6747 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DF78D71F667C3400EC6747 /* QuartzCore.framework */; };
 		43DF79051F68E36F00EC6747 /* s2d_camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DF79031F68E36F00EC6747 /* s2d_camera.cpp */; };
@@ -43,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		432456751F7762E400BD0C04 /* s2d_test_common.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_test_common.cpp; sourceTree = "<group>"; };
+		432456761F7762E400BD0C04 /* s2d_test_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_test_common.h; sourceTree = "<group>"; };
 		433691671F766A4700B0728E /* s2d_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_node.cpp; sourceTree = "<group>"; };
 		433691681F766A4700B0728E /* s2d_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_node.h; sourceTree = "<group>"; };
 		43CB96891F7684F900E6CF36 /* lodepng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lodepng.cpp; sourceTree = "<group>"; };
@@ -51,7 +66,7 @@
 		43CB96981F76B3BC00E6CF36 /* hello-worldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hello-worldTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CB969C1F76B3BC00E6CF36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43CB96A41F76B3FE00E6CF36 /* s2d_node_test.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = s2d_node_test.mm; sourceTree = "<group>"; };
-		43CB96A61F76B66000E6CF36 /* s2d_node_test_case.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_node_test_case.cpp; sourceTree = "<group>"; };
+		43CB96A61F76B66000E6CF36 /* s2d_node_test_case.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = s2d_node_test_case.mm; sourceTree = "<group>"; };
 		43CB96A71F76B66000E6CF36 /* s2d_node_test_case.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_node_test_case.h; sourceTree = "<group>"; };
 		43DF78D71F667C3400EC6747 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		43DF79031F68E36F00EC6747 /* s2d_camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_camera.cpp; sourceTree = "<group>"; };
@@ -100,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				432456721F775B8E00BD0C04 /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +153,10 @@
 			isa = PBXGroup;
 			children = (
 				43CB96A41F76B3FE00E6CF36 /* s2d_node_test.mm */,
-				43CB96A61F76B66000E6CF36 /* s2d_node_test_case.cpp */,
+				43CB96A61F76B66000E6CF36 /* s2d_node_test_case.mm */,
 				43CB96A71F76B66000E6CF36 /* s2d_node_test_case.h */,
+				432456751F7762E400BD0C04 /* s2d_test_common.cpp */,
+				432456761F7762E400BD0C04 /* s2d_test_common.h */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -375,8 +393,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				432456681F775B5800BD0C04 /* s2d_gl_util.cpp in Sources */,
 				43CB96A51F76B3FE00E6CF36 /* s2d_node_test.mm in Sources */,
-				43CB96A81F76B66000E6CF36 /* s2d_node_test_case.cpp in Sources */,
+				432456671F775B5300BD0C04 /* s2d_node.cpp in Sources */,
+				432456701F775B6100BD0C04 /* s2d_util.cpp in Sources */,
+				4324566A1F775B5800BD0C04 /* s2d_sprite_renderer.cpp in Sources */,
+				4324566E1F775B6100BD0C04 /* s2d_sprite.cpp in Sources */,
+				43CB96A81F76B66000E6CF36 /* s2d_node_test_case.mm in Sources */,
+				4324566F1F775B6100BD0C04 /* s2d_camera.cpp in Sources */,
+				4324566D1F775B6100BD0C04 /* s2d_context.cpp in Sources */,
+				432456711F775B7200BD0C04 /* lodepng.cpp in Sources */,
+				4324566B1F775B5800BD0C04 /* s2d_program.cpp in Sources */,
+				4324566C1F775B6100BD0C04 /* s2d_file_system.mm in Sources */,
+				432456771F7762E400BD0C04 /* s2d_test_common.cpp in Sources */,
+				432456691F775B5800BD0C04 /* s2d_texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

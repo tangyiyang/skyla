@@ -126,6 +126,9 @@ void sprite_renderer::draw(const affine_transform& world_transform,
 
 void sprite_renderer::flush()
 {
+    if (!_program || !_texture) {
+        return;
+    }
     
     this->update_indexes();
     _program->use();

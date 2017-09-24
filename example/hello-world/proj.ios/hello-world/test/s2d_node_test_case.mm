@@ -20,42 +20,37 @@
  * THE SOFTWARE.
  * ****************************************************************************/
 
-#import <XCTest/XCTest.h>
-
 #include "s2d_node_test_case.h"
+#include "s2d_test_common.h"
 
-@interface s2d_node_test : XCTestCase
+using namespace s2d;
 
-@property node_test* node_test;
-@end
-
-@implementation s2d_node_test
-
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    _node_test = new node_test();
-    _node_test->setup();
+void node_test::setup()
+{
+    _ctx = new context();
+    _ctx->init(1136, 640);
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-
-    _node_test->tear_down();
+void node_test::tear_down()
+{
+    _ctx->shutdown();
+    delete _ctx;
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    XCTAssertTrue(_node_test->test_node_addchild_with_zorder());
-}
+bool node_test::test_node_addchild_with_zorder()
+{
+    node* s = new node();
+    s->init();
+    s->set_pos(200, 200);
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
+    _ctx->_root->add_child(s);
+    _ctx->_root->update(1);
 
-@end
+    affine_transform world = s->local_to_world();
+
+    bool a = FLT_EQUAL(world.x, 200);
+    bool b = FLT_EQUAL(world.y, 200);
+
+//    bool a= (fabs((pos.x) - (200)) < FLT_EPSILON);
+    return a && b;
+}

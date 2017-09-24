@@ -66,7 +66,6 @@ struct affine_transform {
     affine_transform(float _a, float _b, float _c, float _d, float _x, float _y)
     : a(_a), b(_b), c(_c), d(_d), x(_x), y(_y) {}
 
-    static affine_transform identity;
     static affine_transform mk_identity()
     {
         return affine_transform(1, 0, 0, 1, 0, 0);

@@ -20,42 +20,4 @@
  * THE SOFTWARE.
  * ****************************************************************************/
 
-#import <XCTest/XCTest.h>
-
-#include "s2d_node_test_case.h"
-
-@interface s2d_node_test : XCTestCase
-
-@property node_test* node_test;
-@end
-
-@implementation s2d_node_test
-
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    _node_test = new node_test();
-    _node_test->setup();
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-
-    _node_test->tear_down();
-}
-
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    XCTAssertTrue(_node_test->test_node_addchild_with_zorder());
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
-
-@end
+#include "s2d_test_common.h"

@@ -127,4 +127,37 @@ void node::remove_from_parent()
     _parent->remove_child(this);
 }
 
+affine_transform node::transform_to(node* to)
+{
+    if (this == to) {
+        return this->_local_transform;
+    }
+
+    affine_transform ret = affine_transform::mk_identity();
+
+    node* from = this;
+    while(from != to) {
+        affine_transform::inplace_concat(ret, from->_local_transform);
+        from = from->_parent;
+    }
+
+    affine_transform::inplace_concat(ret, to->_local_transform);
+    return ret;
+}
+
+affine_transform node::local_to_world()
+{
+    S2D_ASSERT(_parent != nullptr);
+    return transform_to(this->get_root());
+}
+
+node* node::get_root()
+{
+    node* parent = this;
+    while(parent->_parent) {
+        parent = parent->_parent;
+    }
+    return parent;
+}
+
 NS_S2D_END

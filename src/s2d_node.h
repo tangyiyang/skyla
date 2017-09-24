@@ -37,6 +37,12 @@ public:
     void remove_all_children();
     void remove_from_parent();
 
+    affine_transform transform_to(node* to);
+    affine_transform local_to_world();
+
+protected:
+    node* get_root();
+
 public:
     inline void set_pos(float x, float y)
     {
