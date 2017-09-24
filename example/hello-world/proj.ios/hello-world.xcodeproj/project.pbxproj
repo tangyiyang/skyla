@@ -20,6 +20,7 @@
 		432456711F775B7200BD0C04 /* lodepng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96891F7684F900E6CF36 /* lodepng.cpp */; };
 		432456721F775B8E00BD0C04 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0921F656FD700E1CE26 /* OpenGLES.framework */; };
 		432456771F7762E400BD0C04 /* s2d_test_common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432456751F7762E400BD0C04 /* s2d_test_common.cpp */; };
+		432456811F77E93B00BD0C04 /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4324567F1F77E93B00BD0C04 /* entry.cpp */; };
 		433691691F766A4700B0728E /* s2d_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433691671F766A4700B0728E /* s2d_node.cpp */; };
 		43CB968B1F7684F900E6CF36 /* lodepng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96891F7684F900E6CF36 /* lodepng.cpp */; };
 		43CB96A51F76B3FE00E6CF36 /* s2d_node_test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96A41F76B3FE00E6CF36 /* s2d_node_test.mm */; };
@@ -37,7 +38,7 @@
 		B61968381F6ED0AC00970B10 /* s2d_sprite_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B61968361F6ED0AC00970B10 /* s2d_sprite_renderer.cpp */; };
 		B62FA8191F7164A300600A58 /* s2d_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B62FA8171F7164A300600A58 /* s2d_program.cpp */; };
 		B6A7F0781F656F3800E1CE26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F0771F656F3800E1CE26 /* main.m */; };
-		B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */; };
+		B6A7F07B1F656F3800E1CE26 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07A1F656F3800E1CE26 /* AppDelegate.mm */; };
 		B6A7F07E1F656F3800E1CE26 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07D1F656F3800E1CE26 /* ViewController.mm */; };
 		B6A7F0811F656F3800E1CE26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A7F07F1F656F3800E1CE26 /* Main.storyboard */; };
 		B6A7F0831F656F3800E1CE26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6A7F0821F656F3800E1CE26 /* Assets.xcassets */; };
@@ -58,6 +59,8 @@
 /* Begin PBXFileReference section */
 		432456751F7762E400BD0C04 /* s2d_test_common.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_test_common.cpp; sourceTree = "<group>"; };
 		432456761F7762E400BD0C04 /* s2d_test_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_test_common.h; sourceTree = "<group>"; };
+		4324567F1F77E93B00BD0C04 /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
+		432456801F77E93B00BD0C04 /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
 		433691671F766A4700B0728E /* s2d_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_node.cpp; sourceTree = "<group>"; };
 		433691681F766A4700B0728E /* s2d_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_node.h; sourceTree = "<group>"; };
 		43CB96891F7684F900E6CF36 /* lodepng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lodepng.cpp; sourceTree = "<group>"; };
@@ -99,7 +102,7 @@
 		B6A7F0731F656F3800E1CE26 /* hello-world.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-world.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A7F0771F656F3800E1CE26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6A7F0791F656F3800E1CE26 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B6A7F07A1F656F3800E1CE26 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		B6A7F07C1F656F3800E1CE26 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		B6A7F07D1F656F3800E1CE26 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		B6A7F0801F656F3800E1CE26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -132,6 +135,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		432456781F77DCAE00BD0C04 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4324567F1F77E93B00BD0C04 /* entry.cpp */,
+				432456801F77E93B00BD0C04 /* entry.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		4324567C1F77E71400BD0C04 /* game_object */ = {
+			isa = PBXGroup;
+			children = (
+				43DF79031F68E36F00EC6747 /* s2d_camera.cpp */,
+				43DF79041F68E36F00EC6747 /* s2d_camera.h */,
+				4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */,
+				4D31B35A1F65992C00B9DDD7 /* s2d_sprite.h */,
+				433691671F766A4700B0728E /* s2d_node.cpp */,
+				433691681F766A4700B0728E /* s2d_node.h */,
+			);
+			name = game_object;
+			sourceTree = "<group>";
+		};
+		4324567D1F77E74B00BD0C04 /* misc */ = {
+			isa = PBXGroup;
+			children = (
+				4DDD0AFF1F6E2D270021E4DB /* s2d_util.cpp */,
+				4DDD0B001F6E2D270021E4DB /* s2d_util.h */,
+			);
+			name = misc;
+			sourceTree = "<group>";
+		};
+		4324567E1F77E75500BD0C04 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				43DF790A1F68E93800EC6747 /* s2d_math.h */,
+				4DDD0AF71F6E149F0021E4DB /* s2d_ref_counter.h */,
+			);
+			name = base;
+			sourceTree = "<group>";
+		};
 		43CB96881F7684F900E6CF36 /* lodepng */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,24 +207,17 @@
 		4D31B3581F65992C00B9DDD7 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				433691671F766A4700B0728E /* s2d_node.cpp */,
-				433691681F766A4700B0728E /* s2d_node.h */,
+				4324567E1F77E75500BD0C04 /* base */,
+				4324567D1F77E74B00BD0C04 /* misc */,
+				4DDD0B021F6E322A0021E4DB /* platform */,
+				4324567C1F77E71400BD0C04 /* game_object */,
 				B61968351F6EC96200970B10 /* renderer */,
 				43FC6B661F6634E100934F03 /* s2d.h */,
 				B65E54331F7411970036BD41 /* s2d_config.h */,
 				43DF790C1F690FB300EC6747 /* s2d_macro.h */,
 				43FC6B611F6634E100934F03 /* s2d_common.h */,
-				4DDD0B021F6E322A0021E4DB /* platform */,
 				43FC6B621F6634E100934F03 /* s2d_context.cpp */,
 				43FC6B631F6634E100934F03 /* s2d_context.h */,
-				4D31B3591F65992C00B9DDD7 /* s2d_sprite.cpp */,
-				4D31B35A1F65992C00B9DDD7 /* s2d_sprite.h */,
-				43DF79031F68E36F00EC6747 /* s2d_camera.cpp */,
-				43DF79041F68E36F00EC6747 /* s2d_camera.h */,
-				43DF790A1F68E93800EC6747 /* s2d_math.h */,
-				4DDD0AF71F6E149F0021E4DB /* s2d_ref_counter.h */,
-				4DDD0AFF1F6E2D270021E4DB /* s2d_util.cpp */,
-				4DDD0B001F6E2D270021E4DB /* s2d_util.h */,
 			);
 			name = src;
 			path = ../../../src;
@@ -255,9 +291,10 @@
 		B6A7F0751F656F3800E1CE26 /* hello-world */ = {
 			isa = PBXGroup;
 			children = (
+				432456781F77DCAE00BD0C04 /* src */,
 				43CB96A31F76B3F100E6CF36 /* test */,
 				B6A7F0791F656F3800E1CE26 /* AppDelegate.h */,
-				B6A7F07A1F656F3800E1CE26 /* AppDelegate.m */,
+				B6A7F07A1F656F3800E1CE26 /* AppDelegate.mm */,
 				B6A7F07C1F656F3800E1CE26 /* ViewController.h */,
 				B6A7F07D1F656F3800E1CE26 /* ViewController.mm */,
 				B6A7F07F1F656F3800E1CE26 /* Main.storyboard */,
@@ -419,7 +456,8 @@
 				4DDD0AF21F6E0DC40021E4DB /* s2d_texture.cpp in Sources */,
 				43FC6B671F6634E100934F03 /* s2d_context.cpp in Sources */,
 				43FC6B681F6634E100934F03 /* s2d_gl_util.cpp in Sources */,
-				B6A7F07B1F656F3800E1CE26 /* AppDelegate.m in Sources */,
+				432456811F77E93B00BD0C04 /* entry.cpp in Sources */,
+				B6A7F07B1F656F3800E1CE26 /* AppDelegate.mm in Sources */,
 				433691691F766A4700B0728E /* s2d_node.cpp in Sources */,
 				B62FA8191F7164A300600A58 /* s2d_program.cpp in Sources */,
 				4D31B35B1F65992C00B9DDD7 /* s2d_sprite.cpp in Sources */,

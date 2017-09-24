@@ -30,13 +30,29 @@
 #include "s2d_sprite_renderer.h"
 
 NS_S2D
+
+class context;
+class app_protocol {
+public:
+    virtual void on_init(context* ctx) = 0;
+    virtual void on_pause() = 0;
+    virtual void on_resume() = 0;
+    virtual void on_destroy() = 0;
+};
+
 class context {
 public:
-    void init(float width, float height);
-    void loop(float dt);
-    void shutdown();
+    context(app_protocol* protocol = nullptr) : _app(protocol) {}
 
 public:
+    void init(int opengles_version, float width, float height);
+    void loop(float dt);
+    void pause();
+    void resume();
+    void shutdown();
+    
+public:
+    app_protocol*    _app;
     file_system*     _file_system;
     sprite_renderer* _sprite_renderer;
     node*            _root;
@@ -45,6 +61,12 @@ public:
     affine_transform _world_view_affine_transform;
     
 public:
+    static inline context* C()
+    {
+        return _global_context;
+    }
+private:
+    /* The ONLY static context in seal2d. */
     static context* _global_context;
 };
 

@@ -25,8 +25,6 @@
 
 NS_S2D
 
-context* util::_global_context = nullptr;
-
 void util::log(int level, const char* format, ...)
 {
     if (level >= S2D_LOG_LEVEL) {
@@ -39,7 +37,7 @@ void util::log(int level, const char* format, ...)
 
 file_entry* util::load_file(const char* path)
 {
-    return _global_context->_file_system->read(path);
+    return context::C()->_file_system->read(path);
 }
 
 

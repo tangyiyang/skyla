@@ -55,7 +55,6 @@ void texture::init(const char* file)
     
     file_entry* f = util::load_file(file);
     f->retain();
-    
 
 #ifdef USE_LODE_PNG
 

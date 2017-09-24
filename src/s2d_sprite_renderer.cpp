@@ -110,7 +110,7 @@ void sprite_renderer::draw(const affine_transform& world_transform,
         this->flush();
     }
     
-    context* ctx = context::_global_context;
+    context* ctx = context::C();
     const affine_transform& mv = ctx->_world_view_affine_transform;
     affine_transform t = affine_transform::concat(world_transform, mv);
 
@@ -143,7 +143,7 @@ void sprite_renderer::flush()
     
     _program->set_uniform("u_projection",
                           program::UNIFORM_TYPE_MATRIX_3_FV,
-                          context::_global_context->_camera->_matrix.m);
+                          context::C()->_camera->_matrix.m);
 
     if(gl_util::support_vao()) {
         glBindVertexArray(_vao);

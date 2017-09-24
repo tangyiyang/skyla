@@ -56,7 +56,7 @@ void sprite::init()
     _quad[3].color = 0xffffffff;
 
     _texture = new texture();
-    _texture->init("res/seal2d-transparent-red.png");
+    _texture->init("res/seal2d-transparent.png");
 }
 
 void sprite::update(float dt)
@@ -67,10 +67,7 @@ void sprite::update(float dt)
 
 void sprite::draw()
 {
-    context::_global_context->_sprite_renderer->draw(
-                                                     _local_transform,
-                                                     _quad,
-                                                     _texture);
+    context::C()->_sprite_renderer->draw(_local_transform, _quad, _texture);
 }
 
 NS_S2D_END

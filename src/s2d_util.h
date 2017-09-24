@@ -37,18 +37,12 @@ NS_S2D
 #define LOGD(format, ...) s2d::util::log(S2D_LOG_DEBUG, format "\n", ##__VA_ARGS__);
 #define LOGE(format, ...) s2d::util::log(S2D_LOG_ERROR, format "\n", ##__VA_ARGS__);
 
-class context;
+
 class file_entry;
 class util {
 public:
-    static void         init(context* ctx) { _global_context = ctx; }
-    
-public:
-    static void         log(int level, const char* format, ...);
-    static file_entry*  load_file(const char* path);
-    
-private:
-    static context* _global_context;
+    static void log(int level, const char* format, ...);
+    static file_entry* load_file(const char* path);
 };
 
 NS_S2D_END

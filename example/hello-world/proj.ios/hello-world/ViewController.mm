@@ -8,10 +8,7 @@
 
 
 #import "ViewController.h"
-#import <OpenGLES/ES2/glext.h>
-
-#include "s2d.h"
-#include "s2d_gl_util.h"
+#include "entry.h"
 
 @interface ViewController () {
 
@@ -19,7 +16,8 @@
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 
-@property s2d::context *game_context;
+@property int opengl_es_version;
+@property entry* entry;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -28,53 +26,53 @@
 
 @implementation ViewController
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+    EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+    _opengl_es_version = 3;
+    if (context == nil) {
+        context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        _opengl_es_version = 2;
+    }
+    self.context = context;
 
     if (!self.context) {
         NSLog(@"Failed to create ES context");
         return;
     }
 
-
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 
-    [self setupGL];
-    s2d::gl_util::check_gl_extension(3);
+    [EAGLContext setCurrentContext:self.context];
 
-    self.game_context = new s2d::context();
+    /* TODO: looks ungly here, move to Appdelegate someday. */
+    _entry = new entry();
+    self.game_context = new s2d::context(_entry);
 }
 
 - (void)viewDidLayoutSubviews
 {
     GLKView* view = (GLKView*)self.view;
     [view bindDrawable];
-
     self.preferredFramesPerSecond = 60.0f;
-
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
-CHECK_GL_ERROR
-    self.game_context->init(viewSize.width * scaleFactor, viewSize.height * scaleFactor);
 
+    self.game_context->init(_opengl_es_version,
+                            viewSize.width * scaleFactor,
+                            viewSize.height * scaleFactor);
 }
 
 - (void)dealloc
 {
     [self tearDownGL];
-
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
-
-    self.game_context->shutdown();
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,8 +89,7 @@ CHECK_GL_ERROR
         }
         self.context = nil;
     }
-
-        // Dispose of any resources that can be recreated.
+    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -101,13 +98,14 @@ CHECK_GL_ERROR
 
 - (void)setupGL
 {
-    [EAGLContext setCurrentContext:self.context];
 }
 
 - (void)tearDownGL
 {
     [EAGLContext setCurrentContext:self.context];
 
+    self.game_context->shutdown();
+    delete _entry;
 }
 
 #pragma mark - GLKView and GLKViewController delegate methods
@@ -120,17 +118,14 @@ CHECK_GL_ERROR
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
-    CHECK_GL_ERROR
     glClearColor(0.5, 0.5, 0.5, 0);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    CHECK_GL_ERROR
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
-    CHECK_GL_ERROR
     NSTimeInterval interval = [self timeSinceLastDraw];
+    
     self.game_context->loop(interval);
 }
 
