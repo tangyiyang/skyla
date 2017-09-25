@@ -28,10 +28,46 @@ NS_S2D
 
 context* context::_global_context = nullptr;
 
-void context::init(int opengles_version, float width, float height)
+void context::init(int opengles_version, float window_width, float window_height)
 {
     _global_context = this;
     s2d::gl_util::check_gl_extension(opengles_version);
+
+
+    _logic_size = {1136, 640};
+    _window_size = {window_width, window_height};
+    _resolution_compat_type = FIXED_WIDTH;
+
+    switch (_resolution_compat_type) {
+        case FIXED_WIDTH:
+            _scale_factor.y = _scale_factor.x = _window_size.width / _logic_size.width;
+            _logic_size.height = ceilf(_window_size.height / _scale_factor.y);
+            _visible_rect.origin = {0, 0};
+            _visible_rect.size =_logic_size;
+            break;
+
+        case FIXED_HEIGHT:
+            _scale_factor.x = _scale_factor.y = _window_size.height / _logic_size.height;
+            _logic_size.width = ceilf(_window_size.width / _scale_factor.x);
+            _visible_rect.origin = {0, 0};
+            _visible_rect.size =_logic_size;
+        default:
+            break;
+    }
+
+    _viewport_rect.size.width = _logic_size.width * _scale_factor.x;
+    _viewport_rect.size.height = _logic_size.height * _scale_factor.y;
+    _viewport_rect.origin.x = (_window_size.width - _viewport_rect.size.width)/2;
+    _viewport_rect.origin.y = (_window_size.height - _viewport_rect.size.height)/2;
+
+    LOGD("** resolution compat mode = %d", _resolution_compat_type);
+    LOGD("** window size = {%.2f, %.2f}", _window_size.width, _window_size.height);
+    LOGD("** viewport size = {%.2f, %.2f}", _viewport_rect.size.width, _viewport_rect.size.height);
+    LOGD("** _logic_size size = {%.2f, %.2f}", _logic_size.width, _logic_size.height);
+    LOGD("** visible origin = {%.2f, %.2f}", _visible_rect.origin.x, _visible_rect.origin.y);
+    LOGD("** visible size = {%.2f, %.2f}", _visible_rect.size.width, _visible_rect.size.height);
+
+    LOGD("context initialized.");
 
     _sprite_renderer = new sprite_renderer();
     _file_system = new file_system();
@@ -40,15 +76,16 @@ void context::init(int opengles_version, float width, float height)
 
     _sprite_renderer->init();
     _file_system->init();
-    _camera->init_orthographic(width, height);
+    _camera->init_orthographic(_logic_size.width, _logic_size.height);
     _root->init();
 
-    _world_view_affine_transform = affine_transform::mk_translate(-width/2, -height/2);
+    _world_view_affine_transform = affine_transform::mk_translate(-_logic_size.width/2,
+                                                                  -_logic_size.height/2);
 
-    LOGD("context initialized.");
     if (_app) {
         _app->on_init(this);
     }
+
 }
 
 void context::loop(float dt)

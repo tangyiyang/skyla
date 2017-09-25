@@ -62,6 +62,7 @@
     CGSize viewSize = [view bounds].size;
     CGFloat scaleFactor = [view contentScaleFactor];
 
+
     self.game_context->init(_opengl_es_version,
                             viewSize.width * scaleFactor,
                             viewSize.height * scaleFactor);

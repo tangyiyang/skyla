@@ -42,10 +42,15 @@ public:
 
 class context {
 public:
+    enum RESOLUTION_COMPAT_TYPE {
+        FIXED_WIDTH = 0,
+        FIXED_HEIGHT = 1,
+    };
+public:
     context(app_protocol* protocol = nullptr) : _app(protocol) {}
 
 public:
-    void init(int opengles_version, float width, float height);
+    void init(int opengles_version, float window_width, float window_height);
     void loop(float dt);
     void pause();
     void resume();
@@ -54,6 +59,11 @@ public:
     inline node* get_root()
     {
         return _root;
+    }
+
+    inline const rect& get_visible_rect()
+    {
+        return _visible_rect;
     }
     
 public:
@@ -64,7 +74,13 @@ public:
     camera*          _camera;
 
     affine_transform _world_view_affine_transform;
-    
+
+    size             _logic_size;
+    size             _window_size;
+    rect             _viewport_rect;
+    rect             _visible_rect;
+    vec2             _scale_factor;
+    RESOLUTION_COMPAT_TYPE _resolution_compat_type;
 public:
     static inline context* C()
     {

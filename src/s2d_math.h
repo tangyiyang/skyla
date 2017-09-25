@@ -53,6 +53,11 @@ struct size {
     float height;
 };
 
+struct rect {
+    vec2 origin;
+    size size;
+};
+
 struct affine_transform {
     /*
      a b 0
