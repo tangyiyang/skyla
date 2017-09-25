@@ -33,7 +33,17 @@ void context::init(int opengles_version, float window_width, float window_height
     _global_context = this;
     s2d::gl_util::check_gl_extension(opengles_version);
 
+    init_resolution_settings(window_width, window_height);
+    init_fundamental_components(_logic_size);
+    LOGD("context initialized.");
 
+    if (_app) {
+        _app->on_init(this);
+    }
+}
+
+void context::init_resolution_settings(float window_width, float window_height)
+{
     _logic_size = {1136, 640};
     _window_size = {window_width, window_height};
     _resolution_compat_type = FIXED_WIDTH;
@@ -66,9 +76,10 @@ void context::init(int opengles_version, float window_width, float window_height
     LOGD("** _logic_size size = {%.2f, %.2f}", _logic_size.width, _logic_size.height);
     LOGD("** visible origin = {%.2f, %.2f}", _visible_rect.origin.x, _visible_rect.origin.y);
     LOGD("** visible size = {%.2f, %.2f}", _visible_rect.size.width, _visible_rect.size.height);
+}
 
-    LOGD("context initialized.");
-
+void context::init_fundamental_components(const size& logic_size)
+{
     _sprite_renderer = new sprite_renderer();
     _file_system = new file_system();
     _camera = new camera();
@@ -76,16 +87,11 @@ void context::init(int opengles_version, float window_width, float window_height
 
     _sprite_renderer->init();
     _file_system->init();
-    _camera->init_orthographic(_logic_size.width, _logic_size.height);
+    _camera->init_orthographic(logic_size.width, logic_size.height);
     _root->init();
 
-    _world_view_affine_transform = affine_transform::mk_translate(-_logic_size.width/2,
-                                                                  -_logic_size.height/2);
-
-    if (_app) {
-        _app->on_init(this);
-    }
-
+    _world_view_affine_transform = affine_transform::mk_translate(-logic_size.width/2,
+                                                                  -logic_size.height/2);
 }
 
 void context::loop(float dt)
@@ -125,6 +131,5 @@ void context::shutdown()
         _app->on_destroy();
     }
 }
-
 
 NS_S2D_END

@@ -65,7 +65,11 @@ public:
     {
         return _visible_rect;
     }
-    
+
+private:
+    void init_resolution_settings(float window_width, float window_height);
+    void init_fundamental_components(const size& logic_size);
+
 public:
     app_protocol*    _app;
     file_system*     _file_system;
