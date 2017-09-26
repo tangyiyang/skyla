@@ -23,7 +23,7 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
+#*.a -- add libs like glfw, for user's convenience
 *.lib
 
 # Executables
