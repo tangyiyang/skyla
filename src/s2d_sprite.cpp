@@ -23,8 +23,51 @@
 #include "s2d_sprite.h"
 #include "s2d_context.h"
 #include "s2d_util.h"
+#include "cJSON.h"
 
 NS_S2D
+
+void sprite_frame_cache::load(const char* atlas, const char* texture_file)
+{
+    file_entry* file = util::load_file(atlas);
+    cJSON* root = cJSON_Parse((const char*)file->_buffer);
+    cJSON* frames = cJSON_GetObjectItemCaseSensitive(root, "frames");
+    if (frames) {
+        cJSON* child = frames->child;
+        while (child) {
+            sprite_frame* f = new sprite_frame();
+            f->_name = child->string;
+
+            cJSON* frame_obj = cJSON_GetObjectItemCaseSensitive(child, "frame");
+            f->_frame.origin.x = cJSON_GetObjectItemCaseSensitive(frame_obj, "x")->valueint;
+            f->_frame.origin.y = cJSON_GetObjectItemCaseSensitive(frame_obj, "y")->valueint;
+            f->_frame.size.width = cJSON_GetObjectItemCaseSensitive(frame_obj, "w")->valueint;
+            f->_frame.size.height = cJSON_GetObjectItemCaseSensitive(frame_obj, "h")->valueint;
+
+            f->_rotated = (cJSON_GetObjectItemCaseSensitive(child, "rotated")->type == cJSON_True);
+            f->_trimmed = (cJSON_GetObjectItemCaseSensitive(child, "trimmed")->type == cJSON_True);
+
+            child = child->next;
+        }
+    }
+
+    cJSON_Delete(root);
+    file->release();
+}
+
+sprite_frame* sprite_frame_cache::get(const char* name)
+{
+    return _cache[name];
+}
+
+void sprite_frame_cache::shutdown()
+{
+    std::map<std::string, sprite_frame*>::iterator it = _cache.begin();
+    for (; it != _cache.end(); ++it) {
+        it->second->release();
+    }
+    _cache.clear();
+}
 
 void sprite::init(const char* tex_file)
 {
@@ -60,6 +103,11 @@ void sprite::init(const char* tex_file)
     _quad[3].uv.u = (1<<16)-1;
     _quad[3].uv.v = MAX_TEX_COORD - MAX_TEX_COORD;
     _quad[3].color = 0xffffffff;
+}
+
+void sprite::init(sprite_frame* frame)
+{
+
 }
 
 void sprite::update(float dt)

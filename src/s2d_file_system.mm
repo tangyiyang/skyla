@@ -52,11 +52,12 @@ uint8_t* sys_read(const char* path, uint8_t* buffer, size_t* size) {
     fseek(fp, 0L, SEEK_END);
     size_t file_size = ftell(fp);
     rewind(fp);
-    
+
+    // always allocated 1 extra byte, this would make deal with C string easier.
     if (!buffer) {
-        buffer = (unsigned char*)malloc(file_size);
+        buffer = (unsigned char*)malloc(file_size+1);
     }
-    memset(buffer, 0, file_size);
+    memset(buffer, 0, file_size+1);
     size_t result = fread(buffer, 1, file_size, fp);
 
     if(result != file_size) {

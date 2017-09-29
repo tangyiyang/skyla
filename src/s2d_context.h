@@ -73,6 +73,7 @@ private:
 public:
     app_protocol*    _app;
     file_system*     _file_system;
+    sprite_frame_cache* _sprite_frame_cache;
     sprite_renderer* _sprite_renderer;
     node*            _root;
     camera*          _camera;

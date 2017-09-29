@@ -10,7 +10,6 @@ public:
     void on_pause() override;
     void on_resume() override;
     void on_destroy() override;
-    
 };
 
 #endif /* entry_h */

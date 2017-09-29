@@ -80,6 +80,7 @@ void context::init_resolution_settings(float window_width, float window_height)
 
 void context::init_fundamental_components(const size& logic_size)
 {
+    _sprite_frame_cache = new sprite_frame_cache();
     _sprite_renderer = new sprite_renderer();
     _file_system = new file_system();
     _camera = new camera();
@@ -119,6 +120,7 @@ void context::resume()
 void context::shutdown()
 {
     LOGD("context will shutdown, good bye :).");
+    _sprite_frame_cache->shutdown();
     _sprite_renderer->shutdown();
     _root->remove_all_children();
 

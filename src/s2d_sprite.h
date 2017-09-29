@@ -30,9 +30,31 @@
 
 NS_S2D
 
+class sprite_frame : public ref_counter {
+public:
+    rect _frame;
+    rect _sprite_source_size;
+    rect _source_size;
+    bool _rotated;
+    bool _trimmed;
+    std::string _name;
+    texture* _texture;
+};
+
+class sprite_frame_cache {
+public:
+    void load(const char* atlas, const char* texture_file);
+    sprite_frame* get(const char* name);
+
+    void shutdown();
+private:
+    std::map<std::string, sprite_frame*> _cache;
+};
+
 class sprite: public node {
 public:
     void init(const char* tex_file);
+    void init(sprite_frame* frame);
     void update(float dt) override;
 
 protected:
