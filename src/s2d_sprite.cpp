@@ -36,7 +36,8 @@ void sprite_frame_cache::load(const char* atlas, const char* texture_file)
         cJSON* child = frames->child;
         while (child) {
             sprite_frame* f = new sprite_frame();
-            f->_name = child->string;
+            const char* name = child->string;
+            f->_name = name;
 
             cJSON* frame_obj = cJSON_GetObjectItemCaseSensitive(child, "frame");
             f->_frame.origin.x = cJSON_GetObjectItemCaseSensitive(frame_obj, "x")->valueint;
@@ -44,10 +45,22 @@ void sprite_frame_cache::load(const char* atlas, const char* texture_file)
             f->_frame.size.width = cJSON_GetObjectItemCaseSensitive(frame_obj, "w")->valueint;
             f->_frame.size.height = cJSON_GetObjectItemCaseSensitive(frame_obj, "h")->valueint;
 
+            cJSON* size_obj = cJSON_GetObjectItemCaseSensitive(child, "sourceSize");
+            f->_source_size.width = cJSON_GetObjectItemCaseSensitive(size_obj, "w")->valueint;
+            f->_source_size.height = cJSON_GetObjectItemCaseSensitive(size_obj, "h")->valueint;
+
+            cJSON* source_size_obj = cJSON_GetObjectItemCaseSensitive(child, "spriteSourceSize");
+            f->_sprite_source_rect.origin.x = cJSON_GetObjectItemCaseSensitive(source_size_obj, "x")->valueint;
+            f->_sprite_source_rect.origin.y = cJSON_GetObjectItemCaseSensitive(source_size_obj, "y")->valueint;
+            f->_sprite_source_rect.size.width = cJSON_GetObjectItemCaseSensitive(source_size_obj, "w")->valueint;
+            f->_sprite_source_rect.size.height = cJSON_GetObjectItemCaseSensitive(source_size_obj, "h")->valueint;
+
             f->_rotated = (cJSON_GetObjectItemCaseSensitive(child, "rotated")->type == cJSON_True);
             f->_trimmed = (cJSON_GetObjectItemCaseSensitive(child, "trimmed")->type == cJSON_True);
 
             child = child->next;
+
+            _cache[name] = f;
         }
     }
 
@@ -88,7 +101,7 @@ void sprite::init(const char* tex_file)
     _quad[1].pos.x = 0;
     _quad[1].pos.y = _size.height;
     _quad[1].uv.u = 0;
-    _quad[1].uv.v = MAX_TEX_COORD - MAX_TEX_COORD;
+    _quad[1].uv.v = 0;
     _quad[1].color = 0xffffffff;
 
     _quad[2].pos.x = _size.width;
@@ -101,7 +114,7 @@ void sprite::init(const char* tex_file)
     _quad[3].pos.y = _size.height;
 
     _quad[3].uv.u = (1<<16)-1;
-    _quad[3].uv.v = MAX_TEX_COORD - MAX_TEX_COORD;
+    _quad[3].uv.v = 0;
     _quad[3].color = 0xffffffff;
 }
 

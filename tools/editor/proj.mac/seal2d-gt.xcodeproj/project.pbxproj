@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43AE73A31F83570100C4F941 /* level_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE73A11F83570100C4F941 /* level_editor.cpp */; };
 		B63FEBE91F7D4ED1001BD442 /* gl3w.c in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE51F7D4ED1001BD442 /* gl3w.c */; };
 		B63FEBEA1F7D4EDD001BD442 /* imgui_impl_glfw_gl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE31F7D4C64001BD442 /* imgui_impl_glfw_gl3.cpp */; };
 		B63FEBEB1F7D4EEA001BD442 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE01F7D4C34001BD442 /* imgui.cpp */; };
@@ -34,6 +35,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		43AE73A11F83570100C4F941 /* level_editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = level_editor.cpp; sourceTree = "<group>"; };
+		43AE73A21F83570100C4F941 /* level_editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = level_editor.h; sourceTree = "<group>"; };
 		B63FEBDF1F7D4C34001BD442 /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		B63FEBE01F7D4C34001BD442 /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
 		B63FEBE11F7D4C34001BD442 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
@@ -79,7 +82,8 @@
 			children = (
 				B63FEBDD1F7D4C34001BD442 /* common */,
 			);
-			path = libs;
+			name = libs;
+			path = ../libs;
 			sourceTree = "<group>";
 		};
 		B63FEBDD1F7D4C34001BD442 /* common */ = {
@@ -87,8 +91,7 @@
 			children = (
 				B63FEBDE1F7D4C34001BD442 /* imgui */,
 			);
-			name = common;
-			path = ../../libs/common;
+			path = common;
 			sourceTree = "<group>";
 		};
 		B63FEBDE1F7D4C34001BD442 /* imgui */ = {
@@ -142,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				B66F9E021F7AB913002AF54D /* main.cpp */,
+				43AE73A11F83570100C4F941 /* level_editor.cpp */,
+				43AE73A21F83570100C4F941 /* level_editor.h */,
 			);
 			name = src;
 			path = ../src;
@@ -217,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43AE73A31F83570100C4F941 /* level_editor.cpp in Sources */,
 				B63FEBE91F7D4ED1001BD442 /* gl3w.c in Sources */,
 				B63FEBEB1F7D4EEA001BD442 /* imgui.cpp in Sources */,
 				B63FEBF21F7D4FE1001BD442 /* imgui_demo.cpp in Sources */,

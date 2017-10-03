@@ -33,8 +33,8 @@ NS_S2D
 class sprite_frame : public ref_counter {
 public:
     rect _frame;
-    rect _sprite_source_size;
-    rect _source_size;
+    rect _sprite_source_rect;
+    size _source_size;
     bool _rotated;
     bool _trimmed;
     std::string _name;

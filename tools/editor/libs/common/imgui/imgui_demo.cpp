@@ -124,7 +124,7 @@ void ImGui::ShowUserGuide()
 void ImGui::ShowTestWindow(bool* p_open)
 {
     // Examples apps
-    static bool show_app_main_menu_bar = false;
+    static bool show_app_main_menu_bar = true;
     static bool show_app_console = false;
     static bool show_app_log = false;
     static bool show_app_layout = false;
