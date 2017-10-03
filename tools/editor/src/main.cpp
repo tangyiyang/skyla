@@ -49,13 +49,13 @@ int main(int, char**)
     bool opened = true;
     ImVec4 clear_color = ImColor(114, 144, 154);
 
-    level_editor* editor = new level_editor();
+    game_tool::level_editor* editor = new game_tool::level_editor();
     // Main loop
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         ImGui_ImplGlfwGL3_NewFrame();
 
-        editor->show_menu_bar();
+        editor->draw();
             // 1. Show a simple window
             // Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appears in a window automatically called "Debug"
 //        {

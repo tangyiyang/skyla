@@ -1,4 +1,18 @@
 #include "level_editor.h"
+#include "imgui.h"
+
+NS_GAME_TOOL
+
+level_editor::level_editor()
+{
+    _tool_bar_visible = true;
+}
+
+void level_editor::draw()
+{
+    this->show_menu_bar();
+    this->show_tool_bar();
+}
 
 void level_editor::show_menu_file()
 {
@@ -16,7 +30,9 @@ void level_editor::show_menu_file()
             ImGui::MenuItem("Hello");
             ImGui::MenuItem("Sailor");
             if (ImGui::BeginMenu("Recurse..")) {
+
                 this->show_menu_file();
+
                 ImGui::EndMenu();
             }
             ImGui::EndMenu();
@@ -58,6 +74,7 @@ void level_editor::show_menu_bar()
 {
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {
+
             this->show_menu_file();
 
             ImGui::EndMenu();
@@ -75,3 +92,16 @@ void level_editor::show_menu_bar()
     }
 }
 
+void level_editor::show_tool_bar()
+{
+    if (_tool_bar_visible) {
+        ImGui::Begin("ToolBar", NULL);
+        ImGui::SetNextWindowPos(ImVec2(10, 0));
+        if(ImGui::Button("Sprite")) {
+            _cmd_stack.push(new cmd_add_sprite());
+        }
+        ImGui::End();
+    }
+}
+
+NS_GAME_TOOL_END

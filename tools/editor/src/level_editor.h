@@ -1,14 +1,29 @@
 #ifndef level_editor_h
 #define level_editor_h
 
-#include "imgui.h"
+
+#include "level_editor_common.h"
+#include "cmds.h"
+
+NS_GAME_TOOL
 
 class level_editor {
 public:
-    void show_menu_bar();
+    level_editor();
+
+public:
+    void draw();
 
 private:
+    void show_menu_bar();
+    void show_tool_bar();
     void show_menu_file();
+
+private:
+    bool _tool_bar_visible;
+
+    std::queue<cmd*> _cmd_stack;
 };
 
+NS_GAME_TOOL_END
 #endif /* level_editor_h */
