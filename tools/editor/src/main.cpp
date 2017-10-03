@@ -35,7 +35,6 @@ int main(int, char**)
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
-
     ImVec4 clear_color = ImColor(114, 144, 154);
 
     game_tool::lua_handler* _l = new game_tool::lua_handler();
@@ -74,10 +73,10 @@ int main(int, char**)
 //            }
 //        }
 
-//        if (show_test_window) {
-//            ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
-//            ImGui::ShowTestWindow(&show_test_window);
-//        }
+        if (show_test_window) {
+            ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
+            ImGui::ShowTestWindow(&show_test_window);
+        }
 
         // Rendering
         int display_w, display_h;

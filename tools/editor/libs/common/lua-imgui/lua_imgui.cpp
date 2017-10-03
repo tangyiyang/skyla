@@ -16,33 +16,38 @@ int limgui_##call(lua_State* L) \
     return 0;\
 }
 
-#define ARRAY_SIZE(ARR)  ((int)(sizeof(ARR)/sizeof(*ARR)))
+IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(BeginMainMenuBar);
+IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMainMenuBar);
+IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMenu);
+IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(End);
+IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(Separator);
 
-int limgui_GetIO_KeyCtrl(lua_State* L)
+int limgui_Begin(lua_State* L)
 {
-    ImGuiIO& io = ImGui::GetIO();
-    lua_pushboolean(L, io.KeyCtrl);
-    return 1;
-}
+    int n = lua_gettop(L);
 
-int limgui_GetIO_KeySuper(lua_State* L)
-{
-    ImGuiIO& io = ImGui::GetIO();
-    lua_pushboolean(L, io.KeySuper);
-    return 1;
-}
-
-int limgui_GetIO_KeysDown(lua_State* L)
-{
-    ImGuiIO& io = ImGui::GetIO();
-    int n = ARRAY_SIZE(io.KeysDown);
-    lua_newtable(L);
-    for (int i = 0; i < n; ++i) {
-        if (io.KeysDownDuration[i] > 0.0f) {
-
-        }
+    bool ret = false;
+    if (n == 1) {
+        ret = ImGui::Begin(luaL_checkstring(L, 1));
+        lua_pushboolean(L, ret);
+        return 1;
+    } else if (n == 2) {
+        bool v = lua_toboolean(L, 2);
+        ret = ImGui::Begin(luaL_checkstring(L, 1), &v);
+        lua_pushboolean(L, ret);
+        lua_pushboolean(L, v);
+        return 2;
+    } else if (n == 3) {
+        bool v = lua_toboolean(L, 2);
+        int flags = (int)luaL_checkinteger(L, 3);
+        ret = ImGui::Begin(luaL_checkstring(L, 1), &v, flags);
+        lua_pushboolean(L, ret);
+        lua_pushboolean(L, v);
+        return 2;
+    } else {
+        luaL_error(L, "invalid args for Begin");
     }
-    return 1;
+    return 0;
 }
 
 int limgui_BeginMenu(lua_State* L)
@@ -50,10 +55,10 @@ int limgui_BeginMenu(lua_State* L)
     int n = lua_gettop(L);
     bool ret = false;
     if (n == 1) {
-        const char* label = lua_tostring(L, 1);
+        const char* label = luaL_checkstring(L, 1);
         ret = ImGui::BeginMenu(label);
     } else if (n == 2) {
-        const char* label = lua_tostring(L, 1);
+        const char* label = luaL_checkstring(L, 1);
         bool enabled = lua_toboolean(L, 2);
         ret = ImGui::BeginMenu(label, enabled);
     } else {
@@ -64,23 +69,101 @@ int limgui_BeginMenu(lua_State* L)
     return 1;
 }
 
+int limgui_Button(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 1) {
+        lua_pushboolean(L, ImGui::Button(luaL_checkstring(L, 1)));
+        return 1;
+    } else if (n == 3) {
+        ImVec2 v(luaL_checknumber(L, 2), luaL_checknumber(L, 3));
+        lua_pushboolean(L, ImGui::Button(luaL_checkstring(L, 1)));
+        return 1;
+    } else {
+        luaL_error(L, "invalid args for Button");
+    }
+    return 0;
+}
+
+int limgui_Columns(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 0) {
+        ImGui::Columns();
+    } else if (n == 1) {
+        ImGui::Columns((int)luaL_checkinteger(L, 1));
+    } else if (n == 2) {
+        ImGui::Columns((int)luaL_checkinteger(L, 1), luaL_checkstring(L, 2));
+    } else if (n == 3) {
+        ImGui::Columns((int)luaL_checkinteger(L, 1), luaL_checkstring(L, 2), lua_toboolean(L, 3));
+    } else {
+        luaL_error(L, "invalid args for limgui_Columns");
+    }
+    return 0;
+}
+
+int limgui_InputText(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 2) {
+        char buf[512] = "";
+        bool ret = ImGui::InputText(luaL_checkstring(L, 1), buf, 512);
+        lua_pushboolean(L, ret);
+        lua_pushlstring(L, buf, strlen(buf));
+        return 2;
+    } else {
+        luaL_error(L, "invalid args for InputText");
+    }
+    return 0;
+}
+
+int limgui_KeyCtrl(lua_State* L)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    lua_pushboolean(L, io.KeyCtrl);
+    return 1;
+}
+
+int limgui_KeySuper(lua_State* L)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    lua_pushboolean(L, io.KeySuper);
+    return 1;
+}
+
+int limgui_KeysDown(lua_State* L)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    int n = sizeof(io.KeysDown) / sizeof(*io.KeysDown);
+    lua_newtable(L);
+    int index = 1;
+    for (int i = 0; i < n; ++i) {
+        if (io.KeysDownDuration[i] > 0.0f) {
+            lua_pushinteger(L, index++);
+            lua_pushnumber(L, i);
+            lua_settable(L, -3);
+        }
+    }
+    return 1;
+}
+
 int limgui_MenuItem(lua_State* L)
 {
     int n = lua_gettop(L);
     bool ret = false;
     if (n == 1) {
-        ret = ImGui::MenuItem(lua_tostring(L, 1));
+        ret = ImGui::MenuItem(luaL_checkstring(L, 1));
         lua_pushboolean(L, ret);
         return 1;
     } else if (n == 2) {
-        ret = ImGui::MenuItem(lua_tostring(L, 1), lua_tostring(L, 2));
+        ret = ImGui::MenuItem(luaL_checkstring(L, 1), luaL_checkstring(L, 2));
         lua_pushboolean(L, ret);
         return 1;
     } else if (n == 3) {
-        const char* label = lua_tostring(L, 1);
+        const char* label = luaL_checkstring(L, 1);
         const char* shortcut = "";
         if (!lua_isnil(L, 2)) {
-            shortcut = lua_tostring(L, 2);
+            shortcut = luaL_checkstring(L, 2);
         }
         bool selected = lua_toboolean(L, 3);
         bool* p = &selected;
@@ -89,10 +172,10 @@ int limgui_MenuItem(lua_State* L)
         lua_pushboolean(L, *p);
         return 2;
     } else if (n == 4) {
-        const char* label = lua_tostring(L, 1);
-        const char* shortcut = lua_tostring(L, 2);
+        const char* label = luaL_checkstring(L, 1);
+        const char* shortcut = luaL_checkstring(L, 2);
         if (!lua_isnil(L, 2)) {
-            shortcut = lua_tostring(L, 2);
+            shortcut = luaL_checkstring(L, 2);
         }
         bool selected = lua_toboolean(L, 3);
         bool enabled = lua_toboolean(L, 4);
@@ -107,10 +190,52 @@ int limgui_MenuItem(lua_State* L)
     return 0;
 }
 
-IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(BeginMainMenuBar);
-IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMainMenuBar);
-IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(Separator);
-IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMenu);
+int limgui_SameLine(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if(n == 0) {
+        ImGui::SameLine();
+    } else if (n == 1) {
+        ImGui::SameLine(luaL_checknumber(L, 1));
+    } else if (n == 2) {
+        ImGui::SameLine(luaL_checknumber(L, 1), luaL_checknumber(L, 2));
+    } else {
+        luaL_error(L, "invalid args for SameLine");
+    }
+    return 0;
+}
+
+int limgui_SetColumnWidth(lua_State* L)
+{
+    ImGui::SetColumnWidth(luaL_checknumber(L, 1), luaL_checknumber(L, 2));
+    return 0;
+}
+
+int limgui_SetWindowSize(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 2) {
+        ImGui::SetWindowSize(ImVec2(luaL_checknumber(L, 1), luaL_checknumber(L, 2)));
+    } else if (n == 3) {
+        ImGui::SetWindowSize(ImVec2(luaL_checknumber(L, 1), luaL_checknumber(L, 2)),
+                             (int)luaL_checkinteger(L, 3));
+    } else {
+        luaL_error(L, "invalid args for SetWindowSize");
+    }
+    return 0;
+}
+
+int limgui_Text(lua_State* L)
+{
+    // TODO: support var args sometime
+    int n = lua_gettop(L);
+    if (n == 1) {
+        ImGui::Text("%s", luaL_checkstring(L, 1));
+    } else {
+        luaL_error(L, "invalid args for Text");
+    }
+    return 0;
+}
 
 int luaopen_imgui_core(lua_State* L)
 {
@@ -118,16 +243,24 @@ int luaopen_imgui_core(lua_State* L)
     luaL_checkversion(L);
 #endif
     luaL_Reg lib[] = {
-        { "io.keyCtrl", limgui_GetIO_KeyCtrl},
-        { "io.KeySuper", limgui_GetIO_KeySuper},
-        { "io.KeysDown", limgui_GetIO_KeysDown},
-
+        REGISTER_LIB_FUNC(Begin),
         REGISTER_LIB_FUNC(BeginMenu),
-        REGISTER_LIB_FUNC(EndMenu),
         REGISTER_LIB_FUNC(BeginMainMenuBar),
+        REGISTER_LIB_FUNC(Button),
+        REGISTER_LIB_FUNC(Columns),
+        REGISTER_LIB_FUNC(End),
+        REGISTER_LIB_FUNC(EndMenu),
         REGISTER_LIB_FUNC(EndMainMenuBar),
+        REGISTER_LIB_FUNC(InputText),
+        REGISTER_LIB_FUNC(KeyCtrl),
+        REGISTER_LIB_FUNC(KeySuper),
+        REGISTER_LIB_FUNC(KeysDown),
         REGISTER_LIB_FUNC(MenuItem),
+        REGISTER_LIB_FUNC(SameLine),
         REGISTER_LIB_FUNC(Separator),
+        REGISTER_LIB_FUNC(SetColumnWidth),
+        REGISTER_LIB_FUNC(SetWindowSize),
+        REGISTER_LIB_FUNC(Text),
         { NULL, NULL },
     };
 

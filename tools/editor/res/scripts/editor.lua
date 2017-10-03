@@ -1,8 +1,61 @@
 local core = require "editor.core"
-local imgui = require "imgui"
-local editor = {}
+local print_r = require "print_r"
+local editor = {
+    work_dir = ""
+}
 
--- local imgui = require "imgui"
+local function on_toolbar_node()
+    print("on_toolbar_node")
+end
+
+local function on_toolbar_sprite()
+    print("on_toolbar_sprite")
+end
+
+local function on_toolbar_scale9sprite()
+    print("on_toolbar_scale9sprite")
+end
+
+local function on_toolbar_layercolor()
+    print("on_toolbar_layercolor")
+end
+
+local function on_toolbar_label_ttf()
+    print("on_toolbar_label_ttf")
+end
+
+local function on_toolbar_bmfont()
+    print("on_toolbar_bmfont")
+end
+
+local function on_toolbar_menu()
+    print("on_toolbar_menu")
+end
+
+local function on_toolbar_menu_item()
+    print("on_toolbar_menu_item")
+end
+
+local function on_toolbar_paritcle()
+    print("on_toolbar_paritcle")
+end
+
+local function on_toolbar_clipping_node()
+    print("on_toolbar_clipping_node")
+end
+
+local avaliable_widgets_on_toolbar = {
+    {name = "Node", func = on_toolbar_node},
+    {name = "Sprite", func = on_toolbar_sprite},
+    {name = "Scale9Sprite", func = on_toolbar_scale9sprite},
+    {name = "LayerColor", func = on_toolbar_layercolor},
+    {name = "LabelTTF", func = on_toolbar_label_ttf},
+    {name = "LabelBMFont", func = on_toolbar_bmfont},
+    {name = "Menu", func = on_toolbar_menu},
+    {name = "MenuItem", func = on_toolbar_menu_item},
+    {name = "Particle", func = on_toolbar_paritcle},
+    {name = "ClippingNode", func = on_toolbar_clipping_node},
+}
 
 function editor.start()
     print("editor start")
@@ -61,22 +114,57 @@ local function on_open_file_menu()
 
 end
 
-local function response_to_shortcut()
-    -- local io = imgui.GetIO();
-    -- local n = io.KeysDown
-    -- print("n = ", n);
---     for (i  i < IM_ARRAYSIZE(io.KeysDown); i++) {
--- //            if (io.KeysDownDuration[i] >= 0.0f) {
--- //                ImGui::SameLine();
--- //                ImGui::Text("%d (%.02f secs)", i, io.KeysDownDuration[i]);
--- //            }
--- //        }
+local function pressed(key)
+    local keys = imgui.KeysDown()
+
+    local t = string.byte(key)
+    for i = 1, #keys do
+        if keys[i] == t then
+            return true
+        end
+    end
+
+    return false
 end
 
+local function response_to_shortcut()
+    local super = imgui.KeySuper()
+    local ctrl = imgui.KeyCtrl()
 
-function editor.update(dt)
-    -- response_to_shortcut()
+    if super and pressed("O") then
+        print("pressed super+o")
+    end
 
+    if super and pressed("A") then
+        print("pressed super+a")
+    end
+
+    if super and pressed("Z") then
+        print("pressed super+z")
+    end
+
+    if super and pressed("C") then
+        print("pressed super+c")
+    end
+
+    if super and pressed("V") then
+        print("pressed super+v")
+    end
+
+    if super and pressed("S") then
+        print("pressed super+s")
+    end
+
+    if super and pressed("X") then
+        print("pressed super+x")
+    end
+
+    if super and pressed("Y") then
+        print("pressed super+y")
+    end
+end
+
+local function draw_menu()
     if (imgui.BeginMainMenuBar()) then
         if (imgui.BeginMenu("File")) then
 
@@ -87,7 +175,7 @@ function editor.update(dt)
 
         if (imgui.BeginMenu("Edit")) then
             if (imgui.MenuItem("Undo", "CTRL+Z")) then
-                print("ctrl + z");
+
             end
 
             if (imgui.MenuItem("Redo", "CTRL+Y", false, false)) then
@@ -105,6 +193,47 @@ function editor.update(dt)
         end
         imgui.EndMainMenuBar()
     end
+end
+
+local function draw_code_connection_tab()
+
+end
+
+local function draw_tool_bar()
+    imgui.Begin("ToolBar", imgui.ImGuiWindowFlags_AlwaysUseWindowPadding)
+    imgui.Columns(1)
+    for _, w in ipairs(avaliable_widgets_on_toolbar) do
+        if imgui.Button(w.name) then
+            w.func()
+        end
+    end
+
+    imgui.End()
+end
+
+local function draw_editor_scene()
+    imgui.Begin("Scene")
+
+    imgui.End()
+end
+
+local function draw_file_system()
+    imgui.Begin("works")
+    local work_dir = editor.work_dir
+    if imgui.Button("Open") then
+        editor.work_dir = core.pick_folder(work_dir)
+    end
+    imgui.SameLine()
+    imgui.InputText("path", editor.work_dir)
+    imgui.End()
+end
+
+function editor.update(dt)
+    response_to_shortcut()
+    draw_menu()
+    draw_tool_bar()
+    draw_file_system()
+    draw_editor_scene()
 end
 
 function editor.destory()
