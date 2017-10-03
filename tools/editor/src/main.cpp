@@ -49,30 +49,6 @@ int main(int, char**)
         ImGui_ImplGlfwGL3_NewFrame();
 
         _l->update(0);
-//        editor->draw();
-
-//
-//        ImGuiIO& io = ImGui::GetIO();
-//        if (io.KeyCtrl) {
-//            ImGui::Text("Ctrl");
-//        }
-//
-//        if (io.KeyAlt) {
-//            ImGui::Text("Alt");
-//        }
-//
-//        if (io.KeySuper) {
-//            ImGui::Text("Super");
-//        }
-//
-//        ImGui::Text("Keys down:");
-//        for (int i = 0; i < IM_ARRAYSIZE(io.KeysDown); i++) {
-//            if (io.KeysDownDuration[i] >= 0.0f) {
-//                ImGui::SameLine();
-//                ImGui::Text("%d (%.02f secs)", i, io.KeysDownDuration[i]);
-//            }
-//        }
-
 //        if (show_test_window) {
 //            ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
 //            ImGui::ShowTestWindow(&show_test_window);

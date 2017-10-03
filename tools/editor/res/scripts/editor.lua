@@ -68,25 +68,39 @@ function editor.start()
     }
 end
 
+-- we must have these limitations
+local max_visit_depth = 10
+local visit_depth = 0
+local total_tree_items = 512
+local tree_items = 0
 local recursive_visit_path
-function recursive_visit_path(path, file_tree)
+recursive_visit_path = function(path, t)
+    -- print("path = ", path)
+    if visit_depth >= max_visit_depth or tree_items >= total_tree_items then
+        visit_depth = 0
+        return t
+    end
+
+    visit_depth = visit_depth + 1
+
     lfs.chdir(path)
     local pwd = lfs.currentdir()
     -- print("pwd = ", pwd)
     for file in lfs.dir(pwd) do
-        if (file ~= ".") and (file ~= "..") then
-            if lfs.attributes(file, "mode") == "file" then
-                -- print("found file, "..file)
-                file_tree[file] = "file"
-            elseif lfs.attributes(file, "mode") == "directory" then
-                -- print("found dir, " .. file," containing:")
-                local next_dir = pwd .. "/" .. file
-                file_tree[file] = {}
-                recursive_visit_path(next_dir, file_tree[file])
+        if (string.byte(file) ~= string.byte(".")) then
+            local f = path .. "/" .. file
+            local attr = lfs.attributes(f)
+            if attr and attr.mode == "directory" then
+                t[file] = {}
+                recursive_visit_path(f, t[file])
+            else
+                t[file] = "file"
             end
+            tree_items = tree_items + 1
         end
     end
-    return file_tree
+
+    return t
 end
 
 local function reload_file_tree(root_path)

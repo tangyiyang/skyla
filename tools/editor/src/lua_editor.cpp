@@ -32,7 +32,7 @@ int leditor_open_dialog(lua_State* L)
         lua_pushstring(L, (const char*)out_path);
         return 1;
     } else if ( result == NFD_CANCEL ) {
-        lua_pushstring(L, "");
+        lua_pushstring(L, dir);
         return 1;
     } else {
         luaL_error(L, "error open dialog: %s", NFD_GetError());
@@ -50,7 +50,7 @@ int leditor_pick_folder(lua_State* L)
         lua_pushstring(L, (const char*)out_path);
         return 1;
     } else if ( result == NFD_CANCEL ) {
-        lua_pushstring(L, "");
+        lua_pushstring(L, dir);
         return 1;
     } else {
         luaL_error(L, "error pick folder: %s", NFD_GetError());
