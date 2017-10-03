@@ -2,9 +2,7 @@
 
 #include "level_editor_common.h"
 #include "lua_handler.h"
-
-extern lua_State* lState;
-extern void LoadImguiBindings();
+#include "lua_imgui.h"
 
 NS_GAME_TOOL
 
@@ -84,6 +82,7 @@ void lua_handler::register_lua_extensions()
 {
     luaL_Reg lua_modules[] = {
         { "editor.core", luaopen_editor_core},
+        { "imgui", luaopen_imgui_core},
         { "cjson", luaopen_cjson},
         { NULL, NULL}
     };
@@ -110,8 +109,6 @@ lua_handler::lua_handler()
     register_lua_extensions();
 
     // register the imgui binding
-    lState = _lua_state;
-    LoadImguiBindings();
 
     assert(lua_gettop(_lua_state) == 0);
     lua_pushcfunction(_lua_state, traceback);

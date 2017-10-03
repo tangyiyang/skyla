@@ -1,4 +1,5 @@
 local core = require "editor.core"
+local imgui = require "imgui"
 local editor = {}
 
 -- local imgui = require "imgui"
@@ -16,13 +17,15 @@ function editor.init()
     print("editor init")
 end
 
+local checked = false
+
 local function on_open_file_menu()
     if (imgui.MenuItem("New")) then
 
     end
 
     if (imgui.MenuItem("Open", "Ctrl+O")) then
-
+        print("ctrl + o");
     end
 
     if (imgui.BeginMenu("Open Recent")) then
@@ -48,13 +51,32 @@ local function on_open_file_menu()
     if (imgui.BeginMenu("Disabled", false)) then
         IM_ASSERT(0);
     end
-    if (imgui.MenuItem("Checked", NULL, true)) then end
+    local t
+    t, checked = imgui.MenuItem("Checked", nil, checked)
+    if t then
+        print("checked = ", checked)
+    end
+
     if (imgui.MenuItem("Quit", "Alt+F4")) then end
 
 end
 
+local function response_to_shortcut()
+    -- local io = imgui.GetIO();
+    -- local n = io.KeysDown
+    -- print("n = ", n);
+--     for (i  i < IM_ARRAYSIZE(io.KeysDown); i++) {
+-- //            if (io.KeysDownDuration[i] >= 0.0f) {
+-- //                ImGui::SameLine();
+-- //                ImGui::Text("%d (%.02f secs)", i, io.KeysDownDuration[i]);
+-- //            }
+-- //        }
+end
+
+
 function editor.update(dt)
-    print("editor update")
+    -- response_to_shortcut()
+
     if (imgui.BeginMainMenuBar()) then
         if (imgui.BeginMenu("File")) then
 
@@ -65,6 +87,7 @@ function editor.update(dt)
 
         if (imgui.BeginMenu("Edit")) then
             if (imgui.MenuItem("Undo", "CTRL+Z")) then
+                print("ctrl + z");
             end
 
             if (imgui.MenuItem("Redo", "CTRL+Y", false, false)) then

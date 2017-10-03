@@ -8,6 +8,9 @@
 
 #include "lua_handler.h"
 
+#define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
+
+
 static void error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error %d: %s\n", error, description);
@@ -32,12 +35,14 @@ int main(int, char**)
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
+
     ImVec4 clear_color = ImColor(114, 144, 154);
 
     game_tool::lua_handler* _l = new game_tool::lua_handler();
     _l->init();
 
-//    game_tool::level_editor* editor = new game_tool::level_editor();
+    bool show_test_window = true;
+    game_tool::level_editor* editor = new game_tool::level_editor();
 
     // Main loop
     while (!glfwWindowShouldClose(window)) {
@@ -47,7 +52,27 @@ int main(int, char**)
         _l->update(0);
 //        editor->draw();
 
-
+//
+//        ImGuiIO& io = ImGui::GetIO();
+//        if (io.KeyCtrl) {
+//            ImGui::Text("Ctrl");
+//        }
+//
+//        if (io.KeyAlt) {
+//            ImGui::Text("Alt");
+//        }
+//
+//        if (io.KeySuper) {
+//            ImGui::Text("Super");
+//        }
+//
+//        ImGui::Text("Keys down:");
+//        for (int i = 0; i < IM_ARRAYSIZE(io.KeysDown); i++) {
+//            if (io.KeysDownDuration[i] >= 0.0f) {
+//                ImGui::SameLine();
+//                ImGui::Text("%d (%.02f secs)", i, io.KeysDownDuration[i]);
+//            }
+//        }
 
 //        if (show_test_window) {
 //            ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
@@ -67,7 +92,7 @@ int main(int, char**)
     ImGui_ImplGlfwGL3_Shutdown();
     glfwTerminate();
 
-//    delete editor;
+    delete editor;
 
     return 0;
 }
