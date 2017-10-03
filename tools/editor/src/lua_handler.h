@@ -13,6 +13,7 @@ extern "C" {
     #include "lauxlib.h"
     extern int luaopen_editor_core(lua_State* L);
     extern int luaopen_cjson(lua_State* L);
+    extern int luaopen_lfs(lua_State* L);
 }
 #endif
 

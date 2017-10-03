@@ -21,6 +21,7 @@ IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMainMenuBar);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMenu);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(End);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(Separator);
+IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(TreePop);
 
 int limgui_Begin(lua_State* L)
 {
@@ -107,6 +108,9 @@ int limgui_InputText(lua_State* L)
     int n = lua_gettop(L);
     if (n == 2) {
         char buf[512] = "";
+        size_t len = 0;
+        luaL_checklstring(L, 2, &len);
+        strncpy(buf, luaL_checkstring(L, 2), len);
         bool ret = ImGui::InputText(luaL_checkstring(L, 1), buf, 512);
         lua_pushboolean(L, ret);
         lua_pushlstring(L, buf, strlen(buf));
@@ -237,6 +241,13 @@ int limgui_Text(lua_State* L)
     return 0;
 }
 
+int limgui_TreeNode(lua_State* L)
+{
+    lua_pushboolean(L, ImGui::TreeNode(luaL_checkstring(L, 1)));
+    return 1;
+}
+
+
 int luaopen_imgui_core(lua_State* L)
 {
 #ifdef luaL_checkversion
@@ -261,6 +272,9 @@ int luaopen_imgui_core(lua_State* L)
         REGISTER_LIB_FUNC(SetColumnWidth),
         REGISTER_LIB_FUNC(SetWindowSize),
         REGISTER_LIB_FUNC(Text),
+        REGISTER_LIB_FUNC(TreeNode),
+        REGISTER_LIB_FUNC(TreePop),
+
         { NULL, NULL },
     };
 

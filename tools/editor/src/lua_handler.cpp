@@ -84,6 +84,7 @@ void lua_handler::register_lua_extensions()
         { "editor.core", luaopen_editor_core},
         { "imgui", luaopen_imgui_core},
         { "cjson", luaopen_cjson},
+        { "lfs", luaopen_lfs},
         { NULL, NULL}
     };
 

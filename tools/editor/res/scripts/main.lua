@@ -6,6 +6,7 @@ local function initialize()
     require "imgui_consts"
     require "config"
     editor = require "editor"
+    record = require "record"
 end
 
 initialize()

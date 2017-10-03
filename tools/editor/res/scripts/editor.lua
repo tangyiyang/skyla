@@ -1,7 +1,9 @@
 local core = require "editor.core"
+local lfs = require "lfs"
 local print_r = require "print_r"
 local editor = {
-    work_dir = ""
+    root_dir_name = "",
+    file_tree = {}
 }
 
 local function on_toolbar_node()
@@ -66,8 +68,51 @@ function editor.start()
     }
 end
 
+local recursive_visit_path
+function recursive_visit_path(path, file_tree)
+    lfs.chdir(path)
+    local pwd = lfs.currentdir()
+    -- print("pwd = ", pwd)
+    for file in lfs.dir(pwd) do
+        if (file ~= ".") and (file ~= "..") then
+            if lfs.attributes(file, "mode") == "file" then
+                -- print("found file, "..file)
+                file_tree[file] = "file"
+            elseif lfs.attributes(file, "mode") == "directory" then
+                -- print("found dir, " .. file," containing:")
+                local next_dir = pwd .. "/" .. file
+                file_tree[file] = {}
+                recursive_visit_path(next_dir, file_tree[file])
+            end
+        end
+    end
+    return file_tree
+end
+
+local function reload_file_tree(root_path)
+    local saved_dir = lfs.currentdir()
+    editor.file_tree = recursive_visit_path(root_path, {})
+
+    -- TODO: pattern matching?
+    local s = root_path
+    local i = #s
+
+    -- /abc/ddd/ee -> get the ee
+    while i >= 1 do
+        if string.byte(s, i) == string.byte('/') then
+            break
+        end
+        i = i - 1
+    end
+    editor.root_dir_name = string.sub(s, i+1, #s)
+    lfs.chdir(saved_dir)
+end
+
 function editor.init()
-    print("editor init")
+    local settings = record.load_settings()
+    print("the settings")
+    print_r(settings)
+    reload_file_tree(settings.work_dir)
 end
 
 local checked = false
@@ -217,14 +262,38 @@ local function draw_editor_scene()
     imgui.End()
 end
 
+local draw_file_tree
+function draw_file_tree(name, file_tree)
+    if imgui.TreeNode(name) then
+        for k, v in pairs(file_tree) do
+            if type(v) == "table" then
+                draw_file_tree(k, v)
+            else
+                imgui.Text(k)
+            end
+        end
+        imgui.TreePop()
+    end
+end
+
 local function draw_file_system()
     imgui.Begin("works")
-    local work_dir = editor.work_dir
+    local work_dir = record.settings.work_dir
     if imgui.Button("Open") then
-        editor.work_dir = core.pick_folder(work_dir)
+        local dir = core.pick_folder(work_dir)
+        record.settings.work_dir = dir
+        record.save()
+        reload_file_tree(dir)
+        print("the file tree is")
+        print_r(editor.file_tree)
     end
     imgui.SameLine()
-    imgui.InputText("path", editor.work_dir)
+    imgui.InputText("path", record.settings.work_dir)
+    imgui.Separator()
+
+    -- draw the file tree
+    draw_file_tree(editor.root_dir_name, editor.file_tree)
+
     imgui.End()
 end
 

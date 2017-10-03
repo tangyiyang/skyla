@@ -28,7 +28,7 @@ local function print_r(root)
 				tinsert(temp,"+" .. key .. " [" .. tostring(v).."]")
 			end
 		end
-		return tconcat(temp, space)
+		return tconcat(temp, "\n" .. space)
 	end
 	print(_dump(root, "",""))
 end
