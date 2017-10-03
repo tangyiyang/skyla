@@ -45,6 +45,8 @@
     #define S2D_TARGET_PLATFORM (S2D_TARGET_ANDROID)
 #elif (defined S2D_TARGET_IOS)
     #define S2D_TARGET_PLATFORM (S2D_TARGET_IOS)
+#elif (defined S2D_TARGET_OSX)
+    #define S2D_TARGET_PLATFORM (S2D_TARGET_OSX)
 #else
 #    error "unsupport platform"
 #endif

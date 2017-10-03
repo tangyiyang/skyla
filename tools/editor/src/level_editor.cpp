@@ -1,6 +1,9 @@
 #include "level_editor.h"
 #include "imgui.h"
 
+#define GAME_SCENE_WINDOW_X (100)
+#define GAME_SCENE_WINDOW_Y (20)
+
 NS_GAME_TOOL
 
 level_editor::level_editor()
@@ -8,10 +11,22 @@ level_editor::level_editor()
     _tool_bar_visible = true;
 }
 
+void level_editor::init_scene()
+{
+
+
+}
+
+void level_editor::shutdown_scene()
+{
+
+}
+
 void level_editor::draw()
 {
     this->show_menu_bar();
     this->show_tool_bar();
+    this->show_editor_scene();
 }
 
 void level_editor::show_menu_file()
@@ -96,12 +111,21 @@ void level_editor::show_tool_bar()
 {
     if (_tool_bar_visible) {
         ImGui::Begin("ToolBar", NULL);
-        ImGui::SetNextWindowPos(ImVec2(10, 0));
         if(ImGui::Button("Sprite")) {
             _cmd_stack.push(new cmd_add_sprite());
         }
         ImGui::End();
     }
+}
+
+void level_editor::show_editor_scene()
+{
+    ImGui::Begin("GameScene", NULL);
+    ImGui::SetNextWindowPos(ImVec2(50, 200));
+    if(ImGui::Button("Sprite")) {
+        _cmd_stack.push(new cmd_add_sprite());
+    }
+    ImGui::End();
 }
 
 NS_GAME_TOOL_END
