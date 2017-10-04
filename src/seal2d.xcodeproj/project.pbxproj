@@ -1,0 +1,396 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4337BC641F8521A3004CF11B /* s2d_camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC471F852195004CF11B /* s2d_camera.cpp */; };
+		4337BC651F8521A3004CF11B /* s2d_context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC4B1F852195004CF11B /* s2d_context.cpp */; };
+		4337BC661F8521A3004CF11B /* s2d_file_system.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC4E1F852195004CF11B /* s2d_file_system.mm */; };
+		4337BC671F8521A3004CF11B /* s2d_gl_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC4F1F852195004CF11B /* s2d_gl_util.cpp */; };
+		4337BC681F8521A3004CF11B /* s2d_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC531F852196004CF11B /* s2d_node.cpp */; };
+		4337BC691F8521A3004CF11B /* s2d_program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC561F852196004CF11B /* s2d_program.cpp */; };
+		4337BC6A1F8521A3004CF11B /* s2d_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC591F852196004CF11B /* s2d_sprite.cpp */; };
+		4337BC6B1F8521A3004CF11B /* s2d_sprite_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC5B1F852196004CF11B /* s2d_sprite_renderer.cpp */; };
+		4337BC6C1F8521A3004CF11B /* s2d_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC5D1F852196004CF11B /* s2d_texture.cpp */; };
+		4337BC6D1F8521A3004CF11B /* s2d_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC5F1F852196004CF11B /* s2d_util.cpp */; };
+		4337BC741F8521BA004CF11B /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC701F8521B7004CF11B /* cJSON.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4337BC371F852151004CF11B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4337BC391F852151004CF11B /* libseal2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libseal2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4337BC461F852195004CF11B /* s2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d.h; sourceTree = "<group>"; };
+		4337BC471F852195004CF11B /* s2d_camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_camera.cpp; sourceTree = "<group>"; };
+		4337BC481F852195004CF11B /* s2d_camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_camera.h; sourceTree = "<group>"; };
+		4337BC491F852195004CF11B /* s2d_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_common.h; sourceTree = "<group>"; };
+		4337BC4A1F852195004CF11B /* s2d_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_config.h; sourceTree = "<group>"; };
+		4337BC4B1F852195004CF11B /* s2d_context.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_context.cpp; sourceTree = "<group>"; };
+		4337BC4C1F852195004CF11B /* s2d_context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_context.h; sourceTree = "<group>"; };
+		4337BC4D1F852195004CF11B /* s2d_file_system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_file_system.h; sourceTree = "<group>"; };
+		4337BC4E1F852195004CF11B /* s2d_file_system.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = s2d_file_system.mm; sourceTree = "<group>"; };
+		4337BC4F1F852195004CF11B /* s2d_gl_util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_gl_util.cpp; sourceTree = "<group>"; };
+		4337BC501F852195004CF11B /* s2d_gl_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_gl_util.h; sourceTree = "<group>"; };
+		4337BC511F852195004CF11B /* s2d_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_macro.h; sourceTree = "<group>"; };
+		4337BC521F852196004CF11B /* s2d_math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_math.h; sourceTree = "<group>"; };
+		4337BC531F852196004CF11B /* s2d_node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_node.cpp; sourceTree = "<group>"; };
+		4337BC541F852196004CF11B /* s2d_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_node.h; sourceTree = "<group>"; };
+		4337BC551F852196004CF11B /* s2d_platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_platform.h; sourceTree = "<group>"; };
+		4337BC561F852196004CF11B /* s2d_program.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_program.cpp; sourceTree = "<group>"; };
+		4337BC571F852196004CF11B /* s2d_program.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_program.h; sourceTree = "<group>"; };
+		4337BC581F852196004CF11B /* s2d_ref_counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_ref_counter.h; sourceTree = "<group>"; };
+		4337BC591F852196004CF11B /* s2d_sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_sprite.cpp; sourceTree = "<group>"; };
+		4337BC5A1F852196004CF11B /* s2d_sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_sprite.h; sourceTree = "<group>"; };
+		4337BC5B1F852196004CF11B /* s2d_sprite_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_sprite_renderer.cpp; sourceTree = "<group>"; };
+		4337BC5C1F852196004CF11B /* s2d_sprite_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_sprite_renderer.h; sourceTree = "<group>"; };
+		4337BC5D1F852196004CF11B /* s2d_texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_texture.cpp; sourceTree = "<group>"; };
+		4337BC5E1F852196004CF11B /* s2d_texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_texture.h; sourceTree = "<group>"; };
+		4337BC5F1F852196004CF11B /* s2d_util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_util.cpp; sourceTree = "<group>"; };
+		4337BC601F852196004CF11B /* s2d_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_util.h; sourceTree = "<group>"; };
+		4337BC611F852196004CF11B /* seal2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = seal2d.xcodeproj; sourceTree = "<group>"; };
+		4337BC701F8521B7004CF11B /* cJSON.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cJSON.c; sourceTree = "<group>"; };
+		4337BC711F8521B7004CF11B /* cJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cJSON.h; sourceTree = "<group>"; };
+		4337BC731F8521B7004CF11B /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4337BC361F852151004CF11B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4337BC2E1F852122004CF11B = {
+			isa = PBXGroup;
+			children = (
+				4337BC6E1F8521B7004CF11B /* libs */,
+				4337BC451F852195004CF11B /* src */,
+				4337BC3A1F852151004CF11B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4337BC3A1F852151004CF11B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4337BC391F852151004CF11B /* libseal2d.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4337BC451F852195004CF11B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4337BC461F852195004CF11B /* s2d.h */,
+				4337BC471F852195004CF11B /* s2d_camera.cpp */,
+				4337BC481F852195004CF11B /* s2d_camera.h */,
+				4337BC491F852195004CF11B /* s2d_common.h */,
+				4337BC4A1F852195004CF11B /* s2d_config.h */,
+				4337BC4B1F852195004CF11B /* s2d_context.cpp */,
+				4337BC4C1F852195004CF11B /* s2d_context.h */,
+				4337BC4D1F852195004CF11B /* s2d_file_system.h */,
+				4337BC4E1F852195004CF11B /* s2d_file_system.mm */,
+				4337BC4F1F852195004CF11B /* s2d_gl_util.cpp */,
+				4337BC501F852195004CF11B /* s2d_gl_util.h */,
+				4337BC511F852195004CF11B /* s2d_macro.h */,
+				4337BC521F852196004CF11B /* s2d_math.h */,
+				4337BC531F852196004CF11B /* s2d_node.cpp */,
+				4337BC541F852196004CF11B /* s2d_node.h */,
+				4337BC551F852196004CF11B /* s2d_platform.h */,
+				4337BC561F852196004CF11B /* s2d_program.cpp */,
+				4337BC571F852196004CF11B /* s2d_program.h */,
+				4337BC581F852196004CF11B /* s2d_ref_counter.h */,
+				4337BC591F852196004CF11B /* s2d_sprite.cpp */,
+				4337BC5A1F852196004CF11B /* s2d_sprite.h */,
+				4337BC5B1F852196004CF11B /* s2d_sprite_renderer.cpp */,
+				4337BC5C1F852196004CF11B /* s2d_sprite_renderer.h */,
+				4337BC5D1F852196004CF11B /* s2d_texture.cpp */,
+				4337BC5E1F852196004CF11B /* s2d_texture.h */,
+				4337BC5F1F852196004CF11B /* s2d_util.cpp */,
+				4337BC601F852196004CF11B /* s2d_util.h */,
+				4337BC611F852196004CF11B /* seal2d.xcodeproj */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		4337BC621F852196004CF11B /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4337BC6E1F8521B7004CF11B /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				4337BC6F1F8521B7004CF11B /* cJSON */,
+				4337BC721F8521B7004CF11B /* stb_image */,
+			);
+			name = libs;
+			path = ../libs;
+			sourceTree = "<group>";
+		};
+		4337BC6F1F8521B7004CF11B /* cJSON */ = {
+			isa = PBXGroup;
+			children = (
+				4337BC701F8521B7004CF11B /* cJSON.c */,
+				4337BC711F8521B7004CF11B /* cJSON.h */,
+			);
+			path = cJSON;
+			sourceTree = "<group>";
+		};
+		4337BC721F8521B7004CF11B /* stb_image */ = {
+			isa = PBXGroup;
+			children = (
+				4337BC731F8521B7004CF11B /* stb_image.h */,
+			);
+			path = stb_image;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4337BC381F852151004CF11B /* seal2d */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4337BC421F852151004CF11B /* Build configuration list for PBXNativeTarget "seal2d" */;
+			buildPhases = (
+				4337BC351F852151004CF11B /* Sources */,
+				4337BC361F852151004CF11B /* Frameworks */,
+				4337BC371F852151004CF11B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = seal2d;
+			productName = "seal2d-mobile";
+			productReference = 4337BC391F852151004CF11B /* libseal2d.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4337BC2F1F852122004CF11B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				TargetAttributes = {
+					4337BC381F852151004CF11B = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4337BC321F852122004CF11B /* Build configuration list for PBXProject "seal2d" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4337BC2E1F852122004CF11B;
+			productRefGroup = 4337BC3A1F852151004CF11B /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4337BC621F852196004CF11B /* Products */;
+					ProjectRef = 4337BC611F852196004CF11B /* seal2d.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				4337BC381F852151004CF11B /* seal2d */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4337BC351F852151004CF11B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4337BC671F8521A3004CF11B /* s2d_gl_util.cpp in Sources */,
+				4337BC661F8521A3004CF11B /* s2d_file_system.mm in Sources */,
+				4337BC6A1F8521A3004CF11B /* s2d_sprite.cpp in Sources */,
+				4337BC6D1F8521A3004CF11B /* s2d_util.cpp in Sources */,
+				4337BC691F8521A3004CF11B /* s2d_program.cpp in Sources */,
+				4337BC6C1F8521A3004CF11B /* s2d_texture.cpp in Sources */,
+				4337BC641F8521A3004CF11B /* s2d_camera.cpp in Sources */,
+				4337BC741F8521BA004CF11B /* cJSON.c in Sources */,
+				4337BC6B1F8521A3004CF11B /* s2d_sprite_renderer.cpp in Sources */,
+				4337BC651F8521A3004CF11B /* s2d_context.cpp in Sources */,
+				4337BC681F8521A3004CF11B /* s2d_node.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4337BC331F852122004CF11B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4337BC341F852122004CF11B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		4337BC401F852151004CF11B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = GH4YBKBN58;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4337BC411F852151004CF11B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = GH4YBKBN58;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4337BC321F852122004CF11B /* Build configuration list for PBXProject "seal2d" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4337BC331F852122004CF11B /* Debug */,
+				4337BC341F852122004CF11B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4337BC421F852151004CF11B /* Build configuration list for PBXNativeTarget "seal2d" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4337BC401F852151004CF11B /* Debug */,
+				4337BC411F852151004CF11B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4337BC2F1F852122004CF11B /* Project object */;
+}
