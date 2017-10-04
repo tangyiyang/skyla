@@ -292,7 +292,7 @@ function draw_file_tree(name, file_tree)
 end
 
 local function draw_file_system()
-    imgui.Begin("works")
+    imgui.Begin("Works")
     local work_dir = record.settings.work_dir
     if imgui.Button("Open") then
         local dir = core.pick_folder(work_dir)
@@ -312,12 +312,20 @@ local function draw_file_system()
     imgui.End()
 end
 
+local function draw_scene_graph()
+    imgui.Begin("Scene-Graph")
+
+    imgui.End()
+end
+
 function editor.update(dt)
     response_to_shortcut()
     draw_menu()
     draw_tool_bar()
     draw_file_system()
+    draw_scene_graph()
     draw_editor_scene()
+
 end
 
 function editor.destory()

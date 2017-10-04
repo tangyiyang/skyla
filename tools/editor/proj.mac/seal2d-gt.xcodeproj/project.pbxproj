@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		430F7C021F83768000D0C98C /* cmds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F7C001F83768000D0C98C /* cmds.cpp */; };
 		430F7CB81F8381DF00D0C98C /* lobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 430F7C7E1F8381D700D0C98C /* lobject.c */; };
 		430F7CB91F8381DF00D0C98C /* ldo.c in Sources */ = {isa = PBXBuildFile; fileRef = 430F7C7F1F8381D700D0C98C /* ldo.c */; };
 		430F7CBA1F8381DF00D0C98C /* ltm.c in Sources */ = {isa = PBXBuildFile; fileRef = 430F7C801F8381D700D0C98C /* ltm.c */; };
@@ -51,7 +50,6 @@
 		43AA98D01F83EEC100368AAD /* nfd_cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CB1F83EEB600368AAD /* nfd_cocoa.m */; };
 		43AA98D11F83EEC500368AAD /* nfd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CC1F83EEB600368AAD /* nfd_common.c */; };
 		43AA98D51F83FED700368AAD /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98D31F83FECB00368AAD /* lfs.c */; };
-		43AE73A31F83570100C4F941 /* level_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43AE73A11F83570100C4F941 /* level_editor.cpp */; };
 		B63FEBE91F7D4ED1001BD442 /* gl3w.c in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE51F7D4ED1001BD442 /* gl3w.c */; };
 		B63FEBEA1F7D4EDD001BD442 /* imgui_impl_glfw_gl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE31F7D4C64001BD442 /* imgui_impl_glfw_gl3.cpp */; };
 		B63FEBEB1F7D4EEA001BD442 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE01F7D4C34001BD442 /* imgui.cpp */; };
@@ -80,8 +78,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		430F7C001F83768000D0C98C /* cmds.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cmds.cpp; sourceTree = "<group>"; };
-		430F7C011F83768000D0C98C /* cmds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cmds.h; sourceTree = "<group>"; };
 		430F7C031F8376BD00D0C98C /* level_editor_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = level_editor_common.h; sourceTree = "<group>"; };
 		430F7C7D1F8381D700D0C98C /* lobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lobject.h; sourceTree = "<group>"; };
 		430F7C7E1F8381D700D0C98C /* lobject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lobject.c; sourceTree = "<group>"; };
@@ -161,8 +157,6 @@
 		43AA98CD1F83EEB600368AAD /* nfd_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nfd_common.h; sourceTree = "<group>"; };
 		43AA98D31F83FECB00368AAD /* lfs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lfs.c; sourceTree = "<group>"; };
 		43AA98D41F83FECB00368AAD /* lfs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lfs.h; sourceTree = "<group>"; };
-		43AE73A11F83570100C4F941 /* level_editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = level_editor.cpp; sourceTree = "<group>"; };
-		43AE73A21F83570100C4F941 /* level_editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = level_editor.h; sourceTree = "<group>"; };
 		B63FEBDF1F7D4C34001BD442 /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		B63FEBE01F7D4C34001BD442 /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
 		B63FEBE11F7D4C34001BD442 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
@@ -405,10 +399,6 @@
 			children = (
 				430F7CF81F83896E00D0C98C /* luabinding */,
 				B66F9E021F7AB913002AF54D /* main.cpp */,
-				43AE73A11F83570100C4F941 /* level_editor.cpp */,
-				43AE73A21F83570100C4F941 /* level_editor.h */,
-				430F7C001F83768000D0C98C /* cmds.cpp */,
-				430F7C011F83768000D0C98C /* cmds.h */,
 				430F7C031F8376BD00D0C98C /* level_editor_common.h */,
 			);
 			name = src;
@@ -494,7 +484,6 @@
 				430F7CD01F8381DF00D0C98C /* ldblib.c in Sources */,
 				430F7CF41F83873000D0C98C /* lua_cjson.c in Sources */,
 				430F7CC71F8381DF00D0C98C /* lbitlib.c in Sources */,
-				430F7C021F83768000D0C98C /* cmds.cpp in Sources */,
 				430F7CF21F83873000D0C98C /* fpconv.c in Sources */,
 				430F7CBA1F8381DF00D0C98C /* ltm.c in Sources */,
 				430F7CC41F8381DF00D0C98C /* lbaselib.c in Sources */,
@@ -507,7 +496,6 @@
 				43AA98D01F83EEC100368AAD /* nfd_cocoa.m in Sources */,
 				430F7CBC1F8381DF00D0C98C /* lauxlib.c in Sources */,
 				430F7CC01F8381DF00D0C98C /* lapi.c in Sources */,
-				43AE73A31F83570100C4F941 /* level_editor.cpp in Sources */,
 				430F7CBD1F8381DF00D0C98C /* lopcodes.c in Sources */,
 				430F7CD41F8381DF00D0C98C /* lmem.c in Sources */,
 				43AA98D51F83FED700368AAD /* lfs.c in Sources */,

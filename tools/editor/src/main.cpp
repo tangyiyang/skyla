@@ -4,8 +4,6 @@
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
 
-#include "level_editor.h"
-
 #include "lua_handler.h"
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
@@ -18,7 +16,6 @@ static void error_callback(int error, const char* description)
 
 int main(int, char**)
 {
-        // Setup window
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
         return 1;
@@ -41,7 +38,6 @@ int main(int, char**)
     _l->init();
 
     bool show_test_window = true;
-    game_tool::level_editor* editor = new game_tool::level_editor();
 
     // Main loop
     while (!glfwWindowShouldClose(window)) {
@@ -67,8 +63,5 @@ int main(int, char**)
     ImGui_ImplGlfwGL3_Shutdown();
     glfwTerminate();
 
-    delete editor;
-
     return 0;
 }
-

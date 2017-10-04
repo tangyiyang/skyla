@@ -1,0 +1,53 @@
+{
+    "hash": "244e96571eebc53",
+    "version": "0.0.1",
+    "work_dir": "./demo_scene/",
+    "data" : {
+        "name": "default-scene-name",
+        "setup:": {
+            "node": {
+                "id": 1,
+                "content": {
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    },
+                    "rotation": 30.0,
+                    "translate": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "z_order": 0,
+                    "size": {
+                        "width": 512,
+                        "height": 256
+                    },
+                    "anchor": {
+                        "x" : 0.0,
+                        "y" : 0.0
+                    },
+
+                    "children" : {
+
+                    }
+                },
+
+                "layout": {
+                    "pivot" : 5,
+                }
+            },
+        },
+
+        "animation" : {
+            "timelines" : {
+                "enter" : {
+
+                },
+
+                "exit" : {
+
+                }
+            }
+        }
+    }
+}
