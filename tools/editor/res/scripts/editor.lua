@@ -68,16 +68,15 @@ function editor.start()
     }
 end
 
--- we must have these limitations
-local max_visit_depth = 10
-local visit_depth = 0
+-- we must have these limitations when we have a LARGE folder.
+local max_visit_depth = 128
 local total_tree_items = 512
+local visit_depth = 0
 local tree_items = 0
-local recursive_visit_path
+local recursive_visit_path -- forward declartion for recursive function :)
 recursive_visit_path = function(path, t)
     -- print("path = ", path)
     if visit_depth >= max_visit_depth or tree_items >= total_tree_items then
-        visit_depth = 0
         return t
     end
 
@@ -105,6 +104,8 @@ end
 
 local function reload_file_tree(root_path)
     local saved_dir = lfs.currentdir()
+    visit_depth = 0
+    tree_items = 0
     editor.file_tree = recursive_visit_path(root_path, {})
 
     -- TODO: pattern matching?
