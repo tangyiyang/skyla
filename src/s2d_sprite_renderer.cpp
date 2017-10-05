@@ -57,15 +57,32 @@ void sprite_renderer::init()
     glGenBuffers(1, &_ibo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_t) * _max_indexes, nullptr, GL_DYNAMIC_DRAW);
-    if (gl_util::support_vao()) {
-        glGenVertexArrays(1, &_vao);
-        glBindVertexArray(_vao);
-        glEnableVertexAttribArray(program::VERTEX_ATTR_POS);
-        glEnableVertexAttribArray(program::VERTEX_ATTR_COLOR);
-        glEnableVertexAttribArray(program::VERTEX_ATTR_TEX_COORD);
-        setup_vertex_attr();
-        glBindVertexArray(0);
-    }
+
+    glGenVertexArrays(1, &_vao);
+    glBindVertexArray(_vao);
+    glEnableVertexAttribArray(program::VERTEX_ATTR_POS);
+    glEnableVertexAttribArray(program::VERTEX_ATTR_COLOR);
+    glEnableVertexAttribArray(program::VERTEX_ATTR_TEX_COORD);
+    glVertexAttribPointer(program::VERTEX_ATTR_POS,
+                          2,
+                      GL_FLOAT,
+                      GL_FALSE,
+                      sizeof(pos_tex_color_vertex),
+                      (void*)offsetof(pos_tex_color_vertex, pos));
+    glVertexAttribPointer(program::VERTEX_ATTR_TEX_COORD,
+                      2,
+                      GL_UNSIGNED_SHORT,
+                      GL_TRUE,
+                      sizeof(pos_tex_color_vertex),
+                      (void*)offsetof(pos_tex_color_vertex, uv));
+    glVertexAttribPointer(program::VERTEX_ATTR_COLOR,
+                      4,
+                      GL_UNSIGNED_BYTE,
+                      GL_TRUE,
+                      sizeof(pos_tex_color_vertex),
+                      (void*)offsetof(pos_tex_color_vertex, color));
+    glBindVertexArray(0);
+
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -125,7 +142,6 @@ void sprite_renderer::flush()
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_tex_color_vertex), _vertex_buffer);
     
@@ -133,49 +149,19 @@ void sprite_renderer::flush()
                           program::UNIFORM_TYPE_MATRIX_3_FV,
                           context::C()->_camera->_matrix.m);
 
-    if(gl_util::support_vao()) {
-        glBindVertexArray(_vao);
-    } else {
-        setup_vertex_attr();
-    }
+    glBindVertexArray(_vao);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, _num_indexes * sizeof(index_t), _index_buffer);
     glDrawElements(GL_TRIANGLES, _num_indexes, GL_UNSIGNED_SHORT, 0);
-    CHECK_GL_ERROR;
 
     _program->unuse();
     _texture->unbind();
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    if (gl_util::support_vao()) {
-        glBindVertexArray(0);
-    }
+    glBindVertexArray(0);
+
     _num_indexes = 0;
     _num_vertices = 0;
-}
-
-void sprite_renderer::setup_vertex_attr()
-{
-    glVertexAttribPointer(program::VERTEX_ATTR_POS,
-                          2,
-                          GL_FLOAT,
-                          GL_TRUE,
-                          sizeof(pos_tex_color_vertex),
-                          (void*)offsetof(pos_tex_color_vertex, pos));
-
-    glVertexAttribPointer(program::VERTEX_ATTR_TEX_COORD,
-                          2,
-                          GL_UNSIGNED_SHORT,
-                          GL_TRUE,
-                          sizeof(pos_tex_color_vertex),
-                          (void*)offsetof(pos_tex_color_vertex, uv));
-
-    glVertexAttribPointer(program::VERTEX_ATTR_COLOR,
-                          4,
-                          GL_UNSIGNED_BYTE,
-                          GL_TRUE,
-                          sizeof(pos_tex_color_vertex),
-                          (void*)offsetof(pos_tex_color_vertex, color));
 }
 
 void sprite_renderer::update_indexes()

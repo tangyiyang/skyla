@@ -41,34 +41,25 @@ void gl_util::check_gl_extension(uint32_t glversion)
 {
     _gl_version = glversion;
 
-#if S2D_IS_MOBILE
-    if (glversion == 3) {
-        _gl_cap_bits |= GL_CAP_SUPPORT_VAO;
-    } else {
-        LOGE("not check opengles 2.0 yet.");
-        S2D_ASSERT(false);
-    }
     GLint n = 0;
     glGetIntegerv(GL_NUM_EXTENSIONS, &n);
 
     for (int i = 0; i < n; ++i) {
         LOGD("%d: %s", i, (const char*)glGetStringi(GL_EXTENSIONS, i));
     }
-#elif S2D_IS_DESKTOP
-    _gl_cap_bits |= GL_CAP_SUPPORT_VAO;
-#endif
+    
     const char* gl_vendor = (const char*)glGetString(GL_VENDOR);
     const char* gl_renderer = (const char*)glGetString(GL_RENDERER);
     const char* gl_version = (const char*)glGetString(GL_VERSION);
     LOGD("gl_vendor = %s", gl_vendor);
     LOGD("gl_renderer = %s", gl_renderer);
     LOGD("gl_version = %s", gl_version);
+    
 #if S2D_IS_MOBILE
     const char* gl_extension = (const char *)glGetString(GL_EXTENSIONS);
     LOGD("gl_extension = %s", gl_extension);
-#else
 #endif
-    LOGD("gl: support vao = %s", support_vao() ? "true" : "false");
+
 }
 
 NS_S2D_END

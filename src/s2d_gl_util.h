@@ -31,13 +31,7 @@
 #elif S2D_IS_MAC
 #include <OpenGL/gl3.h>
 #else
-#error "open gl not included."
-#endif
-
-#if S2D_IS_MAC
-//#define glGenVertexArrays glGenVertexArraysAPPLE
-//#define glBindVertexArray glBindVertexArrayAPPLE
-//#define glDeleteVertexArrays glDeleteVertexArraysAPPLE
+#error "opengl not included."
 #endif
 
 #ifdef DEBUG
@@ -46,20 +40,12 @@
 #define CHECK_GL_ERROR do{}while(0);
 #endif
 
-// GL_CAPS
-#define GL_CAP_SUPPORT_VAO (1 << 0)
-
 NS_S2D
 
 class gl_util {
 public:
     static void check_gl_extension(uint32_t glversion);
     static void check_gl_error(const char* file, int line);
-
-    static inline bool support_vao()
-    {
-        return _gl_cap_bits & GL_CAP_SUPPORT_VAO;
-    }
 
 private:
     static uint64_t _gl_cap_bits;

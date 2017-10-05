@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		432456721F775B8E00BD0C04 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0921F656FD700E1CE26 /* OpenGLES.framework */; };
 		432456771F7762E400BD0C04 /* s2d_test_common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432456751F7762E400BD0C04 /* s2d_test_common.cpp */; };
-		432456811F77E93B00BD0C04 /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4324567F1F77E93B00BD0C04 /* entry.cpp */; };
 		4337BC7C1F8521F9004CF11B /* libseal2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BC7B1F8521EE004CF11B /* libseal2d.a */; };
 		4337BC7D1F85230C004CF11B /* libseal2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BC7B1F8521EE004CF11B /* libseal2d.a */; };
+		4337BD091F861CA4004CF11B /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BD071F861C5B004CF11B /* entry.cpp */; };
+		4337BD0A1F861CA5004CF11B /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BD071F861C5B004CF11B /* entry.cpp */; };
 		43CB96A51F76B3FE00E6CF36 /* s2d_node_test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96A41F76B3FE00E6CF36 /* s2d_node_test.mm */; };
 		43CB96A81F76B66000E6CF36 /* s2d_node_test_case.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96A61F76B66000E6CF36 /* s2d_node_test_case.mm */; };
 		43DF78D41F66694E00EC6747 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0941F656FDB00E1CE26 /* GLKit.framework */; };
@@ -34,6 +35,13 @@
 			remoteGlobalIDString = 4337BC391F852151004CF11B;
 			remoteInfo = seal2d;
 		};
+		4337BD031F861C48004CF11B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4337BC751F8521EE004CF11B /* seal2d.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4337BCA21F8524B7004CF11B;
+			remoteInfo = "seal2d-mac";
+		};
 		43CB969D1F76B3BC00E6CF36 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B6A7F06B1F656F3800E1CE26 /* Project object */;
@@ -46,9 +54,9 @@
 /* Begin PBXFileReference section */
 		432456751F7762E400BD0C04 /* s2d_test_common.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_test_common.cpp; sourceTree = "<group>"; };
 		432456761F7762E400BD0C04 /* s2d_test_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_test_common.h; sourceTree = "<group>"; };
-		4324567F1F77E93B00BD0C04 /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
-		432456801F77E93B00BD0C04 /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
 		4337BC751F8521EE004CF11B /* seal2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = seal2d.xcodeproj; path = ../../../src/seal2d.xcodeproj; sourceTree = "<group>"; };
+		4337BD071F861C5B004CF11B /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
+		4337BD081F861C5B004CF11B /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
 		43CB96921F76B38700E6CF36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		43CB96981F76B3BC00E6CF36 /* hello-worldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hello-worldTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CB969C1F76B3BC00E6CF36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,21 +103,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		432456781F77DCAE00BD0C04 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				4324567F1F77E93B00BD0C04 /* entry.cpp */,
-				432456801F77E93B00BD0C04 /* entry.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		4337BC761F8521EE004CF11B /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				4337BC7B1F8521EE004CF11B /* libseal2d.a */,
+				4337BD041F861C48004CF11B /* libseal2d-mac.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4337BD061F861C5B004CF11B /* csrc */ = {
+			isa = PBXGroup;
+			children = (
+				4337BD071F861C5B004CF11B /* entry.cpp */,
+				4337BD081F861C5B004CF11B /* entry.h */,
+			);
+			name = csrc;
+			path = ../../csrc;
 			sourceTree = "<group>";
 		};
 		43CB96991F76B3BC00E6CF36 /* hello-worldTests */ = {
@@ -156,7 +166,7 @@
 		B6A7F0751F656F3800E1CE26 /* hello-world */ = {
 			isa = PBXGroup;
 			children = (
-				432456781F77DCAE00BD0C04 /* src */,
+				4337BD061F861C5B004CF11B /* csrc */,
 				43CB96A31F76B3F100E6CF36 /* test */,
 				B6A7F0791F656F3800E1CE26 /* AppDelegate.h */,
 				B6A7F07A1F656F3800E1CE26 /* AppDelegate.mm */,
@@ -283,6 +293,13 @@
 			remoteRef = 4337BC7A1F8521EE004CF11B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4337BD041F861C48004CF11B /* libseal2d-mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libseal2d-mac.a";
+			remoteRef = 4337BD031F861C48004CF11B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -311,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4337BD0A1F861CA5004CF11B /* entry.cpp in Sources */,
 				43CB96A51F76B3FE00E6CF36 /* s2d_node_test.mm in Sources */,
 				43CB96A81F76B66000E6CF36 /* s2d_node_test_case.mm in Sources */,
 				432456771F7762E400BD0C04 /* s2d_test_common.cpp in Sources */,
@@ -321,8 +339,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4337BD091F861CA4004CF11B /* entry.cpp in Sources */,
 				B6A7F07E1F656F3800E1CE26 /* ViewController.mm in Sources */,
-				432456811F77E93B00BD0C04 /* entry.cpp in Sources */,
 				B6A7F07B1F656F3800E1CE26 /* AppDelegate.mm in Sources */,
 				B6A7F0781F656F3800E1CE26 /* main.m in Sources */,
 			);
