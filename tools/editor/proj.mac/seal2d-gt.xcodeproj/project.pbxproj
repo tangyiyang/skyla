@@ -57,7 +57,6 @@
 		B63FEBF21F7D4FE1001BD442 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBF11F7D4FE0001BD442 /* imgui_demo.cpp */; };
 		B66F9E031F7AB913002AF54D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B66F9E021F7AB913002AF54D /* main.cpp */; };
 		B66F9E061F7ABC42002AF54D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B66F9E051F7ABC42002AF54D /* OpenGL.framework */; };
-		B6D098DD1F7ABE99003280F4 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D098DC1F7ABE98003280F4 /* libglfw3.a */; };
 		B6D098DF1F7ABEA6003280F4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D098DE1F7ABEA6003280F4 /* Cocoa.framework */; };
 		B6D098E11F7ABEDF003280F4 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D098E01F7ABEDF003280F4 /* IOKit.framework */; };
 		B6D098E51F7ABF31003280F4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D098E41F7ABF31003280F4 /* CoreVideo.framework */; };
@@ -189,7 +188,6 @@
 				B6D098E51F7ABF31003280F4 /* CoreVideo.framework in Frameworks */,
 				B6D098E11F7ABEDF003280F4 /* IOKit.framework in Frameworks */,
 				B6D098DF1F7ABEA6003280F4 /* Cocoa.framework in Frameworks */,
-				B6D098DD1F7ABE99003280F4 /* libglfw3.a in Frameworks */,
 				B66F9E061F7ABC42002AF54D /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -643,13 +641,13 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../libs/osx/glfw/include",
+					"$(SRCROOT)/../../../libs/glfw/include",
 					"$(SRCROOT)/../libs/common/imgui",
 					"$(SRCROOT)/../libs/common/lua-imgui",
 					"$(SRCROOT)/../libs/common/lua-5.3.4",
 					"$(SRCROOT)/../libs/common/nativefiledialog",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../libs/osx/glfw/lib";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
 				OTHER_LDFLAGS = "-lglfw3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -666,13 +664,13 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../libs/osx/glfw/include",
+					"$(SRCROOT)/../../../libs/glfw/include",
 					"$(SRCROOT)/../libs/common/imgui",
 					"$(SRCROOT)/../libs/common/lua-imgui",
 					"$(SRCROOT)/../libs/common/lua-5.3.4",
 					"$(SRCROOT)/../libs/common/nativefiledialog",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../libs/osx/glfw/lib";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
 				OTHER_LDFLAGS = "-lglfw3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

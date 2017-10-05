@@ -14,7 +14,6 @@
 		4337BCD91F852BBF004CF11B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCD81F852BBF004CF11B /* IOKit.framework */; };
 		4337BCDD1F852BF8004CF11B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCDC1F852BF8004CF11B /* AppKit.framework */; };
 		4337BCE11F852C8A004CF11B /* libseal2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCAF1F8524BD004CF11B /* libseal2d-mac.a */; settings = {ATTRIBUTES = (Required, ); }; };
-		4337BCF51F8532E4004CF11B /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCF41F8532E4004CF11B /* libglfw3.a */; };
 		4337BCF91F853EE2004CF11B /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BCF71F853EDE004CF11B /* entry.cpp */; };
 		4337BCFC1F8544CD004CF11B /* res in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4337BCFB1F8544C0004CF11B /* res */; };
 		4337BCFE1F8610F2004CF11B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCFD1F8610F2004CF11B /* GLUT.framework */; };
@@ -83,7 +82,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4337BCE11F852C8A004CF11B /* libseal2d-mac.a in Frameworks */,
-				4337BCF51F8532E4004CF11B /* libglfw3.a in Frameworks */,
 				4337BCDD1F852BF8004CF11B /* AppKit.framework in Frameworks */,
 				4337BCD31F852BA7004CF11B /* CoreFoundation.framework in Frameworks */,
 				4337BCD91F852BBF004CF11B /* IOKit.framework in Frameworks */,
@@ -414,7 +412,7 @@
 					"$(SRCROOT)/../csrc",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "-lglfw3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -431,7 +429,7 @@
 					"$(SRCROOT)/../csrc",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "-lglfw3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
