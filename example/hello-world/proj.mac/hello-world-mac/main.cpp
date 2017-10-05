@@ -76,7 +76,6 @@ int main(int argc, char** argv)
     width  = 1280;
     height = 720;
 
-
     glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

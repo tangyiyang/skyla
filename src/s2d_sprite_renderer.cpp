@@ -60,29 +60,28 @@ void sprite_renderer::init()
 
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
-    glEnableVertexAttribArray(program::VERTEX_ATTR_POS);
-    glEnableVertexAttribArray(program::VERTEX_ATTR_COLOR);
-    glEnableVertexAttribArray(program::VERTEX_ATTR_TEX_COORD);
     glVertexAttribPointer(program::VERTEX_ATTR_POS,
                           2,
-                      GL_FLOAT,
-                      GL_FALSE,
-                      sizeof(pos_tex_color_vertex),
-                      (void*)offsetof(pos_tex_color_vertex, pos));
+                          GL_FLOAT,
+                          GL_FALSE,
+                          sizeof(pos_tex_color_vertex),
+                          (void*)offsetof(pos_tex_color_vertex, pos));
+    glEnableVertexAttribArray(program::VERTEX_ATTR_POS);
     glVertexAttribPointer(program::VERTEX_ATTR_TEX_COORD,
-                      2,
-                      GL_UNSIGNED_SHORT,
-                      GL_TRUE,
-                      sizeof(pos_tex_color_vertex),
-                      (void*)offsetof(pos_tex_color_vertex, uv));
+                          2,
+                          GL_UNSIGNED_SHORT,
+                          GL_TRUE,
+                          sizeof(pos_tex_color_vertex),
+                          (void*)offsetof(pos_tex_color_vertex, uv));
+    glEnableVertexAttribArray(program::VERTEX_ATTR_COLOR);
     glVertexAttribPointer(program::VERTEX_ATTR_COLOR,
-                      4,
-                      GL_UNSIGNED_BYTE,
-                      GL_TRUE,
-                      sizeof(pos_tex_color_vertex),
-                      (void*)offsetof(pos_tex_color_vertex, color));
+                          4,
+                          GL_UNSIGNED_BYTE,
+                          GL_TRUE,
+                          sizeof(pos_tex_color_vertex),
+                          (void*)offsetof(pos_tex_color_vertex, color));
+    glEnableVertexAttribArray(program::VERTEX_ATTR_TEX_COORD);
     glBindVertexArray(0);
-
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

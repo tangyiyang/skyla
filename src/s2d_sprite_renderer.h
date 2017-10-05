@@ -70,8 +70,8 @@ private:
 private:
     program*              _program;
     texture*              _texture;
-    pos_tex_color_vertex* _vertex_buffer;
     index_t*              _index_buffer;
+    pos_tex_color_vertex* _vertex_buffer;
     int32_t               _num_indexes;
     int32_t               _num_vertices;
     int32_t               _max_vertices;
