@@ -28,6 +28,16 @@
 
 #if S2D_IS_IOS
 #include <OpenGLES/ES3/glext.h>
+#elif S2D_IS_MAC
+#include <OpenGL/gl3.h>
+#else
+#error "open gl not included."
+#endif
+
+#if S2D_IS_MAC
+//#define glGenVertexArrays glGenVertexArraysAPPLE
+//#define glBindVertexArray glBindVertexArrayAPPLE
+//#define glDeleteVertexArrays glDeleteVertexArraysAPPLE
 #endif
 
 #ifdef DEBUG

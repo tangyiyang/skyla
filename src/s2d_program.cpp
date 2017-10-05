@@ -22,35 +22,38 @@
 
 #include "s2d_program.h"
 
-static const char* vs_sprite = STRINGIFY
-(\n
- attribute mediump vec2 pos;      \n
- attribute highp   vec2 tex_coord;\n
- attribute lowp    vec4 color; \n
+static const char* vs_sprite = ""
+#if S2D_IS_DESKTOP
+"#version 100\n"
+#else
+#endif
+""
+" attribute mediump vec2 pos;                               \n"
+" attribute highp   vec2 tex_coord;                         \n"
+" attribute lowp    vec4 color;                             \n"
+" varying highp vec2 v_tex_coord;                           \n"
+" varying lowp vec4 v_color;                                \n"
 
- varying highp vec2 v_tex_coord; \n
- varying lowp vec4 v_color; \n
+" uniform mat3 u_projection;                                \n"
+" void main() {                                             \n"
+     "vec3 tmp = u_projection * vec3(pos.x, pos.y, 0.0);    \n"
+     "gl_Position = vec4(tmp.x, tmp.y, 0.0, 1.0);           \n"
 
- uniform mat3 u_projection; \n
- void main() {              \n
-     vec3 tmp = u_projection * vec3(pos.x, pos.y, 0.0); \n
-     gl_Position = vec4(tmp.x, tmp.y, 0.0, 1.0); \n
+     "v_tex_coord = vec2(tex_coord.x, tex_coord.y);         \n"
+     "v_color = color;                                      \n"
+ "}                                                         \n";
 
-     v_tex_coord = vec2(tex_coord.x, tex_coord.y);
-     v_color = color;
- }\n
- );
-
-static const char* fs_sprite = STRINGIFY
-(\n
- varying highp vec2 v_tex_coord; \n
- varying lowp vec4 v_color; \n
-
- uniform sampler2D texture0;
- void main() {\n
-     gl_FragColor = v_color * texture2D(texture0, v_tex_coord); \n
- }\n
- );
+static const char* fs_sprite = ""
+#if S2D_IS_DESKTOP
+"#version 100\n"
+#else
+#endif
+" varying highp vec2 v_tex_coord; \n"
+" varying lowp vec4 v_color; \n"
+"uniform sampler2D texture0;\n"
+" void main() {\n"
+"     gl_FragColor = v_color * texture2D(texture0, v_tex_coord); \n"
+" }\n";
 
 NS_S2D
 program* program::load_default_program(EMBEDED_PROGRAMS type)
@@ -60,13 +63,12 @@ program* program::load_default_program(EMBEDED_PROGRAMS type)
         vs_sprite,
         fs_sprite
     };
-CHECK_GL_ERROR
     int vs_index = type*2;
     int fs_index = type*2 + 1;
     GLuint vs = load_shader(GL_VERTEX_SHADER, shaders[vs_index]);
     CHECK_GL_ERROR
     GLuint fs = load_shader(GL_FRAGMENT_SHADER, shaders[fs_index]);
-CHECK_GL_ERROR
+    CHECK_GL_ERROR
     program* p = new program();
     p->init(vs, fs);
     return p;
@@ -75,7 +77,7 @@ CHECK_GL_ERROR
 GLuint program::load_shader(GLenum shader_type, const char* shader_data)
 {
     GLuint shader = glCreateShader(shader_type);
-
+    CHECK_GL_ERROR
     glShaderSource(shader, 1, &shader_data, NULL);
     glCompileShader(shader);
     GLint status;
@@ -101,6 +103,19 @@ GLuint program::load_shader(GLenum shader_type, const char* shader_data)
     return shader;
 }
 
+static const char* vertex_attr_names[program::VERTEX_ATTR_COUNT] = {
+    "pos",
+    "text_coord",
+    "color",
+};
+
+void program::bind_vertex_locations(GLuint program)
+{
+    for (int i = 0; i < VERTEX_ATTR_COUNT; ++i) {
+        glBindAttribLocation(program, i, vertex_attr_names[i]);
+        CHECK_GL_ERROR
+    }
+}
 
 GLuint program::load_program(GLuint vs, GLuint fs)
 {
@@ -108,6 +123,8 @@ GLuint program::load_program(GLuint vs, GLuint fs)
     glAttachShader(program, vs);
     glAttachShader(program, fs);
 
+    bind_vertex_locations(program);
+    
     glLinkProgram(program);
 
     GLint status;
@@ -134,18 +151,6 @@ void program::init(GLuint vs, GLuint fs)
 void program::shutdown()
 {
     glDeleteProgram(_program_handle);
-}
-
-GLuint program::enable_attribute(const char* attr_name)
-{
-    S2D_ASSERT(_program_handle > 0 && attr_name);
-
-    GLint location = glGetAttribLocation(_program_handle, attr_name);
-    glEnableVertexAttribArray(location);
-    glBindAttribLocation(_program_handle, location, attr_name);
-
-    _map_vertex_attribute_location[attr_name] = location;
-    return location;
 }
 
 void program::set_uniform(const char* name, UNIFORM_TYPE type, float* value, bool transpose /*= false*/)

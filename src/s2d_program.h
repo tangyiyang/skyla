@@ -39,6 +39,14 @@ public:
         EMBEDED_PROGRAM_MAX
     };
 
+    enum VERTEX_ATTR {
+        VERTEX_ATTR_POS = 0,
+        VERTEX_ATTR_TEX_COORD,
+        VERTEX_ATTR_COLOR,
+
+        VERTEX_ATTR_COUNT,
+    };
+
     enum UNIFORM_TYPE {
         UNIFORM_TYPE_1_F = 0,
         UNIFORM_TYPE_MATRIX_3_FV,
@@ -49,13 +57,13 @@ public:
 public:
     static program* load_default_program(EMBEDED_PROGRAMS type);
     static GLuint load_shader(GLenum shader_type, const char* shader_data);
+    static void bind_vertex_locations(GLuint program);
     static GLuint load_program(GLuint vs, GLuint fs);
 
 public:
     void init(GLuint vs, GLuint fs);
     void shutdown();
     
-    GLuint enable_attribute(const char* attr_name);
     void set_uniform(const char* name, UNIFORM_TYPE type, float* value, bool transpose = false);
 
     inline void use()
@@ -74,14 +82,8 @@ public:
         return _program_handle;
     }
 
-    inline GLuint get_vertex_attr_location(const char* name)
-    {
-        return _map_vertex_attribute_location[name];
-    }
-
 private:
     GLuint _program_handle;
-    std::map<std::string, GLuint> _map_vertex_attribute_location;
     std::map<std::string, GLint> _map_uniform_location;
 };
 

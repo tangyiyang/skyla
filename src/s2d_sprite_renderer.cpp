@@ -43,8 +43,6 @@ _max_vertices(0)
 
 void sprite_renderer::init()
 {
-
-    CHECK_GL_ERROR
     _num_vertices = 0;
     _max_vertices = S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE;
     _num_indexes = 0;
@@ -53,30 +51,20 @@ void sprite_renderer::init()
     _index_buffer = (index_t*)malloc(sizeof(index_t) * _max_indexes);
 
     _program = program::load_default_program(program::EMBEDED_PROGRAM_SPRITE_DEFAULT);
-    CHECK_GL_ERROR
-    GLuint loc_pos = _program->enable_attribute("pos");
-    GLuint loc_texcoord = _program->enable_attribute("tex_coord");
-    GLuint loc_color = _program->enable_attribute("color");
     glGenBuffers(1, &_vbo); S2D_ASSERT(_vbo > 0);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex) * _max_vertices, nullptr, GL_DYNAMIC_DRAW);
-
-    CHECK_GL_ERROR
-
     glGenBuffers(1, &_ibo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_t) * _max_indexes, nullptr, GL_DYNAMIC_DRAW);
-    
     if (gl_util::support_vao()) {
         glGenVertexArrays(1, &_vao);
         glBindVertexArray(_vao);
-        glEnableVertexAttribArray(loc_pos);
-        glEnableVertexAttribArray(loc_texcoord);
-        glEnableVertexAttribArray(loc_color);
+        glEnableVertexAttribArray(program::VERTEX_ATTR_POS);
+        glEnableVertexAttribArray(program::VERTEX_ATTR_COLOR);
+        glEnableVertexAttribArray(program::VERTEX_ATTR_TEX_COORD);
         setup_vertex_attr();
-
         glBindVertexArray(0);
-        CHECK_GL_ERROR;
     }
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -168,21 +156,21 @@ void sprite_renderer::flush()
 
 void sprite_renderer::setup_vertex_attr()
 {
-    glVertexAttribPointer(_program->get_vertex_attr_location("pos"),
+    glVertexAttribPointer(program::VERTEX_ATTR_POS,
                           2,
                           GL_FLOAT,
                           GL_TRUE,
                           sizeof(pos_tex_color_vertex),
                           (void*)offsetof(pos_tex_color_vertex, pos));
 
-    glVertexAttribPointer(_program->get_vertex_attr_location("tex_coord"),
+    glVertexAttribPointer(program::VERTEX_ATTR_TEX_COORD,
                           2,
                           GL_UNSIGNED_SHORT,
                           GL_TRUE,
                           sizeof(pos_tex_color_vertex),
                           (void*)offsetof(pos_tex_color_vertex, uv));
 
-    glVertexAttribPointer(_program->get_vertex_attr_location("color"),
+    glVertexAttribPointer(program::VERTEX_ATTR_COLOR,
                           4,
                           GL_UNSIGNED_BYTE,
                           GL_TRUE,

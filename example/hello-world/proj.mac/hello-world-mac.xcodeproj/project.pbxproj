@@ -8,7 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		4337BC8D1F852453004CF11B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC8C1F852453004CF11B /* main.cpp */; };
-		4337BCB01F8524BF004CF11B /* libseal2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCAF1F8524BD004CF11B /* libseal2d-mac.a */; };
+		4337BCD11F852B96004CF11B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCD01F852B96004CF11B /* OpenGL.framework */; };
+		4337BCD31F852BA7004CF11B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCD21F852BA7004CF11B /* CoreFoundation.framework */; };
+		4337BCD71F852BB6004CF11B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCD61F852BB6004CF11B /* CoreVideo.framework */; };
+		4337BCD91F852BBF004CF11B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCD81F852BBF004CF11B /* IOKit.framework */; };
+		4337BCDD1F852BF8004CF11B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCDC1F852BF8004CF11B /* AppKit.framework */; };
+		4337BCE11F852C8A004CF11B /* libseal2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCAF1F8524BD004CF11B /* libseal2d-mac.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		4337BCF51F8532E4004CF11B /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCF41F8532E4004CF11B /* libglfw3.a */; };
+		4337BCF91F853EE2004CF11B /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BCF71F853EDE004CF11B /* entry.cpp */; };
+		4337BCFC1F8544CD004CF11B /* res in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4337BCFB1F8544C0004CF11B /* res */; };
+		4337BCFE1F8610F2004CF11B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCFD1F8610F2004CF11B /* GLUT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,17 +35,25 @@
 			remoteGlobalIDString = 4337BCA21F8524B7004CF11B;
 			remoteInfo = "seal2d-mac";
 		};
+		4337BCE21F852D44004CF11B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4337BC931F852477004CF11B /* seal2d.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4337BCA11F8524B7004CF11B;
+			remoteInfo = "seal2d-mac";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		4337BC871F852453004CF11B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = .;
+			dstSubfolderSpec = 16;
 			files = (
+				4337BCFC1F8544CD004CF11B /* res in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -44,6 +61,20 @@
 		4337BC891F852453004CF11B /* hello-world-mac */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "hello-world-mac"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4337BC8C1F852453004CF11B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4337BC931F852477004CF11B /* seal2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = seal2d.xcodeproj; path = ../../../src/seal2d.xcodeproj; sourceTree = "<group>"; };
+		4337BCD01F852B96004CF11B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		4337BCD21F852BA7004CF11B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		4337BCD41F852BAE004CF11B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4337BCD61F852BB6004CF11B /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		4337BCD81F852BBF004CF11B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		4337BCDA1F852BD8004CF11B /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		4337BCDC1F852BF8004CF11B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		4337BCF11F8532E4004CF11B /* glfw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw3.h; sourceTree = "<group>"; };
+		4337BCF21F8532E4004CF11B /* glfw3native.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw3native.h; sourceTree = "<group>"; };
+		4337BCF41F8532E4004CF11B /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libglfw3.a; sourceTree = "<group>"; };
+		4337BCF71F853EDE004CF11B /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
+		4337BCF81F853EDE004CF11B /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
+		4337BCFB1F8544C0004CF11B /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
+		4337BCFD1F8610F2004CF11B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +82,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4337BCB01F8524BF004CF11B /* libseal2d-mac.a in Frameworks */,
+				4337BCE11F852C8A004CF11B /* libseal2d-mac.a in Frameworks */,
+				4337BCF51F8532E4004CF11B /* libglfw3.a in Frameworks */,
+				4337BCDD1F852BF8004CF11B /* AppKit.framework in Frameworks */,
+				4337BCD31F852BA7004CF11B /* CoreFoundation.framework in Frameworks */,
+				4337BCD91F852BBF004CF11B /* IOKit.framework in Frameworks */,
+				4337BCD71F852BB6004CF11B /* CoreVideo.framework in Frameworks */,
+				4337BCD11F852B96004CF11B /* OpenGL.framework in Frameworks */,
+				4337BCFE1F8610F2004CF11B /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				4337BC931F852477004CF11B /* seal2d.xcodeproj */,
+				4337BCB21F852707004CF11B /* libs */,
 				4337BC8B1F852453004CF11B /* hello-world-mac */,
+				4337BCFB1F8544C0004CF11B /* res */,
 				4337BC8A1F852453004CF11B /* Products */,
 				4337BC9B1F85248D004CF11B /* Frameworks */,
 			);
@@ -79,6 +119,7 @@
 		4337BC8B1F852453004CF11B /* hello-world-mac */ = {
 			isa = PBXGroup;
 			children = (
+				4337BCF61F853EDE004CF11B /* csrc */,
 				4337BC8C1F852453004CF11B /* main.cpp */,
 			);
 			path = "hello-world-mac";
@@ -96,8 +137,69 @@
 		4337BC9B1F85248D004CF11B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4337BCFD1F8610F2004CF11B /* GLUT.framework */,
+				4337BCDC1F852BF8004CF11B /* AppKit.framework */,
+				4337BCDA1F852BD8004CF11B /* CoreMedia.framework */,
+				4337BCD81F852BBF004CF11B /* IOKit.framework */,
+				4337BCD61F852BB6004CF11B /* CoreVideo.framework */,
+				4337BCD41F852BAE004CF11B /* CoreGraphics.framework */,
+				4337BCD21F852BA7004CF11B /* CoreFoundation.framework */,
+				4337BCD01F852B96004CF11B /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4337BCB21F852707004CF11B /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				4337BCEE1F8532E4004CF11B /* glfw */,
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		4337BCEE1F8532E4004CF11B /* glfw */ = {
+			isa = PBXGroup;
+			children = (
+				4337BCEF1F8532E4004CF11B /* include */,
+				4337BCF31F8532E4004CF11B /* lib */,
+			);
+			name = glfw;
+			path = ../../../libs/glfw;
+			sourceTree = "<group>";
+		};
+		4337BCEF1F8532E4004CF11B /* include */ = {
+			isa = PBXGroup;
+			children = (
+				4337BCF01F8532E4004CF11B /* GLFW */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		4337BCF01F8532E4004CF11B /* GLFW */ = {
+			isa = PBXGroup;
+			children = (
+				4337BCF11F8532E4004CF11B /* glfw3.h */,
+				4337BCF21F8532E4004CF11B /* glfw3native.h */,
+			);
+			path = GLFW;
+			sourceTree = "<group>";
+		};
+		4337BCF31F8532E4004CF11B /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				4337BCF41F8532E4004CF11B /* libglfw3.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		4337BCF61F853EDE004CF11B /* csrc */ = {
+			isa = PBXGroup;
+			children = (
+				4337BCF71F853EDE004CF11B /* entry.cpp */,
+				4337BCF81F853EDE004CF11B /* entry.h */,
+			);
+			name = csrc;
+			path = ../../csrc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,6 +216,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4337BCE31F852D44004CF11B /* PBXTargetDependency */,
 			);
 			name = "hello-world-mac";
 			productName = "hello-world-mac";
@@ -180,11 +283,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4337BCF91F853EE2004CF11B /* entry.cpp in Sources */,
 				4337BC8D1F852453004CF11B /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4337BCE31F852D44004CF11B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "seal2d-mac";
+			targetProxy = 4337BCE21F852D44004CF11B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4337BC8E1F852453004CF11B /* Debug */ = {
@@ -295,6 +407,14 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/hello-world-mac/deps",
+					"$(SRCROOT)/../../../libs/glfw/include",
+					"$(SRCROOT)/../../../src",
+					"$(SRCROOT)/../csrc",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -304,6 +424,14 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/hello-world-mac/deps",
+					"$(SRCROOT)/../../../libs/glfw/include",
+					"$(SRCROOT)/../../../src",
+					"$(SRCROOT)/../csrc",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

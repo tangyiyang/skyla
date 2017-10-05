@@ -97,6 +97,8 @@ void context::init_fundamental_components(const size& logic_size)
 
 void context::loop(float dt)
 {
+    glClearColor(0.5, 0.5, 0.5, 0);
+    glClear(GL_COLOR_BUFFER_BIT);
     _root->update(dt);
     _sprite_renderer->flush();
 }
