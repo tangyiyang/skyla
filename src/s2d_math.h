@@ -58,6 +58,12 @@ struct size {
 struct rect {
     vec2 origin;
     size size;
+
+    static inline bool contains(const rect& r, float x, float y)
+    {
+        return (x >= r.origin.x && x <= r.origin.x + r.size.width) &&
+               (y >= r.origin.y && y <= r.origin.y + r.size.height);
+    }
 };
 
 struct affine_transform {
@@ -129,6 +135,19 @@ struct affine_transform {
         float x = left.x * right.a + left.y * right.c + right.x;
         float y = left.x * right.b + left.y * right.d + right.y;
         
+        return affine_transform(a, b, c, d, x, y);
+    }
+
+    static inline affine_transform invert(const affine_transform& t)
+    {
+        float det = t.a * t.d - t.c * t.b;
+        float a =  t.d / det;
+        float b = -t.b / det;
+        float c = -t.c / det;
+        float d =  t.a / det;
+        float x = (t.c*t.y - t.d*t.x) / det;
+        float y = (t.b*t.x - t.a*t.y) / det;
+
         return affine_transform(a, b, c, d, x, y);
     }
 };

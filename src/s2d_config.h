@@ -35,4 +35,8 @@
 #define S2D_DEFAULT_LOGIC_HEIGHT (720)
 #endif
 
+#ifndef S2D_INITIAL_TOUCHABLE_NODES
+#define S2D_INITIAL_TOUCHABLE_NODES (64)
+#endif
+
 #endif /* s2d_config_h */

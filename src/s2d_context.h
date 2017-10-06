@@ -58,6 +58,11 @@ public:
     void resume();
     void shutdown();
 
+    void on_touch_begin(uint64_t id, float x, float y);
+    void on_touch_moved(uint64_t id, float x, float y);
+    void on_touch_ended(uint64_t id, float x, float y);
+    void on_touch_cancl(uint64_t id, float x, float y);
+
     void set_logic_size(float width, float height);
     void set_content_scale_factor(float factor); // for engine internal usage only!
 
@@ -92,6 +97,7 @@ public:
     vec2             _scale_factor;
     RESOLUTION_COMPAT_TYPE _resolution_compat_type;
     float            _content_scale_factor; // on retina screen, this may be 2 or 3.
+    
 public:
     static inline context* C()
     {

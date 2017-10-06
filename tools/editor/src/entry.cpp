@@ -15,8 +15,8 @@ void entry::on_init(context* ctx)
 
     node* root = ctx->get_root();
     root->set_content_size(visible_rect.size.width, visible_rect.size.height);
-    root->set_anchor(0, 0);
-    root->set_pos(100, 0);
+    root->set_anchor(0.5, 0.5);
+    root->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
 
     float scale_x = visible_rect.size.width / 16.0f;
     float scale_y = visible_rect.size.height / 16.0f;

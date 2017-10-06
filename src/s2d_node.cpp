@@ -55,11 +55,37 @@ void node::update(float dt)
 {
     this->sort();
     this->update_srt();
-
     std::vector<node*>::iterator it = _children.begin();
     for (; it != _children.end(); ++it) {
         (*it)->update(dt);
     }
+}
+
+void node::hit_test(touch_handler* handler, touch_event* event)
+{
+    vec2 local = world_to_local(event->_pos.x, event->_pos.y);
+    bool contains = this->contains(local.x, local.y);
+
+    // visit the child recusively
+    std::vector<node*>::iterator it = _children.begin();
+    for (; it != _children.end(); ++it) {
+        (*it)->hit_test(handler, event);
+    }
+
+    if (contains && (event->_phase == touch_event::TOUCH_BEGIN)) {
+        handler->add_touch_node(this);
+    }
+}
+
+void node::on_touch(touch_event* event)
+{
+
+}
+
+bool node::contains(float local_x, float local_y)
+{
+    struct rect r = { 0, 0, this->_size.width, this->_size.height };
+    return r.contains(r, local_x, local_y);
 }
 
 void node::update_srt()
@@ -121,6 +147,12 @@ void node::remove_from_parent()
 {
     S2D_ASSERT(_parent != nullptr);
     _parent->remove_child(this);
+}
+
+vec2 node::world_to_local(float world_x, float world_y)
+{
+    affine_transform world_to_local = affine_transform::invert(local_to_world());
+    return affine_transform::apply_transform(world_to_local, world_x, world_y);
 }
 
 affine_transform node::transform_to(node* to)

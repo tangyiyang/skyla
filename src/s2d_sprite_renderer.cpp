@@ -115,6 +115,8 @@ void sprite_renderer::draw(const affine_transform& world_transform,
     }
     
     context* ctx = context::C();
+
+    // TODO: can this be put in shader?
     const affine_transform& mv = ctx->_world_view_affine_transform;
     affine_transform t = affine_transform::concat(world_transform, mv);
 

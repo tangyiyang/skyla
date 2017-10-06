@@ -19,17 +19,24 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
+
 #ifndef s2d_node_h
 #define s2d_node_h
 
 #include "s2d_common.h"
+#include "s2d_touch_handler.h"
 
 NS_S2D
 
 class node {
+    /*
+     *  The scene-graph and the related model-view transformation.
+     */
 public:
     virtual void init();
     virtual void update(float dt);
+    virtual void hit_test(touch_handler* handler, touch_event* event);
+    virtual void on_touch(touch_event* event);
 
 public:
     void add_child(node* child, uint32_t z_order = 0);
@@ -37,11 +44,9 @@ public:
     void remove_all_children();
     void remove_from_parent();
 
+    vec2 world_to_local(float world_x, float world_y);
     affine_transform transform_to(node* to);
     affine_transform local_to_world();
-
-protected:
-    node* get_root();
 
 public:
     inline void set_pos(float x, float y)
@@ -86,15 +91,16 @@ public:
     }
 
 protected:
+    node* get_root();
     void sort();
     void update_srt();
+    bool contains(float local_x, float local_y);
 
 protected:
+    // members for the scene-graph.
     uint32_t             _z_order;
-    // TODO: this could be a litter meomry wasting, consider a better way.
     uint32_t             _z_counter;
     uint64_t             _dirty_flags;
-    node*                _parent;
 
     vec2                 _pos;
     vec2                 _scale;
@@ -103,7 +109,7 @@ protected:
     size                 _content_size;
     float                _rotation;
     affine_transform     _local_transform;
-
+    node*                _parent;
     std::vector<node*>   _children;
 };
 

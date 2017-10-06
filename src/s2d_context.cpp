@@ -147,6 +147,26 @@ void context::shutdown()
     }
 }
 
+void context::on_touch_begin(uint64_t id, float x, float y)
+{
+
+}
+
+void context::on_touch_moved(uint64_t id, float x, float y)
+{
+
+}
+
+void context::on_touch_ended(uint64_t id, float x, float y)
+{
+
+}
+
+void context::on_touch_cancl(uint64_t id, float x, float y)
+{
+
+}
+
 void context::set_logic_size(float width, float height)
 {
     if (FLT_EQUAL(width, _logic_size.width) && FLT_EQUAL(height, _logic_size.height)) {
