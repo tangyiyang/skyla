@@ -179,7 +179,6 @@ affine_transform node::transform_to(node* to)
         from = from->_parent;
     }
 
-    affine_transform::inplace_concat(ret, to->_local_transform);
     return ret;
 }
 

@@ -18,8 +18,13 @@ void entry::on_init(context* ctx)
 
     node* layer = new node();
     layer->init();
+#if 1
     layer->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
     layer->set_anchor(0.5, 0.5);
+#else
+    layer->set_pos(0, 0);
+    layer->set_anchor(0, 0);
+#endif
     layer->set_size(visible_rect.size.width, visible_rect.size.height);
     layer->set_scale(0.5);
     root->add_child(layer);
@@ -28,12 +33,17 @@ void entry::on_init(context* ctx)
     float scale_y = visible_rect.size.height / 16.0f;
     sprite* background = new sprite();
     background->init("res/editor_resoruces/backgroud.png");
-    background->set_size(visible_rect.size.width/2, visible_rect.size.height/2);
-    background->set_scale(scale_x/2, scale_y/2);
+    background->set_scale(scale_x, scale_y);
+
+#if 1
     background->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
     background->set_anchor(0.5, 0.5);
+#else
+    background->set_pos(0, 0);
+    background->set_anchor(0, 0);
+#endif
 
-    root->add_child(background);
+    layer->add_child(background);
 
     sprite* s = new sprite();
     s->init("res/seal2d-transparent.png");
