@@ -31,9 +31,11 @@ context* context::_global_context = nullptr;
 void context::init(int opengles_version, float window_width, float window_height)
 {
     _global_context = this;
+    _logic_size = {S2D_DEFAULT_LOGIC_WIDTH, S2D_DEFAULT_LOGIC_HEIGHT};
+    _content_scale_factor = 1.0f;
     s2d::gl_util::check_gl_extension(opengles_version);
 
-    init_resolution_settings(window_width, window_height);
+    update_resolution_settings(window_width, window_height);
     init_fundamental_components(_logic_size);
     LOGD("context initialized.");
 
@@ -42,9 +44,8 @@ void context::init(int opengles_version, float window_width, float window_height
     }
 }
 
-void context::init_resolution_settings(float window_width, float window_height)
+void context::update_resolution_settings(float window_width, float window_height)
 {
-    _logic_size = {1136, 640};
     _window_size = {window_width, window_height};
     _resolution_compat_type = FIXED_WIDTH;
 
@@ -72,6 +73,7 @@ void context::init_resolution_settings(float window_width, float window_height)
 
     LOGD("** resolution compat mode = %d", _resolution_compat_type);
     LOGD("** window size = {%.2f, %.2f}", _window_size.width, _window_size.height);
+    LOGD("** viewport origin = {%.2f, %.2f}", _viewport_rect.origin.x, _viewport_rect.origin.y);
     LOGD("** viewport size = {%.2f, %.2f}", _viewport_rect.size.width, _viewport_rect.size.height);
     LOGD("** _logic_size size = {%.2f, %.2f}", _logic_size.width, _logic_size.height);
     LOGD("** visible origin = {%.2f, %.2f}", _visible_rect.origin.x, _visible_rect.origin.y);
@@ -95,10 +97,19 @@ void context::init_fundamental_components(const size& logic_size)
                                                                   -logic_size.height/2);
 }
 
-void context::loop(float dt)
+void context::clear()
 {
     glClearColor(0.5, 0.5, 0.5, 0);
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void context::loop(float dt)
+{
+    glViewport(_viewport_rect.origin.x,
+               _viewport_rect.origin.y,
+               _viewport_rect.size.width * _content_scale_factor,
+               _viewport_rect.size.height* _content_scale_factor);
+
     _root->update(dt);
     _sprite_renderer->flush();
 }
@@ -133,6 +144,32 @@ void context::shutdown()
 
     if (_app) {
         _app->on_destroy();
+    }
+}
+
+void context::set_logic_size(float width, float height)
+{
+    if (FLT_EQUAL(width, _logic_size.width) && FLT_EQUAL(height, _logic_size.height)) {
+        return;
+    }
+
+    _logic_size = {width, height};
+    update_resolution_settings(_window_size.width, _window_size.height);
+    if (_app) {
+        _app->on_resize(this);
+    }
+}
+
+void context::set_content_scale_factor(float factor)
+{
+    if (FLT_EQUAL(_content_scale_factor, factor)) {
+        return;
+    }
+
+    _content_scale_factor = factor;
+    update_resolution_settings(_window_size.width, _window_size.height);
+    if (_app) {
+        _app->on_resize(this);
     }
 }
 

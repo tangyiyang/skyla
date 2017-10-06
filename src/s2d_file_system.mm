@@ -133,6 +133,7 @@ file_entry* file_system::read(const char* path)
     }
     
     LOGE("file could not be found at path: %s", path);
+    S2D_ASSERT(path);
     return nullptr;
 }
 

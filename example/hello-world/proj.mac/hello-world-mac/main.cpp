@@ -109,6 +109,7 @@ int main(int argc, char** argv)
         double now = glfwGetTime();
         dt = now - last;
 
+        ctx->clear();
         ctx->loop(dt);
 
         last = now;

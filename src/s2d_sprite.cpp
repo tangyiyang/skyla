@@ -90,7 +90,7 @@ void sprite::init(const char* tex_file)
 
     _texture = new texture();
     _texture->init(tex_file);
-    _size = _texture->_size;
+    _content_size = _size = _texture->_size;
 
     _quad[0].pos.x = 0;
     _quad[0].pos.y = 0;
@@ -131,7 +131,8 @@ void sprite::update(float dt)
 
 void sprite::draw()
 {
-    context::C()->_sprite_renderer->draw(_local_transform, _quad, _texture);
+    affine_transform world = transform_to(this->get_root());
+    context::C()->_sprite_renderer->draw(world, _quad, _texture);
 }
 
 NS_S2D_END

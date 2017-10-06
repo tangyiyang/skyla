@@ -27,4 +27,12 @@
 #define S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE (1024*4)
 #endif
 
+#ifndef S2D_DEFAULT_LOGIC_WIDTH
+#define S2D_DEFAULT_LOGIC_WIDTH (1280)
+#endif
+
+#ifndef S2D_DEFAULT_LOGIC_HEIGHT
+#define S2D_DEFAULT_LOGIC_HEIGHT (720)
+#endif
+
 #endif /* s2d_config_h */

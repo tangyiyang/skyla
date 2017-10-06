@@ -24,11 +24,13 @@
 #define s2d_math_h
 
 #include <math.h>
+#include <float.h>
 #include "s2d_macro.h"
 
 NS_S2D
 
 #define PI (3.1415926f)
+#define FLT_EQUAL(a, b) (fabs((a) - (b)) < FLT_EPSILON)
 
 struct vec2 {
     float x;

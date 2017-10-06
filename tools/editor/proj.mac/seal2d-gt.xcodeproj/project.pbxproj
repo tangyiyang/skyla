@@ -50,6 +50,8 @@
 		43AA98D01F83EEC100368AAD /* nfd_cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CB1F83EEB600368AAD /* nfd_cocoa.m */; };
 		43AA98D11F83EEC500368AAD /* nfd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CC1F83EEB600368AAD /* nfd_common.c */; };
 		43AA98D51F83FED700368AAD /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98D31F83FECB00368AAD /* lfs.c */; };
+		43D3265A1F8620C40070B743 /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D326581F8620C40070B743 /* entry.cpp */; };
+		43D326641F86231F0070B743 /* libseal2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D326631F8620E00070B743 /* libseal2d-mac.a */; };
 		B63FEBE91F7D4ED1001BD442 /* gl3w.c in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE51F7D4ED1001BD442 /* gl3w.c */; };
 		B63FEBEA1F7D4EDD001BD442 /* imgui_impl_glfw_gl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE31F7D4C64001BD442 /* imgui_impl_glfw_gl3.cpp */; };
 		B63FEBEB1F7D4EEA001BD442 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE01F7D4C34001BD442 /* imgui.cpp */; };
@@ -61,6 +63,23 @@
 		B6D098E11F7ABEDF003280F4 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D098E01F7ABEDF003280F4 /* IOKit.framework */; };
 		B6D098E51F7ABF31003280F4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D098E41F7ABF31003280F4 /* CoreVideo.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		43D326601F8620E00070B743 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43D3265B1F8620E00070B743 /* seal2d.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4337BC391F852151004CF11B;
+			remoteInfo = seal2d;
+		};
+		43D326621F8620E00070B743 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43D3265B1F8620E00070B743 /* seal2d.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4337BCA21F8524B7004CF11B;
+			remoteInfo = "seal2d-mac";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		B66F9DF51F7AB888002AF54D /* Copy Files */ = {
@@ -156,6 +175,9 @@
 		43AA98CD1F83EEB600368AAD /* nfd_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nfd_common.h; sourceTree = "<group>"; };
 		43AA98D31F83FECB00368AAD /* lfs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lfs.c; sourceTree = "<group>"; };
 		43AA98D41F83FECB00368AAD /* lfs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lfs.h; sourceTree = "<group>"; };
+		43D326581F8620C40070B743 /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
+		43D326591F8620C40070B743 /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
+		43D3265B1F8620E00070B743 /* seal2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = seal2d.xcodeproj; path = ../../../src/seal2d.xcodeproj; sourceTree = "<group>"; };
 		B63FEBDF1F7D4C34001BD442 /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		B63FEBE01F7D4C34001BD442 /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
 		B63FEBE11F7D4C34001BD442 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
@@ -185,6 +207,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43D326641F86231F0070B743 /* libseal2d-mac.a in Frameworks */,
 				B6D098E51F7ABF31003280F4 /* CoreVideo.framework in Frameworks */,
 				B6D098E11F7ABEDF003280F4 /* IOKit.framework in Frameworks */,
 				B6D098DF1F7ABEA6003280F4 /* Cocoa.framework in Frameworks */,
@@ -322,6 +345,15 @@
 			path = "lua-fs";
 			sourceTree = "<group>";
 		};
+		43D3265C1F8620E00070B743 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43D326611F8620E00070B743 /* libseal2d.a */,
+				43D326631F8620E00070B743 /* libseal2d-mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B63FEBDC1F7D4C26001BD442 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +408,7 @@
 		B66F9DEE1F7AB888002AF54D = {
 			isa = PBXGroup;
 			children = (
+				43D3265B1F8620E00070B743 /* seal2d.xcodeproj */,
 				B63FEBDC1F7D4C26001BD442 /* libs */,
 				B66F9E011F7AB90A002AF54D /* src */,
 				430F7CD91F8382B700D0C98C /* res */,
@@ -396,6 +429,8 @@
 			isa = PBXGroup;
 			children = (
 				430F7CF81F83896E00D0C98C /* luabinding */,
+				43D326581F8620C40070B743 /* entry.cpp */,
+				43D326591F8620C40070B743 /* entry.h */,
 				B66F9E021F7AB913002AF54D /* main.cpp */,
 				430F7C031F8376BD00D0C98C /* level_editor_common.h */,
 			);
@@ -461,12 +496,35 @@
 			mainGroup = B66F9DEE1F7AB888002AF54D;
 			productRefGroup = B66F9DF81F7AB888002AF54D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 43D3265C1F8620E00070B743 /* Products */;
+					ProjectRef = 43D3265B1F8620E00070B743 /* seal2d.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B66F9DF61F7AB888002AF54D /* seal2d-gt */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		43D326611F8620E00070B743 /* libseal2d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libseal2d.a;
+			remoteRef = 43D326601F8620E00070B743 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		43D326631F8620E00070B743 /* libseal2d-mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libseal2d-mac.a";
+			remoteRef = 43D326621F8620E00070B743 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B66F9DF31F7AB888002AF54D /* Sources */ = {
@@ -489,6 +547,7 @@
 				430F7CBF1F8381DF00D0C98C /* liolib.c in Sources */,
 				430F7CFB1F83897D00D0C98C /* lua_editor.cpp in Sources */,
 				430F7CDD1F83842200D0C98C /* lua_handler.cpp in Sources */,
+				43D3265A1F8620C40070B743 /* entry.cpp in Sources */,
 				430F7CC11F8381DF00D0C98C /* lstring.c in Sources */,
 				430F7CCF1F8381DF00D0C98C /* lctype.c in Sources */,
 				43AA98D01F83EEC100368AAD /* nfd_cocoa.m in Sources */,
@@ -637,6 +696,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -646,8 +706,10 @@
 					"$(SRCROOT)/../libs/common/lua-imgui",
 					"$(SRCROOT)/../libs/common/lua-5.3.4",
 					"$(SRCROOT)/../libs/common/nativefiledialog",
+					"$(SRCROOT)/../../../src",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "-lglfw3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -660,6 +722,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -669,8 +732,10 @@
 					"$(SRCROOT)/../libs/common/lua-imgui",
 					"$(SRCROOT)/../libs/common/lua-5.3.4",
 					"$(SRCROOT)/../libs/common/nativefiledialog",
+					"$(SRCROOT)/../../../src",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "-lglfw3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

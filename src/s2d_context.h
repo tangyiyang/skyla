@@ -38,6 +38,7 @@ public:
     virtual void on_pause() = 0;
     virtual void on_resume() = 0;
     virtual void on_destroy() = 0;
+    virtual void on_resize(context* ctx) = 0;
 };
 
 class context {
@@ -51,10 +52,14 @@ public:
 
 public:
     void init(int opengles_version, float window_width, float window_height);
+    void clear();
     void loop(float dt);
     void pause();
     void resume();
     void shutdown();
+
+    void set_logic_size(float width, float height);
+    void set_content_scale_factor(float factor); // for engine internal usage only!
 
     inline node* get_root()
     {
@@ -67,7 +72,7 @@ public:
     }
 
 private:
-    void init_resolution_settings(float window_width, float window_height);
+    void update_resolution_settings(float window_width, float window_height);
     void init_fundamental_components(const size& logic_size);
 
 public:
@@ -86,6 +91,7 @@ public:
     rect             _visible_rect;
     vec2             _scale_factor;
     RESOLUTION_COMPAT_TYPE _resolution_compat_type;
+    float            _content_scale_factor; // on retina screen, this may be 2 or 3.
 public:
     static inline context* C()
     {

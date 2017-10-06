@@ -5,6 +5,8 @@
 #include <GLFW/glfw3.h>
 
 #include "lua_handler.h"
+#include "s2d.h"
+#include "entry.h"
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
 
@@ -25,10 +27,17 @@ int main(int, char**)
 #if __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
+
+    int width = 1280;
+    int height = 720;
     GLFWwindow* window = glfwCreateWindow(1280, 720, "ImGui OpenGL3 example", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
     gl3wInit();
+
+    int fb_w, fb_h;
+    glfwGetFramebufferSize(window, &fb_w, &fb_h);
+    float content_scale_factor = fb_w / width;
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
@@ -36,6 +45,12 @@ int main(int, char**)
 
     game_tool::lua_handler* _l = new game_tool::lua_handler();
     _l->init();
+
+
+    entry* game_entry = new entry();
+    s2d::context* ctx = new s2d::context(game_entry);
+    ctx->init(3, width, height);
+    ctx->set_content_scale_factor(content_scale_factor);
 
     bool show_test_window = true;
 
@@ -57,8 +72,15 @@ int main(int, char**)
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui::Render();
+
+        ctx->loop(0);
+
         glfwSwapBuffers(window);
     }
+
+    ctx->shutdown();
+    delete game_entry;
+    delete ctx;
         // Cleanup
     ImGui_ImplGlfwGL3_Shutdown();
     glfwTerminate();

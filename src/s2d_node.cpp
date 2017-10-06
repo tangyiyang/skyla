@@ -125,6 +125,7 @@ void node::remove_from_parent()
 
 affine_transform node::transform_to(node* to)
 {
+    // TODO: this code could be optimized.
     if (this == to) {
         return this->_local_transform;
     }
