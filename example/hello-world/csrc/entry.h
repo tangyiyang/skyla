@@ -10,6 +10,7 @@ public:
     void on_pause() override;
     void on_resume() override;
     void on_destroy() override;
+    void on_resize(context* ctx) override;
 };
 
 #endif /* entry_h */

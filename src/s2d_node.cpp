@@ -64,25 +64,21 @@ void node::update(float dt)
 
 void node::update_srt()
 {
-    if (this->_parent) {
-        _local_transform = _parent->_local_transform;
-    } else {
-        _local_transform = affine_transform::mk_identity();
-    }
+    _local_transform = affine_transform::mk_identity();
 
-    float anchor_x = _size.width * _anchor.x;
-    float anchor_y = _size.height * _anchor.y;
+    float anchor_x = _content_size.width * _anchor.x;
+    float anchor_y = _content_size.height * _anchor.y;
 
     //TODO: optimize this code
+    affine_transform anchor_to = affine_transform::mk_translate(-anchor_x, -anchor_y);
     affine_transform scale = affine_transform::mk_scale(_scale.x, _scale.y);
     affine_transform rotation = affine_transform::mk_rotation(_rotation);
     affine_transform translate = affine_transform::mk_translate(_pos.x, _pos.y);
-    affine_transform anchor_to = affine_transform::mk_translate(-anchor_x, -anchor_y);
 
+    affine_transform::inplace_concat(_local_transform, anchor_to);
     affine_transform::inplace_concat(_local_transform, scale);
     affine_transform::inplace_concat(_local_transform, rotation);
     affine_transform::inplace_concat(_local_transform, translate);
-    affine_transform::inplace_concat(_local_transform, anchor_to);
 }
 
 static bool comapre_z(node* a, node* b)

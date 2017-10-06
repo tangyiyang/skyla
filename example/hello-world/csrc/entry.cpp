@@ -10,14 +10,27 @@ void entry::on_init(context* ctx)
     LOGD("entry:: on_init");
 
     ctx->_sprite_frame_cache->load("res/animations/pirate.json", "res/animations/pirate.png");
+
+    node* root = ctx->get_root();
+    root->set_content_size(visible_rect.size.width, visible_rect.size.height);
+    root->set_anchor(0, 0);
+    root->set_pos(0, 0);
+
+    node* first = new node();
+    first->init();
+    first->set_content_size(visible_rect.size.width, visible_rect.size.height);
+    first->set_pos(0, 0);
+    first->set_anchor(0, 0);
+    first->set_scale(0.5);
+
     sprite* s = new sprite();
     s->init("res/seal2d-transparent.png");
-    s->set_pos(center.x, center.y);
+    s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
     s->set_anchor(0.5, 0.5);
+    first->add_child(s);
 
-    ctx->get_root()->add_child(s);
+    root->add_child(first);
 }
-
 
 void entry::on_pause()
 {
@@ -32,4 +45,9 @@ void entry::on_resume()
 void entry::on_destroy()
 {
     LOGD("entry:: on_destroy");
+}
+
+void entry::on_resize(context* ctx)
+{
+
 }

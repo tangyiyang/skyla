@@ -52,12 +52,16 @@ public:
     inline void set_scale(float scale)
     {
         _scale.x = _scale.y = scale;
+        _size.width = _content_size.width * scale;
+        _size.height = _content_size.height * scale;
     }
 
     inline void set_scale(float sx, float sy)
     {
         _scale.x = sx;
         _scale.y = sy;
+        _size.width = _content_size.width * sx;
+        _size.height = _content_size.height * sy;
     }
 
     inline void set_anchor(float ax, float ay)
@@ -69,6 +73,11 @@ public:
     inline void set_rotation(float rotation)
     {
         _rotation = rotation;
+    }
+
+    inline void set_content_size(float width, float height)
+    {
+        _content_size = _size = {width, height};
     }
 
     inline uint32_t get_zorder()
@@ -91,6 +100,7 @@ protected:
     vec2                 _scale;
     vec2                 _anchor;
     size                 _size;
+    size                 _content_size;
     float                _rotation;
     affine_transform     _local_transform;
 
