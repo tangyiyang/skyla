@@ -11,32 +11,35 @@ void entry::on_init(context* ctx)
 
 //    ctx->_sprite_frame_cache->load("res/animations/pirate.json", "res/animations/pirate.png");
 
-
-
     node* root = ctx->get_root();
-    root->set_content_size(visible_rect.size.width, visible_rect.size.height);
-    root->set_anchor(0.5, 0.5);
-    root->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
+    root->set_size(visible_rect.size.width, visible_rect.size.height);
+    root->set_anchor(0, 0);
+    root->set_pos(0, 0);
+
+    node* layer = new node();
+    layer->init();
+    layer->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
+    layer->set_anchor(0.5, 0.5);
+    layer->set_size(visible_rect.size.width, visible_rect.size.height);
+    layer->set_scale(0.5);
+    root->add_child(layer);
 
     float scale_x = visible_rect.size.width / 16.0f;
     float scale_y = visible_rect.size.height / 16.0f;
     sprite* background = new sprite();
     background->init("res/editor_resoruces/backgroud.png");
-    background->set_scale(scale_x, scale_y);
-    background->set_pos(0, 0);
-    background->set_anchor(0, 0);
-    root->add_child(background);
+    background->set_size(visible_rect.size.width/2, visible_rect.size.height/2);
+    background->set_scale(scale_x/2, scale_y/2);
+    background->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
+    background->set_anchor(0.5, 0.5);
 
-    _background = background;
+    root->add_child(background);
 
     sprite* s = new sprite();
     s->init("res/seal2d-transparent.png");
     s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
     s->set_anchor(0.5, 0.5);
-
-    root->add_child(s);
-
-    root->set_scale(0.5);
+    layer->add_child(s);
 }
 
 

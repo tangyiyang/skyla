@@ -3,6 +3,8 @@
 
 NS_S2D
 
+uint64_t touch_handler::_touch_id_counter = 0;
+
 void touch_handler::init()
 {
     _touchable_nodes.reserve(S2D_INITIAL_TOUCHABLE_NODES);
@@ -11,8 +13,6 @@ void touch_handler::init()
 void touch_handler::handle_touch_event(touch_event *event)
 {
     node* root = context::C()->get_root();
-
-
     switch (event->_phase) {
         case touch_event::TOUCH_BEGIN: {
             // TOOD: Do this way have performance issue?

@@ -90,7 +90,7 @@ void sprite::init(const char* tex_file)
 
     _texture = new texture();
     _texture->init(tex_file);
-    _content_size = _size = _texture->_size;
+    _size = _texture->_size;
 
     _quad[0].pos.x = 0;
     _quad[0].pos.y = 0;

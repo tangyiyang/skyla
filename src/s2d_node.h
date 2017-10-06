@@ -30,7 +30,7 @@ NS_S2D
 
 class node {
     /*
-     *  The scene-graph and the related model-view transformation.
+     *  The scene-graph implemention class.
      */
 public:
     virtual void init();
@@ -47,6 +47,7 @@ public:
     vec2 world_to_local(float world_x, float world_y);
     affine_transform transform_to(node* to);
     affine_transform local_to_world();
+    rect bounds();
 
 public:
     inline void set_pos(float x, float y)
@@ -57,16 +58,12 @@ public:
     inline void set_scale(float scale)
     {
         _scale.x = _scale.y = scale;
-        _size.width = _content_size.width * scale;
-        _size.height = _content_size.height * scale;
     }
 
     inline void set_scale(float sx, float sy)
     {
         _scale.x = sx;
         _scale.y = sy;
-        _size.width = _content_size.width * sx;
-        _size.height = _content_size.height * sy;
     }
 
     inline void set_anchor(float ax, float ay)
@@ -80,9 +77,9 @@ public:
         _rotation = rotation;
     }
 
-    inline void set_content_size(float width, float height)
+    inline void set_size(float width, float height)
     {
-        _content_size = _size = {width, height};
+        _size = {width, height};
     }
 
     inline uint32_t get_zorder()
@@ -94,10 +91,10 @@ protected:
     node* get_root();
     void sort();
     void update_srt();
-    bool contains(float local_x, float local_y);
 
 protected:
     // members for the scene-graph.
+    uint64_t             _id;
     uint32_t             _z_order;
     uint32_t             _z_counter;
     uint64_t             _dirty_flags;
@@ -106,11 +103,12 @@ protected:
     vec2                 _scale;
     vec2                 _anchor;
     size                 _size;
-    size                 _content_size;
     float                _rotation;
     affine_transform     _local_transform;
     node*                _parent;
     std::vector<node*>   _children;
+
+    static uint64_t _node_id_counter;
 };
 
 NS_S2D_END

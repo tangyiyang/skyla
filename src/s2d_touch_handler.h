@@ -2,6 +2,7 @@
 #define s2d_touch_handler_h
 
 #include "s2d_common.h"
+#include "s2d_util.h"
 
 NS_S2D
 
@@ -17,11 +18,16 @@ struct touch_event {
 public:
     uint64_t          _id;
     vec2              _pos;
-    vec2              _prev_pos;
     TOUCH_EVENT_PHASE _phase;
 };
 
 class touch_handler {
+public:
+    static uint64_t touch_id()
+    {
+        return _touch_id_counter++;
+    }
+
 public:
     void init();
 
@@ -29,6 +35,7 @@ public:
 
     inline void add_touch_node(node* n)
     {
+        LOGD("add touch node size = %d", _touchable_nodes.size());
         _touchable_nodes.push_back(n);
     }
 
@@ -37,6 +44,9 @@ private:
 
 private:
     std::vector<node*> _touchable_nodes;
+
+private:
+    static uint64_t _touch_id_counter;
 };
 
 NS_S2D_END

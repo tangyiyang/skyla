@@ -33,21 +33,19 @@ NS_S2D
 #define DIRTY_SRT (DIRTY_TRANSFORM | DIRTY_SCALE | DIRTY_ROTATION)
 #define DIRTY_ALL (DIRTY_SRT | DIRTY_Z)
 
+uint64_t node::_node_id_counter = 0;
 void node::init()
 {
+    _id = _node_id_counter++;
     _local_transform = affine_transform::mk_identity();
     _pos = {0, 0};
-
     _scale = {1.0, 1.0};
     _rotation = 0;
     _anchor = {0.5, 0.5};
     _size = {0, 0};
-
     _z_order = 0;
     _z_counter = 0;
-
     _parent = nullptr;
-
     _dirty_flags = DIRTY_ALL;
 }
 
@@ -63,37 +61,48 @@ void node::update(float dt)
 
 void node::hit_test(touch_handler* handler, touch_event* event)
 {
-    vec2 local = world_to_local(event->_pos.x, event->_pos.y);
-    bool contains = this->contains(local.x, local.y);
+    if (_id == 3) {
+        // id == 3, sprite
+        // bug: sprite not reponsed correctly.
+        int i = 0;
+    }
+    node* parent = _parent ? _parent : this;
+    affine_transform world_to_local_transform = affine_transform::invert(parent->transform_to(this->get_root()));
+
+    vec2 local = affine_transform::apply_transform(world_to_local_transform, event->_pos.x, event->_pos.y);
+
+    // TODO: we should have a virtual rect bounds() function????
+    rect bounds = {
+        0,
+        0,
+        _size.width,
+        _size.height};
+    bool contains = rect::contains(bounds, local.x, local.y);
+
+    LOGD("id(%d), world = %.2f, %.2f, local = %.2f, %.2f, size = %.2f, %.2f, contains = %s", _id, event->_pos.x, event->_pos.y, local.x, local.y, _size.width, _size.height, contains?"true" : "false");
+
+    if (contains && (event->_phase == touch_event::TOUCH_BEGIN)) {
+        handler->add_touch_node(this);
+    }
 
     // visit the child recusively
     std::vector<node*>::iterator it = _children.begin();
     for (; it != _children.end(); ++it) {
         (*it)->hit_test(handler, event);
     }
-
-    if (contains && (event->_phase == touch_event::TOUCH_BEGIN)) {
-        handler->add_touch_node(this);
-    }
 }
 
 void node::on_touch(touch_event* event)
 {
-
-}
-
-bool node::contains(float local_x, float local_y)
-{
-    struct rect r = { 0, 0, this->_size.width, this->_size.height };
-    return r.contains(r, local_x, local_y);
+    LOGD("on_touch id(%d), event = %d, p = %.2f, %,2f", this->_id, event->_phase, event->_pos.x, event->_pos.y);
 }
 
 void node::update_srt()
 {
     _local_transform = affine_transform::mk_identity();
 
-    float anchor_x = _content_size.width * _anchor.x;
-    float anchor_y = _content_size.height * _anchor.y;
+    float anchor_x = _size.width * _anchor.x;
+    float anchor_y = _size.height * _anchor.y;
 
     //TODO: optimize this code
     affine_transform anchor_to = affine_transform::mk_translate(-anchor_x, -anchor_y);
@@ -176,8 +185,18 @@ affine_transform node::transform_to(node* to)
 
 affine_transform node::local_to_world()
 {
-    S2D_ASSERT(_parent != nullptr);
     return transform_to(this->get_root());
+}
+
+rect node::bounds()
+{
+    affine_transform world_to_local = transform_to(this->get_root());
+    return {
+        0,
+        0,
+        world_to_local.a * _size.width,
+        world_to_local.d * _size.height
+    };
 }
 
 node* node::get_root()

@@ -85,6 +85,7 @@ void context::init_fundamental_components(const size& logic_size)
     _sprite_frame_cache = new sprite_frame_cache();
     _sprite_renderer = new sprite_renderer();
     _file_system = new file_system();
+    _touch_handler = new touch_handler();
     _camera = new camera();
     _root = new node();
 
@@ -137,6 +138,7 @@ void context::shutdown()
     _sprite_renderer->shutdown();
     _root->remove_all_children();
 
+    delete _touch_handler;
     delete _sprite_renderer;
     delete _file_system;
     delete _root;
@@ -147,24 +149,44 @@ void context::shutdown()
     }
 }
 
-void context::on_touch_begin(uint64_t id, float x, float y)
+void context::on_touch_begin(float x, float y)
 {
-
+    touch_event e = {
+        touch_handler::touch_id(),
+        x, _window_size.height - y,
+        touch_event::TOUCH_BEGIN
+    };
+    _touch_handler->handle_touch_event(&e);
 }
 
-void context::on_touch_moved(uint64_t id, float x, float y)
+void context::on_touch_moved(float x, float y)
 {
-
+    touch_event e = {
+        touch_handler::touch_id(),
+        x, _window_size.height - y,
+        touch_event::TOUCH_MOVED
+    };
+    _touch_handler->handle_touch_event(&e);
 }
 
-void context::on_touch_ended(uint64_t id, float x, float y)
+void context::on_touch_ended(float x, float y)
 {
-
+    touch_event e = {
+        touch_handler::touch_id(),
+        x, _window_size.height - y,
+        touch_event::TOUCH_ENDED
+    };
+    _touch_handler->handle_touch_event(&e);
 }
 
-void context::on_touch_cancl(uint64_t id, float x, float y)
+void context::on_touch_cancl(float x, float y)
 {
-
+    touch_event e = {
+        touch_handler::touch_id(),
+        x, _window_size.height - y,
+        touch_event::TOUCH_CANCL
+    };
+    _touch_handler->handle_touch_event(&e);
 }
 
 void context::set_logic_size(float width, float height)

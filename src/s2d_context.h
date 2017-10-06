@@ -58,10 +58,10 @@ public:
     void resume();
     void shutdown();
 
-    void on_touch_begin(uint64_t id, float x, float y);
-    void on_touch_moved(uint64_t id, float x, float y);
-    void on_touch_ended(uint64_t id, float x, float y);
-    void on_touch_cancl(uint64_t id, float x, float y);
+    void on_touch_begin(float x, float y);
+    void on_touch_moved(float x, float y);
+    void on_touch_ended(float x, float y);
+    void on_touch_cancl(float x, float y);
 
     void set_logic_size(float width, float height);
     void set_content_scale_factor(float factor); // for engine internal usage only!
@@ -81,12 +81,13 @@ private:
     void init_fundamental_components(const size& logic_size);
 
 public:
-    app_protocol*    _app;
-    file_system*     _file_system;
+    app_protocol*       _app;
+    touch_handler*      _touch_handler;
+    file_system*        _file_system;
     sprite_frame_cache* _sprite_frame_cache;
-    sprite_renderer* _sprite_renderer;
-    node*            _root;
-    camera*          _camera;
+    sprite_renderer*    _sprite_renderer;
+    node*               _root;
+    camera*             _camera;
 
     affine_transform _world_view_affine_transform;
 

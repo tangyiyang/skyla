@@ -63,7 +63,6 @@ protected:
 
 protected:
     pos_tex_color_vertex _quad[4];
-    program*             _program;
     texture*             _texture;
 };
 
