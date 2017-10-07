@@ -52,10 +52,14 @@ private:
 };
 
 class sprite: public node {
+    /*
+     * The Quad Sprite.
+     */
 public:
     void init(const char* tex_file);
     void init(sprite_frame* frame);
-    void update(float dt) override;
+    void update(float dt)       override;
+    rect bounds_in(node* space) override;
 
 protected:
     void draw();

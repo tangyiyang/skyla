@@ -120,7 +120,7 @@ void sprite::init(const char* tex_file)
 
 void sprite::init(sprite_frame* frame)
 {
-
+    node::init();
 }
 
 void sprite::update(float dt)
@@ -133,6 +133,36 @@ void sprite::draw()
 {
     affine_transform world = transform_to(this->get_root());
     context::C()->_sprite_renderer->draw(world, _quad, _texture);
+}
+
+rect sprite::bounds_in(node* space)
+{
+    float minX = FLT_MAX, maxX = -FLT_MAX, minY = FLT_MAX, maxY = -FLT_MAX;
+    if (space == this) {
+        for (int i = 0; i < 4; ++i) {
+            float x = _quad[i].pos.x;
+            float y = _quad[i].pos.y;
+            minX = std::min(minX, x);
+            maxX = std::max(maxX, x);
+            minY = std::min(minY, y);
+            maxY = std::max(maxY, y);
+        }
+    } else {
+        affine_transform trans = this->transform_to(space);
+        for (int i = 0; i < 4; ++i) {
+            float x = _quad[i].pos.x;
+            float y = _quad[i].pos.y;
+
+            vec2 p = affine_transform::apply_transform(trans, x, y);
+
+            minX = std::min(minX, p.x);
+            maxX = std::max(maxX, p.x);
+            minY = std::min(minY, p.y);
+            maxY = std::max(maxY, p.y);
+        }
+    }
+
+    return {minX, minY, maxX - minX, maxY - minY};
 }
 
 NS_S2D_END

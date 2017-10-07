@@ -72,14 +72,14 @@ void node::hit_test(touch_handler* handler, touch_event* event)
     vec2 local = affine_transform::apply_transform(world_to_local_transform, event->_pos.x, event->_pos.y);
 
     // TODO: we should have a virtual rect bounds() function????
-    rect bounds = {
-        0,
-        0,
-        _size.width,
-        _size.height};
+    rect bounds = bounds_in(_parent);
     bool contains = rect::contains(bounds, local.x, local.y);
 
-    LOGD("id(%d), world = %.2f, %.2f, local = %.2f, %.2f, size = %.2f, %.2f, contains = %s", _id, event->_pos.x, event->_pos.y, local.x, local.y, _size.width, _size.height, contains?"true" : "false");
+    LOGD("id(%d), world = %.2f, %.2f, local = %.2f, %.2f, bounds = %.2f, %.2f, %.2f, %.2f, contains = %s",
+         _id, event->_pos.x, event->_pos.y, local.x, local.y,
+         bounds.origin.x, bounds.origin.y,
+         bounds.size.width, bounds.size.height,
+         contains ? "true" : "false");
 
     if (contains && (event->_phase == touch_event::TOUCH_BEGIN)) {
         handler->add_touch_node(this);
@@ -91,6 +91,18 @@ void node::hit_test(touch_handler* handler, touch_event* event)
         (*it)->hit_test(handler, event);
     }
 }
+
+
+rect node::bounds_in(node* space)
+{
+    return {
+        0,
+        0,
+        _size.width,
+        _size.height
+    };
+}
+
 
 void node::on_touch(touch_event* event)
 {
@@ -185,17 +197,6 @@ affine_transform node::transform_to(node* to)
 affine_transform node::local_to_world()
 {
     return transform_to(this->get_root());
-}
-
-rect node::bounds()
-{
-    affine_transform world_to_local = transform_to(this->get_root());
-    return {
-        0,
-        0,
-        world_to_local.a * _size.width,
-        world_to_local.d * _size.height
-    };
 }
 
 node* node::get_root()

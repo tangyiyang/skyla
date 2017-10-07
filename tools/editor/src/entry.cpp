@@ -27,7 +27,7 @@ void entry::on_init(context* ctx)
 #endif
     layer->set_size(visible_rect.size.width, visible_rect.size.height);
     layer->set_scale(0.5);
-    root->add_child(layer);
+
 
     float scale_x = visible_rect.size.width / 16.0f;
     float scale_y = visible_rect.size.height / 16.0f;
@@ -43,12 +43,14 @@ void entry::on_init(context* ctx)
     background->set_anchor(0, 0);
 #endif
 
-    layer->add_child(background);
 
     sprite* s = new sprite();
     s->init("res/seal2d-transparent.png");
     s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
     s->set_anchor(0.5, 0.5);
+
+    root->add_child(layer);
+    layer->add_child(background);
     layer->add_child(s);
 }
 

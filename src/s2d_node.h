@@ -37,7 +37,7 @@ public:
     virtual void update(float dt);
     virtual void hit_test(touch_handler* handler, touch_event* event);
     virtual void on_touch(touch_event* event);
-
+    virtual rect bounds_in(node* space);
 public:
     void add_child(node* child, uint32_t z_order = 0);
     void remove_child(node* child);
@@ -47,7 +47,6 @@ public:
     vec2 world_to_local(float world_x, float world_y);
     affine_transform transform_to(node* to);
     affine_transform local_to_world();
-    rect bounds();
 
 public:
     inline void set_pos(float x, float y)
