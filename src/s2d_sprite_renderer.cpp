@@ -52,14 +52,15 @@ void sprite_renderer::init()
 
     _program = program::load_default_program(program::EMBEDED_PROGRAM_SPRITE_DEFAULT);
     glGenBuffers(1, &_vbo); S2D_ASSERT(_vbo > 0);
+    glGenBuffers(1, &_ibo);
+    glGenVertexArrays(1, &_vao);
+
+    glBindVertexArray(_vao);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex) * _max_vertices, nullptr, GL_DYNAMIC_DRAW);
-    glGenBuffers(1, &_ibo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_t) * _max_indexes, nullptr, GL_DYNAMIC_DRAW);
 
-    glGenVertexArrays(1, &_vao);
-    glBindVertexArray(_vao);
     glVertexAttribPointer(program::VERTEX_ATTR_POS,
                           2,
                           GL_FLOAT,
@@ -82,6 +83,7 @@ void sprite_renderer::init()
                           (void*)offsetof(pos_tex_color_vertex, color));
     glEnableVertexAttribArray(program::VERTEX_ATTR_TEX_COORD);
     glBindVertexArray(0);
+
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -138,28 +140,29 @@ void sprite_renderer::flush()
     
     this->update_indexes();
     _program->use();
+    _program->set_uniform("u_projection",
+                          program::UNIFORM_TYPE_MATRIX_3_FV,
+                          context::C()->_camera->_matrix.m);
     _texture->bind();
     CHECK_GL_ERROR;
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_tex_color_vertex), _vertex_buffer);
-    
-    _program->set_uniform("u_projection",
-                          program::UNIFORM_TYPE_MATRIX_3_FV,
-                          context::C()->_camera->_matrix.m);
-
-    glBindVertexArray(_vao);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, _num_indexes * sizeof(index_t), _index_buffer);
+
+    glBindVertexArray(_vao);
     glDrawElements(GL_TRIANGLES, _num_indexes, GL_UNSIGNED_SHORT, 0);
 
     _program->unuse();
     _texture->unbind();
+    glBindVertexArray(0);
+
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
 
     _num_indexes = 0;
     _num_vertices = 0;
