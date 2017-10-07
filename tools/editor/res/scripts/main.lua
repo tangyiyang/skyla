@@ -7,6 +7,9 @@ local function initialize()
     require "config"
     editor = require "editor"
     record = require "record"
+
+    -- inject serveral global util functions.
+    print_r = require "print_r"
 end
 
 initialize()

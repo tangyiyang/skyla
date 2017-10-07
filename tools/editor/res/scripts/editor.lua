@@ -1,6 +1,8 @@
 local core = require "editor.core"
 local lfs = require "lfs"
 local print_r = require "print_r"
+local scene_graph_editor = require "scene_graph_editor"
+
 local editor = {
     root_dir_name = "",
     file_tree = {}
@@ -277,14 +279,34 @@ local function draw_editor_scene()
     imgui.End()
 end
 
+local function editable(file_name)
+    return string.match(file_name, ".scene$")
+end
+
+local function reload_scene(file_name)
+    local full_path = string.format("%s/%s", record.settings.work_dir, file_name)
+    scene_graph_editor.load(full_path)
+end
+
+local function on_click_scene_file(file_name)
+    print("click scene file :", file_name)
+    reload_scene(file_name)
+end
+
 local draw_file_tree
-function draw_file_tree(name, file_tree)
+draw_file_tree = function(name, file_tree)
     if imgui.TreeNode(name) then
         for k, v in pairs(file_tree) do
             if type(v) == "table" then
                 draw_file_tree(k, v)
             else
-                imgui.Text(k)
+                if editable(k) then
+                    if imgui.Button(k) then
+                        on_click_scene_file(k)
+                    end
+                else
+                    imgui.Text(k)
+                end
             end
         end
         imgui.TreePop()
@@ -313,9 +335,7 @@ local function draw_file_system()
 end
 
 local function draw_scene_graph()
-    imgui.Begin("Scene-Graph")
-
-    imgui.End()
+    scene_graph_editor.render()
 end
 
 function editor.update(dt)
@@ -324,8 +344,6 @@ function editor.update(dt)
     draw_tool_bar()
     draw_file_system()
     draw_scene_graph()
-    draw_editor_scene()
-
 end
 
 function editor.destory()

@@ -2,51 +2,54 @@
     "hash": "244e96571eebc53",
     "version": "0.0.1",
     "work_dir": "./demo_scene/",
-    "data" : {
+    "data": {
         "name": "default-scene-name",
-        "setup:": {
+        "setup": {
             "node": {
                 "id": 1,
-                "content": {
-                    "scale": {
-                        "x": 1.0,
-                        "y": 1.0
+                "display_name": "root_node",
+                "var": "root",
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0
+                },
+                "rotation": 30.0,
+                "translate": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "z_order": 0,
+                "size": {
+                    "width": 1280,
+                    "height": 720
+                },
+                "anchor": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "children": [
+                    {
+                        "sprite": {
+                            "id": 2,
+                            "display_name": "background"
+                        }
                     },
-                    "rotation": 30.0,
-                    "translate": {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    "z_order": 0,
-                    "size": {
-                        "width": 512,
-                        "height": 256
-                    },
-                    "anchor": {
-                        "x" : 0.0,
-                        "y" : 0.0
-                    },
-
-                    "children" : {
-
+                    {
+                        "sprite": {
+                            "id": 3,
+                            "display_name": "logo"
+                        }
                     }
-                },
-
+                ],
                 "layout": {
-                    "pivot" : 5,
+                    "pivot": 5
                 }
-            },
+            }
         },
-
-        "animation" : {
-            "timelines" : {
-                "enter" : {
-
-                },
-
-                "exit" : {
-
-                }
+        "animation": {
+            "timelines": {
+                "enter": {},
+                "exit": {}
             }
         }
     }
