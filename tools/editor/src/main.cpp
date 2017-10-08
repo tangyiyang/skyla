@@ -121,10 +121,10 @@ int main(int, char**)
         ImGui_ImplGlfwGL3_NewFrame();
 
         _l->update(0);
-//        if (show_test_window) {
-//            ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
-//            ImGui::ShowTestWindow(&show_test_window);
-//        }
+        if (show_test_window) {
+            ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
+            ImGui::ShowTestWindow(&show_test_window);
+        }
 
         // Rendering
         int display_w, display_h;

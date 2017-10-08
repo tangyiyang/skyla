@@ -9,8 +9,6 @@ extern "C" {
 }
 #endif
 
-
 int luaopen_imgui_core(lua_State* L);
-
 
 #endif /* lua_imgui_h */

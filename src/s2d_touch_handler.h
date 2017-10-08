@@ -35,7 +35,6 @@ public:
 
     inline void add_touch_node(node* n)
     {
-        LOGD("add touch node size = %d", _touchable_nodes.size());
         _touchable_nodes.push_back(n);
     }
 

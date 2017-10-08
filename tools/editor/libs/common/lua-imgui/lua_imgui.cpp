@@ -20,6 +20,8 @@ IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(BeginMainMenuBar);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMainMenuBar);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMenu);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(End);
+IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(IsItemActive);
+IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(IsItemClicked);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(Separator);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(TreePop);
 
@@ -86,6 +88,21 @@ int limgui_Button(lua_State* L)
     return 0;
 }
 
+int limgui_CollapsingHeader(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 1) {
+        bool ret = ImGui::CollapsingHeader(luaL_checkstring(L, 1));
+        lua_pushboolean(L, ret);
+        return 1;
+    } else if (n == 2) {
+        bool ret = ImGui::CollapsingHeader(luaL_checkstring(L, 1), luaL_checkinteger(L, 2));
+        lua_pushboolean(L, ret);
+        return 1;
+    }
+    return 0;
+}
+
 int limgui_Columns(lua_State* L)
 {
     int n = lua_gettop(L);
@@ -98,8 +115,24 @@ int limgui_Columns(lua_State* L)
     } else if (n == 3) {
         ImGui::Columns((int)luaL_checkinteger(L, 1), luaL_checkstring(L, 2), lua_toboolean(L, 3));
     } else {
-        luaL_error(L, "invalid args for limgui_Columns");
+        luaL_error(L, "invalid args for Columns");
     }
+    return 0;
+}
+
+int limgui_Checkbox(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 2) {
+        const char* label = luaL_checkstring(L, 1);
+        bool v = lua_toboolean(L, 2);
+        ImGui::Checkbox(label, &v);
+        lua_pushboolean(L, v);
+        return 1;
+    } else {
+        luaL_error(L, "invalid args for Checkbox");
+    }
+
     return 0;
 }
 
@@ -247,6 +280,28 @@ int limgui_TreeNode(lua_State* L)
     return 1;
 }
 
+int limgui_TreeNodeEx(lua_State* L)
+{
+    bool ret = false;
+    int n = lua_gettop(L);
+    if (n == 1) {
+        if (lua_isstring(L, 1)) {
+            ret = ImGui::TreeNodeEx(lua_tostring(L, 1));
+            lua_pushboolean(L, ret);
+            return 1;
+        } else {
+            luaL_error(L, "invalid args for TreeNodeEx");
+            return 0;
+        }
+    } else if (n == 2) {
+        ret = ImGui::TreeNodeEx(luaL_checkstring(L, 1), luaL_checkinteger(L, 2));
+        lua_pushboolean(L, ret);
+        return 1;
+    } else {
+        luaL_error(L, "var args for TreeNodeEx not supported yet.");
+    }
+    return 0;
+}
 
 int luaopen_imgui_core(lua_State* L)
 {
@@ -259,10 +314,13 @@ int luaopen_imgui_core(lua_State* L)
         REGISTER_LIB_FUNC(BeginMainMenuBar),
         REGISTER_LIB_FUNC(Button),
         REGISTER_LIB_FUNC(Columns),
+        REGISTER_LIB_FUNC(Checkbox),
         REGISTER_LIB_FUNC(End),
         REGISTER_LIB_FUNC(EndMenu),
         REGISTER_LIB_FUNC(EndMainMenuBar),
         REGISTER_LIB_FUNC(InputText),
+        REGISTER_LIB_FUNC(IsItemActive),
+        REGISTER_LIB_FUNC(IsItemClicked),
         REGISTER_LIB_FUNC(KeyCtrl),
         REGISTER_LIB_FUNC(KeySuper),
         REGISTER_LIB_FUNC(KeysDown),
@@ -273,7 +331,9 @@ int luaopen_imgui_core(lua_State* L)
         REGISTER_LIB_FUNC(SetWindowSize),
         REGISTER_LIB_FUNC(Text),
         REGISTER_LIB_FUNC(TreeNode),
+        REGISTER_LIB_FUNC(TreeNodeEx),
         REGISTER_LIB_FUNC(TreePop),
+        REGISTER_LIB_FUNC(CollapsingHeader),
 
         { NULL, NULL },
     };

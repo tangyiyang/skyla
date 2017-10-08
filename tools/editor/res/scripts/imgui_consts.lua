@@ -15,3 +15,17 @@ imgui.ImGuiWindowFlags_NoBringToFrontOnFocus  = 1 << 13  -- Disable bringing win
 imgui.ImGuiWindowFlags_AlwaysVerticalScrollbar = 1 << 14  -- Always show vertical scrollbar (even if ContentSize.y < Size.y)
 imgui.ImGuiWindowFlags_AlwaysHorizontalScrollbar = 1<< 15  -- Always show horizontal scrollbar (even if ContentSize.x < Size.x)
 imgui.ImGuiWindowFlags_AlwaysUseWindowPadding = 1 << 16  -- Ensure child windows without border uses style.WindowPadding (ignored by default for non-bordered child windows because more convenient)
+
+imgui.ImGuiTreeNodeFlags_Selected             = 1 << 0   -- Draw as selected
+imgui.ImGuiTreeNodeFlags_Framed               = 1 << 1   -- Full colored frame (e.g. for CollapsingHeader)
+imgui.ImGuiTreeNodeFlags_AllowOverlapMode     = 1 << 2   -- Hit testing to allow subsequent widgets to overlap this one
+imgui.ImGuiTreeNodeFlags_NoTreePushOnOpen     = 1 << 3   -- Don't do a TreePush() when open (e.g. for CollapsingHeader) = no extra indent nor pushing on ID stack
+imgui.ImGuiTreeNodeFlags_NoAutoOpenOnLog      = 1 << 4   -- Don't automatically and temporarily open node when Logging is active (by default logging will automatically open tree nodes)
+imgui.ImGuiTreeNodeFlags_DefaultOpen          = 1 << 5   -- Default node to be open
+imgui.ImGuiTreeNodeFlags_OpenOnDoubleClick    = 1 << 6   -- Need double-click to open node
+imgui.ImGuiTreeNodeFlags_OpenOnArrow          = 1 << 7   -- Only open when clicking on the arrow part. If ImGuiTreeNodeFlags_OpenOnDoubleClick is also set, single-click arrow or double-click all box to open.
+imgui.ImGuiTreeNodeFlags_Leaf                 = 1 << 8   -- No collapsing, no arrow (use as a convenience for leaf nodes).
+imgui.ImGuiTreeNodeFlags_Bullet               = 1 << 9   -- Display a bullet instead of arrow
+--imgui.ImGuITreeNodeFlags_SpanAllAvailWidth  = 1 << 10  -- FIXME: TODO: Extend hit box horizontally even if not framed
+--imgui.ImGuiTreeNodeFlags_NoScrollOnOpen     = 1 << 11  -- FIXME: TODO: Disable automatic scroll on TreePop() if node got just open and contents is not visible
+imgui.ImGuiTreeNodeFlags_CollapsingHeader     = imgui.ImGuiTreeNodeFlags_Framed | imgui.ImGuiTreeNodeFlags_NoAutoOpenOnLog

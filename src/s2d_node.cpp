@@ -75,11 +75,11 @@ void node::hit_test(touch_handler* handler, touch_event* event)
     rect bounds = bounds_in(_parent);
     bool contains = rect::contains(bounds, local.x, local.y);
 
-    LOGD("id(%d), world = %.2f, %.2f, local = %.2f, %.2f, bounds = %.2f, %.2f, %.2f, %.2f, contains = %s",
-         _id, event->_pos.x, event->_pos.y, local.x, local.y,
-         bounds.origin.x, bounds.origin.y,
-         bounds.size.width, bounds.size.height,
-         contains ? "true" : "false");
+//    LOGD("id(%d), world = %.2f, %.2f, local = %.2f, %.2f, bounds = %.2f, %.2f, %.2f, %.2f, contains = %s",
+//         _id, event->_pos.x, event->_pos.y, local.x, local.y,
+//         bounds.origin.x, bounds.origin.y,
+//         bounds.size.width, bounds.size.height,
+//         contains ? "true" : "false");
 
     if (contains && (event->_phase == touch_event::TOUCH_BEGIN)) {
         handler->add_touch_node(this);
@@ -106,7 +106,7 @@ rect node::bounds_in(node* space)
 
 void node::on_touch(touch_event* event)
 {
-    LOGD("on_touch id(%d), event = %d, p = %.2f, %,2f", this->_id, event->_phase, event->_pos.x, event->_pos.y);
+//    LOGD("on_touch id(%d), event = %d, p = %.2f, %,2f", this->_id, event->_phase, event->_pos.x, event->_pos.y);
 }
 
 void node::update_srt()
