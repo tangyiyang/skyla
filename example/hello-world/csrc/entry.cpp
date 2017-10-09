@@ -19,7 +19,6 @@ void entry::on_init(context* ctx)
     first->init();
     first->set_pos(0, 0);
     first->set_anchor(0, 0);
-    first->set_scale(0.5);
 
     sprite* s = new sprite();
     s->init("res/seal2d-transparent.png");

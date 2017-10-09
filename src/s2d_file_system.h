@@ -55,8 +55,8 @@ public:
 public:
     void init();
     bool exist(const char* path);
-    file_entry* read(const char* path);
-    
+    file_entry* read(const char* path, bool cache);
+    void shutdown();
 private:
     uint32_t _file_counter;
     bool _prefer_external;

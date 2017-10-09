@@ -43,7 +43,7 @@ public:
 
 class sprite_frame_cache {
 public:
-    void load(const char* atlas, const char* texture_file);
+    void load(const char* json_atlas, const char* texture_file);
     sprite_frame* get(const char* name);
 
     void shutdown();

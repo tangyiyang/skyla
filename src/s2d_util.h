@@ -42,7 +42,7 @@ class file_entry;
 class util {
 public:
     static void log(int level, const char* format, ...);
-    static file_entry* load_file(const char* path);
+    static file_entry* load_file(const char* path, bool cache);
 };
 
 NS_S2D_END

@@ -27,9 +27,9 @@
 
 NS_S2D
 
-void sprite_frame_cache::load(const char* atlas, const char* texture_file)
+void sprite_frame_cache::load(const char* json_atlas, const char* texture_file)
 {
-    file_entry* file = util::load_file(atlas);
+    file_entry* file = util::load_file(json_atlas, false);
     cJSON* root = cJSON_Parse((const char*)file->_buffer);
     cJSON* frames = cJSON_GetObjectItemCaseSensitive(root, "frames");
     if (frames) {

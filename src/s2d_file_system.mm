@@ -110,11 +110,11 @@ bool file_system::exist(const char* path)
     return sys_exist(path);
 }
 
-file_entry* file_system::read(const char* path)
+file_entry* file_system::read(const char* path, bool cache)
 {
-    file_entry* e = _file_cache[path];
-    if (e) {
-        return e;
+    std::map<std::string, file_entry*>::iterator found = _file_cache.find(path);
+    if (found != _file_cache.end()) {
+        return found->second;
     }
     std::vector<std::string>::iterator it = _search_path.begin();
     for (; it != _search_path.end(); ++it) {
@@ -126,8 +126,11 @@ file_entry* file_system::read(const char* path)
             f->_buffer = buffer;
             f->_path = full_path;
             f->_size = size;
-            
-            _file_cache[path] = f;
+            if (cache) {
+                f->retain();
+                _file_cache[path] = f;
+            }
+
             return f;
         }
     }
@@ -135,6 +138,15 @@ file_entry* file_system::read(const char* path)
     LOGE("file could not be found at path: %s", path);
     S2D_ASSERT(path);
     return nullptr;
+}
+
+void file_system::shutdown()
+{
+    std::map<std::string, file_entry*>::iterator it = _file_cache.begin();
+    for (; it != _file_cache.end(); ++it) {
+        it->second->release();
+    }
+    _file_cache.clear();
 }
 
 NS_S2D_END

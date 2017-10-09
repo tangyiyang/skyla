@@ -134,9 +134,11 @@ void context::resume()
 void context::shutdown()
 {
     LOGD("context will shutdown, good bye :).");
+    _root->remove_all_children();
+
     _sprite_frame_cache->shutdown();
     _sprite_renderer->shutdown();
-    _root->remove_all_children();
+    _file_system->shutdown();
 
     delete _touch_handler;
     delete _sprite_renderer;

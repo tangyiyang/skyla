@@ -35,9 +35,9 @@ void util::log(int level, const char* format, ...)
     }
 }
 
-file_entry* util::load_file(const char* path)
+file_entry* util::load_file(const char* path, bool cache)
 {
-    return context::C()->_file_system->read(path);
+    return context::C()->_file_system->read(path, cache);
 }
 
 

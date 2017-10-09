@@ -29,12 +29,14 @@
 
 NS_S2D
 
+typedef uint64_t texture_id_t;
+
 class texture : public ref_counter {
 public:
     texture();
     ~texture();
     
-    void init(const char* file);
+    bool init(const char* file);
     inline void bind()
     {
         glActiveTexture(GL_TEXTURE0);
@@ -47,9 +49,23 @@ public:
     }
 
 public:
+    texture_id_t    _id;
     file_entry* _file_entry;
     size        _size;
     GLint       _gl_handle;
+
+    static texture_id_t _texture_id_counter;
+};
+
+class texture_cache {
+public:
+    texture_cache();
+
+    texture* load(const char* texture_file_name);
+    void unload(const char* texture_file_name);
+
+private:
+    std::map<std::string, texture*> _cache;
 };
 
 NS_S2D_END

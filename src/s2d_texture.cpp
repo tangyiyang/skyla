@@ -28,6 +28,34 @@
 
 NS_S2D
 
+texture_id_t texture::_texture_id_counter = 0;
+texture_cache::texture_cache()
+{
+    texture::_texture_id_counter = 0;
+}
+
+texture* texture_cache::load(const char* texture_file_name)
+{
+    texture* tex = _cache.at(texture_file_name);
+    if (tex) {
+        return tex;
+    } else {
+        tex = new texture();
+        if (tex->init(texture_file_name)) {
+            _cache[texture_file_name] = tex;
+        } else {
+            delete tex;
+        }
+    }
+    return nullptr;
+}
+
+void texture_cache::unload(const char* texture_file_name)
+{
+
+}
+
+
 texture::texture()
 {
     _file_entry = nullptr;
@@ -40,16 +68,15 @@ texture::~texture()
     SAFE_RELEASE(_file_entry);
 }
 
-void texture::init(const char* file)
+bool texture::init(const char* file)
 {
     if (!file) {
         LOGE("init texture failed, file name is nil");
-        return;
+        return false;
     }
     
-    file_entry* f = util::load_file(file);
+    file_entry* f = util::load_file(file, false);
     f->retain();
-
 
     int x = 0;
     int y = 0;
@@ -62,23 +89,26 @@ void texture::init(const char* file)
     if (!data) {
         LOGE("unable to parse the texture file: %s", file);
         f->release();
-        return;
+        return false;
     }
 
-
-    GLuint tex_id;
-    glGenTextures(1, &tex_id);
+    GLuint gl_handle;
+    glGenTextures(1, &gl_handle);
     
-    glBindTexture(GL_TEXTURE_2D, tex_id);
+    glBindTexture(GL_TEXTURE_2D, gl_handle);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glBindTexture(GL_TEXTURE_2D, 0);
-    _gl_handle = tex_id;
+
+    _id = _texture_id_counter++;
+    _gl_handle = gl_handle;
     _size.width = x;
     _size.height = y;
+
+    return true;
 }
 
 NS_S2D_END
