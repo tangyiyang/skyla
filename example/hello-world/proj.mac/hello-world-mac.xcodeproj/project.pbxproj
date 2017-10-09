@@ -403,6 +403,7 @@
 		4337BC911F852453004CF11B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
 				HEADER_SEARCH_PATHS = (
@@ -420,6 +421,7 @@
 		4337BC921F852453004CF11B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
 				HEADER_SEARCH_PATHS = (

@@ -29,6 +29,8 @@
 
 NS_S2D
 
+#define TEX_COORD_MAX ((1<<16)-1)
+
 typedef uint64_t texture_id_t;
 
 class texture : public ref_counter {
@@ -53,7 +55,7 @@ public:
     file_entry* _file_entry;
     size        _size;
     GLint       _gl_handle;
-
+ 
     static texture_id_t _texture_id_counter;
 };
 

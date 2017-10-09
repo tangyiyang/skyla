@@ -103,6 +103,7 @@ void sprite_renderer::draw(const affine_transform& world_transform,
                            pos_tex_color_vertex* quad,
                            texture* tex)
 {
+    S2D_ASSERT(tex != nullptr);
     if (_texture == nullptr) {
         _texture = tex;
     } else {
@@ -171,12 +172,12 @@ void sprite_renderer::flush()
 void sprite_renderer::update_indexes()
 {
     for (int i = 0, j = 0; i < _num_vertices; i += 4, j+=6) {
-        _index_buffer[j+0] = j+0;
-        _index_buffer[j+1] = j+1;
-        _index_buffer[j+2] = j+2;
-        _index_buffer[j+3] = j+2;
-        _index_buffer[j+4] = j+3;
-        _index_buffer[j+5] = j+1;
+        _index_buffer[j+0] = i+0;
+        _index_buffer[j+1] = i+1;
+        _index_buffer[j+2] = i+2;
+        _index_buffer[j+3] = i+3;
+        _index_buffer[j+4] = i+2;
+        _index_buffer[j+5] = i+1;
     }
     _num_indexes = _num_vertices/4*6;
 }

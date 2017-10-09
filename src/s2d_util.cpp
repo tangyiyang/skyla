@@ -40,5 +40,9 @@ file_entry* util::load_file(const char* path, bool cache)
     return context::C()->_file_system->read(path, cache);
 }
 
+texture* util::load_texture(const char* path)
+{
+    return context::C()->_texture_cache->load(path);
+}
 
 NS_S2D_END

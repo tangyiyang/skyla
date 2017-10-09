@@ -29,6 +29,8 @@ NS_S2D
 
 void sprite_frame_cache::load(const char* json_atlas, const char* texture_file)
 {
+    texture* tex = util::load_texture(texture_file);
+
     file_entry* file = util::load_file(json_atlas, false);
     cJSON* root = cJSON_Parse((const char*)file->_buffer);
     cJSON* frames = cJSON_GetObjectItemCaseSensitive(root, "frames");
@@ -58,9 +60,10 @@ void sprite_frame_cache::load(const char* json_atlas, const char* texture_file)
             f->_rotated = (cJSON_GetObjectItemCaseSensitive(child, "rotated")->type == cJSON_True);
             f->_trimmed = (cJSON_GetObjectItemCaseSensitive(child, "trimmed")->type == cJSON_True);
 
-            child = child->next;
-
+            f->_texture = tex;
             _cache[name] = f;
+
+            child = child->next;
         }
     }
 
@@ -96,18 +99,81 @@ void sprite::init(const char* tex_file)
 
 void sprite::init(sprite_frame* frame)
 {
+    S2D_ASSERT(frame);
     node::init();
+
+    _texture = frame->_texture;
+    setTextureCoord(frame, _texture);
+    _size = frame->_source_size;
 }
 
 void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
 {
     if (frame) {
+        float tex_w = tex->_size.width;
+        float tex_h = tex->_size.height;
+        float x = frame->_frame.origin.x;
+        float y = frame->_frame.origin.y;
+        float ow = frame->_frame.size.width;
+        float oh = frame->_frame.size.height;
 
+        float w = ow;
+        float h = oh;
+        if (frame->_rotated) {
+            std::swap(w, h);
+        }
+
+        uint16_t left = (uint16_t)(x/tex_w * (float)TEX_COORD_MAX);
+        uint16_t right = (uint16_t)((x+w)/tex_w * (float)TEX_COORD_MAX);
+        uint16_t bottom = (uint16_t)(y/tex_h * (float)TEX_COORD_MAX);
+        uint16_t top = (uint16_t)((y+h)/tex_h * (float)TEX_COORD_MAX);
+
+        // Notice:
+        //  quad[0] -> bottom-left
+        //  quad[1] -> bottom-right
+        //  quad[2] -> top-left
+        //  quad[3] -> top-right
+        //  opengl texture is upside-down, so when we swap the bottom and the top.
+        if (frame->_rotated) {
+            _quad[0].uv.u = left;
+            _quad[0].uv.v = bottom;
+            _quad[1].uv.u = left;
+            _quad[1].uv.v = top;
+            _quad[2].uv.u = right;
+            _quad[2].uv.v = bottom;
+            _quad[3].uv.u = right;
+            _quad[3].uv.v = top;
+        } else {
+            _quad[0].uv.u = left;
+            _quad[0].uv.v = top;
+            _quad[1].uv.u = right;
+            _quad[1].uv.v = top;
+            _quad[2].uv.u = left;
+            _quad[2].uv.v = bottom;
+            _quad[3].uv.u = right;
+            _quad[3].uv.v = bottom;
+        }
+
+        _quad[0].pos.x = 0;
+        _quad[0].pos.y = 0;
+        _quad[0].color = 0xffffffff;
+
+        _quad[1].pos.x = ow;
+        _quad[1].pos.y = 0;
+        _quad[1].color = 0xffffffff;
+
+        _quad[2].pos.x = 0;
+        _quad[2].pos.y = oh;
+        _quad[2].color = 0xffffffff;
+
+        _quad[3].pos.x = ow;
+        _quad[3].pos.y = oh;
+        _quad[3].color = 0xffffffff;
     } else {
         _quad[0].pos.x = 0;
         _quad[0].pos.y = 0;
         _quad[0].uv.u = 0;
-        _quad[0].uv.v = MAX_TEX_COORD;
+        _quad[0].uv.v = TEX_COORD_MAX;
         _quad[0].color = 0xffffffff;
 
         _quad[1].pos.x = 0;
@@ -119,7 +185,7 @@ void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
         _quad[2].pos.x = tex->_size.width;
         _quad[2].pos.y = 0;
         _quad[2].uv.u = (1 <<16)-1;
-        _quad[2].uv.v = MAX_TEX_COORD;
+        _quad[2].uv.v = TEX_COORD_MAX;
         _quad[2].color = 0xffffffff;
 
         _quad[3].pos.x = tex->_size.width;

@@ -20,11 +20,20 @@ void entry::on_init(context* ctx)
     first->set_pos(0, 0);
     first->set_anchor(0, 0);
 
-    sprite* s = new sprite();
-    s->init("res/seal2d-transparent.png");
-    s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
-    s->set_anchor(0.5, 0.5);
-    first->add_child(s);
+    const char* tests[] = {"attack_0.png", "attack_1.png",
+                        "attack_2.png", "attack_3.png",
+                        "attack_4.png"
+    };
+
+    for (int i = 0; i < sizeof(tests)/sizeof(const char*); ++i) {
+        sprite_frame* f = ctx->_sprite_frame_cache->get(tests[i]);
+        sprite* s = new sprite();
+        s->init(f);
+        s->set_pos( 0 + i*120, visible_rect.size.height/2);
+        s->set_anchor(0, 0.5);
+        first->add_child(s);
+    }
+
 
     root->add_child(first);
 }

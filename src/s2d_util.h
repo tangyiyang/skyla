@@ -24,6 +24,7 @@
 #define s2d_util_h
 
 #include "s2d_common.h"
+#include "s2d_texture.h"
 
 NS_S2D
 
@@ -43,6 +44,7 @@ class util {
 public:
     static void log(int level, const char* format, ...);
     static file_entry* load_file(const char* path, bool cache);
+    static texture* load_texture(const char* path);
 };
 
 NS_S2D_END
