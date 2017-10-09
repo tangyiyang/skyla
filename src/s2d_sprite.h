@@ -65,6 +65,9 @@ protected:
     void draw();
     void update_srt();
 
+private:
+    void setTextureCoord(sprite_frame* frame, texture* tex);
+
 protected:
     pos_tex_color_vertex _quad[4];
     texture*             _texture;

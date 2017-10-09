@@ -88,39 +88,46 @@ void sprite::init(const char* tex_file)
     
     node::init();
 
-    _texture = new texture();
-    _texture->init(tex_file);
+    _texture = context::C()->_texture_cache->load(tex_file);
+    S2D_ASSERT(_texture);
+    setTextureCoord(nullptr, _texture);
     _size = _texture->_size;
-
-    _quad[0].pos.x = 0;
-    _quad[0].pos.y = 0;
-    _quad[0].uv.u = 0;
-    _quad[0].uv.v = MAX_TEX_COORD;
-    _quad[0].color = 0xffffffff;
-
-    _quad[1].pos.x = 0;
-    _quad[1].pos.y = _size.height;
-    _quad[1].uv.u = 0;
-    _quad[1].uv.v = 0;
-    _quad[1].color = 0xffffffff;
-
-    _quad[2].pos.x = _size.width;
-    _quad[2].pos.y = 0;
-    _quad[2].uv.u = (1 <<16)-1;
-    _quad[2].uv.v = MAX_TEX_COORD;
-    _quad[2].color = 0xffffffff;
-
-    _quad[3].pos.x = _size.width;
-    _quad[3].pos.y = _size.height;
-
-    _quad[3].uv.u = (1<<16)-1;
-    _quad[3].uv.v = 0;
-    _quad[3].color = 0xffffffff;
 }
 
 void sprite::init(sprite_frame* frame)
 {
     node::init();
+}
+
+void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
+{
+    if (frame) {
+
+    } else {
+        _quad[0].pos.x = 0;
+        _quad[0].pos.y = 0;
+        _quad[0].uv.u = 0;
+        _quad[0].uv.v = MAX_TEX_COORD;
+        _quad[0].color = 0xffffffff;
+
+        _quad[1].pos.x = 0;
+        _quad[1].pos.y = tex->_size.height;
+        _quad[1].uv.u = 0;
+        _quad[1].uv.v = 0;
+        _quad[1].color = 0xffffffff;
+
+        _quad[2].pos.x = tex->_size.width;
+        _quad[2].pos.y = 0;
+        _quad[2].uv.u = (1 <<16)-1;
+        _quad[2].uv.v = MAX_TEX_COORD;
+        _quad[2].color = 0xffffffff;
+
+        _quad[3].pos.x = tex->_size.width;
+        _quad[3].pos.y = tex->_size.height;
+        _quad[3].uv.u = (1<<16)-1;
+        _quad[3].uv.v = 0;
+        _quad[3].color = 0xffffffff;
+    }
 }
 
 void sprite::update(float dt)

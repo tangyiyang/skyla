@@ -36,17 +36,21 @@ texture_cache::texture_cache()
 
 texture* texture_cache::load(const char* texture_file_name)
 {
-    texture* tex = _cache.at(texture_file_name);
-    if (tex) {
-        return tex;
+    std::map<std::string, texture*>::iterator found = _cache.find(texture_file_name);
+    if (found != _cache.end()) {
+        return found->second;
     } else {
-        tex = new texture();
+        texture* tex = new texture();
         if (tex->init(texture_file_name)) {
             _cache[texture_file_name] = tex;
+            return tex;
         } else {
             delete tex;
         }
     }
+
+    // TODO: we may have a default texture embeded in engine,
+    //       this would make the user easier to debug.
     return nullptr;
 }
 

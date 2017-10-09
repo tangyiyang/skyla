@@ -82,6 +82,7 @@ void context::update_resolution_settings(float window_width, float window_height
 
 void context::init_fundamental_components(const size& logic_size)
 {
+    _texture_cache = new texture_cache();
     _sprite_frame_cache = new sprite_frame_cache();
     _sprite_renderer = new sprite_renderer();
     _file_system = new file_system();
