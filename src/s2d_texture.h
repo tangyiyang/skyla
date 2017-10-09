@@ -72,4 +72,4 @@ private:
 
 NS_S2D_END
 
-#endif /* s2d_texture_h */
+#endif

@@ -36,4 +36,4 @@
 #include "s2d_math.h"
 #include "s2d_gl_util.h"
 
-#endif /* s2d_common_h */
+#endif

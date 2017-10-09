@@ -56,6 +56,7 @@ static const char* fs_sprite = ""
 " }\n";
 
 NS_S2D
+
 program* program::load_default_program(EMBEDED_PROGRAMS type)
 {
     static const char* shaders[EMBEDED_PROGRAM_MAX*2] =

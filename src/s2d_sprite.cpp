@@ -110,6 +110,7 @@ void sprite::init(sprite_frame* frame)
 void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
 {
     if (frame) {
+        // load part of the texture by the rect provided by frame.
         float tex_w = tex->_size.width;
         float tex_h = tex->_size.height;
         float x = frame->_frame.origin.x;
@@ -170,6 +171,7 @@ void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
         _quad[3].pos.y = oh;
         _quad[3].color = 0xffffffff;
     } else {
+        // load the whole texture
         _quad[0].pos.x = 0;
         _quad[0].pos.y = 0;
         _quad[0].uv.u = 0;
@@ -210,6 +212,8 @@ void sprite::draw()
 
 rect sprite::bounds_in(node* space)
 {
+    // TODO: we test the bounds through the _quad may got problem.
+    //       Is that using the `_size` be a better idea?
     float minX = FLT_MAX, maxX = -FLT_MAX, minY = FLT_MAX, maxY = -FLT_MAX;
     if (space == this) {
         for (int i = 0; i < 4; ++i) {

@@ -92,7 +92,6 @@ protected:
     void update_srt();
 
 protected:
-    // members for the scene-graph.
     uint64_t             _id;
     uint32_t             _z_order;
     uint32_t             _z_counter;

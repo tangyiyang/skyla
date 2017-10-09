@@ -47,4 +47,4 @@ protected:
 
 NS_S2D_END
 
-#endif /* s2d_ref_counter_h */
+#endif

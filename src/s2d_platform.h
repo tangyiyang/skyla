@@ -61,4 +61,4 @@
 
 #endif
 
-#endif /* s2d_platform_h */
+#endif

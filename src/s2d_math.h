@@ -189,4 +189,4 @@ struct matrix3
 };
 NS_S2D_END
 
-#endif /* s2d_math_h */
+#endif

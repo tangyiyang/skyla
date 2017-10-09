@@ -89,4 +89,4 @@ private:
 
 NS_S2D_END
 
-#endif /* s2d_program_h */
+#endif

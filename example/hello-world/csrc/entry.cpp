@@ -34,7 +34,6 @@ void entry::on_init(context* ctx)
         first->add_child(s);
     }
 
-
     root->add_child(first);
 }
 

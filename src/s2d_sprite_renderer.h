@@ -82,4 +82,4 @@ private:
 
 NS_S2D_END
 
-#endif /* s2d_sprite_renderer_h */
+#endif

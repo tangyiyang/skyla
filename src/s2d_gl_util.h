@@ -53,4 +53,4 @@ private:
 };
 
 NS_S2D_END
-#endif /* s2d_gl_util_h */
+#endif

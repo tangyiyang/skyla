@@ -41,4 +41,4 @@ public:
 
 NS_S2D_END
 
-#endif /* s2d_camera_h */
+#endif

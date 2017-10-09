@@ -50,4 +50,4 @@ public:
 NS_S2D_END
 
 
-#endif /* s2d_util_h */
+#endif

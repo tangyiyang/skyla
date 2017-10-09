@@ -36,4 +36,4 @@ public:
 
 NS_S2D_END
 
-#endif /* s2d_render_texture_h */
+#endif

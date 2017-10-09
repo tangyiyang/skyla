@@ -61,25 +61,13 @@ void node::update(float dt)
 
 void node::hit_test(touch_handler* handler, touch_event* event)
 {
-    if (_id == 3) {
-        // id == 3, sprite
-        // bug: sprite not reponsed correctly.
-        int i = 0;
-    }
     node* parent = _parent ? _parent : this;
     affine_transform world_to_local_transform = affine_transform::invert(parent->transform_to(this->get_root()));
 
     vec2 local = affine_transform::apply_transform(world_to_local_transform, event->_pos.x, event->_pos.y);
 
-    // TODO: we should have a virtual rect bounds() function????
-    rect bounds = bounds_in(_parent);
+    rect bounds = this->bounds_in(_parent);
     bool contains = rect::contains(bounds, local.x, local.y);
-
-//    LOGD("id(%d), world = %.2f, %.2f, local = %.2f, %.2f, bounds = %.2f, %.2f, %.2f, %.2f, contains = %s",
-//         _id, event->_pos.x, event->_pos.y, local.x, local.y,
-//         bounds.origin.x, bounds.origin.y,
-//         bounds.size.width, bounds.size.height,
-//         contains ? "true" : "false");
 
     if (contains && (event->_phase == touch_event::TOUCH_BEGIN)) {
         handler->add_touch_node(this);
@@ -106,7 +94,7 @@ rect node::bounds_in(node* space)
 
 void node::on_touch(touch_event* event)
 {
-//    LOGD("on_touch id(%d), event = %d, p = %.2f, %,2f", this->_id, event->_phase, event->_pos.x, event->_pos.y);
+    // TODO: add script
 }
 
 void node::update_srt()
