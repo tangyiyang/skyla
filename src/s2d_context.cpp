@@ -91,6 +91,11 @@ void context::init_fundamental_components(const size& logic_size)
     _camera = new camera();
     _root = new node();
 
+#ifdef S2D_ENABLE_LUA
+    _lua_context = new lua_context();
+    _lua_context->init();
+#endif
+
     _sprite_renderer->init();
     _file_system->init();
     _camera->init_orthographic(logic_size.width, logic_size.height);
@@ -151,6 +156,10 @@ void context::shutdown()
     delete _file_system;
     delete _root;
     delete _camera;
+
+#ifdef S2D_ENABLE_LUA
+    delete _lua_context;
+#endif
 
     if (_app) {
         _app->on_destroy();

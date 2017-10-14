@@ -20,41 +20,50 @@
  * THE SOFTWARE.
  * ****************************************************************************/
 
-#ifndef s2d_util_h
-#define s2d_util_h
+#ifndef s2d_lua_conext_h
+#define s2d_lua_conext_h
 
 #include "s2d_common.h"
-#include "s2d_texture.h"
+
+#ifdef S2D_ENABLE_LUA
+
+typedef int LUA_FUNC_HANDLER;
+
+#ifdef __cplusplus
+extern "C" {
+    #include "lualib.h"
+    #include "lauxlib.h"
+}
+#endif
+
+#define CONTEXT_INIT "CONTEXT_INIT"
+#define CONTEXT_UPDATE "CONTEXT_UPDATE"
+#define CONTEXT_DESTROY "CONTEXT_DESTROY"
 
 NS_S2D
 
-#define S2D_ASSERT(cond) do { \
-                            if (!(cond)) { \
-                                LOGD(STRINGIFY(cond)); \
-                            } \
-                            assert(cond); \
-                            } while(0);
-
-#define LOGD(format, ...) s2d::util::log(S2D_LOG_DEBUG, format "\n", ##__VA_ARGS__);
-#define LOGE(format, ...) s2d::util::log(S2D_LOG_ERROR, format "\n", ##__VA_ARGS__);
-
-#define LOGD_NO_RETURN(format, ...) s2d::util::log(S2D_LOG_DEBUG, format, ##__VA_ARGS__);
-
-#define UTF8_ACCEPT 0
-#define UTF8_REJECT 1
-
-class file_entry;
-class util {
+class context;
+class lua_context {
 public:
-    static uint32_t utf8_len(const char* utf8str);
-    static uint32_t utf8_decode(uint32_t* _state, uint32_t* _codep, uint8_t _ch);
+    static void stackDump (lua_State* L);
+    static int call_lua(lua_State* L, int n, int r);
+
+public:
+    void init();
+    void on_start(context* ctx, const char* script_path);
+    void on_update(uint32_t dt);
+    void on_destroy();
+
+private:
+    void register_lua_extensions();
     
-    static void log(int level, const char* format, ...);
-    static file_entry* load_file(const char* path, bool cache);
-    static texture* load_texture(const char* path);
+public:
+    lua_State* _lua_state;
+    LUA_FUNC_HANDLER _event_handler;
 };
 
 NS_S2D_END
 
+#endif /* end of S2D_ENABLE_LUA */
 
 #endif

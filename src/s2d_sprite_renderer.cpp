@@ -173,7 +173,7 @@ void sprite_renderer::flush()
 
 void sprite_renderer::update_indexes()
 {
-    for (int i = 0, j = 0; i < _num_vertices; i += 4, j+=6) {
+    for (int i = 0, j = 0; i < _num_vertices; i += 4, j += 6) {
         _index_buffer[j+0] = i+0;
         _index_buffer[j+1] = i+1;
         _index_buffer[j+2] = i+2;

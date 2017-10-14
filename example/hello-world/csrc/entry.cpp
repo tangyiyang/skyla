@@ -2,6 +2,9 @@
 
 void entry::on_init(context* ctx)
 {
+#ifdef S2D_ENABLE_LUA
+    ctx->_lua_context->on_start(ctx, "res/scripts/main.lua");
+#else
     rect visible_rect = ctx->get_visible_rect();
 
     vec2 center = { (visible_rect.size.width - visible_rect.origin.x)/2,
@@ -39,6 +42,7 @@ void entry::on_init(context* ctx)
     first->add_child(f);
 
     root->add_child(first);
+#endif
 }
 
 void entry::on_pause()

@@ -38,6 +38,7 @@ public:
     virtual void hit_test(touch_handler* handler, touch_event* event);
     virtual void on_touch(touch_event* event);
     virtual rect bounds_in(node* space);
+
 public:
     void add_child(node* child, uint32_t z_order = 0);
     void remove_child(node* child);

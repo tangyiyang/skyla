@@ -30,6 +30,10 @@
 #include "s2d_sprite.h"
 #include "s2d_bmfont.h"
 
+#ifdef S2D_ENABLE_LUA
+#include "s2d_lua_context.h"
+#endif
+
 NS_S2D
 
 class context;
@@ -91,6 +95,9 @@ public:
     sprite_renderer*    _sprite_renderer;
     node*               _root;
     camera*             _camera;
+#ifdef S2D_ENABLE_LUA
+    lua_context*        _lua_context;
+#endif
 
     affine_transform _world_view_affine_transform;
 
