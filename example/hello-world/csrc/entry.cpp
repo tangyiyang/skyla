@@ -2,7 +2,6 @@
 
 void entry::on_init(context* ctx)
 {
-
     rect visible_rect = ctx->get_visible_rect();
 
     vec2 center = { (visible_rect.size.width - visible_rect.origin.x)/2,
@@ -22,8 +21,7 @@ void entry::on_init(context* ctx)
 
     const char* tests[] = {"attack_0.png", "attack_1.png",
                         "attack_2.png", "attack_3.png",
-                        "attack_4.png"
-    };
+                        "attack_4.png"};
 
     for (int i = 0; i < sizeof(tests)/sizeof(const char*); ++i) {
         sprite_frame* f = ctx->_sprite_frame_cache->get(tests[i]);
@@ -33,6 +31,12 @@ void entry::on_init(context* ctx)
         s->set_anchor(0, 0.5);
         first->add_child(s);
     }
+
+    bmfont* f = new bmfont();
+    f->init("AAAAA", "res/fonts/animated_32_ffffff.fnt");
+    f->set_pos(0, 0);
+    f->set_anchor(0.5, 0);
+    first->add_child(f);
 
     root->add_child(first);
 }

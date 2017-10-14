@@ -25,6 +25,59 @@
 
 NS_S2D
 
+static const uint8_t s_utf8d[364] =
+{
+    // The first part of the table maps bytes to character classes that
+    // to reduce the size of the transition table and create bitmasks.
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,  9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+    7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+    8,8,2,2,2,2,2,2,2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+    10,3,3,3,3,3,3,3,3,3,3,3,3,4,3,3, 11,6,6,6,5,8,8,8,8,8,8,8,8,8,8,8,
+
+    // The second part is a transition table that maps a combination
+    // of a state of the automaton and a character class to a state.
+    0,12,24,36,60,96,84,12,12,12,48,72, 12,12,12,12,12,12,12,12,12,12,12,12,
+    12, 0,12,12,12,12,12, 0,12, 0,12,12, 12,24,12,12,12,12,12,24,12,24,12,12,
+    12,12,12,12,12,12,12,24,12,12,12,12, 12,24,12,12,12,12,12,12,12,24,12,12,
+    12,12,12,12,12,12,12,36,12,36,12,12, 12,36,12,12,12,12,12,36,12,36,12,12,
+    12,36,12,12,12,12,12,12,12,12,12,12
+};
+
+uint32_t util::utf8_len(const char* utf8str)
+{
+    uint32_t state = 0;
+    uint32_t codepoint = 0;
+
+    const char* p = utf8str;
+    size_t i = 0;
+    size_t len = strlen(p);
+
+    uint32_t utf8len = 0;
+    for (; i < len; ++i) {
+        if (util::utf8_decode(&state, (uint32_t*)&codepoint, p[i]) == UTF8_ACCEPT) {
+            utf8len++;
+        }
+    }
+    return utf8len;
+}
+
+uint32_t util::utf8_decode(uint32_t* _state, uint32_t* _codep, uint8_t _ch)
+{
+    uint32_t byte = _ch;
+    uint32_t type = s_utf8d[byte];
+
+    *_codep = (*_state != UTF8_ACCEPT) ?
+    (byte & 0x3fu) | (*_codep << 6) :
+    (0xff >> type) & (byte);
+
+    *_state = s_utf8d[256 + *_state + type];
+    return *_state;
+}
+
 void util::log(int level, const char* format, ...)
 {
     if (level >= S2D_LOG_LEVEL) {

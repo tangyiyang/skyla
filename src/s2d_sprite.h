@@ -58,6 +58,7 @@ class sprite: public node {
 public:
     void init(const char* tex_file);
     void init(sprite_frame* frame);
+    void init(const rect& r, texture* tex);
     void update(float dt)       override;
     rect bounds_in(node* space) override;
 
@@ -66,6 +67,7 @@ protected:
     void update_srt();
 
 private:
+    void setTextureCoord(const rect& r, texture* tex);
     void setTextureCoord(sprite_frame* frame, texture* tex);
 
 protected:

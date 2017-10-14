@@ -30,6 +30,8 @@
 NS_S2D
 
 #define TEX_COORD_MAX ((1<<16)-1)
+#define UINT16_TEX_COORD(len, dim) ((uint16_t)((float)len/(float)dim)*(float)TEX_COORD_MAX)
+
 
 typedef uint64_t texture_id_t;
 
@@ -52,10 +54,10 @@ public:
 
 public:
     texture_id_t    _id;
-    file_entry* _file_entry;
     size        _size;
     GLint       _gl_handle;
- 
+    file_entry* _file_entry;
+
     static texture_id_t _texture_id_counter;
 };
 

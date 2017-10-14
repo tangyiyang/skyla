@@ -24,10 +24,11 @@
 #define s2d_context_h
 
 #include "s2d_common.h"
-#include "s2d_sprite.h"
-#include "s2d_camera.h"
 #include "s2d_file_system.h"
 #include "s2d_sprite_renderer.h"
+#include "s2d_camera.h"
+#include "s2d_sprite.h"
+#include "s2d_bmfont.h"
 
 NS_S2D
 
@@ -85,6 +86,7 @@ public:
     touch_handler*      _touch_handler;
     file_system*        _file_system;
     sprite_frame_cache* _sprite_frame_cache;
+    bmfont_info_cache*  _bmfont_info_cache;
     texture_cache*      _texture_cache;
     sprite_renderer*    _sprite_renderer;
     node*               _root;

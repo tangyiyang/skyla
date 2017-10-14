@@ -59,8 +59,10 @@ public:
     void init();
     void shutdown();
     void draw(const affine_transform& world_transform,
-              pos_tex_color_vertex* quad,
-              texture* tex);
+                   texture* tex,
+                   pos_tex_color_vertex* vertices,
+                   int n);
+
     void flush();
 
 private:

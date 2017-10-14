@@ -56,9 +56,16 @@ texture* texture_cache::load(const char* texture_file_name)
 
 void texture_cache::unload(const char* texture_file_name)
 {
-
+    std::map<std::string, texture*>::iterator found = _cache.find(texture_file_name);
+    if (found != _cache.end()) {
+        texture* tex = found->second;
+        tex->release();
+        _cache.erase(found);
+    } else {
+        LOGE("texture: %s could not be found, may be double free?");
+        S2D_ASSERT(false);
+    }
 }
-
 
 texture::texture()
 {
@@ -80,7 +87,6 @@ bool texture::init(const char* file)
     }
     
     file_entry* f = util::load_file(file, false);
-    f->retain();
 
     int x = 0;
     int y = 0;
@@ -111,6 +117,9 @@ bool texture::init(const char* file)
     _gl_handle = gl_handle;
     _size.width = x;
     _size.height = y;
+
+    free(data);
+    f->release();
 
     return true;
 }

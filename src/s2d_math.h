@@ -59,6 +59,16 @@ struct rect {
     vec2 origin;
     size size;
 
+    static inline rect make_rect(float x, float y, float w, float h)
+    {
+        rect r;
+        r.origin.x = x;
+        r.origin.y = y;
+        r.size.width = w;
+        r.size.height = h;
+        return r;
+    }
+
     static inline bool contains(const rect& r, float x, float y)
     {
         return (x >= r.origin.x && x <= r.origin.x + r.size.width) &&

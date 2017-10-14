@@ -107,6 +107,55 @@ void sprite::init(sprite_frame* frame)
     _size = frame->_source_size;
 }
 
+void sprite::init(const rect& r, texture* tex)
+{
+    S2D_ASSERT(tex);
+    node::init();
+    _texture = tex;
+    this->setTextureCoord(r, tex);
+    // TODO: cacl the size
+    _size = r.size;
+}
+
+void sprite::setTextureCoord(const rect& r, texture* tex)
+{
+    float tex_w = tex->_size.width;
+    float tex_h = tex->_size.height;
+    float w = r.size.width;
+    float h = r.size.height;
+    float x = r.origin.x;
+    float y = r.origin.y;
+
+    uint16_t left = (uint16_t)(x/tex_w * (float)TEX_COORD_MAX);
+    uint16_t right = (uint16_t)((x+w)/tex_w * (float)TEX_COORD_MAX);
+    uint16_t bottom = (uint16_t)(y/tex_h * (float)TEX_COORD_MAX);
+    uint16_t top = (uint16_t)((y+h)/tex_h * (float)TEX_COORD_MAX);
+
+    _quad[0].pos.x = 0;
+    _quad[0].pos.y = 0;
+    _quad[0].uv.u = left;
+    _quad[0].uv.v = top;
+    _quad[0].color = 0xffffffff;
+
+    _quad[1].pos.x = w;
+    _quad[1].pos.y = 0;
+    _quad[1].uv.u = right;
+    _quad[1].uv.v = top;
+    _quad[1].color = 0xffffffff;
+
+    _quad[2].pos.x = 0;
+    _quad[2].pos.y = h;
+    _quad[2].uv.u = left;
+    _quad[2].uv.v = bottom;
+    _quad[2].color = 0xffffffff;
+
+    _quad[3].pos.x = w;
+    _quad[3].pos.y = h;
+    _quad[3].uv.u = right;
+    _quad[3].uv.v = bottom;
+    _quad[3].color = 0xffffffff;
+}
+
 void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
 {
     if (frame) {
@@ -129,22 +178,14 @@ void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
         uint16_t bottom = (uint16_t)(y/tex_h * (float)TEX_COORD_MAX);
         uint16_t top = (uint16_t)((y+h)/tex_h * (float)TEX_COORD_MAX);
 
-        // Notice:
-        //  quad[0] -> bottom-left
-        //  quad[1] -> bottom-right
-        //  quad[2] -> top-left
-        //  quad[3] -> top-right
-        //  opengl texture is upside-down, so when we swap the bottom and the top.
-        if (frame->_rotated) {
-            _quad[0].uv.u = left;
-            _quad[0].uv.v = bottom;
-            _quad[1].uv.u = left;
-            _quad[1].uv.v = top;
-            _quad[2].uv.u = right;
-            _quad[2].uv.v = bottom;
-            _quad[3].uv.u = right;
-            _quad[3].uv.v = top;
-        } else {
+        /* Notice:
+         *  quad[0] -> bottom-left
+         *  quad[1] -> bottom-right
+         *  quad[2] -> top-left
+         *  quad[3] -> top-right
+         * opengl texture is upside-down, so when we swap the bottom and the top.
+         */
+        if (!frame->_rotated) {
             _quad[0].uv.u = left;
             _quad[0].uv.v = top;
             _quad[1].uv.u = right;
@@ -153,6 +194,15 @@ void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
             _quad[2].uv.v = bottom;
             _quad[3].uv.u = right;
             _quad[3].uv.v = bottom;
+        } else {
+            _quad[0].uv.u = left;
+            _quad[0].uv.v = bottom;
+            _quad[1].uv.u = left;
+            _quad[1].uv.v = top;
+            _quad[2].uv.u = right;
+            _quad[2].uv.v = bottom;
+            _quad[3].uv.u = right;
+            _quad[3].uv.v = top;
         }
 
         _quad[0].pos.x = 0;
@@ -207,7 +257,7 @@ void sprite::update(float dt)
 void sprite::draw()
 {
     affine_transform world = transform_to(this->get_root());
-    context::C()->_sprite_renderer->draw(world, _quad, _texture);
+    context::C()->_sprite_renderer->draw(world, _texture, _quad, 4);
 }
 
 rect sprite::bounds_in(node* space)

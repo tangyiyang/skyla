@@ -34,6 +34,9 @@
 		43BFCDAF1F877DD2007DFD82 /* s2d_touch_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */; };
 		43D3266C1F8626B40070B743 /* s2d_render_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */; };
 		43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 43D3266B1F8626B40070B743 /* s2d_render_texture.h */; };
+		B67565161F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
+		B67565171F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
+		B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */ = {isa = PBXBuildFile; fileRef = B67565151F8F374F0077C2D7 /* s2d_bmfont.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +88,8 @@
 		43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_touch_handler.cpp; sourceTree = "<group>"; };
 		43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_render_texture.cpp; sourceTree = "<group>"; };
 		43D3266B1F8626B40070B743 /* s2d_render_texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_render_texture.h; sourceTree = "<group>"; };
+		B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_bmfont.cpp; sourceTree = "<group>"; };
+		B67565151F8F374F0077C2D7 /* s2d_bmfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_bmfont.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,12 +174,14 @@
 		43D326661F8626410070B743 /* game_objects */ = {
 			isa = PBXGroup;
 			children = (
-				4337BC591F852196004CF11B /* s2d_sprite.cpp */,
-				4337BC5A1F852196004CF11B /* s2d_sprite.h */,
-				4337BC471F852195004CF11B /* s2d_camera.cpp */,
-				4337BC481F852195004CF11B /* s2d_camera.h */,
 				4337BC531F852196004CF11B /* s2d_node.cpp */,
 				4337BC541F852196004CF11B /* s2d_node.h */,
+				4337BC591F852196004CF11B /* s2d_sprite.cpp */,
+				4337BC5A1F852196004CF11B /* s2d_sprite.h */,
+				B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */,
+				B67565151F8F374F0077C2D7 /* s2d_bmfont.h */,
+				4337BC471F852195004CF11B /* s2d_camera.cpp */,
+				4337BC481F852195004CF11B /* s2d_camera.h */,
 				43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */,
 				43D3266B1F8626B40070B743 /* s2d_render_texture.h */,
 			);
@@ -227,6 +234,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */,
 				43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */,
 				43BFCDAC1F877401007DFD82 /* s2d_touch_handler.h in Headers */,
 			);
@@ -312,6 +320,7 @@
 			files = (
 				4337BC671F8521A3004CF11B /* s2d_gl_util.cpp in Sources */,
 				4337BC661F8521A3004CF11B /* s2d_file_system.mm in Sources */,
+				B67565161F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */,
 				4337BC6A1F8521A3004CF11B /* s2d_sprite.cpp in Sources */,
 				4337BC6D1F8521A3004CF11B /* s2d_util.cpp in Sources */,
 				4337BC691F8521A3004CF11B /* s2d_program.cpp in Sources */,
@@ -342,6 +351,7 @@
 				4337BCE51F852D7B004CF11B /* s2d_context.cpp in Sources */,
 				4337BCE81F852D7B004CF11B /* s2d_node.cpp in Sources */,
 				43D3266C1F8626B40070B743 /* s2d_render_texture.cpp in Sources */,
+				B67565171F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

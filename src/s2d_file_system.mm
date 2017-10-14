@@ -105,6 +105,14 @@ void file_system::init()
     }
 }
 
+void file_system::add_search_path(const char* relative_path)
+{
+    if (std::find(_search_path.begin(), _search_path.end(), relative_path) != _search_path.end()) {
+        return;
+    }
+    _search_path.push_back(relative_path);
+}
+
 bool file_system::exist(const char* path)
 {
     return sys_exist(path);
@@ -116,6 +124,7 @@ file_entry* file_system::read(const char* path, bool cache)
     if (found != _file_cache.end()) {
         return found->second;
     }
+    
     std::vector<std::string>::iterator it = _search_path.begin();
     for (; it != _search_path.end(); ++it) {
         std::string full_path = *it + path;
@@ -130,7 +139,6 @@ file_entry* file_system::read(const char* path, bool cache)
                 f->retain();
                 _file_cache[path] = f;
             }
-
             return f;
         }
     }

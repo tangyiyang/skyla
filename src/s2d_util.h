@@ -38,10 +38,15 @@ NS_S2D
 #define LOGD(format, ...) s2d::util::log(S2D_LOG_DEBUG, format "\n", ##__VA_ARGS__);
 #define LOGE(format, ...) s2d::util::log(S2D_LOG_ERROR, format "\n", ##__VA_ARGS__);
 
+#define UTF8_ACCEPT 0
+#define UTF8_REJECT 1
 
 class file_entry;
 class util {
 public:
+    static uint32_t utf8_len(const char* utf8str);
+    static uint32_t utf8_decode(uint32_t* _state, uint32_t* _codep, uint8_t _ch);
+    
     static void log(int level, const char* format, ...);
     static file_entry* load_file(const char* path, bool cache);
     static texture* load_texture(const char* path);

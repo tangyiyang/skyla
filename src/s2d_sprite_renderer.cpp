@@ -100,9 +100,11 @@ void sprite_renderer::shutdown()
 }
 
 void sprite_renderer::draw(const affine_transform& world_transform,
+                           texture* tex,
                            pos_tex_color_vertex* quad,
-                           texture* tex)
+                           int n)
 {
+    S2D_ASSERT(n % 4 == 0);
     S2D_ASSERT(tex != nullptr);
     if (_texture == nullptr) {
         _texture = tex;
@@ -113,7 +115,7 @@ void sprite_renderer::draw(const affine_transform& world_transform,
         }
     }
 
-    if (_num_vertices + 4 > _max_vertices) {
+    if (_num_vertices + n > _max_vertices) {
         this->flush();
     }
     
@@ -124,13 +126,13 @@ void sprite_renderer::draw(const affine_transform& world_transform,
     affine_transform t = affine_transform::concat(world_transform, mv);
 
     pos_tex_color_vertex* p = _vertex_buffer + _num_vertices;
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < n; ++i) {
         (p+i)->pos = affine_transform::apply_transform(t, quad[i].pos.x, quad[i].pos.y);
         (p+i)->color = quad[i].color;
         (p+i)->uv = quad[i].uv;
     }
     
-    _num_vertices += 4;
+    _num_vertices += n;
 }
 
 void sprite_renderer::flush()

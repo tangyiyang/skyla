@@ -87,6 +87,7 @@ void context::init_fundamental_components(const size& logic_size)
     _sprite_renderer = new sprite_renderer();
     _file_system = new file_system();
     _touch_handler = new touch_handler();
+    _bmfont_info_cache = new bmfont_info_cache();
     _camera = new camera();
     _root = new node();
 
@@ -138,10 +139,14 @@ void context::shutdown()
     _root->remove_all_children();
 
     _sprite_frame_cache->shutdown();
+    _bmfont_info_cache->shutdown();
     _sprite_renderer->shutdown();
     _file_system->shutdown();
 
     delete _touch_handler;
+    delete _sprite_frame_cache;
+    delete _bmfont_info_cache;
+    delete _texture_cache;
     delete _sprite_renderer;
     delete _file_system;
     delete _root;

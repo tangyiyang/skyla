@@ -50,8 +50,12 @@ public:
 class file_system {
 public:
     file_system();
-    inline const std::string& get_writable_path() { return _writable_path; }
-    
+    inline const std::string& get_writable_path()
+    {
+        return _writable_path;
+    }
+
+    void add_search_path(const char* relative_path);
 public:
     void init();
     bool exist(const char* path);
