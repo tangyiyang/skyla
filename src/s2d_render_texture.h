@@ -27,11 +27,10 @@
 
 NS_S2D
 
-class render_texture : public node
+class render_texture
 {
 public:
-    void init();
-    void update(float dt);
+    
 };
 
 NS_S2D_END

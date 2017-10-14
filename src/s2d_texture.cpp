@@ -69,14 +69,12 @@ void texture_cache::unload(const char* texture_file_name)
 
 texture::texture()
 {
-    _file_entry = nullptr;
     _size = {0, 0};
     _gl_handle = -1;
 }
 
 texture::~texture()
 {
-    SAFE_RELEASE(_file_entry);
 }
 
 bool texture::init(const char* file)

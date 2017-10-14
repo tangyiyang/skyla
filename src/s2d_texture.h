@@ -56,8 +56,7 @@ public:
     texture_id_t    _id;
     size        _size;
     GLint       _gl_handle;
-    file_entry* _file_entry;
-
+    
     static texture_id_t _texture_id_counter;
 };
 
