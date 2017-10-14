@@ -62,6 +62,9 @@ public:
     void update(float dt)       override;
     rect bounds_in(node* space) override;
 
+public:
+    void set_color(uint32_t color);
+
 protected:
     void draw();
     void update_srt();
