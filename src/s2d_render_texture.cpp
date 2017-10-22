@@ -75,8 +75,8 @@ void render_texture::draw(node* tree)
 
     glClearColor(1, 1, 1, 0);
     glClear(GL_COLOR_BUFFER_BIT);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//    glEnable(GL_BLEND);
+//    glBlendFunc(GL_ONE, GL_ONE);
 
     // TODO: we should have an visit function to display different types.
     tree->update(0);

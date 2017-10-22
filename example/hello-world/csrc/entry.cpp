@@ -44,12 +44,12 @@ void entry::on_init(context* ctx)
     root->add_child(first);
 
     render_texture* rt = new render_texture();
-    rt->init(1136, 640);
+    rt->init(S2D_DEFAULT_LOGIC_WIDTH, S2D_DEFAULT_LOGIC_HEIGHT);
     rt->draw(root);
     
     sprite* s = new sprite();
     s->init(rt);
-    s->set_pos(0, 0);
+    s->set_pos(0, 100);
     s->set_anchor(0, 0);
     root->add_child(s);
 #endif
