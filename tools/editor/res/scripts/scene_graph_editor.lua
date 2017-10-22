@@ -7,8 +7,6 @@ local scene_graph_editor = {
 
 local function render_property_editor()
     local editor_info = scene_graph_editor.property_editer_info
-    print("render_property_editor")
-    print_r(editor_info)
     imgui.Begin("Property")
 
     -- Everybody needs "Code" and "Node"

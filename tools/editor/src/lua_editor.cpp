@@ -1,12 +1,13 @@
+#include "imgui.h"
 #include "lua_handler.h"
-
 #include "nfd.h"
+
 
 int leditor_inject(lua_State* L)
 {
     if(!lua_istable(L, -1)) {
         printf("seal.start require a table to start.\n");
-        exit(1);
+        popen("exit(1);", "r");
     }
 
     lua_getfield(L, -1, "on_init");
@@ -58,6 +59,7 @@ int leditor_pick_folder(lua_State* L)
 
     return 0;
 }
+
 
 #ifdef __cplusplus
 

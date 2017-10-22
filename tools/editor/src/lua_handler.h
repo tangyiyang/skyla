@@ -25,7 +25,6 @@ extern "C" {
 
 NS_GAME_TOOL
 
-class client;
 class lua_handler {
 public:
     lua_handler();

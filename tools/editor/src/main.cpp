@@ -70,6 +70,39 @@ static void error_callback(int error, const char* description)
     fprintf(stderr, "Error %d: %s\n", error, description);
 }
 
+// tmp code, remove later on
+
+node* game_scene(s2d::context* ctx)
+{
+    rect visible_rect = ctx->get_visible_rect();
+
+    float yoffset = 150;
+    node* layer = new node();
+    layer->init();
+    layer->set_pos(visible_rect.size.width/2, visible_rect.size.height/2 + yoffset);
+    layer->set_anchor(0.5, 0.5);
+    layer->set_size(visible_rect.size.width, visible_rect.size.height);
+    layer->set_scale(0.5);
+
+    float scale_x = visible_rect.size.width / 16.0f;
+    float scale_y = visible_rect.size.height / 16.0f;
+    sprite* background = new sprite();
+    background->init("res/editor_resoruces/backgroud.png");
+    background->set_scale(scale_x, scale_y);
+    background->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
+    background->set_anchor(0.5, 0.5);
+
+    sprite* s = new sprite();
+    s->init("res/seal2d-transparent.png");
+    s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
+    s->set_anchor(0.5, 0.5);
+
+    layer->add_child(background);
+    layer->add_child(s);
+
+    return layer;
+}
+
 int main(int, char**)
 {
     glfwSetErrorCallback(error_callback);
@@ -82,8 +115,8 @@ int main(int, char**)
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-    int width = 1136;
-    int height = 640;
+    int width = 1280;
+    int height = 720;
     GLFWwindow* window = glfwCreateWindow(width, height, "ImGui OpenGL3 example", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
@@ -115,12 +148,31 @@ int main(int, char**)
 
     bool show_test_window = true;
 
-
+    int rt_w = width/2;
+    int rt_h = height/2;
+    node* rendered_scene = game_scene(ctx);
+    render_texture* rt = new render_texture();
+    rt->init(rt_w, rt_h);
+    rt->draw(rendered_scene);
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         ImGui_ImplGlfwGL3_NewFrame();
 
         _l->update(0);
+
+        ImGui::SetNextWindowSize(ImVec2(rt_w + 10, rt_h + 10),
+                                 ImGuiSetCond_FirstUseEver);
+
+        ImGui::Begin("game-scene");
+        {
+            ImVec2 pos = ImGui::GetCursorScreenPos();
+            ImGui::GetWindowDrawList()->AddImage((void*)rt->_name,
+                                                 ImVec2(ImGui::GetItemRectMin().x + pos.x,
+                                                        ImGui::GetItemRectMin().y + pos.y),
+                                                 ImVec2(pos.x + rt_w / 2, pos.y + rt_h / 2));
+        }
+        ImGui::End();
+
         if (show_test_window) {
             ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
             ImGui::ShowTestWindow(&show_test_window);
