@@ -9,8 +9,6 @@ void entry::on_init(context* ctx)
     
     rect visible_rect = ctx->get_visible_rect();
 
-    vec2 center = { (visible_rect.size.width - visible_rect.origin.x)/2,
-                    (visible_rect.size.height - visible_rect.origin.y)/2 };
     LOGD("entry:: on_init");
 
     ctx->_sprite_frame_cache->load("res/animations/pirate.json", "res/animations/pirate.png");
@@ -40,20 +38,19 @@ void entry::on_init(context* ctx)
     bmfont* f = new bmfont();
     f->init("AAAAA", "res/fonts/animated_32_ffffff.fnt");
     f->set_pos(0, 0);
-    f->set_anchor(0.5, 0);
+    f->set_anchor(0, 0);
     first->add_child(f);
 
     root->add_child(first);
 
     render_texture* rt = new render_texture();
-    rt->init(1280, 720);
+    rt->init(1136, 640);
     rt->draw(root);
     
     sprite* s = new sprite();
     s->init(rt);
     s->set_pos(0, 0);
     s->set_anchor(0, 0);
-//    s->set_scale(1, -1);
     root->add_child(s);
 #endif
 }

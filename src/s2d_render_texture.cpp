@@ -69,12 +69,14 @@ bool render_texture::init(float width, float height)
 void render_texture::draw(node* tree)
 {
     context* C = context::C();
-    const rect& r = C->_viewport_rect;
+    
     glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
-    glViewport(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    glViewport(0, 0, _size.width, _size.height);
 
     glClearColor(1, 1, 1, 0);
     glClear(GL_COLOR_BUFFER_BIT);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // TODO: we should have an visit function to display different types.
     tree->update(0);
