@@ -30,5 +30,6 @@
 #include "s2d_bmfont.h"
 #include "s2d_file_system.h"
 #include "s2d_texture.h"
+#include "s2d_render_texture.h"
 
 #endif 

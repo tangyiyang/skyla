@@ -40,7 +40,7 @@
 #endif
 
 #ifndef S2D_ENABLE_LUA
-#define S2D_ENABLE_LUA (1)
+#define S2D_ENABLE_LUA (0)
 
     #ifndef ENABLE_TYPE_CHECK
         #define ENABLE_TYPE_CHECK (1)

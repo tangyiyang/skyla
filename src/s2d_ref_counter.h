@@ -32,7 +32,11 @@ public:
     ref_counter() : _rc(1) {}
     virtual ~ref_counter() {}
     
-    inline void retain() { ++_rc; }
+    inline void retain()
+    {
+        ++_rc;
+    }
+    
     inline void release()
     {
         --_rc;

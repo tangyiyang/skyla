@@ -69,12 +69,17 @@ void texture_cache::unload(const char* texture_file_name)
 
 texture::texture()
 {
+    _id   = -1;
     _size = {0, 0};
-    _gl_handle = -1;
+    _name = 0;
+    _upside_down = true;
 }
 
 texture::~texture()
 {
+    if (_name) {
+        glDeleteTextures(1, &_name);
+    }
 }
 
 bool texture::init(const char* file)
@@ -112,7 +117,7 @@ bool texture::init(const char* file)
     glBindTexture(GL_TEXTURE_2D, 0);
 
     _id = _texture_id_counter++;
-    _gl_handle = gl_handle;
+    _name = gl_handle;
     _size.width = x;
     _size.height = y;
 

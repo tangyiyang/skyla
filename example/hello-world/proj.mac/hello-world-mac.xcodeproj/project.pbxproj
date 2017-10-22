@@ -409,7 +409,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"S2D_ENABLE_LUA=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/hello-world-mac/deps",
@@ -430,7 +429,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
-				GCC_PREPROCESSOR_DEFINITIONS = "S2D_ENABLE_LUA=1";
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/hello-world-mac/deps",
 					"$(SRCROOT)/../../../libs/glfw/include",

@@ -117,6 +117,15 @@ void sprite::init(const rect& r, texture* tex)
     _size = r.size;
 }
 
+void sprite::init(texture* tex)
+{
+    S2D_ASSERT(tex);
+    node::init();
+    _texture = tex;
+    this->setTextureCoord(nullptr, tex);
+    _size = tex->_size;
+}
+
 void sprite::setTextureCoord(const rect& r, texture* tex)
 {
     float tex_w = tex->_size.width;
@@ -177,7 +186,7 @@ void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
         uint16_t right = (uint16_t)((x+w)/tex_w * (float)TEX_COORD_MAX);
         uint16_t bottom = (uint16_t)(y/tex_h * (float)TEX_COORD_MAX);
         uint16_t top = (uint16_t)((y+h)/tex_h * (float)TEX_COORD_MAX);
-
+        
         /* Notice:
          *  quad[0] -> bottom-left
          *  quad[1] -> bottom-right
@@ -221,29 +230,39 @@ void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
         _quad[3].pos.y = oh;
         _quad[3].color = 0xffffffff;
     } else {
+        
         // load the whole texture
+        uint16_t bottom = 0;
+        uint16_t top = TEX_COORD_MAX;
+        
+        if (!tex->_upside_down) {
+            // for most cases opengl texture is upside down.
+            // for rare cases, such as render-texture is not.
+            std::swap(bottom, top);
+        }
+        
         _quad[0].pos.x = 0;
         _quad[0].pos.y = 0;
         _quad[0].uv.u = 0;
-        _quad[0].uv.v = TEX_COORD_MAX;
+        _quad[0].uv.v = top;
         _quad[0].color = 0xffffffff;
 
         _quad[1].pos.x = 0;
         _quad[1].pos.y = tex->_size.height;
         _quad[1].uv.u = 0;
-        _quad[1].uv.v = 0;
+        _quad[1].uv.v = bottom;
         _quad[1].color = 0xffffffff;
 
         _quad[2].pos.x = tex->_size.width;
         _quad[2].pos.y = 0;
         _quad[2].uv.u = (1 <<16)-1;
-        _quad[2].uv.v = TEX_COORD_MAX;
+        _quad[2].uv.v = top;
         _quad[2].color = 0xffffffff;
 
         _quad[3].pos.x = tex->_size.width;
         _quad[3].pos.y = tex->_size.height;
         _quad[3].uv.u = (1<<16)-1;
-        _quad[3].uv.v = 0;
+        _quad[3].uv.v = bottom;
         _quad[3].color = 0xffffffff;
     }
 }

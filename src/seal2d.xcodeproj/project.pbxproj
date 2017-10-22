@@ -320,8 +320,6 @@
 				B67565151F8F374F0077C2D7 /* s2d_bmfont.h */,
 				4337BC471F852195004CF11B /* s2d_camera.cpp */,
 				4337BC481F852195004CF11B /* s2d_camera.h */,
-				43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */,
-				43D3266B1F8626B40070B743 /* s2d_render_texture.h */,
 			);
 			name = game_objects;
 			sourceTree = "<group>";
@@ -333,6 +331,8 @@
 				4337BC571F852196004CF11B /* s2d_program.h */,
 				4337BC5D1F852196004CF11B /* s2d_texture.cpp */,
 				4337BC5E1F852196004CF11B /* s2d_texture.h */,
+				43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */,
+				43D3266B1F8626B40070B743 /* s2d_render_texture.h */,
 				4337BC5B1F852196004CF11B /* s2d_sprite_renderer.cpp */,
 				4337BC5C1F852196004CF11B /* s2d_sprite_renderer.h */,
 			);

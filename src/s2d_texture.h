@@ -38,13 +38,13 @@ typedef uint64_t texture_id_t;
 class texture : public ref_counter {
 public:
     texture();
-    ~texture();
+    virtual ~texture();
     
     bool init(const char* file);
     inline void bind()
     {
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, _gl_handle);
+        glBindTexture(GL_TEXTURE_2D, _name);
     }
 
     inline void unbind()
@@ -54,8 +54,9 @@ public:
 
 public:
     texture_id_t    _id;
-    size        _size;
-    GLint       _gl_handle;
+    size            _size;
+    GLuint          _name;
+    bool            _upside_down; /* if a texture is upside-down, render-texture is false.*/
     
     static texture_id_t _texture_id_counter;
 };

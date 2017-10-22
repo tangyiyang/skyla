@@ -59,6 +59,7 @@ public:
     void init(const char* tex_file);
     void init(sprite_frame* frame);
     void init(const rect& r, texture* tex);
+    void init(texture* tex);
     void update(float dt)       override;
     rect bounds_in(node* space) override;
 

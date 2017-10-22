@@ -2,9 +2,11 @@
 
 void entry::on_init(context* ctx)
 {
-#ifdef S2D_ENABLE_LUA
+#if S2D_ENABLE_LUA == 1
     ctx->_lua_context->on_start(ctx, "res/scripts/main.lua");
 #else
+
+    
     rect visible_rect = ctx->get_visible_rect();
 
     vec2 center = { (visible_rect.size.width - visible_rect.origin.x)/2,
@@ -42,6 +44,17 @@ void entry::on_init(context* ctx)
     first->add_child(f);
 
     root->add_child(first);
+
+    render_texture* rt = new render_texture();
+    rt->init(1280, 720);
+    rt->draw(root);
+    
+    sprite* s = new sprite();
+    s->init(rt);
+    s->set_pos(0, 0);
+    s->set_anchor(0, 0);
+//    s->set_scale(1, -1);
+    root->add_child(s);
 #endif
 }
 

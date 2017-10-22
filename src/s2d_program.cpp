@@ -25,7 +25,6 @@
 static const char* vs_sprite = ""
 #if S2D_IS_DESKTOP
 "#version 100\n"
-#else
 #endif
 ""
 " attribute mediump vec2 pos;                               \n"
@@ -38,22 +37,47 @@ static const char* vs_sprite = ""
 " void main() {                                             \n"
      "vec3 tmp = u_projection * vec3(pos.x, pos.y, 0.0);    \n"
      "gl_Position = vec4(tmp.x, tmp.y, 0.0, 1.0);           \n"
-
-     "v_tex_coord = vec2(tex_coord.x, tex_coord.y);         \n"
+     "v_tex_coord = tex_coord;                              \n"
      "v_color = color;                                      \n"
  "}                                                         \n";
 
 static const char* fs_sprite = ""
 #if S2D_IS_DESKTOP
-"#version 100\n"
-#else
+"#version 100                                               \n"
 #endif
-" varying highp vec2 v_tex_coord; \n"
-" varying lowp vec4 v_color; \n"
-"uniform sampler2D texture0;\n"
+" varying highp vec2 v_tex_coord;                           \n"
+" varying lowp vec4 v_color;                                \n"
+" uniform sampler2D texture0;                               \n"
 " void main() {\n"
 "     gl_FragColor = v_color * texture2D(texture0, v_tex_coord); \n"
-" }\n";
+" }                                                         \n";
+
+
+static const char* vs_render_texture = ""
+#if S2D_IS_DESKTOP
+"#version 100\n"
+#endif
+""
+" attribute mediump vec2 pos;                       \n"
+" attribute highp vec2 tex_coord;                   \n"
+" varying   highp vec2 v_tex_coord;                 \n"
+" void main() {                                     \n"
+"     gl_Position = vec4(pos.x, pos.y, 0.0, 1.0);   \n"
+"     v_tex_coord = tex_coord;                      \n"
+"}                                                  \n";
+
+static const char* fs_render_Texture = ""
+#if S2D_IS_DESKTOP
+"#version 100\n"
+#endif
+""
+" varying highp vec2 v_tex_coord;                 \n"
+" varying lowp vec4 color;                        \n"
+" uniform sampler2D texture0;                    \n"
+" void main() {                                  \n"
+"   color = texture2D(texture0, v_tex_coord);    \n"
+" }"
+"";
 
 NS_S2D
 
@@ -62,7 +86,9 @@ program* program::load_default_program(EMBEDED_PROGRAMS type)
     static const char* shaders[EMBEDED_PROGRAM_MAX*2] =
     {
         vs_sprite,
-        fs_sprite
+        fs_sprite,
+        vs_render_texture,
+        fs_render_Texture,
     };
     int vs_index = type*2;
     int fs_index = type*2 + 1;
