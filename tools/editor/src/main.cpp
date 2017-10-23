@@ -165,11 +165,7 @@ int main(int, char**)
 
         ImGui::Begin("game-scene");
         {
-            ImVec2 pos = ImGui::GetCursorScreenPos();
-            ImGui::GetWindowDrawList()->AddImage((void*)rt->_name,
-                                                 ImVec2(ImGui::GetItemRectMin().x + pos.x,
-                                                        ImGui::GetItemRectMin().y + pos.y),
-                                                 ImVec2(pos.x + rt_w / 2, pos.y + rt_h / 2));
+            ImGui::Image((void*)rt->_name, ImVec2(rt_w, rt_h), ImVec2(0, 1), ImVec2(1, 0));
         }
         ImGui::End();
 
