@@ -148,11 +148,11 @@ int main(int, char**)
 
     bool show_test_window = true;
 
-    int rt_w = width/2;
-    int rt_h = height/2;
+    int window_width = width/2;
+    int window_height = height/2;
     node* rendered_scene = game_scene(ctx);
     render_texture* rt = new render_texture();
-    rt->init(rt_w, rt_h);
+    rt->init(width, height);
     rt->draw(rendered_scene);
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -160,12 +160,12 @@ int main(int, char**)
 
         _l->update(0);
 
-        ImGui::SetNextWindowSize(ImVec2(rt_w + 10, rt_h + 10),
+        ImGui::SetNextWindowSize(ImVec2(window_width + 10, window_height + 10),
                                  ImGuiSetCond_FirstUseEver);
 
         ImGui::Begin("game-scene");
         {
-            ImGui::Image((void*)rt->_name, ImVec2(rt_w, rt_h), ImVec2(0, 1), ImVec2(1, 0));
+            ImGui::Image((void*)rt->_name, ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
         }
         ImGui::End();
 
