@@ -26,6 +26,14 @@
 #include "s2d_common.h"
 #include "s2d_touch_handler.h"
 
+#define DIRTY_TRANSFORM (1<<0)
+#define DIRTY_SCALE     (1<<1)
+#define DIRTY_ROTATION  (1<<2)
+#define DIRTY_Z         (1<<3)
+
+#define DIRTY_SRT (DIRTY_TRANSFORM | DIRTY_SCALE | DIRTY_ROTATION)
+#define DIRTY_ALL (DIRTY_SRT | DIRTY_Z)
+
 NS_S2D
 
 class node {
@@ -85,6 +93,12 @@ public:
     inline uint32_t get_zorder()
     {
         return _z_order;
+    }
+
+    inline void set_zorder(uint32_t z)
+    {
+        _z_order = z;
+        _dirty_flags |= DIRTY_Z;
     }
 
 protected:

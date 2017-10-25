@@ -32,27 +32,31 @@ class file_entry : public ref_counter {
 public:
     file_entry();
     virtual ~file_entry();
+
 public:
-    uint32_t _id;
-    uint8_t* _buffer;
-    size_t _size;
+    uint32_t    _id;
+    uint8_t*    _buffer;
+    size_t      _size;
     std::string _path;
 };
 
 class file_system {
 public:
     file_system();
+
     inline const std::string& get_writable_path()
     {
         return _writable_path;
     }
 
     void add_search_path(const char* relative_path);
+    file_entry* read(const char* path, bool cache);
+
 public:
     void init();
     bool exist(const char* path);
-    file_entry* read(const char* path, bool cache);
     void shutdown();
+
 private:
     uint32_t _file_counter;
     bool _prefer_external;

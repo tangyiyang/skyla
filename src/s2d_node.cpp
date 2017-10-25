@@ -25,14 +25,6 @@
 
 NS_S2D
 
-#define DIRTY_TRANSFORM (1<<0)
-#define DIRTY_SCALE     (1<<1)
-#define DIRTY_ROTATION  (1<<2)
-#define DIRTY_Z         (1<<3)
-
-#define DIRTY_SRT (DIRTY_TRANSFORM | DIRTY_SCALE | DIRTY_ROTATION)
-#define DIRTY_ALL (DIRTY_SRT | DIRTY_Z)
-
 uint64_t node::_node_id_counter = 0;
 void node::init()
 {
