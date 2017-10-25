@@ -55,15 +55,15 @@ uint8_t* sys_read(const char* path, uint8_t* buffer, size_t* size) {
 
     // always allocated 1 extra byte, this would make deal with C string easier.
     if (!buffer) {
-        buffer = (unsigned char*)malloc(file_size+1);
+        buffer = (unsigned char*)malloc(file_size);
     }
-    memset(buffer, 0, file_size+1);
+    memset(buffer, 0, file_size);
     size_t result = fread(buffer, 1, file_size, fp);
 
     if(result != file_size) {
         free(buffer);
         fclose(fp);
-        fprintf(stderr, "s_read, file reading error, size not match?.\n");
+        fprintf(stderr, "s_read, file reading error.\n");
         return NULL;
     }
     
@@ -80,6 +80,19 @@ bool sys_exist(const char* path)
 }
 
 #endif
+
+file_entry::file_entry() {
+    _id = -1;
+    _buffer = nullptr;
+    _size = 0;
+}
+
+file_entry::~file_entry()
+{
+    if (_buffer) {
+        free(_buffer);
+    }
+}
 
 file_system::file_system() :
 _file_counter(0),
@@ -131,7 +144,8 @@ file_entry* file_system::read(const char* path, bool cache)
         if (this->exist(full_path.c_str())) {
             size_t size;
             uint8_t* buffer = sys_read(full_path.c_str(), nullptr, &size);
-            file_entry* f = new file_entry(_file_counter++);
+            file_entry* f = new file_entry();
+            f->_id = _file_counter++;
             f->_buffer = buffer;
             f->_path = full_path;
             f->_size = size;

@@ -155,6 +155,7 @@ bmfont_info* bmfont_info_cache::load_font(const char *atlas_file_path)
         this->insert_search_path(f->_path.c_str());
 
         bmfont_info* font_info = load_font_from_buffer(f->_buffer);
+        f->release();
         _cache[atlas_file_path] = font_info;
         return font_info;
     }

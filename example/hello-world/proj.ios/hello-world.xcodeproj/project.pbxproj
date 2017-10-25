@@ -49,6 +49,13 @@
 			remoteGlobalIDString = B6A7F0721F656F3800E1CE26;
 			remoteInfo = "hello-world";
 		};
+		4DBA57811FA0E829009DDEF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4337BC751F8521EE004CF11B /* seal2d.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4337BC381F852151004CF11B;
+			remoteInfo = seal2d;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -232,6 +239,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4DBA57821FA0E829009DDEF7 /* PBXTargetDependency */,
 			);
 			name = "hello-world";
 			productName = "hello-world";
@@ -353,6 +361,11 @@
 			isa = PBXTargetDependency;
 			target = B6A7F0721F656F3800E1CE26 /* hello-world */;
 			targetProxy = 43CB969D1F76B3BC00E6CF36 /* PBXContainerItemProxy */;
+		};
+		4DBA57821FA0E829009DDEF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = seal2d;
+			targetProxy = 4DBA57811FA0E829009DDEF7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

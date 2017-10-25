@@ -30,21 +30,13 @@ NS_S2D
 
 class file_entry : public ref_counter {
 public:
-    file_entry(uint32_t id = -1) : _id(id) {}
-    
-    void release()
-    {
-        --_rc;
-        if (_rc == 0) {
-            free(_buffer);
-            delete this;
-        }
-    }
+    file_entry();
+    virtual ~file_entry();
 public:
     uint32_t _id;
-    std::string _path;
     uint8_t* _buffer;
     size_t _size;
+    std::string _path;
 };
 
 class file_system {
