@@ -16,10 +16,7 @@ local function render_property_editor()
     end
 
     if imgui.CollapsingHeader("Node") then
-        print("before editor_info.visible = ", editor_info.visible)
-        print("scene_graph_editor.property_editer_info = ", scene_graph_editor.property_editer_info.visible)
         editor_info.visible = imgui.Checkbox("Visible", editor_info.visible)
-        print("after editor_info.visible = ", editor_info.visible)
     end
 
     if editor_info.type == "Sprite" then
@@ -68,7 +65,6 @@ function build_scene_tree(data, tree)
             tree.display_name = node_data.display_name or k
             tree.id = node_data.id
             tree.visible = node_data.visible
-            print("node_data.visible = ", node_data.visible)
 
             local children = node_data.children
             if children and next(children) then
