@@ -1,24 +1,8 @@
-/****************************************************************************
- * Copyright (c) Yiyang Tang
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * ****************************************************************************/
+/*
+ * Auxiliary for seal2d
+ * Author: yiyang
+ * Copyright: see copyright at s2d.h
+ */
 
 #ifndef s2d_util_h
 #define s2d_util_h
@@ -27,6 +11,34 @@
 #include "s2d_texture.h"
 
 NS_S2D
+
+#define S2D_LOG_VERBOSE (0)
+#define S2D_LOG_DEBUG   (1)
+#define S2D_LOG_INFO    (2)
+#define S2D_LOG_WARN    (3)
+#define S2D_LOG_ERROR   (4)
+#define S2D_LOG_FATAL   (5)
+
+static const char* LOG_LEVEL_STR[] = {
+    "V",
+    "D",
+    "I",
+    "W",
+    "E",
+    "F"
+};
+
+#if (defined DEBUG) && (!defined S2D_LOG_LEVEL)
+#define S2D_LOG_LEVEL S2D_LOG_DEBUG
+#endif
+
+#if (!defined RELEASE) && (!defined S2D_LOG_LEVEL)
+#define S2D_LOG_LEVEL S2D_LOG_ERROR
+#endif
+
+#ifndef S2D_LOG_LEVEL
+#define S2D_LOG_LEVEL (S2D_LOG_LEVEL_DEBUG)
+#endif
 
 #define S2D_ASSERT(cond) do { \
                             if (!(cond)) { \
@@ -38,7 +50,7 @@ NS_S2D
 #define LOGD(format, ...) s2d::util::log(S2D_LOG_DEBUG, format "\n", ##__VA_ARGS__);
 #define LOGE(format, ...) s2d::util::log(S2D_LOG_ERROR, format "\n", ##__VA_ARGS__);
 
-#define LOGD_NO_RETURN(format, ...) s2d::util::log(S2D_LOG_DEBUG, format, ##__VA_ARGS__);
+#define LOGD_NO_NEW_LINE(format, ...) s2d::util::log(S2D_LOG_DEBUG, format, ##__VA_ARGS__);
 
 #define UTF8_ACCEPT 0
 #define UTF8_REJECT 1

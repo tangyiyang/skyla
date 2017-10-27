@@ -1,25 +1,3 @@
-/****************************************************************************
- * Copyright (c) Yiyang Tang
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * ****************************************************************************/
-
 #include "s2d_lua_context.h"
 #include "s2d_util.h"
 #include "s2d_sprite.h"
@@ -260,29 +238,49 @@ static int lseal2d_new_sprite(lua_State* L)
     return 1;
 }
 
-#ifdef __cplusplus
+int lseal2d_util_load_file(lua_State* L)
+{
+    const char* file_path = luaL_checkstring(L, 1);
+    bool cached = lua_toboolean(L, 2);
 
-extern "C" {
+    file_entry* f = util::load_file(file_path, cached);
 
-    int luaopen_seal2d(lua_State* L)
-    {
-    #ifdef luaL_checkversion
-        luaL_checkversion(L);
-    #endif
-        luaL_Reg lib[] = {
-            { "inject", lseal2d_inject},
-            { "context", lseal2d_context},
-            { "node", lseal2d_new_node},
-            { "sprite", lseal2d_new_sprite},
-            { "util", lseal2d_util},
-            { NULL, NULL },
-        };
+    lua_pushlstring(L, (const char*)f->_buffer, f->_size);
+    return 1;
+}
 
-        luaL_newlib(L, lib);
-        return 1;
-    }
-
+static int luaopen_seal2d_util(lua_State* L)
+{
+#ifdef luaL_checkversion
+    luaL_checkversion(L);
 #endif
+
+    luaL_Reg lib[] = {
+        { "load_file",  lseal2d_util_load_file },
+        { NULL, NULL },
+    };
+
+    luaL_newlib(L, lib);
+
+    return 1;
+}
+
+static int luaopen_seal2d(lua_State* L)
+{
+#ifdef luaL_checkversion
+    luaL_checkversion(L);
+#endif
+
+    luaL_Reg lib[] = {
+        { "inject",  lseal2d_inject     },
+        { "context", lseal2d_context    },
+        { "node",    lseal2d_new_node   },
+        { "sprite",  lseal2d_new_sprite },
+        { NULL, NULL },
+    };
+
+    luaL_newlib(L, lib);
+    return 1;
 }
 
 void lua_context::stackDump (lua_State* L)
@@ -293,23 +291,23 @@ void lua_context::stackDump (lua_State* L)
         int t = lua_type(L, i);
         switch (t) {
             case LUA_TSTRING:  /* strings */
-                LOGD_NO_RETURN("%s ", lua_tostring(L, i));
+                LOGD_NO_NEW_LINE("%s ", lua_tostring(L, i));
                 break;
 
             case LUA_TBOOLEAN:  /* booleans */
-                LOGD_NO_RETURN("%s ", lua_toboolean(L, i) ? "true" : "false");
+                LOGD_NO_NEW_LINE("%s ", lua_toboolean(L, i) ? "true" : "false");
                 break;
 
             case LUA_TNUMBER:  /* numbers */
-                LOGD_NO_RETURN("%g ", lua_tonumber(L, i));
+                LOGD_NO_NEW_LINE("%g ", lua_tonumber(L, i));
                 break;
 
             default:  /* other values */
-                LOGD_NO_RETURN("%s ", lua_typename(L, t));
+                LOGD_NO_NEW_LINE("%s ", lua_typename(L, t));
                 break;
         }
     }
-    LOGD_NO_RETURN("\n");
+    LOGD_NO_NEW_LINE("\n");
 }
 
 int lua_context::call_lua(lua_State* L, int n, int r)
@@ -345,7 +343,8 @@ int lua_context::call_lua(lua_State* L, int n, int r)
 void lua_context::register_lua_extensions()
 {
     luaL_Reg lua_modules[] = {
-        { "seal2d",        luaopen_seal2d },
+        { "seal2d",        luaopen_seal2d      },
+        { "seal2d.util",   luaopen_seal2d_util },
         { NULL, NULL}
     };
 
@@ -385,16 +384,6 @@ void lua_context::on_start(context* ctx, const char* script_path)
     call_lua(L, 0, LUA_MULTRET);
 
     lua_getfield(L, LUA_REGISTRYINDEX, CONTEXT_START);
-
-
-
-    lua_context::stackDump(L);
-    LOGD("ctx = %p", ctx);
-
-
-
-    lua_context::stackDump(L);
-
     call_lua(_lua_state, 0, 0);
 }
 

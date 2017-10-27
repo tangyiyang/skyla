@@ -1,5 +1,25 @@
+/*
+ * public headers for user
+ * Author: yiyang
+ * Copyright is at end of this file, hope this file would never be more than one page. :)
+ */
+
+#ifndef s2d_h
+#define s2d_h
+
+#include "s2d_context.h"
+#include "s2d_util.h"
+#include "s2d_math.h"
+#include "s2d_sprite.h"
+#include "s2d_bmfont.h"
+#include "s2d_file_system.h"
+#include "s2d_texture.h"
+#include "s2d_render_texture.h"
+
+#endif 
+
 /****************************************************************************
- * Copyright (c) Yiyang Tang
+ * Copyright (C) 2017 Yiyang Tang
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,17 +39,3 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * ****************************************************************************/
-
-#ifndef s2d_h
-#define s2d_h
-
-#include "s2d_context.h"
-#include "s2d_util.h"
-#include "s2d_math.h"
-#include "s2d_sprite.h"
-#include "s2d_bmfont.h"
-#include "s2d_file_system.h"
-#include "s2d_texture.h"
-#include "s2d_render_texture.h"
-
-#endif 

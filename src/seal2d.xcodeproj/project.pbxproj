@@ -272,7 +272,6 @@
 				43D326671F8626580070B743 /* renderer */,
 				43D326661F8626410070B743 /* game_objects */,
 				4337BC461F852195004CF11B /* s2d.h */,
-				4337BC491F852195004CF11B /* s2d_common.h */,
 				4337BC4A1F852195004CF11B /* s2d_config.h */,
 				4337BC4B1F852195004CF11B /* s2d_context.cpp */,
 				4337BC4C1F852195004CF11B /* s2d_context.h */,
@@ -358,6 +357,7 @@
 		43D326691F8626830070B743 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				4337BC491F852195004CF11B /* s2d_common.h */,
 				4337BC511F852195004CF11B /* s2d_macro.h */,
 				4337BC521F852196004CF11B /* s2d_math.h */,
 				4337BC581F852196004CF11B /* s2d_ref_counter.h */,

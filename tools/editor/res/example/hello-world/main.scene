@@ -14,7 +14,7 @@
                 "y": 1.0
             },
             "rotation": 30.0,
-            "translate": {
+            "position": {
                 "x": 0.0,
                 "y": 0.0
             },
@@ -31,7 +31,10 @@
                 {
                     "id": 2,
                     "type": "sprite",
-                    "display_name": "background"
+                    "display_name": "background",
+                    "texture": {
+                        "type": "sprite"
+                    }
                 },
                 {
                     "id": 3,
