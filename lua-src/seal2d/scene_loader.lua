@@ -26,6 +26,10 @@ local function set_node(node, ctx, opt)
         node:set_rotation(opt.rotation)
     end
 
+    if opt.position then
+        node:set_pos(opt.position.x, opt.position.y)
+    end
+
     if opt.zorder then
         node:set_zorder(opt.zorder)
     end
