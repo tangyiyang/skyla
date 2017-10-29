@@ -9,7 +9,11 @@ local cjson = reuqire "cjson"
 
 local scene_loader = {}
 
-local function set_node(node, opt)
+local function res_full_path(ctx, path)
+    return string.format("%s/%s", ctx.work_dir, path)
+end
+
+local function set_node(node, ctx, opt)
     node:set_visible(not not opt.visible)
 
     if opt.scale then
@@ -33,20 +37,31 @@ local function set_node(node, opt)
     end
 end
 
-local function set_sprite(sprite, opt)
+local function set_sprite(sprite, ctx, opt)
+    set_node(sprite, ctx, opt)
 
+    local t = opt.texture
+    if t then
+        if t.type == "full-image" then
+            node:set_texture(res_full_path(ctx, t.file))
+        elseif t.type == "atlas" then
+
+        else
+            assert(false, "unkown sprite texture type, file corrupted?")
+        end
+    end
 end
 
-local function load_node(opt)
+local function load_node(...)
     local node = seal2d.node()
-    set_node(node, opt)
+    set_node(node, ...)
     return node
 end
 
-local function load_sprite(opt)
+local function load_sprite(...)
     local spr = seal2d.sprite()
-    set_node(node, opt)
-    set_sprite(sprite, opt)
+    set_node(node, ...)
+    set_sprite(sprite, ...)
     return sprite
 end
 
@@ -56,18 +71,20 @@ local load_funcs = {
 }
 
 
-local function parse(opt)
+local function parse(ctx, opt)
     local t = opt["type"]
     local f = load_funcs[t]
     if not f then
-        print(string.format("scene_loader: unsupported type: %s", t))
+        print(string.format("scene_loader: unsupported type: %s. "
+                            "we would only load the node part.", t))
+        f = load_node
     end
     local go = f(opt)
 
     local children = opt.children
     if children then
-        for i, opt in ipairs(children) do
-            local c = parse(opt)
+        for i, child_opt in ipairs(children) do
+            local c = parse(ctx, child_opt)
             go.add_child(c)
         end
     end
@@ -79,8 +96,13 @@ function scene_loader.load(file_path, cache)
     local data = util.load_file(file_path, cache)
     local graph = cjson.decode(file_path)
 
+    local ctx = {
+        "version" = data.version,
+        "work_dir" = data.work_dir
+    }
+
     local opt = graph.setup
-    return parse(opt)
+    return parse(ctx, opt)
 end
 
 return scene_loader

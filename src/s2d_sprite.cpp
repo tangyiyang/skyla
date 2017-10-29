@@ -63,16 +63,17 @@ void sprite_frame_cache::shutdown()
     _cache.clear();
 }
 
+void sprite::init()
+{
+    node::init();
+    _texture = nullptr;
+}
+
 void sprite::init(const char* tex_file)
 {
     S2D_ASSERT(tex_file);
-    
     node::init();
-
-    _texture = context::C()->_texture_cache->load(tex_file);
-    S2D_ASSERT(_texture);
-    setTextureCoord(nullptr, _texture);
-    _size = _texture->_size;
+    this->set_texture(tex_file);
 }
 
 void sprite::init(sprite_frame* frame)
@@ -81,7 +82,7 @@ void sprite::init(sprite_frame* frame)
     node::init();
 
     _texture = frame->_texture;
-    setTextureCoord(frame, _texture);
+    this->set_texture_coord(frame, _texture);
     _size = frame->_source_size;
 }
 
@@ -89,8 +90,9 @@ void sprite::init(const rect& r, texture* tex)
 {
     S2D_ASSERT(tex);
     node::init();
+    
     _texture = tex;
-    this->setTextureCoord(r, tex);
+    this->set_texture_coord(r, tex);
     // TODO: cacl the size
     _size = r.size;
 }
@@ -100,11 +102,19 @@ void sprite::init(texture* tex)
     S2D_ASSERT(tex);
     node::init();
     _texture = tex;
-    this->setTextureCoord(nullptr, tex);
+    this->set_texture_coord(nullptr, tex);
     _size = tex->_size;
 }
 
-void sprite::setTextureCoord(const rect& r, texture* tex)
+void sprite::set_texture(const char* tex_file)
+{
+    _texture = context::C()->_texture_cache->load(tex_file);
+    S2D_ASSERT(_texture);
+    this->set_texture_coord(nullptr, _texture);
+    _size = _texture->_size;
+}
+
+void sprite::set_texture_coord(const rect& r, texture* tex)
 {
     float tex_w = tex->_size.width;
     float tex_h = tex->_size.height;
@@ -143,7 +153,7 @@ void sprite::setTextureCoord(const rect& r, texture* tex)
     _quad[3].color = 0xffffffff;
 }
 
-void sprite::setTextureCoord(sprite_frame* frame, texture* tex)
+void sprite::set_texture_coord(sprite_frame* frame, texture* tex)
 {
     if (frame) {
         // load part of the texture by the rect provided by frame.
@@ -253,6 +263,10 @@ void sprite::update(float dt)
 
 void sprite::draw()
 {
+    if (!_texture) {
+        return;
+    }
+    
     affine_transform world = transform_to(this->get_root());
     context::C()->_sprite_renderer->draw(world, _texture, _quad, 4);
 }

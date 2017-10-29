@@ -33,7 +33,8 @@
                     "type": "sprite",
                     "display_name": "background",
                     "texture": {
-                        "type": "sprite"
+                        "type": "full-image",
+                        "file": "images/background.png"
                     }
                 },
                 {

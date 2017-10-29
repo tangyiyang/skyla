@@ -42,23 +42,27 @@ class sprite: public node {
      * The Quad Sprite.
      */
 public:
+    void init() override;
     void init(const char* tex_file);
     void init(sprite_frame* frame);
     void init(const rect& r, texture* tex);
     void init(texture* tex);
-    void update(float dt)       override;
-    rect bounds_in(node* space) override;
 
 public:
+    void set_texture(const char* tex_file);
     void set_color(uint32_t color);
+
+public:
+    void update(float dt)       override;
+    rect bounds_in(node* space) override;
 
 protected:
     void draw();
     void update_srt();
 
 private:
-    void setTextureCoord(const rect& r, texture* tex);
-    void setTextureCoord(sprite_frame* frame, texture* tex);
+    void set_texture_coord(const rect& r, texture* tex);
+    void set_texture_coord(sprite_frame* frame, texture* tex);
 
 protected:
     pos_tex_color_vertex _quad[4];

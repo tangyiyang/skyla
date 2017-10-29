@@ -203,14 +203,24 @@ static int lseal2d_new_node(lua_State* L)
 
 static int lseal2d_new_sprite(lua_State* L)
 {
-    char* file_name = (char*)luaL_checkstring(L, 1);
+    int n = lua_gettop(L);
 
-    sprite* s = new sprite();
-    if (file_name[0] == '#') {
-        sprite_frame* f = context::C()->_sprite_frame_cache->get(file_name+1);
-        s->init(f);
+    sprite* s = nullptr;
+    if (n == 1) {
+        s = new sprite();
+        char* file_name = (char*)luaL_checkstring(L, 1);
+        if (file_name[0] == '#') {
+            sprite_frame* f = context::C()->_sprite_frame_cache->get(file_name+1);
+            s->init(f);
+        } else {
+            s->init(file_name);
+        }
+    } else if (n == 0) {
+        s = new sprite();
+        s->init();
     } else {
-        s->init(file_name);
+        luaL_error(L, "invalid arguments to seal2d.new_sprite");
+        return 0;
     }
 
     lua_pushlightuserdata(L, s);
