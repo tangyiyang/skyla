@@ -1,7 +1,7 @@
 {
     "hash": "244e96571eebc53",
     "version": "0.0.1",
-    "work_dir": "./demo_scene/",
+    "work_dir": "",
     "data": {
         "name": "default-scene-name",
         "setup": {

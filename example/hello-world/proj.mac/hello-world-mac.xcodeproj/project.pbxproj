@@ -210,7 +210,7 @@
 			buildPhases = (
 				4337BC851F852453004CF11B /* Sources */,
 				4337BC861F852453004CF11B /* Frameworks */,
-				4D67825B1FA59B7A007D461F /* ShellScript */,
+				4D67825B1FA59B7A007D461F /* Run Script */,
 				4337BC871F852453004CF11B /* Copy Files */,
 			);
 			buildRules = (
@@ -279,18 +279,19 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4D67825B1FA59B7A007D461F /* ShellScript */ = {
+		4D67825B1FA59B7A007D461F /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir -p ../res/scene\ncp -r ../../../lua-src/ ../res/scripts\ncp -r ../../../tools/editor/res/example/hello-world ../res/scene";
+			shellScript = "cp -r ../raw/editor_project/* ../res/\ncp -r ../../../lua-src/* ../res/scripts";
 		};
 /* End PBXShellScriptBuildPhase section */
 

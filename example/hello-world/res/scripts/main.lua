@@ -1,12 +1,15 @@
 local seal2d = require "seal2d"
+local util = require "seal2d.util"
 
 local function on_start()
 	local scene_loader = require "seal2d.scene_loader"
 
 	local ctx = seal2d.context()
 	local root = ctx:get_root()
+	util.add_search_path("res/")
 
-	local scene = scene_loader.load("res/scene/hello-world/main.scene")
+
+	local scene = scene_loader.load("res/scene/scene_main.json")
 
 	root:add_child(scene)
 	-- local r = ctx:get_visible_rect()

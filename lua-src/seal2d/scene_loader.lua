@@ -9,7 +9,7 @@ local cjson = require "cjson"
 local scene_loader = {}
 
 local function res_full_path(ctx, path)
-    return string.format("%s/%s", ctx.work_dir, path)
+    return string.format("%s", path)
 end
 
 local function set_node(node, ctx, opt)
@@ -65,7 +65,7 @@ local function load_sprite(...)
     local spr = seal2d.sprite()
     set_node(spr, ...)
     set_sprite(spr, ...)
-    return sprite
+    return spr
 end
 
 local load_funcs = {
@@ -81,17 +81,17 @@ local function parse(ctx, opt)
                             .. "we would only load the node part.", t))
         f = load_node
     end
-    local go = f(ctx, opt)
+    local node = f(ctx, opt)
 
     local children = opt.children
     if children then
-        for i, child_opt in ipairs(children) do
+        for _, child_opt in ipairs(children) do
             local c = parse(ctx, child_opt)
-            go.add_child(c)
+            node:add_child(c)
         end
     end
 
-    return go
+    return node
 end
 
 function scene_loader.load(file_path, cache)
@@ -99,11 +99,9 @@ function scene_loader.load(file_path, cache)
     local graph = cjson.decode(data)
 
     local ctx = {
-        ["version"] = data.version,
-        ["work_dir"] = data.work_dir
+        ["version"] = graph.version,
+        ["work_dir"] = graph.work_dir
     }
-
-    print_r(graph)
 
     local opt = graph.data.setup
     return parse(ctx, opt)

@@ -202,6 +202,28 @@ static int lseal2d_sprite_set_color(lua_State* L)
     return 0;
 }
 
+static int lseal2d_sprite_set_texture(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n < 2) {
+        luaL_error(L, "invalid number of arguments passed to sprite_set_texture"
+                      "expected more than 2, but got %d", n);
+        return 0;
+    }
+
+    sprite* s = (sprite*)lua_touserdata(L, 1);
+    if (n == 2) {
+        char* file_name = (char*)luaL_checkstring(L, 2);
+        if (file_name[0] == '#') {
+            sprite_frame* f = context::C()->_sprite_frame_cache->get(file_name+1);
+            s->set_texture(f);
+        } else {
+            s->set_texture(file_name);
+        }
+    }
+
+    return 0;
+}
 
 static luaL_Reg sprite_funcs[] = {
     { "set_color", lseal2d_sprite_set_color     },
@@ -284,6 +306,13 @@ static int lseal2d_new_sprite(lua_State* L)
     return 1;
 }
 
+int lseal2d_add_search_path(lua_State* L)
+{
+    const char* path = luaL_checkstring(L, 1);
+    context::C()->_file_system->add_search_path(path);
+    return 1;
+}
+
 int lseal2d_util_load_file(lua_State* L)
 {
     const char* file_path = luaL_checkstring(L, 1);
@@ -302,6 +331,7 @@ static int luaopen_seal2d_util(lua_State* L)
 #endif
 
     luaL_Reg lib[] = {
+        { "add_search_path", lseal2d_add_search_path },
         { "load_file",  lseal2d_util_load_file },
         { NULL, NULL },
     };

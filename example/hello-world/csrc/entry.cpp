@@ -3,6 +3,7 @@
 void entry::on_init(context* ctx)
 {
 #if S2D_ENABLE_LUA == 1
+
     ctx->_lua_context->on_start(ctx, "res/scripts/main.lua");
 #else
     rect visible_rect = ctx->get_visible_rect();

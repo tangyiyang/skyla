@@ -64,6 +64,8 @@ public:
     static void log(int level, const char* format, ...);
     static file_entry* load_file(const char* path, bool cache);
     static texture* load_texture(const char* path);
+
+    static std::string md5(file_entry* file_entry);
 };
 
 NS_S2D_END

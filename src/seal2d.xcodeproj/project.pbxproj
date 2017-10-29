@@ -40,6 +40,9 @@
 		4D67826C1FA5A8CE007D461F /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782611FA5A8CE007D461F /* lua_cjson.c */; };
 		4D67826D1FA5A8CE007D461F /* strbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782621FA5A8CE007D461F /* strbuf.c */; };
 		4D67826E1FA5A8CE007D461F /* strbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782621FA5A8CE007D461F /* strbuf.c */; };
+		4D6782751FA5C0F7007D461F /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782731FA5C0F7007D461F /* md5.c */; };
+		4D6782761FA5C0F7007D461F /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782731FA5C0F7007D461F /* md5.c */; };
+		4D6782771FA5C0F7007D461F /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D6782741FA5C0F7007D461F /* md5.h */; };
 		B67565161F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
 		B67565171F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
 		B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */ = {isa = PBXBuildFile; fileRef = B67565151F8F374F0077C2D7 /* s2d_bmfont.h */; };
@@ -170,6 +173,8 @@
 		4D6782611FA5A8CE007D461F /* lua_cjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua_cjson.c; sourceTree = "<group>"; };
 		4D6782621FA5A8CE007D461F /* strbuf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strbuf.c; sourceTree = "<group>"; };
 		4D6782631FA5A8CE007D461F /* strbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strbuf.h; sourceTree = "<group>"; };
+		4D6782731FA5C0F7007D461F /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5.c; sourceTree = "<group>"; };
+		4D6782741FA5C0F7007D461F /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
 		B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_bmfont.cpp; sourceTree = "<group>"; };
 		B67565151F8F374F0077C2D7 /* s2d_bmfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_bmfont.h; sourceTree = "<group>"; };
 		B6FF635B1F91FC0700D7058F /* lapi.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lapi.c; sourceTree = "<group>"; };
@@ -293,6 +298,7 @@
 		4337BC6E1F8521B7004CF11B /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				4D6782721FA5C0F7007D461F /* md5 */,
 				4337BC6F1F8521B7004CF11B /* cJSON */,
 				4337BC721F8521B7004CF11B /* stb_image */,
 			);
@@ -388,6 +394,15 @@
 			path = "lua-cjson";
 			sourceTree = "<group>";
 		};
+		4D6782721FA5C0F7007D461F /* md5 */ = {
+			isa = PBXGroup;
+			children = (
+				4D6782731FA5C0F7007D461F /* md5.c */,
+				4D6782741FA5C0F7007D461F /* md5.h */,
+			);
+			path = md5;
+			sourceTree = "<group>";
+		};
 		B6FF63581F91FB2200D7058F /* script */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FF63E01F92022600D7058F /* s2d_panel.h in Headers */,
+				4D6782771FA5C0F7007D461F /* md5.h in Headers */,
 				B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */,
 				43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */,
 				43BFCDAC1F877401007DFD82 /* s2d_touch_handler.h in Headers */,
@@ -585,6 +601,7 @@
 				B6FF63D31F91FC4E00D7058F /* ltm.c in Sources */,
 				4337BC691F8521A3004CF11B /* s2d_program.cpp in Sources */,
 				B6FF63D21F91FC4E00D7058F /* ltablib.c in Sources */,
+				4D6782751FA5C0F7007D461F /* md5.c in Sources */,
 				B6FF63D01F91FC4E00D7058F /* lstrlib.c in Sources */,
 				B6FF63C81F91FC4E00D7058F /* lmathlib.c in Sources */,
 				B6FF63C01F91FC4E00D7058F /* ldebug.c in Sources */,
@@ -662,6 +679,7 @@
 				B6FF63A31F91FC4D00D7058F /* ldo.c in Sources */,
 				B6FF63AC1F91FC4D00D7058F /* loadlib.c in Sources */,
 				B6FF63AB1F91FC4D00D7058F /* lmem.c in Sources */,
+				4D6782761FA5C0F7007D461F /* md5.c in Sources */,
 				B6FF63B51F91FC4D00D7058F /* ltm.c in Sources */,
 				B6FF63AE1F91FC4D00D7058F /* lopcodes.c in Sources */,
 				B6FF63A41F91FC4D00D7058F /* ldump.c in Sources */,

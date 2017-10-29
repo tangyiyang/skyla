@@ -35,6 +35,7 @@ public:
     }
 
     void add_search_path(const char* relative_path);
+    void insert_full_search_path(const char* full_path);
     file_entry* read(const char* path, bool cache);
 
 public:

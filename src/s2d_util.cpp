@@ -1,3 +1,5 @@
+#include "md5.h"
+
 #include "s2d_util.h"
 #include "s2d_context.h"
 
@@ -74,6 +76,18 @@ file_entry* util::load_file(const char* path, bool cache)
 texture* util::load_texture(const char* path)
 {
     return context::C()->_texture_cache->load(path);
+}
+
+std::string util::md5(file_entry* file_entry)
+{
+    MD5_CTX ctx;
+    MD5_Init(&ctx);
+
+    MD5_Update(&ctx, file_entry->_buffer, file_entry->_size);
+
+    unsigned char result[32];
+    MD5_Final(result, &ctx);
+    return std::string((const char*)result, 32);
 }
 
 NS_S2D_END

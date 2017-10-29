@@ -98,10 +98,28 @@ void file_system::init()
 
 void file_system::add_search_path(const char* relative_path)
 {
-    if (std::find(_search_path.begin(), _search_path.end(), relative_path) != _search_path.end()) {
+    if (std::find(_search_path.begin(),
+                  _search_path.end(),
+                  relative_path) != _search_path.end()) {
         return;
     }
-    _search_path.push_back(relative_path);
+    if (_prefer_external) {
+        _search_path.push_back(_writable_path + relative_path);
+        _search_path.push_back(_sandbox_path + relative_path);
+    } else {
+        _search_path.push_back(_sandbox_path + relative_path);
+        _search_path.push_back(_writable_path + relative_path);
+    }
+}
+
+void file_system::insert_full_search_path(const char* full_path)
+{
+    if (std::find(_search_path.begin(),
+                  _search_path.end(),
+                  full_path) != _search_path.end()) {
+        return;
+    }
+    _search_path.push_back(full_path);
 }
 
 bool file_system::exist(const char* path)
@@ -111,6 +129,7 @@ bool file_system::exist(const char* path)
 
 file_entry* file_system::read(const char* path, bool cache)
 {
+    LOGD("try to load file: path = %s, cache = %s", path, cache ? "true" : "false");
     std::map<std::string, file_entry*>::iterator found = _file_cache.find(path);
     if (found != _file_cache.end()) {
         return found->second;
@@ -120,6 +139,7 @@ file_entry* file_system::read(const char* path, bool cache)
     for (; it != _search_path.end(); ++it) {
         std::string full_path = *it + path;
         if (this->exist(full_path.c_str())) {
+            LOGD("did load file: full path = %s", full_path.c_str());
             size_t size;
             uint8_t* buffer = sys_read(full_path.c_str(), nullptr, &size);
             file_entry* f = new file_entry();
@@ -129,7 +149,7 @@ file_entry* file_system::read(const char* path, bool cache)
             f->_size = size;
             if (cache) {
                 f->retain();
-                _file_cache[path] = f;
+                _file_cache[full_path] = f;
             }
             return f;
         }

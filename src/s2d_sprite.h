@@ -50,6 +50,7 @@ public:
 
 public:
     void set_texture(const char* tex_file);
+    void set_texture(sprite_frame* frame);
     void set_color(uint32_t color);
 
 public:

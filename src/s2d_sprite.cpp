@@ -81,9 +81,7 @@ void sprite::init(sprite_frame* frame)
     S2D_ASSERT(frame);
     node::init();
 
-    _texture = frame->_texture;
-    this->set_texture_coord(frame, _texture);
-    _size = frame->_source_size;
+    this->set_texture(frame);
 }
 
 void sprite::init(const rect& r, texture* tex)
@@ -112,6 +110,15 @@ void sprite::set_texture(const char* tex_file)
     S2D_ASSERT(_texture);
     this->set_texture_coord(nullptr, _texture);
     _size = _texture->_size;
+}
+
+void sprite::set_texture(sprite_frame* frame)
+{
+    S2D_ASSERT(frame);
+    
+    _texture = frame->_texture;
+    this->set_texture_coord(frame, _texture);
+    _size = frame->_source_size;
 }
 
 void sprite::set_texture_coord(const rect& r, texture* tex)
