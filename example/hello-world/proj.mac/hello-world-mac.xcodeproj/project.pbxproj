@@ -15,7 +15,7 @@
 		4337BCDD1F852BF8004CF11B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCDC1F852BF8004CF11B /* AppKit.framework */; };
 		4337BCE11F852C8A004CF11B /* libseal2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCAF1F8524BD004CF11B /* libseal2d-mac.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		4337BCF91F853EE2004CF11B /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BCF71F853EDE004CF11B /* entry.cpp */; };
-		4337BCFC1F8544CD004CF11B /* res in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4337BCFB1F8544C0004CF11B /* res */; };
+		4337BCFC1F8544CD004CF11B /* res in Copy Files */ = {isa = PBXBuildFile; fileRef = 4337BCFB1F8544C0004CF11B /* res */; };
 		4337BCFE1F8610F2004CF11B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCFD1F8610F2004CF11B /* GLUT.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,14 +44,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4337BC871F852453004CF11B /* CopyFiles */ = {
+		4337BC871F852453004CF11B /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = .;
 			dstSubfolderSpec = 16;
 			files = (
-				4337BCFC1F8544CD004CF11B /* res in CopyFiles */,
+				4337BCFC1F8544CD004CF11B /* res in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -209,7 +210,8 @@
 			buildPhases = (
 				4337BC851F852453004CF11B /* Sources */,
 				4337BC861F852453004CF11B /* Frameworks */,
-				4337BC871F852453004CF11B /* CopyFiles */,
+				4D67825B1FA59B7A007D461F /* ShellScript */,
+				4337BC871F852453004CF11B /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -275,6 +277,22 @@
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4D67825B1FA59B7A007D461F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mkdir -p ../res/scene\ncp -r ../../../lua-src/ ../res/scripts\ncp -r ../../../tools/editor/res/example/hello-world ../res/scene";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4337BC851F852453004CF11B /* Sources */ = {
@@ -403,12 +421,14 @@
 		4337BC911F852453004CF11B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					S2D_ENABLE_LUA,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/hello-world-mac/deps",
@@ -416,6 +436,7 @@
 					"$(SRCROOT)/../../../src",
 					"$(SRCROOT)/../csrc",
 					"$(SRCROOT)/../../../lua-libs/lua-5.3.4",
+					"$(SRCROOT)/../../../lua-libs/lua-cjson",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
 				OTHER_LDFLAGS = "-lglfw3";
@@ -426,6 +447,7 @@
 		4337BC921F852453004CF11B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GH4YBKBN58;
@@ -436,6 +458,7 @@
 					"$(SRCROOT)/../../../src",
 					"$(SRCROOT)/../csrc",
 					"$(SRCROOT)/../../../lua-libs/lua-5.3.4",
+					"$(SRCROOT)/../../../lua-libs/lua-cjson",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../libs/glfw/lib";
 				OTHER_LDFLAGS = "-lglfw3";

@@ -13,6 +13,12 @@ local function print_r(root)
 		return
 	end
 
+	if type(root) == 'userdata' then
+		print("USERDATA: ", root)
+		print_r(getmetatable(root))
+		return
+	end
+
 	local cache = {  [root] = "." }
 	local function _dump(t,space,name)
 		local temp = {}

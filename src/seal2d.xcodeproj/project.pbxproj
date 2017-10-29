@@ -34,6 +34,12 @@
 		43BFCDAF1F877DD2007DFD82 /* s2d_touch_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */; };
 		43D3266C1F8626B40070B743 /* s2d_render_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */; };
 		43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 43D3266B1F8626B40070B743 /* s2d_render_texture.h */; };
+		4D6782661FA5A8CE007D461F /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D67825E1FA5A8CE007D461F /* fpconv.c */; };
+		4D6782671FA5A8CE007D461F /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D67825E1FA5A8CE007D461F /* fpconv.c */; };
+		4D67826B1FA5A8CE007D461F /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782611FA5A8CE007D461F /* lua_cjson.c */; };
+		4D67826C1FA5A8CE007D461F /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782611FA5A8CE007D461F /* lua_cjson.c */; };
+		4D67826D1FA5A8CE007D461F /* strbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782621FA5A8CE007D461F /* strbuf.c */; };
+		4D67826E1FA5A8CE007D461F /* strbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782621FA5A8CE007D461F /* strbuf.c */; };
 		B67565161F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
 		B67565171F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
 		B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */ = {isa = PBXBuildFile; fileRef = B67565151F8F374F0077C2D7 /* s2d_bmfont.h */; };
@@ -159,6 +165,11 @@
 		43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_touch_handler.cpp; sourceTree = "<group>"; };
 		43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_render_texture.cpp; sourceTree = "<group>"; };
 		43D3266B1F8626B40070B743 /* s2d_render_texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_render_texture.h; sourceTree = "<group>"; };
+		4D67825E1FA5A8CE007D461F /* fpconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fpconv.c; sourceTree = "<group>"; };
+		4D67825F1FA5A8CE007D461F /* fpconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpconv.h; sourceTree = "<group>"; };
+		4D6782611FA5A8CE007D461F /* lua_cjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua_cjson.c; sourceTree = "<group>"; };
+		4D6782621FA5A8CE007D461F /* strbuf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strbuf.c; sourceTree = "<group>"; };
+		4D6782631FA5A8CE007D461F /* strbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strbuf.h; sourceTree = "<group>"; };
 		B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_bmfont.cpp; sourceTree = "<group>"; };
 		B67565151F8F374F0077C2D7 /* s2d_bmfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_bmfont.h; sourceTree = "<group>"; };
 		B6FF635B1F91FC0700D7058F /* lapi.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lapi.c; sourceTree = "<group>"; };
@@ -365,6 +376,18 @@
 			name = base;
 			sourceTree = "<group>";
 		};
+		4D67825C1FA5A8CE007D461F /* lua-cjson */ = {
+			isa = PBXGroup;
+			children = (
+				4D67825E1FA5A8CE007D461F /* fpconv.c */,
+				4D67825F1FA5A8CE007D461F /* fpconv.h */,
+				4D6782611FA5A8CE007D461F /* lua_cjson.c */,
+				4D6782621FA5A8CE007D461F /* strbuf.c */,
+				4D6782631FA5A8CE007D461F /* strbuf.h */,
+			);
+			path = "lua-cjson";
+			sourceTree = "<group>";
+		};
 		B6FF63581F91FB2200D7058F /* script */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +400,7 @@
 		B6FF63591F91FC0700D7058F /* lua-libs */ = {
 			isa = PBXGroup;
 			children = (
+				4D67825C1FA5A8CE007D461F /* lua-cjson */,
 				B6FF635A1F91FC0700D7058F /* lua-5.3.4 */,
 			);
 			name = "lua-libs";
@@ -569,6 +593,8 @@
 				B6FF63CD1F91FC4E00D7058F /* loslib.c in Sources */,
 				B6FF63D11F91FC4E00D7058F /* ltable.c in Sources */,
 				B6FF63CA1F91FC4E00D7058F /* loadlib.c in Sources */,
+				4D6782661FA5A8CE007D461F /* fpconv.c in Sources */,
+				4D67826D1FA5A8CE007D461F /* strbuf.c in Sources */,
 				4337BC6C1F8521A3004CF11B /* s2d_texture.cpp in Sources */,
 				B6FF63BA1F91FC4E00D7058F /* lbaselib.c in Sources */,
 				B6FF63BC1F91FC4E00D7058F /* lcode.c in Sources */,
@@ -584,6 +610,7 @@
 				B6FF63D51F91FC4E00D7058F /* lutf8lib.c in Sources */,
 				B6FF63BF1F91FC4E00D7058F /* ldblib.c in Sources */,
 				4337BC651F8521A3004CF11B /* s2d_context.cpp in Sources */,
+				4D67826B1FA5A8CE007D461F /* lua_cjson.c in Sources */,
 				B6FF63DA1F91FDFF00D7058F /* s2d_lua_context.cpp in Sources */,
 				B6FF63C51F91FC4E00D7058F /* linit.c in Sources */,
 				B6FF63C11F91FC4E00D7058F /* ldo.c in Sources */,
@@ -602,6 +629,7 @@
 				B6FF63DB1F91FE0000D7058F /* s2d_lua_context.cpp in Sources */,
 				B6FF63B31F91FC4D00D7058F /* ltable.c in Sources */,
 				4337BCE71F852D7B004CF11B /* s2d_gl_util.cpp in Sources */,
+				4D67826C1FA5A8CE007D461F /* lua_cjson.c in Sources */,
 				4337BCE61F852D7B004CF11B /* s2d_file_system.mm in Sources */,
 				B6FF63A21F91FC4D00D7058F /* ldebug.c in Sources */,
 				4337BCEA1F852D7B004CF11B /* s2d_sprite.cpp in Sources */,
@@ -614,6 +642,7 @@
 				B6FF63B71F91FC4D00D7058F /* lutf8lib.c in Sources */,
 				4337BCE91F852D7B004CF11B /* s2d_program.cpp in Sources */,
 				4337BCEC1F852D7B004CF11B /* s2d_texture.cpp in Sources */,
+				4D6782671FA5A8CE007D461F /* fpconv.c in Sources */,
 				B6FF63B61F91FC4D00D7058F /* lundump.c in Sources */,
 				4337BCE41F852D6A004CF11B /* s2d_camera.cpp in Sources */,
 				B6FF63DF1F92022600D7058F /* s2d_panel.cpp in Sources */,
@@ -645,6 +674,7 @@
 				B6FF63961F91FC1B00D7058F /* lstate.c in Sources */,
 				B6FF639C1F91FC4D00D7058F /* lbaselib.c in Sources */,
 				B6FF639E1F91FC4D00D7058F /* lcode.c in Sources */,
+				4D67826E1FA5A8CE007D461F /* strbuf.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

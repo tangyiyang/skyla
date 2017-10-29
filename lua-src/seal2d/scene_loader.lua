@@ -1,11 +1,10 @@
 --[[
     This is a quick and dirty json format parser for scene.
-    We shall have a binary implemention if requried.
 ]]
 
-local seal2d = reuqire "seal2d"
+local seal2d = require "seal2d"
 local util = require "seal2d.util"
-local cjson = reuqire "cjson"
+local cjson = require "cjson"
 
 local scene_loader = {}
 
@@ -14,6 +13,9 @@ local function res_full_path(ctx, path)
 end
 
 local function set_node(node, ctx, opt)
+    assert(node)
+    print("node = ", node)
+    print_r(node)
     node:set_visible(not not opt.visible)
 
     if opt.scale then
@@ -38,12 +40,13 @@ local function set_node(node, ctx, opt)
 end
 
 local function set_sprite(sprite, ctx, opt)
+    assert(sprite)
     set_node(sprite, ctx, opt)
 
     local t = opt.texture
     if t then
         if t.type == "full-image" then
-            node:set_texture(res_full_path(ctx, t.file))
+            sprite:set_texture(res_full_path(ctx, t.file))
         elseif t.type == "atlas" then
 
         else
@@ -60,8 +63,8 @@ end
 
 local function load_sprite(...)
     local spr = seal2d.sprite()
-    set_node(node, ...)
-    set_sprite(sprite, ...)
+    set_node(spr, ...)
+    set_sprite(spr, ...)
     return sprite
 end
 
@@ -70,16 +73,15 @@ local load_funcs = {
     ["sprite"] = load_sprite,
 }
 
-
 local function parse(ctx, opt)
     local t = opt["type"]
     local f = load_funcs[t]
     if not f then
         print(string.format("scene_loader: unsupported type: %s. "
-                            "we would only load the node part.", t))
+                            .. "we would only load the node part.", t))
         f = load_node
     end
-    local go = f(opt)
+    local go = f(ctx, opt)
 
     local children = opt.children
     if children then
@@ -94,14 +96,16 @@ end
 
 function scene_loader.load(file_path, cache)
     local data = util.load_file(file_path, cache)
-    local graph = cjson.decode(file_path)
+    local graph = cjson.decode(data)
 
     local ctx = {
-        "version" = data.version,
-        "work_dir" = data.work_dir
+        ["version"] = data.version,
+        ["work_dir"] = data.work_dir
     }
 
-    local opt = graph.setup
+    print_r(graph)
+
+    local opt = graph.data.setup
     return parse(ctx, opt)
 end
 

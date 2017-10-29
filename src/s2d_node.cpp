@@ -8,6 +8,7 @@ void node::init()
 {
     _id = _node_id_counter++;
     _local_transform = affine_transform::mk_identity();
+    _visible = true;
     _pos = {0, 0};
     _scale = {1.0, 1.0};
     _rotation = 0;

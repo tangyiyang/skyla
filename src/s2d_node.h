@@ -42,6 +42,11 @@ public:
     affine_transform local_to_world();
 
 public:
+    inline void set_visible(bool v)
+    {
+        _visible = v;
+    }
+
     inline void set_pos(float x, float y)
     {
         _pos = {x, y};
@@ -96,6 +101,7 @@ protected:
     uint32_t             _z_counter;
     uint64_t             _dirty_flags;
 
+    bool                 _visible;
     vec2                 _pos;
     vec2                 _scale;
     vec2                 _anchor;

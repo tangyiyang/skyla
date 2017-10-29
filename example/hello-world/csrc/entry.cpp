@@ -5,8 +5,6 @@ void entry::on_init(context* ctx)
 #if S2D_ENABLE_LUA == 1
     ctx->_lua_context->on_start(ctx, "res/scripts/main.lua");
 #else
-
-    
     rect visible_rect = ctx->get_visible_rect();
 
     LOGD("entry:: on_init");
@@ -42,16 +40,6 @@ void entry::on_init(context* ctx)
     first->add_child(f);
 
     root->add_child(first);
-//
-//    render_texture* rt = new render_texture();
-//    rt->init(S2D_DEFAULT_LOGIC_WIDTH, S2D_DEFAULT_LOGIC_HEIGHT);
-//    rt->draw(root);
-//    
-//    sprite* s = new sprite();
-//    s->init(rt);
-//    s->set_pos(0, 100);
-//    s->set_anchor(0, 0);
-//    root->add_child(s);
 #endif
 }
 

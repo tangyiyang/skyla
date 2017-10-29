@@ -6,6 +6,7 @@
         "name": "default-scene-name",
         "setup": {
             "id": 1,
+            "type": "node",
             "display_name": "root_node",
             "var": "root",
             "visible": true,

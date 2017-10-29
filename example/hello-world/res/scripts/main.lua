@@ -1,15 +1,20 @@
 local seal2d = require "seal2d"
 
 local function on_start()
+	local scene_loader = require "seal2d.scene_loader"
+
 	local ctx = seal2d.context()
 	local root = ctx:get_root()
 
-	local r = ctx:get_visible_rect()
-	local s = seal2d.sprite("res/seal2d-transparent.png")
-	s:set_pos(r.width/2, r.height/2);
-	s:set_color(0xffff00ff);
+	local scene = scene_loader.load("res/scene/hello-world/main.scene")
 
-	root:add_child(s)
+	root:add_child(scene)
+	-- local r = ctx:get_visible_rect()
+	-- local s = seal2d.sprite("res/seal2d-transparent.png")
+	-- s:set_pos(r.width/2, r.height/2);
+	-- s:set_color(0xffff00ff);
+
+	-- root:add_child(s)
 end
 
 local function on_update(dt)
@@ -26,12 +31,16 @@ local function trace_back(err, msg)
 end
 
 local function main()
-	print("hello world")
+	print("*** Entering Lua Scripts ***")
+
+	package.path = package.path .. ";res/scripts/?.lua"
 	seal2d.inject {
 		on_start = on_start,
 		on_update = on_update,
 		on_destroy = on_destroy,
 	}
+
+	print_r = require "seal2d.print_r"
 end
 
 main()
