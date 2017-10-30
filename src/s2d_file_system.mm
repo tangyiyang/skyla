@@ -21,7 +21,7 @@ static const char* sys_sandbox_path()
     return [[[NSBundle mainBundle] resourcePath] UTF8String];
 }
 
-uint8_t* sys_read(const char* path, uint8_t* buffer, size_t* size) {
+uint8_t* sys_read(const char* path, size_t* size) {
     FILE* fp = fopen(path, "r");
     if (!fp) {
         LOGE("s_read, can't open file path = %s.\n", path);
@@ -32,16 +32,14 @@ uint8_t* sys_read(const char* path, uint8_t* buffer, size_t* size) {
     rewind(fp);
 
     // always allocated 1 extra byte, this would make deal with C string easier.
-    if (!buffer) {
-        buffer = (unsigned char*)malloc(file_size);
-    }
+    uint8* buffer = (unsigned char*)malloc(file_size);
     memset(buffer, 0, file_size);
     size_t result = fread(buffer, 1, file_size, fp);
 
     if(result != file_size) {
         free(buffer);
         fclose(fp);
-        fprintf(stderr, "s_read, file reading error.\n");
+        LOGE("sys_read, file reading error. path = %s\n", path);
         return NULL;
     }
     
@@ -139,24 +137,25 @@ file_entry* file_system::read(const char* path, bool cache)
     for (; it != _search_path.end(); ++it) {
         std::string full_path = *it + path;
         if (this->exist(full_path.c_str())) {
-            LOGD("did load file: full path = %s", full_path.c_str());
             size_t size;
-            uint8_t* buffer = sys_read(full_path.c_str(), nullptr, &size);
-            file_entry* f = new file_entry();
-            f->_id = _file_counter++;
-            f->_buffer = buffer;
-            f->_path = full_path;
-            f->_size = size;
-            if (cache) {
-                f->retain();
-                _file_cache[full_path] = f;
+            uint8_t* buffer = sys_read(full_path.c_str(), &size);
+            if (buffer) {
+                file_entry* f = new file_entry();
+                f->_id = _file_counter++;
+                f->_buffer = buffer;
+                f->_path = full_path;
+                f->_size = size;
+                if (cache) {
+                    f->retain();
+                    _file_cache[full_path] = f;
+                }
+                LOGD("did load file: full path = %s", full_path.c_str());
+                return f;
             }
-            return f;
         }
     }
     
     LOGE("file could not be found at path: %s", path);
-    S2D_ASSERT(path);
     return nullptr;
 }
 
