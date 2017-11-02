@@ -9,7 +9,7 @@
 
 #include "s2d_common.h"
 #include "s2d_file_system.h"
-#include "s2d_sprite_renderer.h"
+#include "s2d_quad_renderer.h"
 #include "s2d_camera.h"
 #include "s2d_sprite.h"
 #include "s2d_bmfont.h"
@@ -42,7 +42,8 @@ public:
 public:
     void init(int opengles_version, float window_width, float window_height);
     void clear();
-    void loop(float dt);
+    void update(float dt);
+    void draw();
     void pause();
     void resume();
     void shutdown();
@@ -76,7 +77,7 @@ public:
     sprite_frame_cache* _sprite_frame_cache;
     bmfont_info_cache*  _bmfont_info_cache;
     texture_cache*      _texture_cache;
-    sprite_renderer*    _sprite_renderer;
+    quad_renderer*      _quad_renderer;
     node*               _root;
     camera*             _camera;
 #ifdef S2D_ENABLE_LUA

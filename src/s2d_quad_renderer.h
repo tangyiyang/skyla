@@ -1,54 +1,32 @@
 /*
- * Sprite renderer, draw quads or triangles with this.
+ * Quad renderer, draw quads or triangles with this.
  * Author: yiyang
  * Copyright: see copyright at s2d.h
  */
 
-#ifndef s2d_sprite_renderer_h
-#define s2d_sprite_renderer_h
+#ifndef s2d_quad_renderer_h
+#define s2d_quad_renderer_h
 
 #include "s2d_common.h"
 #include "s2d_program.h"
 #include "s2d_texture.h"
+#include "s2d_renderer.h"
 
 NS_S2D
 
-typedef uint16_t index_t;
-struct uv_t {
-    uint16_t u;
-    uint16_t v;
-};
-
-struct pos_tex_color_vertex {
-    vec2 pos;
-    uv_t uv;
-    uint32_t color;
-};
-
-union sprite_quad {
-    struct {
-        pos_tex_color_vertex tl;
-        pos_tex_color_vertex tr;
-        pos_tex_color_vertex br;
-        pos_tex_color_vertex bl;
-    };
-    pos_tex_color_vertex v[4];
-};
-
-class sprite_renderer {
+class quad_renderer : public renderer {
 public:
-    sprite_renderer();
+    quad_renderer();
 
 public:
     void init();
     void shutdown();
+    void flush();
+
     void draw(const affine_transform& world_transform,
                    texture* tex,
                    pos_tex_color_vertex* vertices,
                    int n);
-
-    void flush();
-
 private:
     void update_indexes();
 

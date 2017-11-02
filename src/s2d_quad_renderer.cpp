@@ -1,9 +1,9 @@
-#include "s2d_sprite_renderer.h"
+#include "s2d_quad_renderer.h"
 #include "s2d_context.h"
 
 NS_S2D
 
-sprite_renderer::sprite_renderer() :
+quad_renderer::quad_renderer() :
 _program(nullptr),
 _texture(nullptr),
 _vertex_buffer(nullptr),
@@ -19,7 +19,7 @@ _max_vertices(0)
 
 }
 
-void sprite_renderer::init()
+void quad_renderer::init()
 {
     _num_vertices = 0;
     _max_vertices = S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE;
@@ -66,7 +66,7 @@ void sprite_renderer::init()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void sprite_renderer::shutdown()
+void quad_renderer::shutdown()
 {
     _program->shutdown();
     
@@ -77,7 +77,7 @@ void sprite_renderer::shutdown()
     free(_index_buffer);
 }
 
-void sprite_renderer::draw(const affine_transform& world_transform,
+void quad_renderer::draw(const affine_transform& world_transform,
                            texture* tex,
                            pos_tex_color_vertex* quad,
                            int n)
@@ -113,7 +113,7 @@ void sprite_renderer::draw(const affine_transform& world_transform,
     _num_vertices += n;
 }
 
-void sprite_renderer::flush()
+void quad_renderer::flush()
 {
     if (!_program || !_texture) {
         return;
@@ -149,7 +149,7 @@ void sprite_renderer::flush()
     _num_vertices = 0;
 }
 
-void sprite_renderer::update_indexes()
+void quad_renderer::update_indexes()
 {
     for (int i = 0, j = 0; i < _num_vertices; i += 4, j += 6) {
         _index_buffer[j+0] = i+0;

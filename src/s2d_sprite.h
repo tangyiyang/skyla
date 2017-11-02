@@ -12,7 +12,7 @@
 #include "s2d_node.h"
 #include "s2d_texture.h"
 #include "s2d_program.h"
-#include "s2d_sprite_renderer.h"
+#include "s2d_quad_renderer.h"
 
 NS_S2D
 

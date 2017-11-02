@@ -101,7 +101,8 @@ int main(int argc, char** argv)
         dt = now - last;
 
         ctx->clear();
-        ctx->loop(dt);
+        ctx->update(dt);
+        ctx->draw();
 
         last = now;
 

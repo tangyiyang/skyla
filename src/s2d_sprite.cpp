@@ -275,7 +275,7 @@ void sprite::draw()
     }
     
     affine_transform world = transform_to(this->get_root());
-    context::C()->_sprite_renderer->draw(world, _texture, _quad, 4);
+    context::C()->_quad_renderer->draw(world, _texture, _quad, 4);
 }
 
 rect sprite::bounds_in(node* space)

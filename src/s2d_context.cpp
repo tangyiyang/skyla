@@ -62,7 +62,7 @@ void context::init_fundamental_components(const size& logic_size)
 {
     _texture_cache = new texture_cache();
     _sprite_frame_cache = new sprite_frame_cache();
-    _sprite_renderer = new sprite_renderer();
+    _quad_renderer = new quad_renderer();
     _file_system = new file_system();
     _touch_handler = new touch_handler();
     _bmfont_info_cache = new bmfont_info_cache();
@@ -74,7 +74,7 @@ void context::init_fundamental_components(const size& logic_size)
     _lua_context->init();
 #endif
 
-    _sprite_renderer->init();
+    _quad_renderer->init();
     _file_system->init();
     _camera->init_orthographic(logic_size.width, logic_size.height);
     _root->init();
@@ -89,15 +89,19 @@ void context::clear()
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void context::loop(float dt)
+void context::update(float dt)
+{
+    _root->update(dt);
+}
+
+void context::draw()
 {
     glViewport(_viewport_rect.origin.x,
                _viewport_rect.origin.y,
                _viewport_rect.size.width * _content_scale_factor,
                _viewport_rect.size.height* _content_scale_factor);
 
-    _root->update(dt);
-    _sprite_renderer->flush();
+    _quad_renderer->flush();
 }
 
 void context::pause()
@@ -123,14 +127,14 @@ void context::shutdown()
 
     _sprite_frame_cache->shutdown();
     _bmfont_info_cache->shutdown();
-    _sprite_renderer->shutdown();
+    _quad_renderer->shutdown();
     _file_system->shutdown();
 
     delete _touch_handler;
     delete _sprite_frame_cache;
     delete _bmfont_info_cache;
     delete _texture_cache;
-    delete _sprite_renderer;
+    delete _quad_renderer;
     delete _file_system;
     delete _root;
     delete _camera;
