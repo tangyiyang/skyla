@@ -9,7 +9,7 @@
 
 #include "s2d_common.h"
 #include "s2d_file_system.h"
-#include "s2d_quad_renderer.h"
+#include "s2d_render_state.h"
 #include "s2d_camera.h"
 #include "s2d_sprite.h"
 #include "s2d_bmfont.h"
@@ -41,7 +41,6 @@ public:
 
 public:
     void init(int opengles_version, float window_width, float window_height);
-    void clear();
     void update(float dt);
     void draw();
     void pause();
@@ -74,10 +73,10 @@ public:
     app_protocol*       _app;
     touch_handler*      _touch_handler;
     file_system*        _file_system;
+    render_state*       _render_state;
     sprite_frame_cache* _sprite_frame_cache;
     bmfont_info_cache*  _bmfont_info_cache;
     texture_cache*      _texture_cache;
-    quad_renderer*      _quad_renderer;
     node*               _root;
     camera*             _camera;
 #ifdef S2D_ENABLE_LUA

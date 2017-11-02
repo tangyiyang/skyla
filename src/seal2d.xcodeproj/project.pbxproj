@@ -43,11 +43,9 @@
 		4D6782751FA5C0F7007D461F /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782731FA5C0F7007D461F /* md5.c */; };
 		4D6782761FA5C0F7007D461F /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782731FA5C0F7007D461F /* md5.c */; };
 		4D6782771FA5C0F7007D461F /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D6782741FA5C0F7007D461F /* md5.h */; };
-		4D9F49BB1FAB908200F2170E /* render_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F49B91FAB908200F2170E /* render_state.cpp */; };
-		4D9F49BC1FAB908200F2170E /* render_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F49B91FAB908200F2170E /* render_state.cpp */; };
-		4D9F49BD1FAB908200F2170E /* render_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D9F49BA1FAB908200F2170E /* render_state.h */; };
-		4DD9F7871FAB86F700B9F94F /* s2d_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9F7851FAB86F700B9F94F /* s2d_renderer.cpp */; };
-		4DD9F7881FAB86F700B9F94F /* s2d_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9F7851FAB86F700B9F94F /* s2d_renderer.cpp */; };
+		4D9F49BB1FAB908200F2170E /* s2d_render_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */; };
+		4D9F49BC1FAB908200F2170E /* s2d_render_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */; };
+		4D9F49BD1FAB908200F2170E /* s2d_render_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D9F49BA1FAB908200F2170E /* s2d_render_state.h */; };
 		4DD9F7891FAB86F700B9F94F /* s2d_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DD9F7861FAB86F700B9F94F /* s2d_renderer.h */; };
 		B67565161F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
 		B67565171F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
@@ -181,9 +179,8 @@
 		4D6782631FA5A8CE007D461F /* strbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strbuf.h; sourceTree = "<group>"; };
 		4D6782731FA5C0F7007D461F /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5.c; sourceTree = "<group>"; };
 		4D6782741FA5C0F7007D461F /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
-		4D9F49B91FAB908200F2170E /* render_state.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = render_state.cpp; sourceTree = "<group>"; };
-		4D9F49BA1FAB908200F2170E /* render_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_state.h; sourceTree = "<group>"; };
-		4DD9F7851FAB86F700B9F94F /* s2d_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_renderer.cpp; sourceTree = "<group>"; };
+		4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_render_state.cpp; sourceTree = "<group>"; };
+		4D9F49BA1FAB908200F2170E /* s2d_render_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_render_state.h; sourceTree = "<group>"; };
 		4DD9F7861FAB86F700B9F94F /* s2d_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_renderer.h; sourceTree = "<group>"; };
 		B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_bmfont.cpp; sourceTree = "<group>"; };
 		B67565151F8F374F0077C2D7 /* s2d_bmfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_bmfont.h; sourceTree = "<group>"; };
@@ -361,10 +358,9 @@
 				43D3266B1F8626B40070B743 /* s2d_render_texture.h */,
 				4337BC5B1F852196004CF11B /* s2d_quad_renderer.cpp */,
 				4337BC5C1F852196004CF11B /* s2d_quad_renderer.h */,
-				4DD9F7851FAB86F700B9F94F /* s2d_renderer.cpp */,
 				4DD9F7861FAB86F700B9F94F /* s2d_renderer.h */,
-				4D9F49B91FAB908200F2170E /* render_state.cpp */,
-				4D9F49BA1FAB908200F2170E /* render_state.h */,
+				4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */,
+				4D9F49BA1FAB908200F2170E /* s2d_render_state.h */,
 			);
 			name = renderer;
 			sourceTree = "<group>";
@@ -510,7 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FF63E01F92022600D7058F /* s2d_panel.h in Headers */,
-				4D9F49BD1FAB908200F2170E /* render_state.h in Headers */,
+				4D9F49BD1FAB908200F2170E /* s2d_render_state.h in Headers */,
 				4D6782771FA5C0F7007D461F /* md5.h in Headers */,
 				B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */,
 				4DD9F7891FAB86F700B9F94F /* s2d_renderer.h in Headers */,
@@ -620,7 +616,7 @@
 				4D6782751FA5C0F7007D461F /* md5.c in Sources */,
 				B6FF63D01F91FC4E00D7058F /* lstrlib.c in Sources */,
 				B6FF63C81F91FC4E00D7058F /* lmathlib.c in Sources */,
-				4D9F49BB1FAB908200F2170E /* render_state.cpp in Sources */,
+				4D9F49BB1FAB908200F2170E /* s2d_render_state.cpp in Sources */,
 				B6FF63C01F91FC4E00D7058F /* ldebug.c in Sources */,
 				B6FF63DE1F92022600D7058F /* s2d_panel.cpp in Sources */,
 				B6FF63CE1F91FC4E00D7058F /* lparser.c in Sources */,
@@ -641,7 +637,6 @@
 				B6FF639A1F91FC2800D7058F /* lapi.c in Sources */,
 				B6FF639B1F91FC2800D7058F /* lauxlib.c in Sources */,
 				4337BC6B1F8521A3004CF11B /* s2d_quad_renderer.cpp in Sources */,
-				4DD9F7871FAB86F700B9F94F /* s2d_renderer.cpp in Sources */,
 				B6FF63D51F91FC4E00D7058F /* lutf8lib.c in Sources */,
 				B6FF63BF1F91FC4E00D7058F /* ldblib.c in Sources */,
 				4337BC651F8521A3004CF11B /* s2d_context.cpp in Sources */,
@@ -678,14 +673,13 @@
 				4337BCE91F852D7B004CF11B /* s2d_program.cpp in Sources */,
 				4337BCEC1F852D7B004CF11B /* s2d_texture.cpp in Sources */,
 				4D6782671FA5A8CE007D461F /* fpconv.c in Sources */,
-				4DD9F7881FAB86F700B9F94F /* s2d_renderer.cpp in Sources */,
 				B6FF63B61F91FC4D00D7058F /* lundump.c in Sources */,
 				4337BCE41F852D6A004CF11B /* s2d_camera.cpp in Sources */,
 				B6FF63DF1F92022600D7058F /* s2d_panel.cpp in Sources */,
 				43BFCDAF1F877DD2007DFD82 /* s2d_touch_handler.cpp in Sources */,
 				B6FF63A01F91FC4D00D7058F /* lctype.c in Sources */,
 				4337BCFA1F853F20004CF11B /* cJSON.c in Sources */,
-				4D9F49BC1FAB908200F2170E /* render_state.cpp in Sources */,
+				4D9F49BC1FAB908200F2170E /* s2d_render_state.cpp in Sources */,
 				4337BCEB1F852D7B004CF11B /* s2d_quad_renderer.cpp in Sources */,
 				B6FF63A91F91FC4D00D7058F /* llex.c in Sources */,
 				4337BCE51F852D7B004CF11B /* s2d_context.cpp in Sources */,

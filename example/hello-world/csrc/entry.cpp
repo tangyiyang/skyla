@@ -33,12 +33,12 @@ void entry::on_init(context* ctx)
         s->set_anchor(0, 0.5);
         first->add_child(s);
     }
-
-    bmfont* f = new bmfont();
-    f->init("AAAAA", "res/fonts/animated_32_ffffff.fnt");
-    f->set_pos(0, 0);
-    f->set_anchor(0, 0);
-    first->add_child(f);
+//
+//    bmfont* f = new bmfont();
+//    f->init("AAAAA", "res/fonts/animated_32_ffffff.fnt");
+//    f->set_pos(0, 0);
+//    f->set_anchor(0, 0);
+//    first->add_child(f);
 
     root->add_child(first);
 #endif

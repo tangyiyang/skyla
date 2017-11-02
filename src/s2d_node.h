@@ -9,6 +9,7 @@
 
 #include "s2d_common.h"
 #include "s2d_touch_handler.h"
+#include "s2d_render_state.h"
 
 #define DIRTY_TRANSFORM (1<<0)
 #define DIRTY_SCALE     (1<<1)
@@ -27,6 +28,7 @@ class node {
 public:
     virtual void init();
     virtual void update(float dt);
+    virtual void draw(render_state* rs);
     virtual void hit_test(touch_handler* handler, touch_event* event);
     virtual void on_touch(touch_event* event);
     virtual rect bounds_in(node* space);

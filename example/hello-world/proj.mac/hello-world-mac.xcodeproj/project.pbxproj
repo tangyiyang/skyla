@@ -429,7 +429,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					S2D_ENABLE_LUA,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/hello-world-mac/deps",

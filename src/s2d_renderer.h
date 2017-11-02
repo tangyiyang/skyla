@@ -1,5 +1,5 @@
 /*
- * Renderer Manager Class
+ * Renderer Interface Class.
  * Author: yiyang
  * Copyright: see copyright at s2d.h
  */
@@ -25,6 +25,7 @@ struct pos_tex_color_vertex {
 
 class renderer {
 public:
+    virtual ~renderer() {};
     virtual void init() = 0;
     virtual void shutdown() = 0;
     virtual void flush() = 0;

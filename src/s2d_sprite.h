@@ -12,7 +12,7 @@
 #include "s2d_node.h"
 #include "s2d_texture.h"
 #include "s2d_program.h"
-#include "s2d_quad_renderer.h"
+#include "s2d_render_state.h"
 
 NS_S2D
 
@@ -55,19 +55,20 @@ public:
 
 public:
     void update(float dt)       override;
+    void draw(render_state* rs) override;
     rect bounds_in(node* space) override;
 
 protected:
-    void draw();
     void update_srt();
 
 private:
     void set_texture_coord(const rect& r, texture* tex);
     void set_texture_coord(sprite_frame* frame, texture* tex);
 
-protected:
+public:
     pos_tex_color_vertex _quad[4];
     texture*             _texture;
+    affine_transform     _model_view;
 };
 
 NS_S2D_END

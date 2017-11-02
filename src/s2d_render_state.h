@@ -1,11 +1,17 @@
-#ifndef render_state_h
-#define render_state_h
+/*
+ * Render State Management Class
+ * Author: yiyang
+ * Copyright: see copyright at s2d.h
+ */
+
+#ifndef s2d_render_state_h
+#define s2d_render_state_h
 
 #include "s2d_renderer.h"
-#include "s2d_sprite.h"
 
 NS_S2D
 
+class sprite;
 class render_state {
 public:
     enum RENDERER_TYPE {
@@ -16,6 +22,7 @@ public:
 public:
     void init();
     void shutdown();
+    void clear();
     void flush();
 
     void draw_sprite(sprite* s);
@@ -27,4 +34,5 @@ private:
 };
 
 NS_S2D_END
-#endif /* render_state_hpp */
+
+#endif

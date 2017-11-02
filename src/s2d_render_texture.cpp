@@ -58,7 +58,7 @@ void render_texture::draw(node* tree)
 
     // TODO: we should have an visit function to display different types.
     tree->update(0);
-    C->_quad_renderer->flush();
+    C->_render_state->flush();
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

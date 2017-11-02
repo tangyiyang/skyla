@@ -30,6 +30,14 @@ void node::update(float dt)
     }
 }
 
+void node::draw(render_state* rs)
+{
+    std::vector<node*>::iterator it = _children.begin();
+    for (; it != _children.end(); ++it) {
+        (*it)->draw(rs);
+    }
+}
+
 void node::hit_test(touch_handler* handler, touch_event* event)
 {
     node* parent = _parent ? _parent : this;

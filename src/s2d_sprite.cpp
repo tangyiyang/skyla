@@ -265,17 +265,20 @@ void sprite::set_texture_coord(sprite_frame* frame, texture* tex)
 void sprite::update(float dt)
 {
     node::update(dt);
-    this->draw();
 }
 
-void sprite::draw()
+void sprite::draw(render_state* rs)
 {
-    if (!_texture) {
+    if (!_visible) {
         return;
     }
-    
-    affine_transform world = transform_to(this->get_root());
-    context::C()->_quad_renderer->draw(world, _texture, _quad, 4);
+
+    _model_view = transform_to(this->get_root());
+    if (_texture) {
+        rs->draw_sprite(this);
+    }
+
+    node::draw(rs);
 }
 
 rect sprite::bounds_in(node* space)
