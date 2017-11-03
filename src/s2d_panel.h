@@ -1,5 +1,5 @@
 /*
- * OpenGL Scissors clipping.
+ * Scissors clipping.
  * Author: yiyang
  * Copyright: see copyright at s2d.h
  */
