@@ -16,6 +16,7 @@ class panel : public node {
 public:
     void init(const rect& r);
     void update(float dt) override;
+    void draw(render_state* rs) override;
 
 private:
     rect _rect;

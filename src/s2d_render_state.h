@@ -27,6 +27,9 @@ public:
 
     void draw_sprite(sprite* s);
 
+    void push_scissors(const rect& r);
+    void pop_scissors();
+
 private:
     renderer* _cur_renderer;
     renderer* _renderers[MAX_RENDERER_TYPE];

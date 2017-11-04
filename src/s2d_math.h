@@ -102,9 +102,30 @@ struct affine_transform {
                                        float y)
     {
         vec2 p;
-        p.x = (float)((double)t.a * x + (double)t.c * y + t.x);
-        p.y = (float)((double)t.b * x + (double)t.d * y + t.y);
+        p.x = t.a * x + t.c * y + t.x;
+        p.y = t.b * x + t.d * y + t.y;
         return p;
+    }
+
+    static inline rect apply_transform(const affine_transform& t,
+                                       const rect& _rect)
+    {
+        float left  = _rect.origin.x;
+        float right = _rect.origin.x + _rect.size.width;
+        float bottom = _rect.origin.y;
+        float top = _rect.origin.y + _rect.size.height;
+
+        vec2 tl = apply_transform(t, left, top);
+        vec2 tr = apply_transform(t, right, top);
+        vec2 bl = apply_transform(t, left, bottom);
+        vec2 br = apply_transform(t, right, bottom);
+
+        float min_x = std::min(std::min(tl.x, tr.x), std::min(bl.x, br.x));
+        float max_x = std::max(std::max(tl.x, tr.x), std::max(bl.x, br.x));
+        float min_y = std::min(std::min(tl.y, tr.y), std::min(bl.y, br.y));
+        float max_y = std::max(std::max(tl.y, tr.y), std::max(tl.y, br.y));
+
+        return rect::make_rect(min_x, min_y, (max_x - min_x), (max_y - min_y));
     }
 
     static inline void inplace_concat(affine_transform& left,

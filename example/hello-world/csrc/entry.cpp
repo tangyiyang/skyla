@@ -16,8 +16,10 @@ void entry::on_init(context* ctx)
     root->set_anchor(0, 0);
     root->set_pos(0, 0);
 
-    node* first = new node();
-    first->init();
+    panel* first = new panel();
+    root->add_child(first);
+
+    first->init(rect::make_rect(0, 0, 500, 500));
     first->set_pos(0, 0);
     first->set_anchor(0, 0);
 
@@ -29,18 +31,11 @@ void entry::on_init(context* ctx)
         sprite_frame* f = ctx->_sprite_frame_cache->get(tests[i]);
         sprite* s = new sprite();
         s->init(f);
-        s->set_pos( 0 + i*120, visible_rect.size.height/2);
-        s->set_anchor(0, 0.5);
+        s->set_pos( 0 + i*120, 0);
+        s->set_anchor(0, 0);
         first->add_child(s);
     }
-//
-//    bmfont* f = new bmfont();
-//    f->init("AAAAA", "res/fonts/animated_32_ffffff.fnt");
-//    f->set_pos(0, 0);
-//    f->set_anchor(0, 0);
-//    first->add_child(f);
 
-    root->add_child(first);
 #endif
 }
 

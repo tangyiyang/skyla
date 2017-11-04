@@ -9,7 +9,6 @@ void render_state::init()
     _cur_renderer = nullptr;
     _renderers[RENDERER_TYPE_QUAD] = new quad_renderer();
     _renderers[RENDERER_TYPE_QUAD]->init();
-
 }
 
 void render_state::shutdown()
@@ -44,10 +43,26 @@ void render_state::draw_sprite(s2d::sprite *s)
     r->draw(s->_model_view, s->_texture, s->_quad, 4);
 }
 
+void render_state::push_scissors(const rect& r)
+{
+    _scissors_stack.push(r);
+    glEnable(GL_SCISSOR_TEST);
+    glScissor(r.origin.x, r.origin.y, r.size.width, r.size.height);
+}
+
+void render_state::pop_scissors()
+{
+    _scissors_stack.pop();
+    if (_scissors_stack.size() == 0) {
+        glDisable(GL_SCISSOR_TEST);
+    }
+}
+
 void render_state::flush()
 {
-    S2D_ASSERT(_cur_renderer);
-    _cur_renderer->flush();
+    if (_cur_renderer) {
+        _cur_renderer->flush();
+    }
 }
 
 NS_S2D_END
