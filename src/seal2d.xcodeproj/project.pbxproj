@@ -37,6 +37,9 @@
 		43BFCDAF1F877DD2007DFD82 /* s2d_touch_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */; };
 		43D3266C1F8626B40070B743 /* s2d_render_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */; };
 		43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 43D3266B1F8626B40070B743 /* s2d_render_texture.h */; };
+		4D360C501FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */; };
+		4D360C511FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */; };
+		4D360C521FAD9DF900075D98 /* s2d_particle_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */; };
 		4D6782661FA5A8CE007D461F /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D67825E1FA5A8CE007D461F /* fpconv.c */; };
 		4D6782671FA5A8CE007D461F /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D67825E1FA5A8CE007D461F /* fpconv.c */; };
 		4D67826B1FA5A8CE007D461F /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782611FA5A8CE007D461F /* lua_cjson.c */; };
@@ -177,6 +180,8 @@
 		43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_touch_handler.cpp; sourceTree = "<group>"; };
 		43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_render_texture.cpp; sourceTree = "<group>"; };
 		43D3266B1F8626B40070B743 /* s2d_render_texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_render_texture.h; sourceTree = "<group>"; };
+		4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_particle_renderer.cpp; sourceTree = "<group>"; };
+		4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_particle_renderer.h; sourceTree = "<group>"; };
 		4D67825E1FA5A8CE007D461F /* fpconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fpconv.c; sourceTree = "<group>"; };
 		4D67825F1FA5A8CE007D461F /* fpconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpconv.h; sourceTree = "<group>"; };
 		4D6782611FA5A8CE007D461F /* lua_cjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua_cjson.c; sourceTree = "<group>"; };
@@ -365,6 +370,8 @@
 				43D3266B1F8626B40070B743 /* s2d_render_texture.h */,
 				4337BC5B1F852196004CF11B /* s2d_quad_renderer.cpp */,
 				4337BC5C1F852196004CF11B /* s2d_quad_renderer.h */,
+				4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */,
+				4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */,
 				4DD9F7861FAB86F700B9F94F /* s2d_renderer.h */,
 				4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */,
 				4D9F49BA1FAB908200F2170E /* s2d_render_state.h */,
@@ -518,6 +525,7 @@
 				439316B91FA7404500D5DFD2 /* s2d_particle.h in Headers */,
 				B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */,
 				4DD9F7891FAB86F700B9F94F /* s2d_renderer.h in Headers */,
+				4D360C521FAD9DF900075D98 /* s2d_particle_renderer.h in Headers */,
 				43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */,
 				43BFCDAC1F877401007DFD82 /* s2d_touch_handler.h in Headers */,
 			);
@@ -641,6 +649,7 @@
 				B6FF63CF1F91FC4E00D7058F /* lstring.c in Sources */,
 				4337BC741F8521BA004CF11B /* cJSON.c in Sources */,
 				B6FF63D71F91FC4E00D7058F /* lzio.c in Sources */,
+				4D360C501FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */,
 				B6FF63C21F91FC4E00D7058F /* ldump.c in Sources */,
 				B6FF63BD1F91FC4E00D7058F /* lcorolib.c in Sources */,
 				B6FF639A1F91FC2800D7058F /* lapi.c in Sources */,
@@ -682,6 +691,7 @@
 				4337BCE91F852D7B004CF11B /* s2d_program.cpp in Sources */,
 				4337BCEC1F852D7B004CF11B /* s2d_texture.cpp in Sources */,
 				4D6782671FA5A8CE007D461F /* fpconv.c in Sources */,
+				4D360C511FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */,
 				B6FF63B61F91FC4D00D7058F /* lundump.c in Sources */,
 				4337BCE41F852D6A004CF11B /* s2d_camera.cpp in Sources */,
 				B6FF63DF1F92022600D7058F /* s2d_panel.cpp in Sources */,

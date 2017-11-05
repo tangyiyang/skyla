@@ -1,5 +1,6 @@
 #include "s2d_render_state.h"
 #include "s2d_quad_renderer.h"
+#include "s2d_particle_renderer.h"
 #include "s2d_sprite.h"
 
 NS_S2D
@@ -9,6 +10,9 @@ void render_state::init()
     _cur_renderer = nullptr;
     _renderers[RENDERER_TYPE_QUAD] = new quad_renderer();
     _renderers[RENDERER_TYPE_QUAD]->init();
+
+    _renderers[RENDERER_TYPE_PARTICLE] = new particle_renderer();
+    _renderers[RENDERER_TYPE_PARTICLE]->init();
 }
 
 void render_state::shutdown()

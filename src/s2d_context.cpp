@@ -53,7 +53,7 @@ void context::update_resolution_settings(float window_width, float window_height
     LOGD("** window size = {%.2f, %.2f}", _window_size.width, _window_size.height);
     LOGD("** viewport origin = {%.2f, %.2f}", _viewport_rect.origin.x, _viewport_rect.origin.y);
     LOGD("** viewport size = {%.2f, %.2f}", _viewport_rect.size.width, _viewport_rect.size.height);
-    LOGD("** _logic_size size = {%.2f, %.2f}", _logic_size.width, _logic_size.height);
+    LOGD("** logic_size size = {%.2f, %.2f}", _logic_size.width, _logic_size.height);
     LOGD("** visible origin = {%.2f, %.2f}", _visible_rect.origin.x, _visible_rect.origin.y);
     LOGD("** visible size = {%.2f, %.2f}", _visible_rect.size.width, _visible_rect.size.height);
 }

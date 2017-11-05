@@ -1,10 +1,3 @@
-//
-//  s2d_particle.cpp
-//  seal2d
-//
-//  Created by yiyang.tang on 2017/10/30.
-//
-
 #include "s2d_particle.h"
 
 NS_S2D
