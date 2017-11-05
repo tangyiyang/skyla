@@ -10,7 +10,6 @@
 
 #include "s2d_common.h"
 #include "s2d_file_system.h"
-#include "s2d_gl_util.h"
 
 NS_S2D
 

@@ -7,7 +7,6 @@
 #ifndef s2d_render_texture_h
 #define s2d_render_texture_h
 
-#include "s2d_gl_util.h"
 #include "s2d_node.h"
 #include "s2d_program.h"
 #include "s2d_texture.h"

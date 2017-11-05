@@ -19,21 +19,26 @@
 #endif
 
 #ifdef DEBUG
-#define CHECK_GL_ERROR s2d::gl_util::check_gl_error(__FILE__, __LINE__);
+#define CHECK_GL_ERROR s2d::gl::check_error(__FILE__, __LINE__);
 #else
 #define CHECK_GL_ERROR do{}while(0);
 #endif
 
 NS_S2D
 
-class gl_util {
+struct blend_func {
+    GLenum src;
+    GLenum dst;
+};
+
+class gl {
 public:
-    static void check_gl_extension(uint32_t glversion);
-    static void check_gl_error(const char* file, int line);
+    static void check_extension(uint32_t glversion);
+    static void check_error(const char* file, int line);
 
 private:
-    static uint64_t _gl_cap_bits;
-    static uint32_t _gl_version;
+    static uint64_t _cap_bits;
+    static uint32_t _version;
 };
 
 NS_S2D_END

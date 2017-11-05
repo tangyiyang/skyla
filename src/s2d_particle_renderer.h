@@ -1,5 +1,6 @@
 /*
- * Particle Renderer, implemented OpenGLES 3.0 feature transform feedback.
+ * Particle Renderer
+ * TODO: implemented OpenGLES 3.0 feature transform feedback.
  * Author: yiyang
  * Copyright: see copyright at s2d.h
  */

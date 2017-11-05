@@ -19,6 +19,6 @@
 #include "s2d_macro.h"
 #include "s2d_ref_counter.h"
 #include "s2d_math.h"
-#include "s2d_gl_util.h"
+#include "s2d_gl.h"
 
 #endif

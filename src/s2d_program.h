@@ -8,7 +8,6 @@
 #define s2d_program_h
 
 #include "s2d_common.h"
-#include "s2d_gl_util.h"
 #include "s2d_util.h"
 
 NS_S2D

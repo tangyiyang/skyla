@@ -17,6 +17,8 @@ NS_S2D
 #define PI (3.1415926f)
 #define FLT_EQUAL(a, b) (fabs((a) - (b)) < FLT_EPSILON)
 
+typedef uint32_t color_t;
+
 struct vec2 {
     float x;
     float y;
@@ -33,6 +35,13 @@ struct vec4 {
     float y;
     float z;
     float w;
+};
+
+struct color4f {
+    float r;
+    float g;
+    float b;
+    float a;
 };
 
 struct size {

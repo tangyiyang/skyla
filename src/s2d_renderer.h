@@ -20,7 +20,7 @@ struct uv_t {
 struct pos_tex_color_vertex {
     vec2 pos;
     uv_t uv;
-    uint32_t color;
+    color_t color;
 };
 
 class renderer {

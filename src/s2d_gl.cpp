@@ -1,12 +1,12 @@
-#include "s2d_gl_util.h"
+#include "s2d_gl.h"
 #include "s2d_util.h"
 
 NS_S2D
 
-uint64_t gl_util::_gl_cap_bits = 0;
-uint32_t gl_util::_gl_version = 3;
+uint64_t gl::_cap_bits = 0;
+uint32_t gl::_version = 3;
 
-void gl_util::check_gl_error(const char* file, int line)
+void gl::check_error(const char* file, int line)
 {
     GLenum err = GL_NO_ERROR;
     if((err = glGetError()) != GL_NO_ERROR) {
@@ -15,9 +15,9 @@ void gl_util::check_gl_error(const char* file, int line)
     }
 }
 
-void gl_util::check_gl_extension(uint32_t glversion)
+void gl::check_extension(uint32_t glversion)
 {
-    _gl_version = glversion;
+    _version = glversion;
 
     GLint n = 0;
     glGetIntegerv(GL_NUM_EXTENSIONS, &n);

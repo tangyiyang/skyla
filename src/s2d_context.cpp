@@ -1,5 +1,4 @@
 #include "s2d_context.h"
-#include "s2d_gl_util.h"
 #include "s2d_util.h"
 
 NS_S2D
@@ -11,7 +10,7 @@ void context::init(int opengles_version, float window_width, float window_height
     _global_context = this;
     _logic_size = {S2D_DEFAULT_LOGIC_WIDTH, S2D_DEFAULT_LOGIC_HEIGHT};
     _content_scale_factor = 1.0f;
-    s2d::gl_util::check_gl_extension(opengles_version);
+    s2d::gl::check_extension(opengles_version);
 
     update_resolution_settings(window_width, window_height);
     init_fundamental_components(_logic_size);
