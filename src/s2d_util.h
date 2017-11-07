@@ -66,6 +66,11 @@ public:
     static texture* load_texture(const char* path);
 
     static std::string md5(file_entry* file_entry);
+
+    inline static float normalized_random()
+    {
+        return -1.0f + (((double)rand())/RAND_MAX) * (1.0 - (-1.0));
+    }
 };
 
 NS_S2D_END

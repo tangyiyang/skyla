@@ -12,7 +12,7 @@
 NS_S2D
 
 struct emmiter_property {
-    enum EMMITER_MODE {
+    enum EMMITER_TYPE {
         GRAVITY = 0,
         RADIDUS,
     };
@@ -58,11 +58,47 @@ struct emmiter_property {
     float* rotation;
     float* delta_rotation;
     float* ttl;
-
     mode_info _mode_info;
 
+    void copy(int to, int from)
+    {
+        x[to] = x[from];
+        y[to] = y[from];
+        start_x[to] = start_x[from];
+        start_y[to] = start_y[from];
+        r[to] = r[from];
+        g[to] = g[from];
+        b[to] = b[from];
+        a[to] = a[from];
+        delta_r[to] = delta_r[from];
+        delta_g[to] = delta_g[from];
+        delta_b[to] = delta_b[from];
+        delta_a[to] = delta_a[from];
+        size[to] = size[from];
+        delta_size[to] = delta_size[from];
+        rotation[to] = rotation[from];
+        delta_rotation[to] = delta_rotation[from];
+        ttl[to] = ttl[from];
+
+        if (_mode_info._mode == GRAVITY) {
+            _mode_info._data._gravity.dir_x[to] = _mode_info._data._gravity.dir_x[from];
+            _mode_info._data._gravity.dir_y[to] = _mode_info._data._gravity.dir_y[from];
+            _mode_info._data._gravity.radial_accel[to] = _mode_info._data._gravity.radial_accel[from];
+            _mode_info._data._gravity.tangential_accel[to] = _mode_info._data._gravity.tangential_accel[from];
+        } else if (_mode_info._mode == RADIDUS) {
+            _mode_info._data._radius.angle[to] = _mode_info._data._radius.angle[from];
+            _mode_info._data._radius.degrees_per_second[to] = _mode_info._data._radius.degrees_per_second[from];
+            _mode_info._data._radius.radius[to] = _mode_info._data._radius.radius[from];
+            _mode_info._data._radius.delta_radius[to] = _mode_info._data._radius.delta_radius[from];
+        } else {
+            LOGE("invalid particle mode");
+            S2D_ASSERT(false);
+        }
+    }
+
+
 public:
-    void init(EMMITER_MODE mode, int total_particles);
+    void init(EMMITER_TYPE mode, int total_particles);
     void shutdown();
 };
 
@@ -79,9 +115,15 @@ public:
 public:
     void init(const char* file_path);
     void update(float dt) override;
+    void start();
+    void stop();
+    void reset();
 
 private:
     void load_particle_settings(const char* file_path);
+    void emit(int n);
+    bool update_life(float dt);
+
 
 private:
     bool _initialized;
@@ -94,6 +136,17 @@ private:
     float _angle_var;
     float _speed;
     float _speed_var;
+    float _duration;
+    int   _emmiter_type;
+
+    /* srt settings */
+    float _rotate_per_second;
+    float _rotate_per_second_var;
+    float _max_radius;
+    float _max_radius_var;
+    float _min_radius;
+    float _min_radius_var;
+    bool _absolute_position;
 
     /* gravity mode settings */
     vec2  _gravity;
@@ -123,6 +176,14 @@ private:
 
     /* texture settings */
     texture* _texture;
+
+    /* emmiter paramters, those vars may change duraring the update process. */
+    bool _active;
+    int _num_particles;
+    float _time_elapsed;
+    float _emission_rate;
+    float _emmit_counter;
+
 };
 
 NS_S2D_END

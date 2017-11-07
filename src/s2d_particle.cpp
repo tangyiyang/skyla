@@ -3,7 +3,7 @@
 
 NS_S2D
 
-void emmiter_property::init(EMMITER_MODE mode, int total_particles)
+void emmiter_property::init(EMMITER_TYPE mode, int total_particles)
 {
     S2D_ASSERT(total_particles >= 0);
 
@@ -27,7 +27,7 @@ void emmiter_property::init(EMMITER_MODE mode, int total_particles)
     rotation = (float*)malloc(total_particles * sizeof(float));
     delta_rotation = (float*)malloc(total_particles * sizeof(float));
 
-    ttl = (float*)malloc(total_particles * sizeof(float));
+    ttl = (float*)calloc(total_particles, sizeof(float));
 
     _mode_info._mode = mode;
     if (mode == GRAVITY) {
@@ -123,14 +123,8 @@ void particle::load_particle_settings(const char *file_path)
     _angle_var = cJSON_GetObjectItemCaseSensitive(root, "angleVariance")->valuedouble;
     _speed = cJSON_GetObjectItemCaseSensitive(root, "speed")->valuedouble;
     _speed_var = cJSON_GetObjectItemCaseSensitive(root, "speedVariance")->valuedouble;
-
-    /* load the gravity mode settings */
-    _gravity.x = cJSON_GetObjectItemCaseSensitive(root, "gravityx")->valuedouble;
-    _gravity.y = cJSON_GetObjectItemCaseSensitive(root, "gravityy")->valuedouble;
-    _radial_accel = cJSON_GetObjectItemCaseSensitive(root, "radialAcceleration")->valuedouble;
-    _radial_accel_var = cJSON_GetObjectItemCaseSensitive(root, "radialAccelVariance")->valuedouble;
-    _tangential_accel = cJSON_GetObjectItemCaseSensitive(root, "tangentialAcceleration")->valuedouble;
-    _tangential_accel_var = cJSON_GetObjectItemCaseSensitive(root, "tangentialAccelVariance")->valuedouble;
+    _absolute_position = cJSON_GetObjectItemCaseSensitive(root, "absolutePosition")->valueint;
+    _duration = cJSON_GetObjectItemCaseSensitive(root, "duration")->valuedouble;
 
     /* load the particle settings */
     _life_span = cJSON_GetObjectItemCaseSensitive(root, "particleLifespan")->valuedouble;
@@ -139,11 +133,6 @@ void particle::load_particle_settings(const char *file_path)
     _start_size_var = cJSON_GetObjectItemCaseSensitive(root, "startParticleSizeVariance")->valuedouble;
     _end_size = cJSON_GetObjectItemCaseSensitive(root, "finishParticleSize")->valuedouble;
     _end_size_var = cJSON_GetObjectItemCaseSensitive(root, "finishParticleSizeVariance")->valuedouble;
-
-    _start_rotation = cJSON_GetObjectItemCaseSensitive(root, "rotationStart")->valuedouble;
-    _start_rotation_var = cJSON_GetObjectItemCaseSensitive(root, "rotationStartVariance")->valuedouble;
-    _end_rotation = cJSON_GetObjectItemCaseSensitive(root, "rotationEnd")->valuedouble;
-    _end_rotation_var = cJSON_GetObjectItemCaseSensitive(root, "rotationEndVariance")->valuedouble;
 
     _start_color.r = cJSON_GetObjectItemCaseSensitive(root, "startColorRed")->valuedouble;
     _start_color.g = cJSON_GetObjectItemCaseSensitive(root, "startColorGreen")->valuedouble;
@@ -165,14 +154,159 @@ void particle::load_particle_settings(const char *file_path)
     _end_color_var.b = cJSON_GetObjectItemCaseSensitive(root, "finishColorVarianceBlue")->valuedouble;
     _end_color_var.a = cJSON_GetObjectItemCaseSensitive(root, "finishColorVarianceAlpha")->valuedouble;
 
+    // TODO: correctly parse these parameters
     _blend.src = cJSON_GetObjectItemCaseSensitive(root, "blendFuncSource")->valueint;
+    _blend.dst = cJSON_GetObjectItemCaseSensitive(root, "blendFuncDestination")->valueint;
+
+    _emmiter_type = cJSON_GetObjectItemCaseSensitive(root, "emitterType")->valueint;
+    if (_emmiter_type == emmiter_property::GRAVITY) {
+        /* load the gravity mode settings */
+        _gravity.x = cJSON_GetObjectItemCaseSensitive(root, "gravityx")->valuedouble;
+        _gravity.y = cJSON_GetObjectItemCaseSensitive(root, "gravityy")->valuedouble;
+        _radial_accel = cJSON_GetObjectItemCaseSensitive(root, "radialAcceleration")->valuedouble;
+        _radial_accel_var = cJSON_GetObjectItemCaseSensitive(root, "radialAccelVariance")->valuedouble;
+        _tangential_accel = cJSON_GetObjectItemCaseSensitive(root, "tangentialAcceleration")->valuedouble;
+        _tangential_accel_var = cJSON_GetObjectItemCaseSensitive(root, "tangentialAccelVariance")->valuedouble;
+    } else if (_emmiter_type == emmiter_property::RADIDUS) {
+        /* load the radial mode settings */
+        _start_rotation = cJSON_GetObjectItemCaseSensitive(root, "rotationStart")->valuedouble;
+        _start_rotation_var = cJSON_GetObjectItemCaseSensitive(root, "rotationStartVariance")->valuedouble;
+        _end_rotation = cJSON_GetObjectItemCaseSensitive(root, "rotationEnd")->valuedouble;
+        _end_rotation_var = cJSON_GetObjectItemCaseSensitive(root, "rotationEndVariance")->valuedouble;
+        _rotate_per_second = cJSON_GetObjectItemCaseSensitive(root, "rotatePerSecondVariance")->valuedouble;
+        _rotate_per_second_var = cJSON_GetObjectItemCaseSensitive(root, "rotatePerSecondVariance")->valuedouble;
+        _max_radius = cJSON_GetObjectItemCaseSensitive(root, "maxRadius")->valuedouble;
+        _max_radius_var = cJSON_GetObjectItemCaseSensitive(root, "maxRadiusVariance")->valuedouble;
+        _min_radius = cJSON_GetObjectItemCaseSensitive(root, "minRadius")->valuedouble;
+
+        /* this looks ugly due to the format doesn't export the minRadiusVariance.
+         * TODO: the particle design doesn't seems so cool, we should build one ourselves.
+         * It's not hard to add an particle editor in our game tool.
+         * refactor this some day, you would do it, will you.? :)
+         */
+        if (cJSON_HasObjectItem(root, "minRadiusVariance")) {
+            _min_radius_var = cJSON_GetObjectItemCaseSensitive(root, "minRadiusVariance")->valuedouble;
+        } else {
+            _min_radius_var = 0.0f;
+        }
+    } else {
+        LOGE("invalid emmiter type: %d", _emmiter_type);
+        S2D_ASSERT(false);
+    }
 
     cJSON_Delete(root);
+
+    this->_emitter_data.init((emmiter_property::EMMITER_TYPE)_emmiter_type, _max_particle);
+
+    _active = true;
+    _time_elapsed = 0.0f;
+    _num_particles = 0;
+    _emmit_counter = 0.0f;
+    _emission_rate = _max_particle / _life_span; /* particle emmit per second. */
+
+    this->reset();
+}
+
+void particle::start()
+{
+    this->reset();
+}
+
+void particle::reset()
+{
+    _active = true;
+    _time_elapsed = 0.0f;
+    for (int i = 0; i < _max_particle; ++i) {
+        _emitter_data.ttl[i] = 0.0f;
+    }
+}
+
+void particle::stop()
+{
+    _active = false;
 }
 
 void particle::update(float dt)
 {
+    node::update(dt);
+    _time_elapsed += dt;
 
+    if ( (!FLT_EQUAL(_duration, -1.0f)) && _time_elapsed > _duration) {
+        this->stop();
+        return;
+    }
+
+    if (_active) {
+        _emmit_counter += dt;
+
+        int n = std::min(_max_particle - _num_particles, (int)(_emmit_counter * _emission_rate));
+        this->emit(n);
+        _emmit_counter -= ((float)n) / _emission_rate;
+
+        LOGD("Particle Emit: "
+             "dt = %.2f, _emission_rate = %.2f, "
+             "_max_particle = %d, n = %d, "
+             "_num_particles = %d, _emmit_counter = %.2f, "
+             " lose = %.2f",
+             dt,
+             _emission_rate,
+             _max_particle,
+             n,
+             _num_particles,
+             _emmit_counter,
+             ((float)n) / _emission_rate);
+    }
+
+    bool all_dead = this->update_life(dt);
+    if (all_dead) {
+        // stop at here.
+        return;
+    }
+
+}
+
+bool particle::update_life(float dt)
+{
+    for (int i = 0; i < _num_particles; ++i)
+    {
+        _emitter_data.ttl[i] -= dt;
+    }
+
+    for (int i = 0; i < _num_particles; ++i)
+    {
+        if (_emitter_data.ttl[i] <= 0.0f)
+        {
+            int j = _num_particles - 1;
+            while (j > 0 && _emitter_data.ttl[j] <= 0)
+            {
+                --_num_particles;
+                --j;
+            }
+            _emitter_data.copy(i, _num_particles - 1);
+
+            --_num_particles;
+
+            if( _num_particles == 0)
+            {
+                this->_emitter_data.shutdown();
+                this->remove_from_parent();
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+void particle::emit(int n)
+{
+    int start = _num_particles;
+    _num_particles += n;
+
+    for (int i = start; i < _num_particles; ++i) {
+        float life = _life_span + _life_span_var * util::normalized_random();
+        _emitter_data.ttl[i] = std::max(life, _life_span);
+    }
 }
 
 NS_S2D_END
