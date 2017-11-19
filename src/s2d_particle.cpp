@@ -201,6 +201,12 @@ void particle::load_particle_settings(const char *file_path)
         _radial_accel_var = cJSON_GetObjectItemCaseSensitive(root, "radialAccelVariance")->valuedouble;
         _tangential_accel = cJSON_GetObjectItemCaseSensitive(root, "tangentialAcceleration")->valuedouble;
         _tangential_accel_var = cJSON_GetObjectItemCaseSensitive(root, "tangentialAccelVariance")->valuedouble;
+
+        if (cJSON_HasObjectItem(root, "rotationIsDir")) {
+            _rotation_is_dir = cJSON_GetObjectItem(root, "rotationIsDir")->valueint;
+        } else {
+            _rotation_is_dir = false;
+        }
     } else if (_emmiter_type == emmiter_property::RADIDUS) {
         /* load the radial mode settings */
         _rotate_per_second = cJSON_GetObjectItemCaseSensitive(root, "rotatePerSecondVariance")->valuedouble;
@@ -289,25 +295,22 @@ bool particle::update(float dt)
         this->emit(n);
         _emmit_counter -= ((float)n) / _emission_rate;
 
-        LOGD("Particle Emit: "
-             "dt = %.2f, _emission_rate = %.2f, "
-             "_max_particle = %d, n = %d, "
-             "_num_particles = %d, _emmit_counter = %.2f, "
-             " lose = %.2f",
-             dt,
-             _emission_rate,
-             _max_particle,
-             n,
-             _num_particles,
-             _emmit_counter,
-             ((float)n) / _emission_rate);
+//        LOGD("Emit: "
+//             "dt = %.2f, _emission_rate = %.2f, "
+//             "_max_particle = %d, n = %d, "
+//             "_num_particles = %d, _emmit_counter = %.2f, "
+//             " lose = %.2f",
+//             dt,
+//             _emission_rate,
+//             _max_particle,
+//             n,
+//             _num_particles,
+//             _emmit_counter,
+//             ((float)n) / _emission_rate);
     }
 
     /* check their lives */
-    bool all_dead = this->update_life(dt);
-    if (all_dead) {
-        return true;
-    }
+    this->update_life(dt);
 
     /* if there were someby alive, we update these lucky girls.*/
     if (_emmiter_type == emmiter_property::GRAVITY)
@@ -320,10 +323,10 @@ bool particle::update(float dt)
 
             vec2::normalize(_emitter_data.x[i], _emitter_data.y[i], radial);
 
-            tangential = radial;
             radial.x *= radial_accel;
             radial.y *= radial_accel;
 
+            tangential = radial;
             std::swap(tangential.x, tangential.y);
             tangential.x *= -tangential_accel;
             tangential.y *= tangential_accel;
@@ -334,14 +337,16 @@ bool particle::update(float dt)
             tmp.x *= dt;
             tmp.y *= dt;
 
+            LOGD("Particle: accel = %.2f, %.2f", tmp.x, tmp.y);
             _emitter_data._mode_info._data._gravity.dir_x[i] += tmp.x;
             _emitter_data._mode_info._data._gravity.dir_y[i] += tmp.y;
 
             tmp.x = _emitter_data._mode_info._data._gravity.dir_x[i] * dt * _y_coord_flip;
             tmp.y = _emitter_data._mode_info._data._gravity.dir_y[i] * dt * _y_coord_flip;
 
+            LOGD("Particle: x_offset = %.2f, y_offset = %.2f", tmp.x, tmp.y);
             _emitter_data.x[i] += tmp.x;
-            _emitter_data.y[i] += tmp.x;
+            _emitter_data.y[i] += tmp.y;
         }
     }
 
@@ -353,31 +358,63 @@ void particle::draw(render_state* rs)
     _model_view = transform_to(this->get_root());
 
     for (int i = 0, j = 0; i < _num_particles; ++i, j += 4) {
+        float x = _emitter_data.x[i];
+        float y = _emitter_data.y[i];
+        float rotation = _emitter_data.rotation[i];
         float size = _emitter_data.size[i];
-        
-        _vertices[j+0].pos.x = 0;
-        _vertices[j+0].pos.y = 0;
-        _vertices[j+0].uv.u = 0;
-        _vertices[j+0].uv.v = S2D_TEX_COORD_MAX;
-        _vertices[j+0].color = 0xffffffff;
+        float red = _emitter_data.r[i];
+        float green = _emitter_data.g[i];
+        float blue = _emitter_data.b[i];
+        float alpha = _emitter_data.a[i];
+        uint32_t color = (((int)(red*255))<<24) + (((int)(green*255))<<16) + (((int)(blue*255))<<8) + ((int)alpha);
 
-        _vertices[j+1].pos.x = size;
-        _vertices[j+1].pos.y = 0;
-        _vertices[j+1].uv.u = S2D_TEX_COORD_MAX;
-        _vertices[j+1].uv.v = S2D_TEX_COORD_MAX;
-        _vertices[j+1].color = 0xffffffff;
+        pos_tex_color_vertex* v = _vertices + j;
 
-        _vertices[j+2].pos.x = 0;
-        _vertices[j+2].pos.y = size;
-        _vertices[j+2].uv.u = 0;
-        _vertices[j+2].uv.v = 0;
-        _vertices[j+2].color = 0xffffffff;
+        GLfloat size_2 = size/2;
+        GLfloat x1 = -size_2;
+        GLfloat y1 = -size_2;
 
-        _vertices[j+3].pos.x = size;
-        _vertices[j+3].pos.y = size;
-        _vertices[j+3].uv.u = S2D_TEX_COORD_MAX;
-        _vertices[j+3].uv.v = 0;
-        _vertices[j+3].color = 0xffffffff;
+        GLfloat x2 = size_2;
+        GLfloat y2 = size_2;
+
+        GLfloat r = -(rotation*PI/180.0f);
+        GLfloat cr = cosf(r);
+        GLfloat sr = sinf(r);
+        GLfloat ax = x1 * cr - y1 * sr + x;
+        GLfloat ay = x1 * sr + y1 * cr + y;
+        GLfloat bx = x2 * cr - y1 * sr + x;
+        GLfloat by = x2 * sr + y1 * cr + y;
+        GLfloat cx = x2 * cr - y2 * sr + x;
+        GLfloat cy = x2 * sr + y2 * cr + y;
+        GLfloat dx = x1 * cr - y2 * sr + x;
+        GLfloat dy = x1 * sr + y2 * cr + y;
+
+        v[0].pos.x = ax;
+        v[0].pos.y = ay;
+        v[0].uv.u = 0;
+        v[0].uv.v = S2D_TEX_COORD_MAX;
+        v[0].color = color;
+
+        v[1].pos.x = bx;
+        v[1].pos.y = by;
+        v[1].uv.u = S2D_TEX_COORD_MAX;
+        v[1].uv.v = S2D_TEX_COORD_MAX;
+        v[1].color = color;
+
+        v[2].pos.x = dx;
+        v[2].pos.y = dy;
+        v[2].uv.u = 0;
+        v[2].uv.v = 0;
+        v[2].color = color;
+
+        v[3].pos.x = cx;
+        v[3].pos.y = cy;
+        v[3].uv.u = S2D_TEX_COORD_MAX;
+        v[3].uv.v = 0;
+        v[3].color = color;
+
+        LOGD("Particle: x = %.2f, y = %.2f", x, y);
+        LOGD("Particle: v[%d] = %.2f, %.2f, y /x = %.2f", 0, v[0].pos.x, v[0].pos.y);
     }
 
     _num_vertices = _num_particles * 4;
@@ -457,10 +494,10 @@ void particle::emit(int n)
      * this SOA mode settings, could we have better performance directly caculate
      * the performance by (deleta = (end - start)/life) ?
      */
-    SET_COLOR(_emitter_data.r, _end_color.r, _end_color_var.r);
-    SET_COLOR(_emitter_data.g, _end_color.g, _end_color_var.g);
-    SET_COLOR(_emitter_data.b, _end_color.b, _end_color_var.b);
-    SET_COLOR(_emitter_data.a, _end_color.a, _end_color_var.a);
+    SET_COLOR(_emitter_data.delta_r, _end_color.r, _end_color_var.r);
+    SET_COLOR(_emitter_data.delta_g, _end_color.g, _end_color_var.g);
+    SET_COLOR(_emitter_data.delta_b, _end_color.b, _end_color_var.b);
+    SET_COLOR(_emitter_data.delta_a, _end_color.a, _end_color_var.a);
 
     SET_DELTA_COLOR(_emitter_data.r, _emitter_data.delta_r);
     SET_DELTA_COLOR(_emitter_data.g, _emitter_data.delta_g);
@@ -494,6 +531,68 @@ void particle::emit(int n)
         _emitter_data.delta_rotation[i] = (end_rotation - _emitter_data.rotation[i]) / _emitter_data.ttl[i];
     }
 
+    /* position */
+    for (int i = start; i < _num_particles; ++i) {
+        _emitter_data.start_x[i] = _pos.x;
+    }
+    for (int i = start; i < _num_particles; ++i) {
+        _emitter_data.start_y[i] = _pos.y;
+    }
+
+    if (_emitter_data._mode_info._mode == emmiter_property::GRAVITY) {
+        float* rc = _emitter_data._mode_info._data._gravity.radial_accel;
+        for (int i = start; i < _num_particles; ++i) {
+            rc[i] = _radial_accel * _radial_accel_var * util::normalized_random();
+        }
+
+        // tangential accel
+        float* tc = _emitter_data._mode_info._data._gravity.tangential_accel;
+        for (int i = start; i < _num_particles; ++i) {
+            tc[i] = _tangential_accel + _tangential_accel_var * util::normalized_random();
+        }
+
+        // rotation is dir
+        if(_rotation_is_dir) {
+            for (int i = start; i < _num_particles; ++i) {
+                float a = (_angle + _angle_var * util::normalized_random())*PI/180.0f;
+
+                float cos_a = cosf(a);
+                float sin_a = sinf(a);
+                float s = _speed + _speed_var * util::normalized_random();
+
+                float dir_x = s * cos_a;
+                float dir_y = s * sin_a;
+
+                _emitter_data._mode_info._data._gravity.dir_x[i] = dir_x;
+                _emitter_data._mode_info._data._gravity.dir_y[i] = dir_y;
+
+                _emitter_data.rotation[i] = -(atan2(dir_y, dir_x) * 180.0f / PI);
+            }
+        }
+        else
+        {
+            for (int i = start; i < _num_particles; ++i) {
+                float angle = _angle + _angle_var * util::normalized_random();
+                float a = (_angle + _angle_var * util::normalized_random()) * PI / 180.0f;
+
+                float cos_a = cosf(a);
+                float sin_a = sinf(a);
+                float s = _speed + _speed_var * util::normalized_random();
+
+                float dir_x = s * cos_a;
+                float dir_y = s * sin_a;
+
+                _emitter_data._mode_info._data._gravity.dir_x[i] = dir_x;
+                _emitter_data._mode_info._data._gravity.dir_y[i] = dir_y;
+
+                LOGD("Particle: a = %.2f, angle_in_degree = %.2f, cos_a = %.2f, sin_a = %.2f, s = %.2f, dir_x = %.2f, dir_y = %.2f",
+                     a, angle, cos_a, sin_a, s, dir_x, dir_y);
+            }
+        }
+
+    } else {
+
+    }
     
 }
 

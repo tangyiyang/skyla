@@ -158,6 +158,7 @@ private:
     float _radial_accel_var;
     float _tangential_accel;
     float _tangential_accel_var;
+    bool  _rotation_is_dir;
 
     /* particle settings */
     float _life_span;

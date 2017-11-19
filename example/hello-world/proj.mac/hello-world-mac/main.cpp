@@ -96,17 +96,21 @@ int main(int argc, char** argv)
 
     double dt = 0.0f;
     while (!glfwWindowShouldClose(window)) {
-        static double last = 0.0f;
-        double now = glfwGetTime();
-        dt = now - last;
+        if(!glfwGetWindowAttrib(window, GLFW_ICONIFIED)) { // prevent cpu 100% when in background.
+            static double last = 0.0f;
+            double now = glfwGetTime();
+            dt = now - last;
 
-        ctx->update(dt);
-        ctx->draw();
+            ctx->update(dt);
+            ctx->draw();
 
-        last = now;
+            last = now;
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+            glfwSwapBuffers(window);
+            glfwPollEvents();
+        } else {
+            glfwWaitEvents();
+        }
     }
 
     ctx->shutdown();

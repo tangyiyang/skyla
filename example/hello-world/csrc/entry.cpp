@@ -17,7 +17,7 @@ void entry::on_init(context* ctx)
 #if 1
 
     particle* p = new particle();
-    p->init("res/particles/flower2.json");
+    p->init("res/particles/flower.json");
     p->set_pos(300, 300);
     root->add_child(p);
 
