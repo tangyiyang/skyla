@@ -1,6 +1,4 @@
 #include "cJSON.h"
-#include "base64.h"
-
 #include "s2d_util.h"
 #include "s2d_particle.h"
 

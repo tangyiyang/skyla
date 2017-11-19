@@ -18,23 +18,6 @@ static void parse_str(char* data, char* val)
     sscanf(pos+1, "%s", val);
 }
 
-void bmfont_info_cache::insert_search_path(const char* atlas_file_path)
-{
-    /*
-     *  subtract the filename of the atlas_file_path
-     *  "res/fonts/animated.fnt" -> "res/fonts/"
-     */
-    int i = (int)strlen(atlas_file_path);
-    for (; i >= 0; --i) {
-        if (atlas_file_path[i] == '/') {
-            break;
-        }
-    }
-
-    std::string s = std::string(atlas_file_path, i+1);
-    context::C()->_file_system->add_search_path(s.c_str());
-}
-
 bmfont_info* bmfont_info_cache::load_font_from_buffer(const uint8_t* buffer)
 {
     bmfont_info* font = new bmfont_info();
@@ -130,7 +113,7 @@ bmfont_info* bmfont_info_cache::load_font(const char *atlas_file_path)
          * so we must add the relative path the to the `search_path`, so that we could be able to
          * load the texture later on.
          */
-        this->insert_search_path(f->_path.c_str());
+        util::insert_search_path(f->_path.c_str());
 
         bmfont_info* font_info = load_font_from_buffer(f->_buffer);
         f->release();

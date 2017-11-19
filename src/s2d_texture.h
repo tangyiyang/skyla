@@ -25,6 +25,7 @@ public:
     virtual ~texture();
     
     bool init(const char* file);
+    bool init(uint8_t* raw_data, size_t len);
     inline void bind()
     {
         glActiveTexture(GL_TEXTURE0);

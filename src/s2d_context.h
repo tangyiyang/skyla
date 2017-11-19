@@ -65,11 +65,17 @@ public:
         return _visible_rect;
     }
 
+    inline void append_release_node(node* n)
+    {
+        _marked_release_nodes.push_back(n);
+    }
+
 private:
     void update_resolution_settings(float window_width, float window_height);
     void init_fundamental_components(const size& logic_size);
 
 public:
+    /* The Core Components */
     app_protocol*       _app;
     touch_handler*      _touch_handler;
     file_system*        _file_system;
@@ -79,12 +85,13 @@ public:
     texture_cache*      _texture_cache;
     node*               _root;
     camera*             _camera;
+
 #ifdef S2D_ENABLE_LUA
     lua_context*        _lua_context;
 #endif
 
+    /* Core Coordinate System */
     affine_transform _world_view_affine_transform;
-
     size             _logic_size;
     size             _window_size;
     rect             _viewport_rect;
@@ -92,6 +99,9 @@ public:
     vec2             _scale_factor;
     RESOLUTION_COMPAT_TYPE _resolution_compat_type;
     float            _content_scale_factor; // on retina screen, this may be 2 or 3.
+
+    /* Object lifecycle management */
+    std::vector<node*>  _marked_release_nodes;
     
 public:
     static inline context* C()

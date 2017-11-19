@@ -69,23 +69,31 @@ bool texture::init(const char* file)
     
     file_entry* f = util::load_file(file, false);
 
+    this->init(f->_buffer, (int)f->_size);
+
+    f->release();
+
+    return true;
+}
+
+bool texture::init(uint8_t* raw_data, size_t len)
+{
     int x = 0;
     int y = 0;
     int channels_in_file = 0;
-    uint8_t* data = stbi_load_from_memory(f->_buffer,
-                                          (int)f->_size,
+    uint8_t* data = stbi_load_from_memory(raw_data,
+                                          len,
                                           &x, &y,
                                           &channels_in_file,
                                           STBI_rgb_alpha);
     if (!data) {
-        LOGE("unable to parse the texture file: %s", file);
-        f->release();
+        LOGE("unable to parse texture data.");
         return false;
     }
 
     GLuint gl_handle;
     glGenTextures(1, &gl_handle);
-    
+
     glBindTexture(GL_TEXTURE_2D, gl_handle);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -94,13 +102,12 @@ bool texture::init(const char* file)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glBindTexture(GL_TEXTURE_2D, 0);
 
+    free(data);
+
     _id = _texture_id_counter++;
     _name = gl_handle;
     _size.width = x;
     _size.height = y;
-
-    free(data);
-    f->release();
 
     return true;
 }

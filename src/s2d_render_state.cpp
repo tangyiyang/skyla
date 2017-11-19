@@ -2,12 +2,14 @@
 #include "s2d_quad_renderer.h"
 #include "s2d_particle_renderer.h"
 #include "s2d_sprite.h"
+#include "s2d_particle.h"
 
 NS_S2D
 
 void render_state::init()
 {
     _cur_renderer = nullptr;
+    _cur_renderer_type = MAX_RENDERER_TYPE;
     _renderers[RENDERER_TYPE_QUAD] = new quad_renderer();
     _renderers[RENDERER_TYPE_QUAD]->init();
 
@@ -22,6 +24,7 @@ void render_state::shutdown()
         delete _renderers[i];
     }
     _cur_renderer = nullptr;
+    _cur_renderer_type = MAX_RENDERER_TYPE;
 }
 
 void render_state::clear()
@@ -30,21 +33,36 @@ void render_state::clear()
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void render_state::draw_sprite(s2d::sprite *s)
+renderer* render_state::switch_renderer(RENDERER_TYPE type)
 {
-    if (!_cur_renderer) {
-        // lazy init, for the sake of renderer not been used.
-        _cur_renderer = _renderers[RENDERER_TYPE_QUAD];
+    if (_cur_renderer_type == MAX_RENDERER_TYPE) {
+        /* initialize */
+        _cur_renderer_type = type;
+        _cur_renderer = _renderers[type];
     } else {
-        // switch from other type of renderer
-        if (_cur_renderer != _renderers[RENDERER_TYPE_QUAD]) {
+        if (_cur_renderer_type != type) {
             _cur_renderer->flush();
-            _cur_renderer = _renderers[RENDERER_TYPE_QUAD];
+            _cur_renderer = _renderers[type];
         }
     }
+    return _cur_renderer;
+}
 
+void render_state::draw_sprite(s2d::sprite *s)
+{
+    switch_renderer(RENDERER_TYPE_QUAD);
     quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
+
     r->draw(s->_model_view, s->_texture, s->_quad, 4);
+}
+
+void render_state::draw_particle(particle* p)
+{
+    /* TODO: using particle renderer later on */
+    switch_renderer(RENDERER_TYPE_QUAD);
+    quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
+
+    r->draw(p->_model_view, p->_texture, p->_vertices, p->_num_vertices);
 }
 
 void render_state::push_scissors(const rect& r)

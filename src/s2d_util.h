@@ -40,12 +40,7 @@ static const char* LOG_LEVEL_STR[] = {
 #define S2D_LOG_LEVEL (S2D_LOG_LEVEL_DEBUG)
 #endif
 
-#define S2D_ASSERT(cond) do { \
-                            if (!(cond)) { \
-                                LOGD(STRINGIFY(cond)); \
-                            } \
-                            assert(cond); \
-                            } while(0);
+#define S2D_ASSERT(cond) do { if (!(cond)) { LOGD(STRINGIFY(cond)); } assert(cond); } while(0);
 
 #define LOGD(format, ...) s2d::util::log(S2D_LOG_DEBUG, format "\n", ##__VA_ARGS__);
 #define LOGE(format, ...) s2d::util::log(S2D_LOG_ERROR, format "\n", ##__VA_ARGS__);
@@ -58,16 +53,18 @@ static const char* LOG_LEVEL_STR[] = {
 class file_entry;
 class util {
 public:
-    static uint32_t utf8_len(const char* utf8str);
-    static uint32_t utf8_decode(uint32_t* _state, uint32_t* _codep, uint8_t _ch);
+    static uint32_t     utf8_len(const char* utf8str);
+    static uint32_t     utf8_decode(uint32_t* _state, uint32_t* _codep, uint8_t _ch);
+
+    static void         log(int level, const char* format, ...);
+
+    static void         insert_search_path(const char* full_path);
+    static file_entry*  load_file(const char* path, bool cache);
+    static texture*     load_texture(const char* path);
+
+    static std::string  md5(file_entry* file_entry);
     
-    static void log(int level, const char* format, ...);
-    static file_entry* load_file(const char* path, bool cache);
-    static texture* load_texture(const char* path);
-
-    static std::string md5(file_entry* file_entry);
-
-    inline static float normalized_random()
+    static inline float normalized_random()
     {
         return -1.0f + (((double)rand())/RAND_MAX) * (1.0 - (-1.0));
     }

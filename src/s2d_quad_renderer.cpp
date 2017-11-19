@@ -115,11 +115,11 @@ void quad_renderer::draw(const affine_transform& world_transform,
 
 void quad_renderer::flush()
 {
-    if (!_program || !_texture) {
+    this->update_indexes();
+    if (!(_num_indexes>0) || !_program || !_texture) {
         return;
     }
-    
-    this->update_indexes();
+
     _program->use();
     _program->set_uniform("u_projection",
                           program::UNIFORM_TYPE_MATRIX_3_FV,
@@ -145,6 +145,7 @@ void quad_renderer::flush()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    LOGD("quad render vertices = %d", _num_vertices);
     _num_indexes = 0;
     _num_vertices = 0;
 }

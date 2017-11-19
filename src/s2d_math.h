@@ -16,12 +16,39 @@ NS_S2D
 
 #define PI (3.1415926f)
 #define FLT_EQUAL(a, b) (fabs((a) - (b)) < FLT_EPSILON)
+#define S2D_TEX_COORD_MAX ((1<<16)-1)
 
 typedef uint32_t color_t;
 
 struct vec2 {
     float x;
     float y;
+
+    static inline void normalize(float x, float y, vec2& out)
+    {
+        float n = x*x + y*y;
+        if (n < FLT_EPSILON) {
+            out.x = 0.0f;
+            out.y = 0.0f;
+        } else {
+            float len = sqrtf(n);
+            out.x = x / len;
+            out.y = y / len;
+        }
+    }
+
+    static inline void normalize(const vec2& v, vec2& out)
+    {
+        float n = v.x * v.x + v.y *v.y;
+        if (n < FLT_EPSILON) {
+            out.x = 0.0f;
+            out.y = 0.0f;
+        } else {
+            float len = sqrtf(n);
+            out.x = v.x/len;
+            out.y = v.y/len;
+        }
+    }
 };
 
 struct vec3 {
@@ -47,6 +74,15 @@ struct color4f {
 struct size {
     float width;
     float height;
+};
+
+class math {
+public:
+    static float clampf(float v, float min, float max)
+    {
+        const float t = v < min ? min : v;
+        return t > max ? max : t;
+    }
 };
 
 struct rect {

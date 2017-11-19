@@ -72,7 +72,6 @@ public:
     void shutdown();
 
 private:
-    void insert_search_path(const char* atlas_file_path);
     bmfont_info* load_font_from_buffer(const uint8_t* buffer);
     
 private:

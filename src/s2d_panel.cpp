@@ -8,9 +8,9 @@ void panel::init(const rect& r)
     _rect = r;
 }
 
-void panel::update(float dt)
+bool panel::update(float dt)
 {
-    node::update(dt);
+    return node::update(dt);
 }
 
 void panel::draw(render_state* rs)

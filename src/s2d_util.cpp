@@ -3,6 +3,8 @@
 #include "s2d_util.h"
 #include "s2d_context.h"
 
+#include <zlib.h> /*It looks like every platform has libz, all we need is to link with -lz.*/
+
 NS_S2D
 
 static const uint8_t s_utf8d[364] =
@@ -66,6 +68,23 @@ void util::log(int level, const char* format, ...)
         vprintf(format, ap);
         va_end(ap);
     }
+}
+
+void util::insert_search_path(const char* full_path)
+{
+    /*
+     *  subtract the filename of the atlas_file_path
+     *  "res/fonts/animated.fnt" -> "res/fonts/"
+     */
+    int i = (int)strlen(full_path);
+    for (; i >= 0; --i) {
+        if (full_path[i] == '/') {
+            break;
+        }
+    }
+
+    std::string s = std::string(full_path, i+1);
+    context::C()->_file_system->insert_full_search_path(s.c_str());
 }
 
 file_entry* util::load_file(const char* path, bool cache)
