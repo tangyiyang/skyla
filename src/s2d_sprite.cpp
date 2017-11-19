@@ -130,10 +130,10 @@ void sprite::set_texture_coord(const rect& r, texture* tex)
     float x = r.origin.x;
     float y = r.origin.y;
 
-    uint16_t left = (uint16_t)(x/tex_w * (float)TEX_COORD_MAX);
-    uint16_t right = (uint16_t)((x+w)/tex_w * (float)TEX_COORD_MAX);
-    uint16_t bottom = (uint16_t)(y/tex_h * (float)TEX_COORD_MAX);
-    uint16_t top = (uint16_t)((y+h)/tex_h * (float)TEX_COORD_MAX);
+    uint16_t left = (uint16_t)(x/tex_w * (float)S2D_TEX_COORD_MAX);
+    uint16_t right = (uint16_t)((x+w)/tex_w * (float)S2D_TEX_COORD_MAX);
+    uint16_t bottom = (uint16_t)(y/tex_h * (float)S2D_TEX_COORD_MAX);
+    uint16_t top = (uint16_t)((y+h)/tex_h * (float)S2D_TEX_COORD_MAX);
 
     _quad[0].pos.x = 0;
     _quad[0].pos.y = 0;
@@ -177,10 +177,10 @@ void sprite::set_texture_coord(sprite_frame* frame, texture* tex)
             std::swap(w, h);
         }
 
-        uint16_t left = (uint16_t)(x/tex_w * (float)TEX_COORD_MAX);
-        uint16_t right = (uint16_t)((x+w)/tex_w * (float)TEX_COORD_MAX);
-        uint16_t bottom = (uint16_t)(y/tex_h * (float)TEX_COORD_MAX);
-        uint16_t top = (uint16_t)((y+h)/tex_h * (float)TEX_COORD_MAX);
+        uint16_t left = (uint16_t)(x/tex_w * (float)S2D_TEX_COORD_MAX);
+        uint16_t right = (uint16_t)((x+w)/tex_w * (float)S2D_TEX_COORD_MAX);
+        uint16_t bottom = (uint16_t)(y/tex_h * (float)S2D_TEX_COORD_MAX);
+        uint16_t top = (uint16_t)((y+h)/tex_h * (float)S2D_TEX_COORD_MAX);
         
         /* Notice:
          *  quad[0] -> bottom-left
@@ -228,7 +228,7 @@ void sprite::set_texture_coord(sprite_frame* frame, texture* tex)
         
         // load the whole texture
         uint16_t bottom = 0;
-        uint16_t top = TEX_COORD_MAX;
+        uint16_t top = S2D_TEX_COORD_MAX;
         
         if (!tex->_upside_down) {
             // for most cases opengl texture is upside down.

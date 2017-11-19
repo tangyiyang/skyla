@@ -353,38 +353,30 @@ void particle::draw(render_state* rs)
     _model_view = transform_to(this->get_root());
 
     for (int i = 0, j = 0; i < _num_particles; ++i, j += 4) {
-        float size_2 = _emitter_data.size[i] / 2;
-        float x = _emitter_data.x[i];
-        float y = _emitter_data.y[i];
-
-        LOGD("size_2 = %.2f", size_2);
+        float size = _emitter_data.size[i];
         
-        // left top
-        _vertices[j+0].pos.x = -size_2;
-        _vertices[j+0].pos.y = size_2;
+        _vertices[j+0].pos.x = 0;
+        _vertices[j+0].pos.y = 0;
         _vertices[j+0].uv.u = 0;
         _vertices[j+0].uv.v = S2D_TEX_COORD_MAX;
         _vertices[j+0].color = 0xffffffff;
 
-        // right top
-        _vertices[j+1].pos.x = size_2;
-        _vertices[j+1].pos.y = size_2;
+        _vertices[j+1].pos.x = size;
+        _vertices[j+1].pos.y = 0;
         _vertices[j+1].uv.u = S2D_TEX_COORD_MAX;
         _vertices[j+1].uv.v = S2D_TEX_COORD_MAX;
         _vertices[j+1].color = 0xffffffff;
 
-        // left bottom
-        _vertices[j+2].pos.x = -size_2;
-        _vertices[j+2].pos.y = -size_2;
+        _vertices[j+2].pos.x = 0;
+        _vertices[j+2].pos.y = size;
         _vertices[j+2].uv.u = 0;
         _vertices[j+2].uv.v = 0;
         _vertices[j+2].color = 0xffffffff;
 
-        // right bottom
-        _vertices[j+3].pos.x = size_2;
-        _vertices[j+3].pos.y = size_2;
-        _vertices[j+2].uv.u = S2D_TEX_COORD_MAX;
-        _vertices[j+2].uv.v = 0;
+        _vertices[j+3].pos.x = size;
+        _vertices[j+3].pos.y = size;
+        _vertices[j+3].uv.u = S2D_TEX_COORD_MAX;
+        _vertices[j+3].uv.v = 0;
         _vertices[j+3].color = 0xffffffff;
     }
 
