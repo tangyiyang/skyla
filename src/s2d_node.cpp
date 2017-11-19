@@ -1,5 +1,7 @@
+#include "s2d_context.h"
 #include "s2d_node.h"
 #include "s2d_util.h"
+
 
 NS_S2D
 
@@ -18,16 +20,24 @@ void node::init()
     _z_counter = 0;
     _parent = nullptr;
     _dirty_flags = DIRTY_ALL;
+    _children.clear();
 }
 
-void node::update(float dt)
+bool node::update(float dt)
 {
+    LOGD("update %d ", this->_id);
     this->sort();
     this->update_srt();
     std::vector<node*>::iterator it = _children.begin();
-    for (; it != _children.end(); ++it) {
-        (*it)->update(dt);
+    while(it != _children.end()) {
+        if ((*it)->update(dt)) {
+            _children.erase(it);
+        } else {
+            ++it;
+        }
     }
+
+    return _dirty_flags & DIRTY_MARKED_RELEASE;
 }
 
 void node::draw(render_state* rs)
@@ -118,8 +128,7 @@ void node::add_child(node* child, uint32_t z_order/*= 0*/)
 
 void node::remove_child(node* child)
 {
-    _children.erase(std::remove(_children.begin(), _children.end(), child), _children.end());
-    delete child;
+    child->_dirty_flags |= DIRTY_MARKED_RELEASE;
 }
 
 void node::remove_all_children()

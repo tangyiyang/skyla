@@ -11,10 +11,11 @@
 #include "s2d_touch_handler.h"
 #include "s2d_render_state.h"
 
-#define DIRTY_TRANSFORM (1<<0)
-#define DIRTY_SCALE     (1<<1)
-#define DIRTY_ROTATION  (1<<2)
-#define DIRTY_Z         (1<<3)
+#define DIRTY_TRANSFORM      (1<<0)
+#define DIRTY_SCALE          (1<<1)
+#define DIRTY_ROTATION       (1<<2)
+#define DIRTY_Z              (1<<3)
+#define DIRTY_MARKED_RELEASE (1<<31)
 
 #define DIRTY_SRT (DIRTY_TRANSFORM | DIRTY_SCALE | DIRTY_ROTATION)
 #define DIRTY_ALL (DIRTY_SRT | DIRTY_Z)
@@ -27,7 +28,7 @@ class node {
      */
 public:
     virtual void init();
-    virtual void update(float dt);
+    virtual bool update(float dt);
     virtual void draw(render_state* rs);
     virtual void hit_test(touch_handler* handler, touch_event* event);
     virtual void on_touch(touch_event* event);
@@ -101,7 +102,7 @@ protected:
     uint64_t             _id;
     uint32_t             _z_order;
     uint32_t             _z_counter;
-    uint64_t             _dirty_flags;
+    uint32_t             _dirty_flags;
 
     bool                 _visible;
     vec2                 _pos;
