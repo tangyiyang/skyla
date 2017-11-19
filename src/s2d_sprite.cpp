@@ -250,21 +250,21 @@ void sprite::set_texture_coord(sprite_frame* frame, texture* tex)
 
         _quad[2].pos.x = tex->_size.width;
         _quad[2].pos.y = 0;
-        _quad[2].uv.u = (1 <<16)-1;
+        _quad[2].uv.u = S2D_TEX_COORD_MAX;
         _quad[2].uv.v = top;
         _quad[2].color = 0xffffffff;
 
         _quad[3].pos.x = tex->_size.width;
         _quad[3].pos.y = tex->_size.height;
-        _quad[3].uv.u = (1<<16)-1;
+        _quad[3].uv.u = S2D_TEX_COORD_MAX;
         _quad[3].uv.v = bottom;
         _quad[3].color = 0xffffffff;
     }
 }
 
-void sprite::update(float dt)
+bool sprite::update(float dt)
 {
-    node::update(dt);
+    return node::update(dt);
 }
 
 void sprite::draw(render_state* rs)

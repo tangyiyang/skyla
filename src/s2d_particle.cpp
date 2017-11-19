@@ -1,7 +1,24 @@
 #include "cJSON.h"
+#include "base64.h"
+
+#include "s2d_util.h"
 #include "s2d_particle.h"
 
 NS_S2D
+
+/* color setting macros*/
+#define SET_COLOR(c, b, v)\
+for (int i = start; i < _num_particles; ++i)\
+{\
+c[i] = math::clampf( b + v * util::normalized_random(), 0.0f, 1.0f);\
+}
+
+#define SET_DELTA_COLOR(c, dc)\
+for (int i = start; i < _num_particles; ++i)\
+{\
+dc[i] = (dc[i] - c[i]) / _emitter_data.ttl[i];\
+}
+
 
 void emmiter_property::init(EMMITER_TYPE mode, int total_particles)
 {
@@ -88,12 +105,17 @@ void emmiter_property::shutdown()
 particle::particle()
 {
     _initialized = false;
+    _texture = nullptr;
+    _vertices = nullptr;
+    _num_particles = 0;
 }
 
 particle::~particle()
 {
     if (_initialized) {
         _emitter_data.shutdown();
+        _texture->release();
+        free(_vertices);
     }
 }
 
@@ -107,6 +129,14 @@ void particle::init(const char* file_path)
     node::init();
 
     this->load_particle_settings(file_path);
+    this->init_vertices();
+}
+
+void particle::init_vertices()
+{
+    /* temporary solution */
+    _num_vertices = 0;
+    _vertices = (pos_tex_color_vertex*)malloc(4 * _max_particle * sizeof(pos_tex_color_vertex));
 }
 
 void particle::load_particle_settings(const char *file_path)
@@ -125,6 +155,7 @@ void particle::load_particle_settings(const char *file_path)
     _speed_var = cJSON_GetObjectItemCaseSensitive(root, "speedVariance")->valuedouble;
     _absolute_position = cJSON_GetObjectItemCaseSensitive(root, "absolutePosition")->valueint;
     _duration = cJSON_GetObjectItemCaseSensitive(root, "duration")->valuedouble;
+    _y_coord_flip = cJSON_GetObjectItemCaseSensitive(root, "yCoordFlipped")->valueint;
 
     /* load the particle settings */
     _life_span = cJSON_GetObjectItemCaseSensitive(root, "particleLifespan")->valuedouble;
@@ -158,6 +189,11 @@ void particle::load_particle_settings(const char *file_path)
     _blend.src = cJSON_GetObjectItemCaseSensitive(root, "blendFuncSource")->valueint;
     _blend.dst = cJSON_GetObjectItemCaseSensitive(root, "blendFuncDestination")->valueint;
 
+    _start_rotation = cJSON_GetObjectItemCaseSensitive(root, "rotationStart")->valuedouble;
+    _start_rotation_var = cJSON_GetObjectItemCaseSensitive(root, "rotationStartVariance")->valuedouble;
+    _end_rotation = cJSON_GetObjectItemCaseSensitive(root, "rotationEnd")->valuedouble;
+    _end_rotation_var = cJSON_GetObjectItemCaseSensitive(root, "rotationEndVariance")->valuedouble;
+
     _emmiter_type = cJSON_GetObjectItemCaseSensitive(root, "emitterType")->valueint;
     if (_emmiter_type == emmiter_property::GRAVITY) {
         /* load the gravity mode settings */
@@ -169,10 +205,6 @@ void particle::load_particle_settings(const char *file_path)
         _tangential_accel_var = cJSON_GetObjectItemCaseSensitive(root, "tangentialAccelVariance")->valuedouble;
     } else if (_emmiter_type == emmiter_property::RADIDUS) {
         /* load the radial mode settings */
-        _start_rotation = cJSON_GetObjectItemCaseSensitive(root, "rotationStart")->valuedouble;
-        _start_rotation_var = cJSON_GetObjectItemCaseSensitive(root, "rotationStartVariance")->valuedouble;
-        _end_rotation = cJSON_GetObjectItemCaseSensitive(root, "rotationEnd")->valuedouble;
-        _end_rotation_var = cJSON_GetObjectItemCaseSensitive(root, "rotationEndVariance")->valuedouble;
         _rotate_per_second = cJSON_GetObjectItemCaseSensitive(root, "rotatePerSecondVariance")->valuedouble;
         _rotate_per_second_var = cJSON_GetObjectItemCaseSensitive(root, "rotatePerSecondVariance")->valuedouble;
         _max_radius = cJSON_GetObjectItemCaseSensitive(root, "maxRadius")->valuedouble;
@@ -192,6 +224,20 @@ void particle::load_particle_settings(const char *file_path)
     } else {
         LOGE("invalid emmiter type: %d", _emmiter_type);
         S2D_ASSERT(false);
+    }
+
+    /*
+     * load the texture data
+     * we don't support the compressed image right now.
+     */
+
+    if (cJSON_HasObjectItem(root, "textureFileName")) {
+        util::insert_search_path(file->_path.c_str());
+
+        const char* name = cJSON_GetObjectItemCaseSensitive(root, "textureFileName")->valuestring;
+        texture* tex = new texture();
+        tex->init(name);
+        _texture = tex;
     }
 
     cJSON_Delete(root);
@@ -226,19 +272,21 @@ void particle::stop()
     _active = false;
 }
 
-void particle::update(float dt)
+bool particle::update(float dt)
 {
     node::update(dt);
     _time_elapsed += dt;
 
+    /* first we test if the particle is dead.*/
     if ( (!FLT_EQUAL(_duration, -1.0f)) && _time_elapsed > _duration) {
         this->stop();
-        return;
+        return false;
     }
 
     if (_active) {
         _emmit_counter += dt;
 
+        /* emit serveral particles */
         int n = std::min(_max_particle - _num_particles, (int)(_emmit_counter * _emission_rate));
         this->emit(n);
         _emmit_counter -= ((float)n) / _emission_rate;
@@ -257,28 +305,111 @@ void particle::update(float dt)
              ((float)n) / _emission_rate);
     }
 
+    /* check their lives */
     bool all_dead = this->update_life(dt);
     if (all_dead) {
-        // stop at here.
-        return;
+        return true;
     }
 
+    /* if there were someby alive, we update these lucky girls.*/
+    if (_emmiter_type == emmiter_property::GRAVITY)
+    {
+        for (int i = 0 ; i < _num_particles; ++i)
+        {
+            vec2 tmp, radial, tangential;
+            float radial_accel = _emitter_data._mode_info._data._gravity.radial_accel[i];
+            float tangential_accel = _emitter_data._mode_info._data._gravity.tangential_accel[i];
+
+            vec2::normalize(_emitter_data.x[i], _emitter_data.y[i], radial);
+
+            tangential = radial;
+            radial.x *= radial_accel;
+            radial.y *= radial_accel;
+
+            std::swap(tangential.x, tangential.y);
+            tangential.x *= -tangential_accel;
+            tangential.y *= tangential_accel;
+
+            // (gravity + radial + tangential) * dt
+            tmp.x = radial.x + tangential.x + _gravity.x;
+            tmp.y = radial.y + tangential.y + _gravity.y;
+            tmp.x *= dt;
+            tmp.y *= dt;
+
+            _emitter_data._mode_info._data._gravity.dir_x[i] += tmp.x;
+            _emitter_data._mode_info._data._gravity.dir_y[i] += tmp.y;
+
+            tmp.x = _emitter_data._mode_info._data._gravity.dir_x[i] * dt * _y_coord_flip;
+            tmp.y = _emitter_data._mode_info._data._gravity.dir_y[i] * dt * _y_coord_flip;
+
+            _emitter_data.x[i] += tmp.x;
+            _emitter_data.y[i] += tmp.x;
+        }
+    }
+
+    return false;
 }
+
+void particle::draw(render_state* rs)
+{
+    _model_view = transform_to(this->get_root());
+
+    for (int i = 0, j = 0; i < _num_particles; ++i, j += 4) {
+        float size_2 = _emitter_data.size[i] / 2;
+        float x = _emitter_data.x[i];
+        float y = _emitter_data.y[i];
+
+        LOGD("size_2 = %.2f", size_2);
+        
+        // left top
+        _vertices[j+0].pos.x = -size_2;
+        _vertices[j+0].pos.y = size_2;
+        _vertices[j+0].uv.u = 0;
+        _vertices[j+0].uv.v = S2D_TEX_COORD_MAX;
+        _vertices[j+0].color = 0xffffffff;
+
+        // right top
+        _vertices[j+1].pos.x = size_2;
+        _vertices[j+1].pos.y = size_2;
+        _vertices[j+1].uv.u = S2D_TEX_COORD_MAX;
+        _vertices[j+1].uv.v = S2D_TEX_COORD_MAX;
+        _vertices[j+1].color = 0xffffffff;
+
+        // left bottom
+        _vertices[j+2].pos.x = -size_2;
+        _vertices[j+2].pos.y = -size_2;
+        _vertices[j+2].uv.u = 0;
+        _vertices[j+2].uv.v = 0;
+        _vertices[j+2].color = 0xffffffff;
+
+        // right bottom
+        _vertices[j+3].pos.x = size_2;
+        _vertices[j+3].pos.y = size_2;
+        _vertices[j+2].uv.u = S2D_TEX_COORD_MAX;
+        _vertices[j+2].uv.v = 0;
+        _vertices[j+3].color = 0xffffffff;
+    }
+
+    _num_vertices = _num_particles * 4;
+
+    LOGD("_num_vertices = %d", _num_vertices);
+    rs->draw_particle(this);
+
+    /* particle shouldn't have any child for most cases.*/
+    node::draw(rs);
+}
+
 
 bool particle::update_life(float dt)
 {
-    for (int i = 0; i < _num_particles; ++i)
-    {
+    for (int i = 0; i < _num_particles; ++i) {
         _emitter_data.ttl[i] -= dt;
     }
 
-    for (int i = 0; i < _num_particles; ++i)
-    {
-        if (_emitter_data.ttl[i] <= 0.0f)
-        {
+    for (int i = 0; i < _num_particles; ++i) {
+        if (_emitter_data.ttl[i] <= 0.0f) {
             int j = _num_particles - 1;
-            while (j > 0 && _emitter_data.ttl[j] <= 0)
-            {
+            while (j > 0 && _emitter_data.ttl[j] <= 0) {
                 --_num_particles;
                 --j;
             }
@@ -286,9 +417,7 @@ bool particle::update_life(float dt)
 
             --_num_particles;
 
-            if( _num_particles == 0)
-            {
-                this->_emitter_data.shutdown();
+            if( _num_particles == 0) {
                 this->remove_from_parent();
                 return true;
             }
@@ -303,10 +432,79 @@ void particle::emit(int n)
     int start = _num_particles;
     _num_particles += n;
 
+    /* life */
     for (int i = start; i < _num_particles; ++i) {
         float life = _life_span + _life_span_var * util::normalized_random();
         _emitter_data.ttl[i] = std::max(life, _life_span);
     }
+
+    /* positions, ralative mode only, we could easily support absolute mode by add node to root. */
+    for (int i = start; i < _num_particles; ++i) {
+        _emitter_data.x[i] = _source_pos_var.x * util::normalized_random();
+    }
+
+    for (int i = start; i < _num_particles; ++i) {
+        _emitter_data.y[i] = _source_pos_var.y * util::normalized_random();
+    }
+
+    for (int i = start; i < _num_particles; ++i)
+    {
+        _emitter_data.start_x[i] = _pos.x;
+    }
+    for (int i = start; i < _num_particles; ++i)
+    {
+        _emitter_data.start_y[i] = _pos.y;
+    }
+
+    /* color */
+    SET_COLOR(_emitter_data.r, _start_color.r, _start_color_var.r);
+    SET_COLOR(_emitter_data.g, _start_color.g, _start_color_var.g);
+    SET_COLOR(_emitter_data.b, _start_color.b, _start_color_var.b);
+    SET_COLOR(_emitter_data.a, _start_color.a, _start_color_var.a);
+
+    /*
+     * TODO: actually, there were two ways to set the delta color, instead using
+     * this SOA mode settings, could we have better performance directly caculate
+     * the performance by (deleta = (end - start)/life) ?
+     */
+    SET_COLOR(_emitter_data.r, _end_color.r, _end_color_var.r);
+    SET_COLOR(_emitter_data.g, _end_color.g, _end_color_var.g);
+    SET_COLOR(_emitter_data.b, _end_color.b, _end_color_var.b);
+    SET_COLOR(_emitter_data.a, _end_color.a, _end_color_var.a);
+
+    SET_DELTA_COLOR(_emitter_data.r, _emitter_data.delta_r);
+    SET_DELTA_COLOR(_emitter_data.g, _emitter_data.delta_g);
+    SET_DELTA_COLOR(_emitter_data.b, _emitter_data.delta_b);
+    SET_DELTA_COLOR(_emitter_data.a, _emitter_data.delta_a);
+
+    /* size */
+    for (int i = start; i < _num_particles; ++i) {
+        _emitter_data.size[i] = _start_size + _start_size_var * util::normalized_random();
+        _emitter_data.size[i] = std::max(0.0f, _emitter_data.size[i]);
+    }
+
+    if (!FLT_EQUAL(_start_size, _end_size)) {
+        for (int i = start; i < _num_particles; ++i) {
+            float end_size = _end_size + _end_size_var * util::normalized_random();
+            end_size = std::max(0.0f, end_size);
+            _emitter_data.delta_size[i] = (end_size - _emitter_data.size[i]) / _emitter_data.ttl[i];
+        }
+    } else {
+        for (int i = start; i < _num_particles; ++i) {
+            _emitter_data.delta_size[i] = 0.0f;
+        }
+    }
+
+    /* rotation */
+    for (int i = start; i < _num_particles; ++i) {
+        _emitter_data.rotation[i] = _start_rotation + _start_rotation_var * util::normalized_random();
+    }
+    for (int i = start; i < _num_particles; ++i) {
+        float end_rotation = _end_rotation + _end_rotation * util::normalized_random();
+        _emitter_data.delta_rotation[i] = (end_rotation - _emitter_data.rotation[i]) / _emitter_data.ttl[i];
+    }
+
+    
 }
 
 NS_S2D_END

@@ -6,6 +6,7 @@
 NS_S2D
 
 uint64_t node::_node_id_counter = 0;
+
 void node::init()
 {
     _id = _node_id_counter++;
@@ -31,6 +32,7 @@ bool node::update(float dt)
     std::vector<node*>::iterator it = _children.begin();
     while(it != _children.end()) {
         if ((*it)->update(dt)) {
+            delete *it;
             _children.erase(it);
         } else {
             ++it;

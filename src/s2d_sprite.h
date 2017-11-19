@@ -54,7 +54,7 @@ public:
     void set_color(uint32_t color);
 
 public:
-    void update(float dt)       override;
+    bool update(float dt)       override;
     void draw(render_state* rs) override;
     rect bounds_in(node* space) override;
 

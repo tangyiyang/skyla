@@ -1,5 +1,5 @@
 /*
- * Particle emmiter system, referenced from cocos2d-x, enhanced with transform feedback implementation.
+ * Particle emmiter system, referenced from cocos2d-x.
  * Author: yiyang
  * Copyright: see copyright at s2d.h
  */
@@ -8,6 +8,7 @@
 #define s2d_particle_h
 
 #include "s2d_node.h"
+#include "s2d_quad_renderer.h"
 
 NS_S2D
 
@@ -23,6 +24,7 @@ struct emmiter_property {
         float* radial_accel;
         float* tangential_accel;
     };
+
     struct mode_raidus {
         float* angle;
         float* degrees_per_second;
@@ -114,16 +116,17 @@ public:
 
 public:
     void init(const char* file_path);
-    void update(float dt) override;
+    bool update(float dt) override;
+    void draw(render_state* rs) override;
     void start();
     void stop();
     void reset();
 
 private:
     void load_particle_settings(const char* file_path);
+    void init_vertices();
     void emit(int n);
     bool update_life(float dt);
-
 
 private:
     bool _initialized;
@@ -138,6 +141,7 @@ private:
     float _speed_var;
     float _duration;
     int   _emmiter_type;
+    int   _y_coord_flip;
 
     /* srt settings */
     float _rotate_per_second;
@@ -174,9 +178,6 @@ private:
     color4f _end_color_var;
     blend_func _blend;
 
-    /* texture settings */
-    texture* _texture;
-
     /* emmiter paramters, those vars may change duraring the update process. */
     bool _active;
     int _num_particles;
@@ -184,6 +185,13 @@ private:
     float _emission_rate;
     float _emmit_counter;
 
+public:
+    /* renderering stuff */
+    /* TODO: we shoud implement this with `particle renderer`.*/
+    pos_tex_color_vertex*   _vertices;
+    int                     _num_vertices;
+    texture*                _texture;
+    affine_transform        _model_view;
 };
 
 NS_S2D_END

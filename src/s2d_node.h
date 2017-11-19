@@ -27,6 +27,8 @@ class node {
      *  The scene-graph implemention class.
      */
 public:
+    node() {}
+    virtual ~node() {}
     virtual void init();
     virtual bool update(float dt);
     virtual void draw(render_state* rs);
