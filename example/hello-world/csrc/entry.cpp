@@ -16,16 +16,16 @@ void entry::on_init(context* ctx)
 
 #if 1
 
-    particle* p = new particle();
-    p->init("res/particles/flower.json");
-    p->set_pos(300, 300);
-    root->add_child(p);
-
-    sprite* s = new sprite();
-    s->init("res/particles/flower.png");
-    s->set_pos(200, 200);
-    s->set_color(0x00ff00ff);
-    root->add_child(s);
+    int j = 0;
+    for (int i = 0; i < 40; ++i) {
+        particle* p = new particle();
+        p->init("res/particles/flower.json");
+        p->set_pos(((i+1)%10) * 100, j*100);
+        if (i%10 == 0) {
+            j++;
+        }
+        root->add_child(p);
+    }
 
 #else
     root->set_anchor(0, 0);

@@ -106,6 +106,8 @@ int main(int argc, char** argv)
 
             last = now;
 
+            LOGD("dt = %.5f", dt);
+
             glfwSwapBuffers(window);
             glfwPollEvents();
         } else {

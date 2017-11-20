@@ -288,8 +288,12 @@ bool particle::update(float dt)
     }
 
     if (_active) {
-        _emmit_counter += dt;
-
+        //issue #1201, prevent bursts of particles, due to too high emitCounter
+        if (_num_particles < _max_particle)
+        {
+            _emmit_counter += dt;
+            
+        }
         /* emit serveral particles */
         int n = std::min(_max_particle - _num_particles, (int)(_emmit_counter * _emission_rate));
         if (n > 0) {

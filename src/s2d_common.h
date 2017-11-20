@@ -20,5 +20,6 @@
 #include "s2d_ref_counter.h"
 #include "s2d_math.h"
 #include "s2d_gl.h"
+#include "s2d_platform.h"
 
 #endif

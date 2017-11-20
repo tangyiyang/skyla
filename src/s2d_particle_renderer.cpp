@@ -23,6 +23,7 @@ particle_renderer::particle_renderer()
 
 void particle_renderer::init()
 {
+#if S2D_IS_DESKTOP
     /* create the program. */
     GLuint shader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(shader, 1, &vs_feed_back, nullptr);
@@ -47,8 +48,6 @@ void particle_renderer::init()
     glTransformFeedbackVaryings(program, 1, feedbackVaryings, GL_INTERLEAVED_ATTRIBS);
     glLinkProgram(program);
     glUseProgram(program);
-
-    CHECK_GL_ERROR;
 
     GLuint vao = 0;
     glGenVertexArrays(1, &vao);
@@ -82,6 +81,14 @@ void particle_renderer::init()
 
     GLfloat feedback[5];
     glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
+
+    for (int i = 0; i < 5; ++i) {
+        LOGD("i = %.2f", feedback[i]);
+    }
+    glDisable(GL_RASTERIZER_DISCARD);
+
+    CHECK_GL_ERROR;
+#endif
 }
 
 void particle_renderer::shutdown()

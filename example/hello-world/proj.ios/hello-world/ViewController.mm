@@ -113,7 +113,8 @@
 
 - (void)update
 {
-
+    NSTimeInterval interval = [self timeSinceLastDraw];
+    self.game_context->update(interval);
 }
 
 
@@ -125,9 +126,9 @@
     glClear(GL_COLOR_BUFFER_BIT);
 
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
-    NSTimeInterval interval = [self timeSinceLastDraw];
+
     
-    self.game_context->loop(interval);
+    self.game_context->draw();
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

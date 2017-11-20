@@ -32,7 +32,7 @@ uint8_t* sys_read(const char* path, size_t* size) {
     rewind(fp);
 
     // always allocated 1 extra byte, this would make deal with C string easier.
-    uint8* buffer = (unsigned char*)malloc(file_size);
+    uint8_t* buffer = (uint8_t*)malloc(file_size);
     memset(buffer, 0, file_size);
     size_t result = fread(buffer, 1, file_size, fp);
 
