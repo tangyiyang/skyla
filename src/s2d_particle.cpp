@@ -292,8 +292,10 @@ bool particle::update(float dt)
 
         /* emit serveral particles */
         int n = std::min(_max_particle - _num_particles, (int)(_emmit_counter * _emission_rate));
-        this->emit(n);
-        _emmit_counter -= ((float)n) / _emission_rate;
+        if (n > 0) {
+            this->emit(n);
+            _emmit_counter -= ((float)n) / _emission_rate;
+        }
 
 //        LOGD("Emit: "
 //             "dt = %.2f, _emission_rate = %.2f, "
@@ -348,6 +350,34 @@ bool particle::update(float dt)
             _emitter_data.x[i] += tmp.x;
             _emitter_data.y[i] += tmp.y;
         }
+    } else if (_emmiter_type == emmiter_property::RADIDUS) {
+
+    }
+
+    //color r,g,b,a
+    for (int i = 0 ; i < _num_particles; ++i) {
+        _emitter_data.r[i] += _emitter_data.delta_r[i] * dt;
+    }
+
+    for (int i = 0 ; i < _num_particles; ++i) {
+        _emitter_data.g[i] += _emitter_data.delta_g[i] * dt;
+    }
+
+    for (int i = 0 ; i < _num_particles; ++i) {
+        _emitter_data.b[i] += _emitter_data.delta_b[i] * dt;
+    }
+
+    for (int i = 0 ; i < _num_particles; ++i) {
+        _emitter_data.a[i] += _emitter_data.a[i] * dt;
+    }
+
+    for (int i = 0 ; i < _num_particles; ++i) {
+        _emitter_data.size[i] += (_emitter_data.delta_size[i] * dt);
+        _emitter_data.size[i] = std::max(0.0f, _emitter_data.size[i]);
+    }
+
+    for (int i = 0 ; i < _num_particles; ++i) {
+        _emitter_data.rotation[i] += _emitter_data.delta_rotation[i] * dt;
     }
 
     return false;
@@ -489,6 +519,8 @@ void particle::emit(int n)
     SET_COLOR(_emitter_data.b, _start_color.b, _start_color_var.b);
     SET_COLOR(_emitter_data.a, _start_color.a, _start_color_var.a);
 
+    LOGD("Particle: emit, color.r = %.2f, start_color.r = %.2f, start_color_var = %.2f", _emitter_data.r[0], _start_color.r, _start_color_var.r);
+
     /*
      * TODO: actually, there were two ways to set the delta color, instead using
      * this SOA mode settings, could we have better performance directly caculate
@@ -499,10 +531,15 @@ void particle::emit(int n)
     SET_COLOR(_emitter_data.delta_b, _end_color.b, _end_color_var.b);
     SET_COLOR(_emitter_data.delta_a, _end_color.a, _end_color_var.a);
 
+    LOGD("Particle: emit, _emitter_data.delta_r = %.2f, _end_color = %.2f, _end_color_var = %.2f",
+         _emitter_data.delta_r[0], _end_color.r, _end_color_var.r);
+
     SET_DELTA_COLOR(_emitter_data.r, _emitter_data.delta_r);
     SET_DELTA_COLOR(_emitter_data.g, _emitter_data.delta_g);
     SET_DELTA_COLOR(_emitter_data.b, _emitter_data.delta_b);
     SET_DELTA_COLOR(_emitter_data.a, _emitter_data.delta_a);
+
+    LOGD("Particle: emit, _emitter_data.r = %.2f, _emitter_data.delta_r = %.2f", _emitter_data.r[0], _emitter_data.delta_r[0]);
 
     /* size */
     for (int i = start; i < _num_particles; ++i) {
