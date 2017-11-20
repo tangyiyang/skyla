@@ -20,6 +20,9 @@ public:
     void init() override;
     void shutdown() override;
     void flush() override;
+
+private:
+    GLuint _program;
 };
 
 NS_S2D_END

@@ -36,7 +36,7 @@ void render_state::clear()
 renderer* render_state::switch_renderer(RENDERER_TYPE type)
 {
     if (_cur_renderer_type == MAX_RENDERER_TYPE) {
-        /* initialize */
+        /* lazy initialize */
         _cur_renderer_type = type;
         _cur_renderer = _renderers[type];
     } else {

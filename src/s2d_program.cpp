@@ -37,7 +37,7 @@ program* program::load_default_program(EMBEDED_PROGRAMS type)
     static const char* shaders[EMBEDED_PROGRAM_MAX*2] =
     {
         vs_sprite,
-        fs_sprite
+        fs_sprite,
     };
     int vs_index = type*2;
     int fs_index = type*2 + 1;

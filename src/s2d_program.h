@@ -18,7 +18,6 @@ public:
 
     enum EMBEDED_PROGRAMS {
         EMBEDED_PROGRAM_SPRITE_DEFAULT = 0,
-
         EMBEDED_PROGRAM_MAX
     };
 
@@ -39,9 +38,9 @@ public:
 
 public:
     static program* load_default_program(EMBEDED_PROGRAMS type);
-    static GLuint load_shader(GLenum shader_type, const char* shader_data);
-    static void bind_vertex_locations(GLuint program);
-    static GLuint load_program(GLuint vs, GLuint fs);
+    static GLuint   load_shader(GLenum shader_type, const char* shader_data);
+    static void     bind_vertex_locations(GLuint program);
+    static GLuint   load_program(GLuint vs, GLuint fs);
 
 public:
     void init(GLuint vs, GLuint fs);
