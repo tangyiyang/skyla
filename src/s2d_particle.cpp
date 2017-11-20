@@ -336,17 +336,16 @@ bool particle::update(float dt)
             // (gravity + radial + tangential) * dt
             tmp.x = radial.x + tangential.x + _gravity.x;
             tmp.y = radial.y + tangential.y + _gravity.y;
+
             tmp.x *= dt;
             tmp.y *= dt;
 
-            LOGD("Particle: accel = %.2f, %.2f", tmp.x, tmp.y);
             _emitter_data._mode_info._data._gravity.dir_x[i] += tmp.x;
             _emitter_data._mode_info._data._gravity.dir_y[i] += tmp.y;
 
             tmp.x = _emitter_data._mode_info._data._gravity.dir_x[i] * dt * _y_coord_flip;
             tmp.y = _emitter_data._mode_info._data._gravity.dir_y[i] * dt * _y_coord_flip;
 
-            LOGD("Particle: x_offset = %.2f, y_offset = %.2f", tmp.x, tmp.y);
             _emitter_data.x[i] += tmp.x;
             _emitter_data.y[i] += tmp.y;
         }
@@ -579,7 +578,7 @@ void particle::emit(int n)
     if (_emitter_data._mode_info._mode == emmiter_property::GRAVITY) {
         float* rc = _emitter_data._mode_info._data._gravity.radial_accel;
         for (int i = start; i < _num_particles; ++i) {
-            rc[i] = _radial_accel * _radial_accel_var * util::normalized_random();
+            rc[i] = _radial_accel + _radial_accel_var * util::normalized_random();
         }
 
         // tangential accel
@@ -626,11 +625,9 @@ void particle::emit(int n)
                      a, angle, cos_a, sin_a, s, dir_x, dir_y);
             }
         }
-
     } else {
 
     }
-    
 }
 
 NS_S2D_END
