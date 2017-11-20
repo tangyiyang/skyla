@@ -367,7 +367,7 @@ bool particle::update(float dt)
     }
 
     for (int i = 0 ; i < _num_particles; ++i) {
-        _emitter_data.a[i] += _emitter_data.a[i] * dt;
+        _emitter_data.a[i] += _emitter_data.delta_a[i] * dt;
     }
 
     for (int i = 0 ; i < _num_particles; ++i) {
@@ -395,7 +395,7 @@ void particle::draw(render_state* rs)
         float green = _emitter_data.g[i];
         float blue = _emitter_data.b[i];
         float alpha = _emitter_data.a[i];
-        uint32_t color = (((int)(red*255))<<24) + (((int)(green*255))<<16) + (((int)(blue*255))<<8) + ((int)alpha);
+        uint32_t color = (((int)(red*255))<<24) + (((int)(green*255))<<16) + (((int)(blue*255))<<8) + ((int)alpha*255);
 
         pos_tex_color_vertex* v = _vertices + j;
 
@@ -441,14 +441,10 @@ void particle::draw(render_state* rs)
         v[3].uv.u = S2D_TEX_COORD_MAX;
         v[3].uv.v = 0;
         v[3].color = color;
-
-        LOGD("Particle: x = %.2f, y = %.2f", x, y);
-        LOGD("Particle: v[%d] = %.2f, %.2f, y /x = %.2f", 0, v[0].pos.x, v[0].pos.y);
     }
 
     _num_vertices = _num_particles * 4;
 
-    LOGD("_num_vertices = %d", _num_vertices);
     rs->draw_particle(this);
 
     /* particle shouldn't have any child for most cases.*/
@@ -518,8 +514,6 @@ void particle::emit(int n)
     SET_COLOR(_emitter_data.b, _start_color.b, _start_color_var.b);
     SET_COLOR(_emitter_data.a, _start_color.a, _start_color_var.a);
 
-    LOGD("Particle: emit, color.r = %.2f, start_color.r = %.2f, start_color_var = %.2f", _emitter_data.r[0], _start_color.r, _start_color_var.r);
-
     /*
      * TODO: actually, there were two ways to set the delta color, instead using
      * this SOA mode settings, could we have better performance directly caculate
@@ -530,15 +524,10 @@ void particle::emit(int n)
     SET_COLOR(_emitter_data.delta_b, _end_color.b, _end_color_var.b);
     SET_COLOR(_emitter_data.delta_a, _end_color.a, _end_color_var.a);
 
-    LOGD("Particle: emit, _emitter_data.delta_r = %.2f, _end_color = %.2f, _end_color_var = %.2f",
-         _emitter_data.delta_r[0], _end_color.r, _end_color_var.r);
-
     SET_DELTA_COLOR(_emitter_data.r, _emitter_data.delta_r);
     SET_DELTA_COLOR(_emitter_data.g, _emitter_data.delta_g);
     SET_DELTA_COLOR(_emitter_data.b, _emitter_data.delta_b);
     SET_DELTA_COLOR(_emitter_data.a, _emitter_data.delta_a);
-
-    LOGD("Particle: emit, _emitter_data.r = %.2f, _emitter_data.delta_r = %.2f", _emitter_data.r[0], _emitter_data.delta_r[0]);
 
     /* size */
     for (int i = start; i < _num_particles; ++i) {
@@ -608,7 +597,6 @@ void particle::emit(int n)
         else
         {
             for (int i = start; i < _num_particles; ++i) {
-                float angle = _angle + _angle_var * util::normalized_random();
                 float a = (_angle + _angle_var * util::normalized_random()) * PI / 180.0f;
 
                 float cos_a = cosf(a);
@@ -620,9 +608,6 @@ void particle::emit(int n)
 
                 _emitter_data._mode_info._data._gravity.dir_x[i] = dir_x;
                 _emitter_data._mode_info._data._gravity.dir_y[i] = dir_y;
-
-                LOGD("Particle: a = %.2f, angle_in_degree = %.2f, cos_a = %.2f, sin_a = %.2f, s = %.2f, dir_x = %.2f, dir_y = %.2f",
-                     a, angle, cos_a, sin_a, s, dir_x, dir_y);
             }
         }
     } else {

@@ -21,6 +21,12 @@ void entry::on_init(context* ctx)
     p->set_pos(300, 300);
     root->add_child(p);
 
+    sprite* s = new sprite();
+    s->init("res/particles/flower.png");
+    s->set_pos(200, 200);
+    s->set_color(0x00ff00ff);
+    root->add_child(s);
+
 #else
     root->set_anchor(0, 0);
     root->set_pos(0, 0);

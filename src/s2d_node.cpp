@@ -26,7 +26,6 @@ void node::init()
 
 bool node::update(float dt)
 {
-    LOGD("update %d ", this->_id);
     this->sort();
     this->update_srt();
     std::vector<node*>::iterator it = _children.begin();

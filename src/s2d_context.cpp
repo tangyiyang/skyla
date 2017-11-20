@@ -84,9 +84,7 @@ void context::init_fundamental_components(const size& logic_size)
 
 void context::update(float dt)
 {
-    LOGD("--- update frame start ---");
     _root->update(dt);
-    LOGD("--- update frame end   ---");
 
     if (!_marked_release_nodes.empty()) {
         std::vector<node*>::iterator it = _marked_release_nodes.begin();

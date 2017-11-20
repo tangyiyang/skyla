@@ -145,7 +145,6 @@ void quad_renderer::flush()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    LOGD("quad render vertices = %d", _num_vertices);
     _num_indexes = 0;
     _num_vertices = 0;
 }
