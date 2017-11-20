@@ -1,4 +1,5 @@
 #include "cJSON.h"
+#include "s2d_context.h"
 #include "s2d_util.h"
 #include "s2d_particle.h"
 
@@ -239,9 +240,8 @@ void particle::load_particle_settings(const char *file_path)
         util::insert_search_path(file->_path.c_str());
 
         const char* name = cJSON_GetObjectItemCaseSensitive(root, "textureFileName")->valuestring;
-        texture* tex = new texture();
-        tex->init(name);
-        _texture = tex;
+
+        _texture = context::C()->_texture_cache->load(name);
     }
 
     cJSON_Delete(root);
