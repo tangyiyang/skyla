@@ -324,11 +324,11 @@ bool particle::update(float dt)
             float tangential_accel = _emitter_data._mode_info._data._gravity.tangential_accel[i];
 
             vec2::normalize(_emitter_data.x[i], _emitter_data.y[i], radial);
+            tangential = radial;
 
             radial.x *= radial_accel;
             radial.y *= radial_accel;
 
-            tangential = radial;
             std::swap(tangential.x, tangential.y);
             tangential.x *= -tangential_accel;
             tangential.y *= tangential_accel;
