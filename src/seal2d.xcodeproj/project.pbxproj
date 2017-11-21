@@ -29,6 +29,9 @@
 		4337BCEC1F852D7B004CF11B /* s2d_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC5D1F852196004CF11B /* s2d_texture.cpp */; };
 		4337BCED1F852D7B004CF11B /* s2d_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC5F1F852196004CF11B /* s2d_util.cpp */; };
 		4337BCFA1F853F20004CF11B /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC701F8521B7004CF11B /* cJSON.c */; };
+		437D767A1FC4258E009FF2AF /* s2d_profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 437D76781FC4258E009FF2AF /* s2d_profiler.cpp */; };
+		437D767B1FC4258E009FF2AF /* s2d_profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 437D76781FC4258E009FF2AF /* s2d_profiler.cpp */; };
+		437D767C1FC4258E009FF2AF /* s2d_profiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 437D76791FC4258E009FF2AF /* s2d_profiler.h */; };
 		439316B71FA7404500D5DFD2 /* s2d_particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 439316B51FA7404500D5DFD2 /* s2d_particle.cpp */; };
 		439316B81FA7404500D5DFD2 /* s2d_particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 439316B51FA7404500D5DFD2 /* s2d_particle.cpp */; };
 		439316B91FA7404500D5DFD2 /* s2d_particle.h in Headers */ = {isa = PBXBuildFile; fileRef = 439316B61FA7404500D5DFD2 /* s2d_particle.h */; };
@@ -297,6 +300,8 @@
 		4337BC711F8521B7004CF11B /* cJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cJSON.h; sourceTree = "<group>"; };
 		4337BC731F8521B7004CF11B /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		4337BCA21F8524B7004CF11B /* libseal2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libseal2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		437D76781FC4258E009FF2AF /* s2d_profiler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_profiler.cpp; sourceTree = "<group>"; };
+		437D76791FC4258E009FF2AF /* s2d_profiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_profiler.h; sourceTree = "<group>"; };
 		439316B51FA7404500D5DFD2 /* s2d_particle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_particle.cpp; sourceTree = "<group>"; };
 		439316B61FA7404500D5DFD2 /* s2d_particle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_particle.h; sourceTree = "<group>"; };
 		43BFCDA91F877401007DFD82 /* s2d_touch_handler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_touch_handler.h; sourceTree = "<group>"; };
@@ -598,6 +603,8 @@
 				4337BC601F852196004CF11B /* s2d_util.h */,
 				43BFCDA91F877401007DFD82 /* s2d_touch_handler.h */,
 				43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */,
+				437D76781FC4258E009FF2AF /* s2d_profiler.cpp */,
+				437D76791FC4258E009FF2AF /* s2d_profiler.h */,
 			);
 			name = misc;
 			sourceTree = "<group>";
@@ -882,6 +889,7 @@
 				4D4703FB1FC4A1060088FAAF /* Json.h in Headers */,
 				4D360C521FAD9DF900075D98 /* s2d_particle_renderer.h in Headers */,
 				4D4703BB1FC4A1050088FAAF /* Event.h in Headers */,
+				437D767C1FC4258E009FF2AF /* s2d_profiler.h in Headers */,
 				43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */,
 				4D4703C31FC4A1050088FAAF /* PathConstraintData.h in Headers */,
 				4D4703B31FC4A1050088FAAF /* Attachment.h in Headers */,
@@ -987,6 +995,7 @@
 				B6FF63C91F91FC4E00D7058F /* lmem.c in Sources */,
 				B6FF63971F91FC1C00D7058F /* lstate.c in Sources */,
 				4D4704151FC4A1060088FAAF /* Skin.c in Sources */,
+				437D767A1FC4258E009FF2AF /* s2d_profiler.cpp in Sources */,
 				B6FF63C61F91FC4E00D7058F /* liolib.c in Sources */,
 				B6FF63CB1F91FC4E00D7058F /* lobject.c in Sources */,
 				4337BC671F8521A3004CF11B /* s2d_gl.cpp in Sources */,
@@ -1091,6 +1100,7 @@
 				B6FF63A11F91FC4D00D7058F /* ldblib.c in Sources */,
 				4D4703E41FC4A1060088FAAF /* AttachmentLoader.c in Sources */,
 				B6FF63DB1F91FE0000D7058F /* s2d_lua_context.cpp in Sources */,
+				437D767B1FC4258E009FF2AF /* s2d_profiler.cpp in Sources */,
 				B6FF63B31F91FC4D00D7058F /* ltable.c in Sources */,
 				4D4703D61FC4A1060088FAAF /* Animation.c in Sources */,
 				4D4703DA1FC4A1060088FAAF /* AnimationStateData.c in Sources */,

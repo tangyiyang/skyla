@@ -13,6 +13,7 @@
 #include "s2d_camera.h"
 #include "s2d_sprite.h"
 #include "s2d_bmfont.h"
+#include "s2d_profiler.h"
 
 #ifdef S2D_ENABLE_LUA
 #include "s2d_lua_context.h"
@@ -28,6 +29,8 @@ public:
     virtual void on_resume() = 0;
     virtual void on_destroy() = 0;
     virtual void on_resize(context* ctx) = 0;
+    virtual void on_begin_update(float dt) = 0;
+    virtual void on_after_update(float dt) = 0;
 };
 
 class context {
@@ -77,14 +80,17 @@ private:
 public:
     /* The Core Components */
     app_protocol*       _app;
-    touch_handler*      _touch_handler;
-    file_system*        _file_system;
-    render_state*       _render_state;
-    sprite_frame_cache* _sprite_frame_cache;
     bmfont_info_cache*  _bmfont_info_cache;
-    texture_cache*      _texture_cache;
-    node*               _root;
     camera*             _camera;
+    file_system*        _file_system;
+    touch_handler*      _touch_handler;
+    render_state*       _render_state;
+    node*               _root;
+    sprite_frame_cache* _sprite_frame_cache;
+    texture_cache*      _texture_cache;
+    profiler*           _profiler;
+
+
 
 #ifdef S2D_ENABLE_LUA
     lua_context*        _lua_context;

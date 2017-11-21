@@ -14,6 +14,7 @@
 #include <vector>
 #include <map>
 #include <stack>
+#include <chrono>
 
 #include "s2d_config.h"
 #include "s2d_macro.h"

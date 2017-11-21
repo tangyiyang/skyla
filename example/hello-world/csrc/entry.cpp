@@ -2,6 +2,8 @@
 
 void entry::on_init(context* ctx)
 {
+    _time_elapsed = 0.0f;
+
 #if S2D_ENABLE_LUA == 1
 
     ctx->_lua_context->on_start(ctx, "res/scripts/main.lua");
@@ -84,4 +86,18 @@ void entry::on_destroy()
 void entry::on_resize(context* ctx)
 {
 
+}
+
+void entry::on_begin_update(float dt)
+{
+
+}
+
+void entry::on_after_update(float dt)
+{
+    _time_elapsed += dt;
+    if (_time_elapsed > 2.0f) {
+        _time_elapsed -= 2.0f;
+        util::profile_stats();
+    }
 }

@@ -278,6 +278,8 @@ void particle::stop()
 
 bool particle::update(float dt)
 {
+    util::profile_begin("particle-update");
+
     node::update(dt);
     _time_elapsed += dt;
 
@@ -383,11 +385,13 @@ bool particle::update(float dt)
         _emitter_data.rotation[i] += _emitter_data.delta_rotation[i] * dt;
     }
 
+    util::profile_end("particle-update");
     return false;
 }
 
 void particle::draw(render_state* rs)
 {
+    util::profile_begin("particle-draw");
     _model_view = transform_to(this->get_root());
 
     for (int i = 0, j = 0; i < _num_particles; ++i, j += 4) {
@@ -453,6 +457,8 @@ void particle::draw(render_state* rs)
 
     /* particle shouldn't have any child for most cases.*/
     node::draw(rs);
+
+    util::profile_end("particle-draw");
 }
 
 
@@ -615,7 +621,8 @@ void particle::emit(int n)
             }
         }
     } else {
-
+        LOGE("not implemented yet.");
+        S2D_ASSERT(false);
     }
 }
 

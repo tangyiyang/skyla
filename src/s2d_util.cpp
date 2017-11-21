@@ -97,6 +97,21 @@ texture* util::load_texture(const char* path)
     return context::C()->_texture_cache->load(path);
 }
 
+void util::profile_begin(const char* name)
+{
+    return context::C()->_profiler->begin(name);
+}
+
+void util::profile_end(const char* name)
+{
+    return context::C()->_profiler->end(name);
+}
+
+void util::profile_stats()
+{
+    return context::C()->_profiler->log_all_stats();
+}
+
 std::string util::md5(file_entry* file_entry)
 {
     MD5_CTX ctx;

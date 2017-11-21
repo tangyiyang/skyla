@@ -62,6 +62,10 @@ public:
     static file_entry*  load_file(const char* path, bool cache);
     static texture*     load_texture(const char* path);
 
+    static void         profile_begin(const char* name);
+    static void         profile_end(const char* name);
+    static void         profile_stats();
+
     static std::string  md5(file_entry* file_entry);
     
     static inline float normalized_random()

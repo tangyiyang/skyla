@@ -67,6 +67,7 @@ void context::init_fundamental_components(const size& logic_size)
     _bmfont_info_cache = new bmfont_info_cache();
     _camera = new camera();
     _root = new node();
+    _profiler = new profiler();
 
 #ifdef S2D_ENABLE_LUA
     _lua_context = new lua_context();
@@ -84,6 +85,10 @@ void context::init_fundamental_components(const size& logic_size)
 
 void context::update(float dt)
 {
+    if (_app) {
+        _app->on_begin_update(dt);
+    }
+
     _root->update(dt);
 
     if (!_marked_release_nodes.empty()) {
@@ -92,6 +97,10 @@ void context::update(float dt)
             delete *it;
         }
         _marked_release_nodes.clear();
+    }
+
+    if (_app) {
+        _app->on_after_update(dt);
     }
 }
 
@@ -134,6 +143,7 @@ void context::shutdown()
     _bmfont_info_cache->shutdown();
     _render_state->shutdown();
     _file_system->shutdown();
+    _profiler->shutdown();
 
     delete _touch_handler;
     delete _sprite_frame_cache;
@@ -143,6 +153,7 @@ void context::shutdown()
     delete _file_system;
     delete _root;
     delete _camera;
+    delete _profiler;
 
 #ifdef S2D_ENABLE_LUA
     delete _lua_context;
