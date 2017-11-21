@@ -433,6 +433,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/hello-world-mac/deps",
 					"$(SRCROOT)/../../../libs/glfw/include",
+					"$(SRCROOT)/../../../libs/spine-c/include",
 					"$(SRCROOT)/../../../src",
 					"$(SRCROOT)/../csrc",
 					"$(SRCROOT)/../../../lua-libs/lua-5.3.4",
@@ -455,6 +456,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/hello-world-mac/deps",
 					"$(SRCROOT)/../../../libs/glfw/include",
+					"$(SRCROOT)/../../../libs/spine-c/include",
 					"$(SRCROOT)/../../../src",
 					"$(SRCROOT)/../csrc",
 					"$(SRCROOT)/../../../lua-libs/lua-5.3.4",
