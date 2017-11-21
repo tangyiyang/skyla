@@ -245,8 +245,10 @@ struct matrix3
     
     inline static vec2 multiply_vec2(matrix3* ml, const vec2* v2)
     {
-        vec2 v = { ml->m[0] * v2->x + ml->m[3] * v2->y + ml->m[6] * 0.0f,
-            ml->m[1] * v2->x + ml->m[4] * v2->y + ml->m[7] * 0.0f };
+        vec2 v = {
+            ml->m[0] * v2->x + ml->m[3] * v2->y + ml->m[6] * 0.0f,
+            ml->m[1] * v2->x + ml->m[4] * v2->y + ml->m[7] * 0.0f
+        };
         return v;
     }
 };

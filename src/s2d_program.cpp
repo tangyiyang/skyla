@@ -131,6 +131,7 @@ void program::shutdown()
 
 void program::set_uniform(const char* name, UNIFORM_TYPE type, float* value, bool transpose /*= false*/)
 {
+    /* TODO: optimize this code using bindUniform */
     std::map<std::string, GLint>::iterator it = _map_uniform_location.find(name);
     GLint location = -1;
     if (it == _map_uniform_location.end()) {
