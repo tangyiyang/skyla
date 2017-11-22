@@ -9,15 +9,23 @@
 
 #ifdef S2D_ENABLE_SPINE
 
+#include "spine/AtlasAttachmentLoader.h"
+#include "spine/extension.h"
 #include "spine/spine.h"
+
 #include "s2d_common.h"
 #include "s2d_node.h"
+#include "s2d_quad_renderer.h"
 
 NS_S2D
 
 class spine_anim : public node {
 public:
-    void init() override;
+    spine_anim();
+    virtual ~spine_anim();
+
+public:
+    void init(const char* skeleton_file, const char* atlas_file);
     bool update(float dt) override;
     void draw(render_state* rs) override;
     void hit_test(touch_handler* handler, touch_event* event) override;
@@ -25,7 +33,8 @@ public:
     rect bounds_in(node* space) override;
 
 private:
-
+    spSkeleton*          _skeleton;
+    spAttachmentLoader*  _attachment_loader;
 };
 
 NS_S2D_END

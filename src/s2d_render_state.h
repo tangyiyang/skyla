@@ -13,6 +13,7 @@ NS_S2D
 
 class sprite;
 class particle;
+class spine_anim;
 
 class render_state {
 public:
@@ -30,6 +31,7 @@ public:
 
     void draw_sprite(sprite* s);
     void draw_particle(particle* p);
+    void draw_spine(spine_anim* s);
 
     void push_scissors(const rect& r);
     void pop_scissors();

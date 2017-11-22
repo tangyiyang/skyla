@@ -3,6 +3,7 @@
 #include "s2d_particle_renderer.h"
 #include "s2d_sprite.h"
 #include "s2d_particle.h"
+#include "s2d_spine.h"
 
 NS_S2D
 
@@ -63,6 +64,11 @@ void render_state::draw_particle(particle* p)
     quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
 
     r->draw(p->_model_view, p->_texture, p->_vertices, p->_num_vertices);
+}
+
+void render_state::draw_spine(spine_anim* s)
+{
+
 }
 
 void render_state::push_scissors(const rect& r)

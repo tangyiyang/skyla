@@ -15,17 +15,20 @@ void entry::on_init(context* ctx)
     node* root = ctx->get_root();
 
 #if 1
+//
+//    int j = 0;
+//    for (int i = 0; i < 40; ++i) {
+//        particle* p = new particle();
+//        p->init("res/particles/flower.json");
+//        p->set_pos(((i+1)%10) * 100, j*100);
+//        if (i%10 == 0) {
+//            j++;
+//        }
+//        root->add_child(p);
+//    }
 
-    int j = 0;
-    for (int i = 0; i < 40; ++i) {
-        particle* p = new particle();
-        p->init("res/particles/flower.json");
-        p->set_pos(((i+1)%10) * 100, j*100);
-        if (i%10 == 0) {
-            j++;
-        }
-        root->add_child(p);
-    }
+    spine_anim* s = new spine_anim();
+    s->init("res/spines/spineboy-pro.json", "res/spines/spineboy.atlas");
 
 #else
     root->set_anchor(0, 0);
