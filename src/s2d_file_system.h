@@ -18,6 +18,13 @@ public:
     file_entry();
     virtual ~file_entry();
 
+    inline uint8_t* take()
+    {
+        uint8_t* buffer = _buffer;
+        _buffer = 0;
+        _size = 0;
+        return buffer;
+    }
 public:
     uint32_t    _id;
     uint8_t*    _buffer;

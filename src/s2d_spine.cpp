@@ -20,7 +20,9 @@ char* _spUtil_readFile (const char* path, int* length)
 {
     file_entry* f = util::load_file(path, false);
     *length = (int)f->_size;
-    return (char*)f->_buffer;
+    char* ret = (char*)f->take();
+    f->release();
+    return ret;
 }
 
 }
@@ -35,6 +37,9 @@ spine_anim::~spine_anim()
 {
     if (_skeleton) {
         spSkeleton_dispose(_skeleton);
+    }
+    if (_state) {
+        spAnimationState_dispose(_state);
     }
 }
 
@@ -76,6 +81,9 @@ void spine_anim::init(const char* skeleton_file, const char* atlas_file)
     _state = spAnimationState_create(spAnimationStateData_create(_skeleton->data));
     _state->rendererObject = this;
     _state->listener = spine_anim::sp_anim_cb;
+
+    spAttachmentLoader_dispose((spAttachmentLoader*)attachment_loader);
+    spSkeletonJson_dispose(json);
 }
 
 bool spine_anim::update(float dt)
