@@ -399,7 +399,7 @@ void particle::draw(render_state* rs)
         float green = _emitter_data.g[i];
         float blue = _emitter_data.b[i];
         float alpha = _emitter_data.a[i];
-        uint32_t color = (((int)(red*255))<<24) + (((int)(green*255))<<16) + (((int)(blue*255))<<8) + ((int)alpha*255);
+        uint32_t color = COLOR4F_TO_UINT32(red, green, blue, alpha);
 
         pos_tex_color_vertex* v = _vertices + j;
 

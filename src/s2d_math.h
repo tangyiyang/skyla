@@ -18,7 +18,8 @@ NS_S2D
 #define FLT_EQUAL(a, b) (fabs((a) - (b)) < FLT_EPSILON)
 #define S2D_TEX_COORD_MAX ((1<<16)-1)
 
-#define COLOR4F_TO_UINT32(r,g,b,a) ((int(r*255)&0xff) << 24) + ((int(g*255)&0xff) << 16) + ((int(r*255)&0xff) << 8) + ((int(r*255)&0xff))
+#define COLOR4F_TO_UINT32(r, g, b, a) ((((int)(r*255))<<24) + (((int)(g*255))<<16) + (((int)(b*255))<<8) + ((int)a*255))
+
 
 typedef uint32_t color_t;
 

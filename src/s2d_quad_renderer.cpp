@@ -121,9 +121,11 @@ void quad_renderer::flush()
     }
 
     _program->use();
+    CHECK_GL_ERROR;
     _program->set_uniform("u_projection",
                           program::UNIFORM_TYPE_MATRIX_3_FV,
                           context::C()->_camera->_matrix.m);
+    CHECK_GL_ERROR;
     _texture->bind();
     CHECK_GL_ERROR;
 

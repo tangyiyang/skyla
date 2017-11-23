@@ -28,8 +28,13 @@ void entry::on_init(context* ctx)
 //    }
 
     spine_anim* s = new spine_anim();
-    s->init("res/spines/spineboy-pro.json", "res/spines/spineboy.atlas");
+    s->init("res/spines/unit_skull.json", "res/spines/unit_skull.atlas");
+    s->set_anim("attack_1", 0, -1);
 
+//    s->init("res/spines/spineboy-pro.json", "res/spines/spineboy.atlas");
+    s->set_pos(200, 200);
+    root->add_child(s);
+    
 #else
     root->set_anchor(0, 0);
     root->set_pos(0, 0);

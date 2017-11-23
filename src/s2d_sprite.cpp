@@ -227,6 +227,8 @@ void sprite::set_texture_coord(sprite_frame* frame, texture* tex)
     } else {
         
         // load the whole texture
+        uint16_t left = 0;
+        uint16_t right = S2D_TEX_COORD_MAX;
         uint16_t bottom = 0;
         uint16_t top = S2D_TEX_COORD_MAX;
         
@@ -235,28 +237,34 @@ void sprite::set_texture_coord(sprite_frame* frame, texture* tex)
             // for rare cases, such as render-texture is not.
             std::swap(bottom, top);
         }
+        /*  0------3
+         *  |      |
+         *  |      |
+         *  1------2
+         *
+         */
         
         _quad[0].pos.x = 0;
         _quad[0].pos.y = 0;
-        _quad[0].uv.u = 0;
+        _quad[0].uv.u = left;
         _quad[0].uv.v = top;
         _quad[0].color = 0xffffffff;
 
         _quad[1].pos.x = 0;
         _quad[1].pos.y = tex->_size.height;
-        _quad[1].uv.u = 0;
+        _quad[1].uv.u = left;
         _quad[1].uv.v = bottom;
         _quad[1].color = 0xffffffff;
 
         _quad[2].pos.x = tex->_size.width;
         _quad[2].pos.y = 0;
-        _quad[2].uv.u = S2D_TEX_COORD_MAX;
+        _quad[2].uv.u = right;
         _quad[2].uv.v = top;
         _quad[2].color = 0xffffffff;
 
         _quad[3].pos.x = tex->_size.width;
         _quad[3].pos.y = tex->_size.height;
-        _quad[3].uv.u = S2D_TEX_COORD_MAX;
+        _quad[3].uv.u = right;
         _quad[3].uv.v = bottom;
         _quad[3].color = 0xffffffff;
     }

@@ -3,7 +3,6 @@
 #include "s2d_particle_renderer.h"
 #include "s2d_sprite.h"
 #include "s2d_particle.h"
-#include "s2d_spine.h"
 
 NS_S2D
 
@@ -49,6 +48,14 @@ renderer* render_state::switch_renderer(RENDERER_TYPE type)
     return _cur_renderer;
 }
 
+void render_state::draw_quad(const affine_transform& t, texture* tex, pos_tex_color_vertex* p)
+{
+    switch_renderer(RENDERER_TYPE_QUAD);
+    quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
+    CHECK_GL_ERROR;
+    r->draw(t, tex, p, 4);
+}
+
 void render_state::draw_sprite(s2d::sprite *s)
 {
     switch_renderer(RENDERER_TYPE_QUAD);
@@ -66,10 +73,6 @@ void render_state::draw_particle(particle* p)
     r->draw(p->_model_view, p->_texture, p->_vertices, p->_num_vertices);
 }
 
-void render_state::draw_spine(spine_anim* s)
-{
-
-}
 
 void render_state::push_scissors(const rect& r)
 {

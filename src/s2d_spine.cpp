@@ -1,5 +1,5 @@
 #include "s2d_spine.h"
-
+#include "s2d_util.h"
 
 NS_S2D
 
@@ -29,12 +29,34 @@ spine_anim::spine_anim()
 {
     _skeleton = nullptr;
     _attachment_loader = nullptr;
+    _state = nullptr;
 }
 spine_anim::~spine_anim()
 {
     if (_skeleton) {
         spSkeleton_dispose(_skeleton);
     }
+}
+
+void spine_anim::sp_anim_cb(spAnimationState* state, spEventType type, spTrackEntry* entry, spEvent* event)
+{
+    spine_anim* self = (spine_anim*)state->rendererObject;
+    self->on_amim_event(type, entry, event);
+}
+
+void spine_anim::on_amim_event(spEventType type, spTrackEntry* entry, spEvent* event)
+{
+
+}
+
+void spine_anim::set_anim(const char* name, int track, int loop)
+{
+    spAnimation* animation = spSkeletonData_findAnimation(_skeleton->data, name);
+    if (!animation) {
+        LOGE("spine_anim::set_anim, not found animation for name = %s", name);
+        return;
+    }
+    spAnimationState_setAnimation(_state, track, animation, loop);
 }
 
 void spine_anim::init(const char* skeleton_file, const char* atlas_file)
@@ -51,6 +73,9 @@ void spine_anim::init(const char* skeleton_file, const char* atlas_file)
         LOGE("error create skeleton: %s, %s", skeleton_file, atlas_file);
         return;
     }
+    _state = spAnimationState_create(spAnimationStateData_create(_skeleton->data));
+    _state->rendererObject = this;
+    _state->listener = spine_anim::sp_anim_cb;
 }
 
 bool spine_anim::update(float dt)
@@ -59,7 +84,12 @@ bool spine_anim::update(float dt)
         return false;
     }
 
-    spSkeleton_update(_skeleton, dt);
+    if (_state) {
+        spAnimationState_update(_state, dt);
+        spAnimationState_apply(_state, _skeleton);
+        spSkeleton_update(_skeleton, dt);
+        spSkeleton_updateWorldTransform(_skeleton);
+    }
 
     return node::update(dt);
 }
@@ -76,21 +106,62 @@ void spine_anim::draw(render_state* rs)
         switch (slot->attachment->type) {
             case SP_ATTACHMENT_REGION: {
                 spRegionAttachment* attachment = (spRegionAttachment*)slot->attachment;
-                spRegionAttachment_computeWorldVertices(attachment, slot->bone, buffer, 0, 0);
+                spAtlasRegion* region = (spAtlasRegion*)attachment->rendererObject;
+                spRegionAttachment_computeWorldVertices(attachment, slot->bone, buffer, 0, 2);
+
+                /*Coord order of spine: BR, BL, UL, UR*/
+                /*Coord order of ours:  UL, BL, UR, BR*/
+                quad[0].pos.x = buffer[2*2+0];
+                quad[0].pos.y = buffer[2*2+1];
+                quad[0].color = COLOR4F_TO_UINT32(attachment->color.r,
+                                                  attachment->color.g,
+                                                  attachment->color.b,
+                                                  attachment->color.a);
+                quad[0].uv.u = attachment->uvs[2*2+0] * ((1<<16)-1);
+                quad[0].uv.v = attachment->uvs[2*2+1] * ((1<<16)-1);
+
+                quad[1].pos.x = buffer[1*2+0];
+                quad[1].pos.y = buffer[1*2+1];
+                quad[1].color = COLOR4F_TO_UINT32(attachment->color.r,
+                                                  attachment->color.g,
+                                                  attachment->color.b,
+                                                  attachment->color.a);
+                quad[1].uv.u = attachment->uvs[1*2+0] * ((1<<16)-1);
+                quad[1].uv.v = attachment->uvs[1*2+1] * ((1<<16)-1);
+
+                quad[2].pos.x = buffer[3*2+0];
+                quad[2].pos.y = buffer[3*2+1];
+                quad[2].color = COLOR4F_TO_UINT32(attachment->color.r,
+                                                  attachment->color.g,
+                                                  attachment->color.b,
+                                                  attachment->color.a);
+                quad[2].uv.u = attachment->uvs[3*2+0] * ((1<<16)-1);
+                quad[2].uv.v = attachment->uvs[3*2+1] * ((1<<16)-1);
+
+                quad[3].pos.x = buffer[0*2+0];
+                quad[3].pos.y = buffer[0*2+1];
+                quad[3].color = COLOR4F_TO_UINT32(attachment->color.r,
+                                                  attachment->color.g,
+                                                  attachment->color.b,
+                                                  attachment->color.a);
+                quad[3].uv.u = attachment->uvs[0*2+0] * ((1<<16)-1);
+                quad[3].uv.v = attachment->uvs[0*2+1] * ((1<<16)-1);
+
+                rs->draw_quad(_local_transform, (texture*)region->page->rendererObject, quad);
+
                 break;
             }
             case SP_ATTACHMENT_MESH: {
                 // TODO:
+//                LOGD("no mesh");
                 break;
             }
             default:
                 continue;
         }
-
-        rs->draw_sprite(<#s2d::sprite *s#>)
-
-
     }
+    
+    node::draw(rs);
 }
 
 void spine_anim::hit_test(touch_handler* handler, touch_event* event)
