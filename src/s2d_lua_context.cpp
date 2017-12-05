@@ -11,6 +11,7 @@ extern int luaopen_cjson(lua_State* L);
 }
 #endif
 
+#define SEAL2D_TYPE_NODE   "seal2d.node"
 #define SEAL2D_TYPE_SPRITE "seal2d.sprite"
 
 NS_S2D
@@ -66,15 +67,17 @@ static int lseal2d_inject(lua_State* L)
 
 static int lseal2d_context_get_root(lua_State* L)
 {
-    context* C = (context*)lua_touserdata(L, 1);
+    context* C = context::C();
     lua_pushlightuserdata(L, C->get_root());
     return 1;
 }
 
 static int lseal2d_context_get_visible_rect(lua_State* L)
 {
-    context* C = (context*)lua_touserdata(L, 1);
+    lua_getfield(L, 1, "__cobj");
+    context* C = (context*)lua_touserdata(L, -1);
 
+    lua_context::stackDump(L);
     rect* r = &(C->_visible_rect);
     lua_newtable(L);
     lua_pushnumber(L, r->origin.x);
@@ -91,25 +94,8 @@ static int lseal2d_context_get_visible_rect(lua_State* L)
 
 static int lseal2d_context(lua_State* L)
 {
-    // TODO: fix me!
-    LOGE("fix the lseal2d_context!!");
-    static context* c = context::C();
-    lua_pushlightuserdata(L, c);
-    if (luaL_newmetatable(L, "SEAL2D_CONTEXT")) {
-        luaL_Reg l[] = {
-            { "get_root", lseal2d_context_get_root },
-            { "get_visible_rect", lseal2d_context_get_visible_rect },
-            { NULL, NULL },
-        };
-        luaL_newlib(L, l);
-        lua_setfield(L, -2, "__index");
-        lua_pushstring(L, "seal2d.context");
-        lua_setfield(L, -2, "__type");
-
-        lua_setmetatable(L, -2);
-    }
-
-    lua_context::stackDump(L);
+    static context* C = context::C();
+    lua_pushlightuserdata(L, C);
     return 1;
 }
 
@@ -141,7 +127,8 @@ static int lseal2d_node_set_size(lua_State* L)
 
 static int lseal2d_node_set_pos(lua_State* L)
 {
-    node* n = (node*)lua_touserdata(L, 1);
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
     lua_Number x = luaL_checknumber(L, 2);
     lua_Number y = luaL_checknumber(L, 3);
     n->set_pos(x, y);
@@ -150,9 +137,10 @@ static int lseal2d_node_set_pos(lua_State* L)
 
 static int lseal2d_node_set_anchor(lua_State* L)
 {
-    node* n = (node*)(lua_touserdata(L, 1));
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
     lua_Number ax = luaL_checknumber(L, 2);
-    lua_Number ay = luaL_checknumber(L, 2);
+    lua_Number ay = luaL_checknumber(L, 3);
     n->set_anchor(ax, ay);
     return 0;
 }
@@ -184,82 +172,42 @@ static int lseal2d_node_set_scale(lua_State* L)
     return 0;
 }
 
-static luaL_Reg node_funcs[] = {
-    { "add_child", lseal2d_node_add_child },
-    { "set_visible", lseal2d_node_set_visible},
-    { "set_pos", lseal2d_node_set_pos },
-    { "set_anchor", lseal2d_node_set_anchor },
-    { "set_rotation", lseal2d_node_set_rotation },
-    { "set_scale", lseal2d_node_set_scale },
-    { "set_size", lseal2d_node_set_size },
-};
-
-static int lseal2d_sprite_set_color(lua_State* L)
+static int lseal2d_node_free(lua_State* L)
 {
-    sprite* s = (sprite*)lua_touserdata(L, 1);
-    lua_Integer color = luaL_checkinteger(L, 2);
-    s->set_color((uint32_t)color);
+    delete *static_cast<node**>(luaL_checkudata(L, 1, SEAL2D_TYPE_NODE));
     return 0;
 }
 
-static int lseal2d_sprite_set_texture(lua_State* L)
-{
-    int n = lua_gettop(L);
-    if (n < 2) {
-        luaL_error(L, "invalid number of arguments passed to sprite_set_texture"
-                      "expected more than 2, but got %d", n);
-        return 0;
-    }
-
-    sprite* s = (sprite*)lua_touserdata(L, 1);
-    if (n == 2) {
-        char* file_name = (char*)luaL_checkstring(L, 2);
-        if (file_name[0] == '#') {
-            sprite_frame* f = context::C()->_sprite_frame_cache->get(file_name+1);
-            s->set_texture(f);
-        } else {
-            s->set_texture(file_name);
-        }
-    }
-
-    return 0;
-}
-
-static luaL_Reg sprite_funcs[] = {
-    { "set_color", lseal2d_sprite_set_color     },
-    { "set_texture", lseal2d_sprite_set_texture },
-};
-
-static int lseal2d_new_node(lua_State* L)
+static int lseal2d_node_new(lua_State* L)
 {
     node* n = new node();
     lua_pushlightuserdata(L, n);
-    if (luaL_newmetatable(L, "SEAL2D_NODE")) {
-        int n = sizeof(node_funcs)/sizeof(luaL_Reg) + sizeof(sprite_funcs)/sizeof(luaL_Reg);
-        struct luaL_Reg* funcs = (luaL_Reg*)malloc(sizeof(luaL_Reg) * (n+1));
-        int index = 0;
-        for (int i = 0; i < sizeof(node_funcs)/sizeof(luaL_Reg); ++i) {
-            funcs[index++] = node_funcs[i];
-        }
+    return 1;
+}
+static int luaopen_seal2d_node(lua_State* L)
+{
+#ifdef luaL_checkversion
+    luaL_checkversion(L);
+#endif
 
-        funcs[index] = {NULL, NULL};
-        lua_createtable(L, 0, index);
-        luaL_setfuncs(L, funcs, 0);
-        lua_setfield(L, -2, "__index");
-        free(funcs);
+    luaL_Reg lib[] = {
+        { "new",         lseal2d_node_new },
+        { "add_child", lseal2d_node_add_child },
+        { "set_visible", lseal2d_node_set_visible},
+        { "set_pos", lseal2d_node_set_pos },
+        { "set_anchor", lseal2d_node_set_anchor },
+        { "set_rotation", lseal2d_node_set_rotation },
+        { "set_scale", lseal2d_node_set_scale },
+        { "set_size", lseal2d_node_set_size },
+        { NULL, NULL },
+    };
 
-        lua_pushstring(L, "seal2d.node");
-        lua_setfield(L, -2, "__type");
+    luaL_newlib(L, lib);
 
-        lua_context::stackDump(L);
-    }
-    lua_setmetatable(L, -2);
-
-    lua_context::stackDump(L);
     return 1;
 }
 
-static int lseal2d_new_sprite(lua_State* L)
+static int lseal2d_sprite_new(lua_State* L)
 {
     int n = lua_gettop(L);
 
@@ -282,27 +230,54 @@ static int lseal2d_new_sprite(lua_State* L)
     }
 
     lua_pushlightuserdata(L, s);
-    if (luaL_newmetatable(L, "SEAL2D_SPRITE")) {
-        int n = sizeof(node_funcs)/sizeof(luaL_Reg) + sizeof(sprite_funcs)/sizeof(luaL_Reg);
-        struct luaL_Reg* funcs = (luaL_Reg*)malloc(sizeof(luaL_Reg) * (n+1));
-        int index = 0;
-        for (int i = 0; i < sizeof(node_funcs)/sizeof(luaL_Reg); ++i) {
-            funcs[index++] = node_funcs[i];
-        }
-        for (int i = 0; i < sizeof(sprite_funcs)/sizeof(luaL_Reg); ++i) {
-            funcs[index++] = sprite_funcs[i];
-        }
-        funcs[index] = {NULL, NULL};
-        lua_createtable(L, 0, index);
-        luaL_setfuncs(L, funcs, 0);
-        lua_setfield(L, -2, "__index");
-        free(funcs);
+    return 1;
+}
 
-        lua_pushstring(L, "seal2d.sprite");
-        lua_setfield(L, -2, "__type");
+static int lseal2d_sprite_set_color(lua_State* L)
+{
+    sprite* s = (sprite*)lua_touserdata(L, 1);
+    lua_Integer color = luaL_checkinteger(L, 2);
+    s->set_color((uint32_t)color);
+    return 0;
+}
+
+static int lseal2d_sprite_set_texture(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n < 2) {
+        luaL_error(L, "invalid number of arguments passed to sprite_set_texture"
+                   "expected more than 2, but got %d", n);
+        return 0;
     }
 
-    lua_setmetatable(L, -2);
+    sprite* s = (sprite*)lua_touserdata(L, 1);
+    if (n == 2) {
+        char* file_name = (char*)luaL_checkstring(L, 2);
+        if (file_name[0] == '#') {
+            sprite_frame* f = context::C()->_sprite_frame_cache->get(file_name+1);
+            s->set_texture(f);
+        } else {
+            s->set_texture(file_name);
+        }
+    }
+
+    return 0;
+}
+
+int luaopen_seal2d_sprite(lua_State* L)
+{
+#ifdef luaL_checkversion
+    luaL_checkversion(L);
+#endif
+
+    luaL_Reg lib[] = {
+        { "new",            lseal2d_sprite_new },
+        { "set_texture",    lseal2d_sprite_set_texture },
+        { "set_color",      lseal2d_sprite_set_color},
+        { NULL, NULL },
+    };
+
+    luaL_newlib(L, lib);
     return 1;
 }
 
@@ -341,6 +316,24 @@ static int luaopen_seal2d_util(lua_State* L)
     return 1;
 }
 
+
+static int luaopen_seal2d_context(lua_State* L)
+{
+#ifdef luaL_checkversion
+    luaL_checkversion(L);
+#endif
+
+    luaL_Reg lib[] = {
+        { "get_root",         lseal2d_context_get_root },
+        { "get_visible_rect", lseal2d_context_get_visible_rect },
+        { NULL, NULL },
+    };
+
+    luaL_newlib(L, lib);
+
+    return 1;
+}
+
 static int luaopen_seal2d(lua_State* L)
 {
 #ifdef luaL_checkversion
@@ -349,9 +342,7 @@ static int luaopen_seal2d(lua_State* L)
 
     luaL_Reg lib[] = {
         { "inject",  lseal2d_inject     },
-        { "context", lseal2d_context    },
-        { "node",    lseal2d_new_node   },
-        { "sprite",  lseal2d_new_sprite },
+        { "get_context", lseal2d_context    },
         { NULL, NULL },
     };
 
@@ -419,9 +410,14 @@ int lua_context::call_lua(lua_State* L, int n, int r)
 void lua_context::register_lua_extensions()
 {
     luaL_Reg lua_modules[] = {
-        { "cjson",         luaopen_cjson       },
-        { "seal2d",        luaopen_seal2d      },
-        { "seal2d.util",   luaopen_seal2d_util },
+        { "cjson",          luaopen_cjson       },
+        { "seal2d",         luaopen_seal2d      },
+        { "seal2d_node",    luaopen_seal2d_node },
+        { "seal2d_sprite",  luaopen_seal2d_sprite },
+        { "seal2d_context", luaopen_seal2d_context},
+        { "seal2d_util",    luaopen_seal2d_util },
+
+
         { NULL, NULL}
     };
 

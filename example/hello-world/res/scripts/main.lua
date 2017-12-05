@@ -1,23 +1,18 @@
 local seal2d = require "seal2d"
-local util = require "seal2d.util"
+local util = require "seal2d_util"
 
 local function on_start()
-	local scene_loader = require "seal2d.scene_loader"
+	local ctx = require "seal2d.context"
+	local sprite = require "seal2d.game_object.sprite"
 
-	local ctx = seal2d.context()
-	local root = ctx:get_root()
 	util.add_search_path("res/")
 
+	local root = ctx:get_root()
+	local r = ctx:get_visible_rect()
 
-	local scene = scene_loader.load("res/scene/scene_main.json")
-
-	root:add_child(scene)
-	-- local r = ctx:get_visible_rect()
-	-- local s = seal2d.sprite("res/seal2d-transparent.png")
-	-- s:set_pos(r.width/2, r.height/2);
-	-- s:set_color(0xffff00ff);
-
-	-- root:add_child(s)
+	local logo = sprite.new("seal2d-transparent.png")
+	logo:set_pos(r.width / 2, r.height / 2)
+	root:add_child(logo)
 end
 
 local function on_update(dt)
@@ -28,23 +23,27 @@ local function on_destroy()
 	print("call on destroy")
 end
 
-local function trace_back(err, msg)
-	print("traceback: ", err)
-	print(msg)
+local function inject(mod)
+	for k, v in pairs(mod) do
+		_G[k] = v
+	end
 end
 
 local function main()
 	print("*** Entering Lua Scripts ***")
 
 	package.path = package.path .. ";res/scripts/?.lua"
+	_G["seal2d"] = require "seal2d"
+	_G["print_r"] = require "seal2d.print_r"
+	_G["misc"] = require "seal2d.misc"
+
+	inject(misc)
+
 	seal2d.inject {
 		on_start = on_start,
 		on_update = on_update,
 		on_destroy = on_destroy,
 	}
-
-	print_r = require "seal2d.print_r"
 end
 
 main()
-

@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		430F7CDA1F8382C500D0C98C /* res in Copy Files */ = {isa = PBXBuildFile; fileRef = 430F7CD91F8382B700D0C98C /* res */; };
 		430F7CDD1F83842200D0C98C /* lua_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F7CDB1F83842200D0C98C /* lua_handler.cpp */; };
-		430F7CF21F83873000D0C98C /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 430F7CE61F83871800D0C98C /* fpconv.c */; };
-		430F7CF41F83873000D0C98C /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 430F7CEE1F83871800D0C98C /* lua_cjson.c */; };
-		430F7CF51F83873000D0C98C /* strbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 430F7CEF1F83871800D0C98C /* strbuf.c */; };
 		430F7CFB1F83897D00D0C98C /* lua_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F7CFA1F83897D00D0C98C /* lua_editor.cpp */; };
 		43AA98C51F83BB6200368AAD /* lua_imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 439DAB901F83BAAE00832952 /* lua_imgui.cpp */; };
 		43AA98D01F83EEC100368AAD /* nfd_cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CB1F83EEB600368AAD /* nfd_cocoa.m */; };
@@ -100,11 +97,6 @@
 		430F7CD91F8382B700D0C98C /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
 		430F7CDB1F83842200D0C98C /* lua_handler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lua_handler.cpp; sourceTree = "<group>"; };
 		430F7CDC1F83842200D0C98C /* lua_handler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lua_handler.h; sourceTree = "<group>"; };
-		430F7CE61F83871800D0C98C /* fpconv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fpconv.c; sourceTree = "<group>"; };
-		430F7CE71F83871800D0C98C /* fpconv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fpconv.h; sourceTree = "<group>"; };
-		430F7CEE1F83871800D0C98C /* lua_cjson.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lua_cjson.c; sourceTree = "<group>"; };
-		430F7CEF1F83871800D0C98C /* strbuf.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = strbuf.c; sourceTree = "<group>"; };
-		430F7CF01F83871800D0C98C /* strbuf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = strbuf.h; sourceTree = "<group>"; };
 		430F7CF91F83897D00D0C98C /* lua_editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lua_editor.h; sourceTree = "<group>"; };
 		430F7CFA1F83897D00D0C98C /* lua_editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lua_editor.cpp; sourceTree = "<group>"; };
 		439DAB901F83BAAE00832952 /* lua_imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lua_imgui.cpp; sourceTree = "<group>"; };
@@ -218,18 +210,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		430F7CE11F83871800D0C98C /* lua-cjson */ = {
-			isa = PBXGroup;
-			children = (
-				430F7CE61F83871800D0C98C /* fpconv.c */,
-				430F7CE71F83871800D0C98C /* fpconv.h */,
-				430F7CEE1F83871800D0C98C /* lua_cjson.c */,
-				430F7CEF1F83871800D0C98C /* strbuf.c */,
-				430F7CF01F83871800D0C98C /* strbuf.h */,
-			);
-			path = "lua-cjson";
-			sourceTree = "<group>";
-		};
 		430F7CF81F83896E00D0C98C /* luabinding */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,7 +358,6 @@
 				43AA98D21F83FECB00368AAD /* lua-fs */,
 				43AA98C71F83EEB600368AAD /* nativefiledialog */,
 				439DAB8F1F83BAAE00832952 /* lua-imgui */,
-				430F7CE11F83871800D0C98C /* lua-cjson */,
 				B63FEBDE1F7D4C34001BD442 /* imgui */,
 			);
 			path = common;
@@ -546,8 +525,6 @@
 				4DD3C59E1F9CF2980068632E /* lzio.c in Sources */,
 				4DD3C5901F9CF2980068632E /* loadlib.c in Sources */,
 				43AA98D11F83EEC500368AAD /* nfd_common.c in Sources */,
-				430F7CF41F83873000D0C98C /* lua_cjson.c in Sources */,
-				430F7CF21F83873000D0C98C /* fpconv.c in Sources */,
 				430F7CFB1F83897D00D0C98C /* lua_editor.cpp in Sources */,
 				430F7CDD1F83842200D0C98C /* lua_handler.cpp in Sources */,
 				43D3265A1F8620C40070B743 /* entry.cpp in Sources */,
@@ -586,7 +563,6 @@
 				4DD3C57E1F9CF2980068632E /* lapi.c in Sources */,
 				B63FEBF01F7D4F7C001BD442 /* imgui_draw.cpp in Sources */,
 				B63FEBEA1F7D4EDD001BD442 /* imgui_impl_glfw_gl3.cpp in Sources */,
-				430F7CF51F83873000D0C98C /* strbuf.c in Sources */,
 				4DD3C58C1F9CF2980068632E /* liolib.c in Sources */,
 				4DD3C58A1F9CF2980068632E /* lgc.c in Sources */,
 			);

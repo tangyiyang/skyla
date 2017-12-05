@@ -182,7 +182,8 @@ int main(int, char**)
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui::Render();
 
-        ctx->loop(0);
+        ctx->update(0);
+        ctx->draw();
 
         glfwSwapBuffers(window);
     }
