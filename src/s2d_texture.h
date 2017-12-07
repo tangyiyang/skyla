@@ -38,6 +38,7 @@ public:
     size            _size;
     GLuint          _name;
     bool            _upside_down; /* if a texture is upside-down, render-texture is false.*/
+    bool            _premultiply_alpha;
     
     static texture_id_t _texture_id_counter;
 };

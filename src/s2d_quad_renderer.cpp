@@ -3,20 +3,20 @@
 
 NS_S2D
 
-quad_renderer::quad_renderer() :
-_program(nullptr),
-_texture(nullptr),
-_vertex_buffer(nullptr),
-_index_buffer(nullptr),
-_vbo(0),
-_ibo(0),
-_vao(0),
-_num_indexes(0),
-_max_indexes(0),
-_num_vertices(0),
-_max_vertices(0)
+quad_renderer::quad_renderer()
 {
-
+    _blend_mode = BLEND_MODE_NONE;
+    _program = nullptr;
+    _texture = nullptr;
+    _vertex_buffer = nullptr;
+    _index_buffer = nullptr;
+    _vbo = 0;
+    _ibo = 0;
+    _vao = 0;
+    _num_indexes = 0;
+    _max_indexes = 0;
+    _num_vertices = 0;
+    _max_vertices = 0;
 }
 
 void quad_renderer::init()
@@ -78,9 +78,10 @@ void quad_renderer::shutdown()
 }
 
 void quad_renderer::draw(const affine_transform& world_transform,
-                           texture* tex,
-                           pos_tex_color_vertex* quad,
-                           int n)
+                         texture* tex,
+                         blend_mode mode,
+                         pos_tex_color_vertex* quad,
+                         int n)
 {
     S2D_ASSERT(n % 4 == 0);
     S2D_ASSERT(tex != nullptr);
@@ -90,6 +91,17 @@ void quad_renderer::draw(const affine_transform& world_transform,
         if (_texture != tex) {
             this->flush();
             _texture = tex;
+        }
+    }
+
+    if (_blend_mode == BLEND_MODE_NONE) {
+        _blend_mode = mode;
+        _blend_func = renderer::blend_mode_to_func(_blend_mode);
+    } else {
+        if (_blend_mode != mode) {
+            this->flush();
+            _blend_mode = mode;
+            _blend_func = renderer::blend_mode_to_func(_blend_mode);
         }
     }
 
@@ -130,7 +142,7 @@ void quad_renderer::flush()
     CHECK_GL_ERROR;
 
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendFunc(_blend_func.src, _blend_func.dst);
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_tex_color_vertex), _vertex_buffer);

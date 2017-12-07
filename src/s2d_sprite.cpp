@@ -99,26 +99,34 @@ void sprite::init(texture* tex)
 {
     S2D_ASSERT(tex);
     node::init();
-    _texture = tex;
+    this->set_texture(tex);
     this->set_texture_coord(nullptr, tex);
     _size = tex->_size;
 }
 
 void sprite::set_texture(const char* tex_file)
 {
-    _texture = context::C()->_texture_cache->load(tex_file);
-    S2D_ASSERT(_texture);
-    this->set_texture_coord(nullptr, _texture);
-    _size = _texture->_size;
+    texture* tex = context::C()->_texture_cache->load(tex_file);
+    this->set_texture(tex);
+    this->set_texture_coord(nullptr, tex);
+    _size = tex->_size;
 }
 
 void sprite::set_texture(sprite_frame* frame)
 {
     S2D_ASSERT(frame);
-    
-    _texture = frame->_texture;
+
+    this->set_texture(frame->_texture);
     this->set_texture_coord(frame, _texture);
     _size = frame->_source_size;
+}
+
+void sprite::set_texture(texture* tex)
+{
+    S2D_ASSERT(tex);
+
+    _texture = tex;
+    _blend_mode = _texture->_premultiply_alpha ? BLEND_MODE_NORMAL : BLEND_MODE_ALPHA;
 }
 
 void sprite::set_texture_coord(const rect& r, texture* tex)

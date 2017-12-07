@@ -33,7 +33,7 @@ void render_state::clear()
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-renderer* render_state::switch_renderer(RENDERER_TYPE type)
+renderer* render_state::switch_renderer(render_type type)
 {
     if (_cur_renderer_type == MAX_RENDERER_TYPE) {
         /* lazy initialize */
@@ -48,12 +48,15 @@ renderer* render_state::switch_renderer(RENDERER_TYPE type)
     return _cur_renderer;
 }
 
-void render_state::draw_quad(const affine_transform& t, texture* tex, pos_tex_color_vertex* p)
+void render_state::draw_quad(const affine_transform& t,
+                             texture* tex,
+                             blend_mode b,
+                             pos_tex_color_vertex* p)
 {
     switch_renderer(RENDERER_TYPE_QUAD);
     quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
     CHECK_GL_ERROR;
-    r->draw(t, tex, p, 4);
+    r->draw(t, tex, b, p, 4);
 }
 
 void render_state::draw_sprite(s2d::sprite *s)
@@ -61,7 +64,7 @@ void render_state::draw_sprite(s2d::sprite *s)
     switch_renderer(RENDERER_TYPE_QUAD);
     quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
 
-    r->draw(s->_model_view, s->_texture, s->_quad, 4);
+    r->draw(s->_model_view, s->_texture, s->_blend_mode, s->_quad, 4);
 }
 
 void render_state::draw_particle(particle* p)
@@ -70,7 +73,7 @@ void render_state::draw_particle(particle* p)
     switch_renderer(RENDERER_TYPE_QUAD);
     quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
 
-    r->draw(p->_model_view, p->_texture, p->_vertices, p->_num_vertices);
+    r->draw(p->_model_view, p->_texture, p->_blend_mode, p->_vertices, p->_num_vertices);
 }
 
 

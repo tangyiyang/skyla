@@ -155,7 +155,25 @@ void spine_anim::draw(render_state* rs)
                 quad[3].uv.u = attachment->uvs[0*2+0] * ((1<<16)-1);
                 quad[3].uv.v = attachment->uvs[0*2+1] * ((1<<16)-1);
 
-                rs->draw_quad(_local_transform, (texture*)region->page->rendererObject, quad);
+                blend_mode mode = BLEND_MODE_NONE;
+                switch (slot->data->blendMode) {
+                    case SP_BLEND_MODE_NORMAL:
+                        mode = BLEND_MODE_NORMAL;
+                        break;
+                    case SP_BLEND_MODE_ADDITIVE:
+                        mode = BLEND_MODE_ADDTIVE;
+                        break;
+                    case SP_BLEND_MODE_MULTIPLY:
+                        mode = BLEND_MODE_MUTIPLY;
+                        break;
+                    case SP_BLEND_MODE_SCREEN:
+                        mode = BLEND_MODE_SCREEN;
+                        break;
+                    default:
+                        break;
+                }
+
+                rs->draw_quad(_local_transform, (texture*)region->page->rendererObject, mode, quad);
 
                 break;
             }

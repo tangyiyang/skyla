@@ -14,9 +14,10 @@ NS_S2D
 class sprite;
 class particle;
 
+
 class render_state {
 public:
-    enum RENDERER_TYPE {
+    enum render_type {
         RENDERER_TYPE_QUAD = 0,
         RENDERER_TYPE_PARTICLE,
         MAX_RENDERER_TYPE,
@@ -28,22 +29,22 @@ public:
     void clear();
     void flush();
 
-    void draw_quad(const affine_transform& t, texture* tex, pos_tex_color_vertex* p);
+    void draw_quad(const affine_transform& t, texture* tex, blend_mode b, pos_tex_color_vertex* p);
     void draw_sprite(sprite* s);
     void draw_particle(particle* p);
-    
 
     void push_scissors(const rect& r);
     void pop_scissors();
 
 private:
-    renderer* switch_renderer(RENDERER_TYPE type);
+    renderer* switch_renderer(render_type type);
 
 private:
-    RENDERER_TYPE  _cur_renderer_type;
+    render_type  _cur_renderer_type;
     renderer* _cur_renderer;
     renderer* _renderers[MAX_RENDERER_TYPE];
     std::stack<rect> _scissors_stack;
+    blend_mode _mode;
 };
 
 NS_S2D_END

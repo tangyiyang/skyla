@@ -51,6 +51,7 @@ public:
 public:
     void set_texture(const char* tex_file);
     void set_texture(sprite_frame* frame);
+    void set_texture(texture* tex);
     void set_color(uint32_t color);
 
 public:
@@ -69,6 +70,7 @@ public:
     pos_tex_color_vertex _quad[4];
     texture*             _texture;
     affine_transform     _model_view;
+    enum blend_mode      _blend_mode;
 };
 
 NS_S2D_END

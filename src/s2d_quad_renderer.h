@@ -24,13 +24,16 @@ public:
     void flush();
 
     void draw(const affine_transform& world_transform,
-                   texture* tex,
-                   pos_tex_color_vertex* vertices,
-                   int n);
+              texture* tex,
+              blend_mode mode,
+              pos_tex_color_vertex* vertices,
+              int n);
 private:
     void update_indexes();
 
 private:
+    blend_mode            _blend_mode;
+    blend_func            _blend_func;
     program*              _program;
     texture*              _texture;
     index_t*              _index_buffer;

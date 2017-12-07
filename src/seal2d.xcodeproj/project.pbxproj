@@ -166,6 +166,8 @@
 		4D4704281FC4A3100088FAAF /* s2d_spine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4704261FC4A3100088FAAF /* s2d_spine.cpp */; };
 		4D4704291FC4A3100088FAAF /* s2d_spine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4704261FC4A3100088FAAF /* s2d_spine.cpp */; };
 		4D47042A1FC4A3100088FAAF /* s2d_spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4704271FC4A3100088FAAF /* s2d_spine.h */; };
+		4D5686721FD9A07F00D1FEBD /* s2d_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D5686711FD9A07F00D1FEBD /* s2d_renderer.cpp */; };
+		4D5686731FD9A30900D1FEBD /* s2d_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D5686711FD9A07F00D1FEBD /* s2d_renderer.cpp */; };
 		4D6782661FA5A8CE007D461F /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D67825E1FA5A8CE007D461F /* fpconv.c */; };
 		4D6782671FA5A8CE007D461F /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D67825E1FA5A8CE007D461F /* fpconv.c */; };
 		4D67826B1FA5A8CE007D461F /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D6782611FA5A8CE007D461F /* lua_cjson.c */; };
@@ -393,6 +395,7 @@
 		4D4703AC1FC4A1050088FAAF /* VertexEffect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VertexEffect.c; sourceTree = "<group>"; };
 		4D4704261FC4A3100088FAAF /* s2d_spine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_spine.cpp; sourceTree = "<group>"; };
 		4D4704271FC4A3100088FAAF /* s2d_spine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_spine.h; sourceTree = "<group>"; };
+		4D5686711FD9A07F00D1FEBD /* s2d_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_renderer.cpp; sourceTree = "<group>"; };
 		4D67825E1FA5A8CE007D461F /* fpconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fpconv.c; sourceTree = "<group>"; };
 		4D67825F1FA5A8CE007D461F /* fpconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpconv.h; sourceTree = "<group>"; };
 		4D6782611FA5A8CE007D461F /* lua_cjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua_cjson.c; sourceTree = "<group>"; };
@@ -586,6 +589,7 @@
 				4337BC5C1F852196004CF11B /* s2d_quad_renderer.h */,
 				4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */,
 				4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */,
+				4D5686711FD9A07F00D1FEBD /* s2d_renderer.cpp */,
 				4DD9F7861FAB86F700B9F94F /* s2d_renderer.h */,
 				4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */,
 				4D9F49BA1FAB908200F2170E /* s2d_render_state.h */,
@@ -1041,6 +1045,7 @@
 				B6FF63CD1F91FC4E00D7058F /* loslib.c in Sources */,
 				B6FF63D11F91FC4E00D7058F /* ltable.c in Sources */,
 				439316B71FA7404500D5DFD2 /* s2d_particle.cpp in Sources */,
+				4D5686721FD9A07F00D1FEBD /* s2d_renderer.cpp in Sources */,
 				4D4703DD1FC4A1060088FAAF /* Atlas.c in Sources */,
 				4D4704091FC4A1060088FAAF /* Skeleton.c in Sources */,
 				4D4704171FC4A1060088FAAF /* Slot.c in Sources */,
@@ -1124,6 +1129,7 @@
 				B6FF63B71F91FC4D00D7058F /* lutf8lib.c in Sources */,
 				4D4703F41FC4A1060088FAAF /* extension.c in Sources */,
 				4337BCE91F852D7B004CF11B /* s2d_program.cpp in Sources */,
+				4D5686731FD9A30900D1FEBD /* s2d_renderer.cpp in Sources */,
 				4337BCEC1F852D7B004CF11B /* s2d_texture.cpp in Sources */,
 				4D6782671FA5A8CE007D461F /* fpconv.c in Sources */,
 				4D360C511FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */,

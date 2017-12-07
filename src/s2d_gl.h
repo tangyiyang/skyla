@@ -26,11 +26,6 @@
 
 NS_S2D
 
-struct blend_func {
-    GLenum src;
-    GLenum dst;
-};
-
 class gl {
 public:
     static void check_extension(uint32_t glversion);

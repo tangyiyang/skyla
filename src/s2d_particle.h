@@ -177,7 +177,7 @@ private:
     color4f _start_color_var;
     color4f _end_color;
     color4f _end_color_var;
-    blend_func _blend;
+    blend_func  _blend;
 
     /* emmiter paramters, those vars may change duraring the update process. */
     bool _active;
@@ -193,6 +193,7 @@ public:
     int                     _num_vertices;
     texture*                _texture;
     affine_transform        _model_view;
+    blend_mode              _blend_mode;
 };
 
 NS_S2D_END
