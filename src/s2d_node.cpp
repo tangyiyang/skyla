@@ -22,6 +22,7 @@ void node::init()
     _parent = nullptr;
     _dirty_flags = DIRTY_ALL;
     _children.clear();
+    _touch_callback = nullptr;
 }
 
 bool node::update(float dt)
@@ -85,6 +86,9 @@ rect node::bounds_in(node* space)
 void node::on_touch(touch_event* event)
 {
     // TODO: add script
+    if (_touch_callback) {
+        _touch_callback(this, event);
+    }
 }
 
 void node::update_srt()

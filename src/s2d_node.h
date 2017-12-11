@@ -79,6 +79,11 @@ public:
         _rotation = rotation;
     }
 
+    inline const size& get_size()
+    {
+        return _size;
+    }
+
     inline void set_size(float width, float height)
     {
         _size = {width, height};
@@ -93,6 +98,11 @@ public:
     {
         _z_order = z;
         _dirty_flags |= DIRTY_Z;
+    }
+
+    inline void set_touch_callback(touch_callback_t callback)
+    {
+        _touch_callback = callback;
     }
 
 protected:
@@ -115,6 +125,7 @@ protected:
     affine_transform     _local_transform;
     node*                _parent;
     std::vector<node*>   _children;
+    touch_callback_t     _touch_callback;
 
     static uint64_t _node_id_counter;
 };

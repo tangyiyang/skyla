@@ -329,11 +329,4 @@ rect sprite::bounds_in(node* space)
     return {minX, minY, maxX - minX, maxY - minY};
 }
 
-void sprite::set_color(uint32_t color)
-{
-    for (int i = 0; i < 4; ++i) {
-        _quad[i].color = color;
-    }
-}
-
 NS_S2D_END

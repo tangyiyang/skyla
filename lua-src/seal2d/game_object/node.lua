@@ -4,6 +4,9 @@ local C = require "seal2d_node"
 local node = {
     init = C.init,
     set_pos = C.set_pos,
+    get_size = C.get_size,
+    set_size = C.set_size,
+    on_touch = C.on_touch,
 }
 
 function node.new(t)

@@ -39,7 +39,7 @@ public:
     void on_destroy();
 
 private:
-    void register_lua_extensions();
+    void register_lua_extensions(lua_State* L);
     
 public:
     lua_State* _lua_state;

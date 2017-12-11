@@ -11,11 +11,9 @@ extern int luaopen_cjson(lua_State* L);
 }
 #endif
 
-#define SEAL2D_TYPE_NODE   "seal2d.node"
-#define SEAL2D_TYPE_SPRITE "seal2d.sprite"
-
 NS_S2D
 
+#define SEAL2D_USER_FUNC_TABLE "s2d_funcs"
 #define TRACE_BACK_FUNC_INDEX (1)
 
 static int traceback (lua_State* L)
@@ -110,7 +108,8 @@ static int lseal2d_node_add_child(lua_State* L)
 
 static int lseal2d_node_set_visible(lua_State* L)
 {
-    node* n = (node*)lua_touserdata(L, 1);
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
     bool visible = lua_toboolean(L, 2);
     n->set_visible(visible);
     return 0;
@@ -118,11 +117,23 @@ static int lseal2d_node_set_visible(lua_State* L)
 
 static int lseal2d_node_set_size(lua_State* L)
 {
-    node* n = (node*)lua_touserdata(L, 1);
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
     lua_Number width = luaL_checknumber(L, 2);
     lua_Number height = luaL_checknumber(L, 3);
     n->set_size(width, height);
     return 0;
+}
+
+static int lseal2d_node_get_size(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+    const size& s = n->get_size();
+    lua_pushnumber(L, s.width);
+    lua_pushnumber(L, s.height);
+
+    return 2;
 }
 
 static int lseal2d_node_set_pos(lua_State* L)
@@ -147,7 +158,8 @@ static int lseal2d_node_set_anchor(lua_State* L)
 
 static int lseal2d_node_set_rotation(lua_State* L)
 {
-    node* n = (node*)(lua_touserdata(L, 1));
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
     lua_Number r = luaL_checknumber(L, 2);
     n->set_rotation(r);
     return 0;
@@ -157,11 +169,13 @@ static int lseal2d_node_set_scale(lua_State* L)
 {
     int n_args = lua_gettop(L);
     if (n_args == 2) {
-        node* n = (node*)(lua_touserdata(L, 1));
+        lua_getfield(L, 1, "__cobj");
+        node* n = (node*)lua_touserdata(L, -1);
         lua_Number scale = luaL_checknumber(L, 2);
         n->set_scale(scale);
     } else if (n_args == 3) {
-        node* n = (node*)(lua_touserdata(L, 1));
+        lua_getfield(L, 1, "__cobj");
+        node* n = (node*)lua_touserdata(L, -1);
         lua_Number x = luaL_checknumber(L, 2);
         lua_Number y = luaL_checknumber(L, 3);
         n->set_scale(x, y);
@@ -172,15 +186,48 @@ static int lseal2d_node_set_scale(lua_State* L)
     return 0;
 }
 
-static int lseal2d_node_free(lua_State* L)
+static int lseal2d_node_on_touch(lua_State* L)
 {
-    delete *static_cast<node**>(luaL_checkudata(L, 1, SEAL2D_TYPE_NODE));
+    int n_args = lua_gettop(L);
+    if (n_args == 2) {
+        lua_getfield(L, 1, "__cobj");
+        node* n = (node*)lua_touserdata(L, -1);
+        lua_pop(L, 1);
+        lua_context::stackDump(L);
+
+        lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE);
+        lua_context::stackDump(L);
+        lua_pushvalue(L, 2);
+        lua_context::stackDump(L);
+        lua_pushlightuserdata(L, n);
+        lua_context::stackDump(L);
+
+        lua_settable(L, -3);
+
+        lua_context::stackDump(L);
+
+        n->set_touch_callback([=](void*, touch_event*){
+
+            lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE);
+            lua_context::stackDump(L);
+            lua_pushlightuserdata(L, n);
+            lua_context::stackDump(L);
+            lua_gettable(L, -2);
+            lua_context::stackDump(L);
+            lua_context::call_lua(L, 0, 0);
+        });
+        return 0;
+    }
+
+    luaL_error(L, "invalid number of arguments passed to seal2d_node_on_touch"
+                  "expected 2, but got %d", n_args);
     return 0;
 }
 
 static int lseal2d_node_new(lua_State* L)
 {
     node* n = new node();
+    n->init();
     lua_pushlightuserdata(L, n);
     return 1;
 }
@@ -199,6 +246,8 @@ static int luaopen_seal2d_node(lua_State* L)
         { "set_rotation", lseal2d_node_set_rotation },
         { "set_scale", lseal2d_node_set_scale },
         { "set_size", lseal2d_node_set_size },
+        { "get_size", lseal2d_node_get_size },
+        { "on_touch", lseal2d_node_on_touch },
         { NULL, NULL },
     };
 
@@ -264,6 +313,23 @@ static int lseal2d_sprite_set_texture(lua_State* L)
     return 0;
 }
 
+static int lseal2d_sprite_set_blend_mode(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n != 2) {
+        luaL_error(L, "invalid number of arguments passed to sprite_set_blend_mode"
+                   "expected more than 2, but got %d", n);
+        return 0;
+    }
+    sprite* s = (sprite*)lua_touserdata(L, 1);
+    lua_Integer mode = luaL_checkinteger(L, 2);
+
+    S2D_ASSERT(mode >= 0 && mode < BLEND_MODE_MAX);
+    s->set_blend_mode((enum blend_mode)mode);
+
+    return 0;
+}
+
 int luaopen_seal2d_sprite(lua_State* L)
 {
 #ifdef luaL_checkversion
@@ -274,6 +340,57 @@ int luaopen_seal2d_sprite(lua_State* L)
         { "new",            lseal2d_sprite_new },
         { "set_texture",    lseal2d_sprite_set_texture },
         { "set_color",      lseal2d_sprite_set_color},
+        { "set_blend_mode", lseal2d_sprite_set_blend_mode},
+        { NULL, NULL },
+    };
+
+    luaL_newlib(L, lib);
+    return 1;
+}
+
+int lseal2d_new_bmfont(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 2) {
+        const char* text = luaL_checkstring(L, 1);
+        const char* font_atlas_path = luaL_checkstring(L, 2);
+
+        bmfont* n = new bmfont();
+        n->init(text, font_atlas_path);
+
+        lua_pushlightuserdata(L, n);
+        return 1;
+    }
+
+    luaL_error(L, "invalid number of arguments in seal2d_new_bmfont"
+               " expected 2, but got %d", n);
+    return 0;
+}
+
+int lseal2d_bmfont_set_text(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 2){
+        bmfont* b = (bmfont*)lua_touserdata(L, 1);
+        const char* text = luaL_checkstring(L, 2);
+        b->set_text(text);
+        return 1;
+    }
+
+    luaL_error(L, "invalid number of arguments in seal2d_new_bmfont"
+               " expected 2, but got %d", n);
+    return 0;
+}
+
+int luaopen_seal2d_bmfont(lua_State* L)
+{
+#ifdef luaL_checkversion
+    luaL_checkversion(L);
+#endif
+
+    luaL_Reg lib[] = {
+        { "new",            lseal2d_new_bmfont },
+        { "set_text",       lseal2d_bmfont_set_text   },
         { NULL, NULL },
     };
 
@@ -407,43 +524,46 @@ int lua_context::call_lua(lua_State* L, int n, int r)
     return err;
 }
 
-void lua_context::register_lua_extensions()
+void lua_context::register_lua_extensions(lua_State* L)
 {
     luaL_Reg lua_modules[] = {
         { "cjson",          luaopen_cjson       },
         { "seal2d",         luaopen_seal2d      },
         { "seal2d_node",    luaopen_seal2d_node },
         { "seal2d_sprite",  luaopen_seal2d_sprite },
+        { "seal2d_bmfont",  luaopen_seal2d_bmfont },
         { "seal2d_context", luaopen_seal2d_context},
         { "seal2d_util",    luaopen_seal2d_util },
-
 
         { NULL, NULL}
     };
 
     luaL_Reg* lib = lua_modules;
-    lua_getglobal(_lua_state, "package");
-    lua_getfield(_lua_state, -1, "preload");
+    lua_getglobal(L, "package");
+    lua_getfield(L, -1, "preload");
     for (; lib->func; lib++) {
-        lua_pushcfunction(_lua_state, lib->func);
-        lua_setfield(_lua_state, -2, lib->name);
+        lua_pushcfunction(L, lib->func);
+        lua_setfield(L, -2, lib->name);
     }
 
-    lua_pop(_lua_state, 2);
+    lua_pop(L, 2);
 }
 
 void lua_context::init()
 {
-    _lua_state = nullptr;
-    _lua_state = luaL_newstate();
-    lua_assert(_lua_state);
+    lua_State* L = luaL_newstate();
 
-    luaL_openlibs(_lua_state);
+    luaL_openlibs(L);
 
-    register_lua_extensions();
+    register_lua_extensions(L);
 
-    assert(lua_gettop(_lua_state) == 0);
-    lua_pushcfunction(_lua_state, traceback);
+    lua_newtable(L);
+    lua_setfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE);
+
+    assert(lua_gettop(L) == 0);
+    lua_pushcfunction(L, traceback);
+
+    _lua_state = L;
 }
 
 void lua_context::on_start(context* ctx, const char* script_path)

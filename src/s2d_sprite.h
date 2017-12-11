@@ -52,7 +52,20 @@ public:
     void set_texture(const char* tex_file);
     void set_texture(sprite_frame* frame);
     void set_texture(texture* tex);
-    void set_color(uint32_t color);
+
+public:
+    /* inline setters */
+    inline void set_color(uint32_t color)
+    {
+        for (int i = 0; i < 4; ++i) {
+            _quad[i].color = color;
+        }
+    }
+
+    inline void set_blend_mode(blend_mode mode)
+    {
+        _blend_mode = mode;
+    }
 
 public:
     bool update(float dt)       override;

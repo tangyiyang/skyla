@@ -17,6 +17,7 @@
 		4337BCF91F853EE2004CF11B /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BCF71F853EDE004CF11B /* entry.cpp */; };
 		4337BCFC1F8544CD004CF11B /* res in Copy Files */ = {isa = PBXBuildFile; fileRef = 4337BCFB1F8544C0004CF11B /* res */; };
 		4337BCFE1F8610F2004CF11B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCFD1F8610F2004CF11B /* GLUT.framework */; };
+		4DB22E0B1FDEF8F9004B4747 /* lua-src in Copy Files */ = {isa = PBXBuildFile; fileRef = 4DB22E0A1FDEF8F8004B4747 /* lua-src */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 			dstPath = .;
 			dstSubfolderSpec = 16;
 			files = (
+				4DB22E0B1FDEF8F9004B4747 /* lua-src in Copy Files */,
 				4337BCFC1F8544CD004CF11B /* res in Copy Files */,
 			);
 			name = "Copy Files";
@@ -75,6 +77,7 @@
 		4337BCF81F853EDE004CF11B /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
 		4337BCFB1F8544C0004CF11B /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
 		4337BCFD1F8610F2004CF11B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		4DB22E0A1FDEF8F8004B4747 /* lua-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "lua-src"; path = "../../../lua-src"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,7 @@
 		4337BC801F852453004CF11B = {
 			isa = PBXGroup;
 			children = (
+				4DB22E0A1FDEF8F8004B4747 /* lua-src */,
 				4337BC931F852477004CF11B /* seal2d.xcodeproj */,
 				4337BCB21F852707004CF11B /* libs */,
 				4337BC8B1F852453004CF11B /* hello-world-mac */,
@@ -291,7 +295,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -r ../raw/editor_project/* ../res/\ncp -r ../../../lua-src/* ../res/scripts";
+			shellScript = "cp -r ../raw/editor_project/* ../res/";
 		};
 /* End PBXShellScriptBuildPhase section */
 

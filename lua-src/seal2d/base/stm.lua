@@ -18,6 +18,8 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 
+-- reference: https://github.com/unindented/lua-fsm
+
 local unpack = unpack or table.unpack
 
 local M = {}

@@ -7,16 +7,17 @@ function misc.class(name, super)
             local this = {}
             setmetatable(this, {__index = __class})
             this.__name = name
+            this:ctor(...)
             return this
         end
     elseif type(super == 'function') then
         __class.new = function(...)
 
-            local cobj = super(...)
-            cobj.__name = name
-            cobj.__ctor = __class.ctor
-            cobj.__ctor(...)
-            return cobj
+            local obj = super(...)
+            obj.__name = name
+            obj.__ctor = __class.ctor
+            obj:__ctor(...)
+            return obj
         end
     else
         assert(false, "invalid super type")
