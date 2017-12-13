@@ -64,12 +64,12 @@ static void cursor_pos_callback(GLFWwindow* window, double x, double y)
 
     s2d::context* C = s2d::context::C();
     if (pressing) {
-        C->on_touch_moved(x, C->_window_size.height - y);
+        C->on_touch_moved(x, y);
     }
 
     static char title[256] = "";
     snprintf(title, 256, "[%s] [%d, %d]",
-             C->_app->_app_name.c_str(), (int)x, (int)(C->_logic_size.height - y));
+             C->_app->_app_name.c_str(), (int)x, (int)(C->_window_size.height - y));
     glfwSetWindowTitle(window, title);
 }
 
@@ -80,10 +80,10 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
     glfwGetCursorPos(window, &x, &y);
     if (action == GLFW_RELEASE) {
         pressing = false;
-        C->on_touch_ended(x, C->_window_size.height - y);
+        C->on_touch_ended(x, y);
     } else if (action == GLFW_PRESS) {
         pressing = true;
-        C->on_touch_begin(x, C->_window_size.height - y);
+        C->on_touch_begin(x, y);
     }
 }
 

@@ -6,13 +6,13 @@ local node = {
     set_pos = C.set_pos,
     get_size = C.get_size,
     set_size = C.set_size,
-    on_touch = C.on_touch,
+    on_event = C.on_event,
 }
 
 function node.new(t)
     local obj = t or {
         __cobj = C.new(),
-        __parent = nil
+        __parent = nil,
     }
     setmetatable(obj, {__index = node})
     return obj

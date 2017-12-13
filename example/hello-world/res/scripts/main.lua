@@ -41,8 +41,10 @@ local function main()
 	_G["seal2d"] = require "seal2d"
 	_G["print_r"] = require "seal2d.print_r"
 	_G["misc"] = require "seal2d.misc"
+	_G["consts"] = require "seal2d.base.consts"
 
 	inject(misc)
+	inject(consts)
 
 	seal2d.inject {
 		on_start = on_start,

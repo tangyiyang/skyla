@@ -13,9 +13,6 @@ extern int luaopen_cjson(lua_State* L);
 
 NS_S2D
 
-#define SEAL2D_USER_FUNC_TABLE "s2d_funcs"
-#define TRACE_BACK_FUNC_INDEX (1)
-
 static int traceback (lua_State* L)
 {
     const char *msg = lua_tostring(L, 1);
@@ -186,7 +183,7 @@ static int lseal2d_node_set_scale(lua_State* L)
     return 0;
 }
 
-static int lseal2d_node_on_touch(lua_State* L)
+static int lseal2d_node_on_event(lua_State* L)
 {
     int n_args = lua_gettop(L);
     if (n_args == 2) {
@@ -196,25 +193,23 @@ static int lseal2d_node_on_touch(lua_State* L)
         lua_context::stackDump(L);
 
         lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE);
-        lua_context::stackDump(L);
-        lua_pushvalue(L, 2);
-        lua_context::stackDump(L);
         lua_pushlightuserdata(L, n);
-        lua_context::stackDump(L);
-
+        lua_pushvalue(L, 2);
         lua_settable(L, -3);
 
-        lua_context::stackDump(L);
+        n->set_touch_callback([=](void*, touch_event* e){
 
-        n->set_touch_callback([=](void*, touch_event*){
+            lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE); /* event_table */
+            lua_pushlightuserdata(L, n); /* event_table node */
+            lua_gettable(L, -2);    /* event_table node function */
+            lua_pushstring(L, SEAL2D_EVENT_TOUCH); /* event_table node function "seal2d.event.touch" */
+            lua_pushinteger(L, e->_id); /* event_table node function "seal2d.event.touch" id */
+            lua_pushnumber(L, e->_phase); /* event_table node function "seal2d.event.touch" id phase */
+            lua_pushnumber(L, e->_pos.x); /* event_table node function "seal2d.event.touch" id phase x */
+            lua_pushnumber(L, e->_pos.y); /* event_table node function "seal2d.event.touch" id phase x y*/
 
-            lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE);
-            lua_context::stackDump(L);
-            lua_pushlightuserdata(L, n);
-            lua_context::stackDump(L);
-            lua_gettable(L, -2);
-            lua_context::stackDump(L);
-            lua_context::call_lua(L, 0, 0);
+            lua_context::call_lua(L, 5, 0);
+            lua_pop(L, -1);
         });
         return 0;
     }
@@ -247,7 +242,7 @@ static int luaopen_seal2d_node(lua_State* L)
         { "set_scale", lseal2d_node_set_scale },
         { "set_size", lseal2d_node_set_size },
         { "get_size", lseal2d_node_get_size },
-        { "on_touch", lseal2d_node_on_touch },
+        { "on_event", lseal2d_node_on_event },
         { NULL, NULL },
     };
 
@@ -395,6 +390,7 @@ int luaopen_seal2d_bmfont(lua_State* L)
     };
 
     luaL_newlib(L, lib);
+    lua_context::stackDump(L);
     return 1;
 }
 

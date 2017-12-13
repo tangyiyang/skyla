@@ -54,8 +54,19 @@ function button:ctor(opt)
     self:set_size(w, h)
 
 
-    self:on_touch(function()
-        print("Lua ontouch")
+    local function on_touch(id, phase, x, y)
+        print("id, phase, x, y = ", id, phase, x, y)
+        if phase == TOUCH_ENDED then
+            opt.callback()
+        end
+    end
+
+    self:on_event(function(event_type, ...)
+        if event_type == "seal2d_event_touch" then
+            on_touch(...)
+        else
+
+        end
     end)
 end
 
