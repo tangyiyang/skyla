@@ -38,22 +38,60 @@ static void resize_callback(GLFWwindow* window, int width, int height)
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if (action == GLFW_PRESS)
-        {
-        switch (key)
-            {
-                case GLFW_KEY_ESCAPE:
+    if (action == GLFW_PRESS) {
+        switch (key) {
+            case GLFW_KEY_ESCAPE:
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
                 break;
-                default:
+            default:
                 break;
-            }
         }
+    }
 }
+
+static bool pressing = false;
+
+static void cursor_pos_callback(GLFWwindow* window, double x, double y)
+{
+    int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+    if (state == GLFW_PRESS && !pressing) {
+        pressing = true;
+        return;
+    } else if (state == GLFW_RELEASE && pressing) {
+        pressing = false;
+        return;
+    }
+
+    s2d::context* C = s2d::context::C();
+    if (pressing) {
+        C->on_touch_moved(x, C->_window_size.height - y);
+    }
+
+    static char title[256] = "";
+    snprintf(title, 256, "[%s] [%d, %d]",
+             C->_app->_app_name.c_str(), (int)x, (int)(C->_logic_size.height - y));
+    glfwSetWindowTitle(window, title);
+}
+
+static void mouse_button_callback(GLFWwindow* window, int button, int action, int modifier)
+{
+    s2d::context* C = s2d::context::C();
+    double x, y;
+    glfwGetCursorPos(window, &x, &y);
+    if (action == GLFW_RELEASE) {
+        pressing = false;
+        C->on_touch_ended(x, C->_window_size.height - y);
+    } else if (action == GLFW_PRESS) {
+        pressing = true;
+        C->on_touch_begin(x, C->_window_size.height - y);
+    }
+}
+
 
 int main(int argc, char** argv)
 {
     int width, height;
+    int win_width, win_height;
     GLFWwindow* window;
 
     entry* game_entry = new entry();
@@ -64,8 +102,8 @@ int main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
-    width  = 1136;
-    height = 640;
+    win_width  = 1136;
+    win_height = 640;
 
     glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -73,7 +111,7 @@ int main(int argc, char** argv)
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(width, height, "seal2d-hello-world", NULL, NULL);
+    window = glfwCreateWindow(win_width, win_height, ctx->_app->_app_name.c_str(), NULL, NULL);
     if (!window) {
         fprintf(stderr, "Failed to create GLFW window\n");
         glfwTerminate();
@@ -85,6 +123,9 @@ int main(int argc, char** argv)
 
     glfwSetFramebufferSizeCallback(window, resize_callback);
     glfwSetKeyCallback(window, key_callback);
+    glfwSetCursorPosCallback(window, cursor_pos_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
+    
 
     // Set initial aspect ratio
     glfwGetFramebufferSize(window, &width, &height);
@@ -92,7 +133,7 @@ int main(int argc, char** argv)
 
     glfwSetTime(0.0);
 
-    ctx->init(3, width, height);
+    ctx->init(3, win_width, win_height);
 
     double dt = 0.0f;
     while (!glfwWindowShouldClose(window)) {

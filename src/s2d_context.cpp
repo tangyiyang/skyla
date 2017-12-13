@@ -8,7 +8,7 @@ context* context::_global_context = nullptr;
 void context::init(int opengles_version, float window_width, float window_height)
 {
     _global_context = this;
-    _logic_size = {S2D_DEFAULT_LOGIC_WIDTH, S2D_DEFAULT_LOGIC_HEIGHT};
+    _logic_size = {window_width, window_height};
     _content_scale_factor = 1.0f;
     s2d::gl::check_extension(opengles_version);
 

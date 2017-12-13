@@ -3,6 +3,8 @@
 void entry::on_init(context* ctx)
 {
     _time_elapsed = 0.0f;
+    this->_app_name = "seal2d.hello-world";
+    this->_app_version = "v0.0.1";
 
 #if S2D_ENABLE_LUA == 1
 

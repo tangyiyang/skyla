@@ -31,6 +31,10 @@ public:
     virtual void on_resize(context* ctx) = 0;
     virtual void on_begin_update(float dt) = 0;
     virtual void on_after_update(float dt) = 0;
+
+public:
+    std::string _app_name;
+    std::string _app_version;
 };
 
 class context {
