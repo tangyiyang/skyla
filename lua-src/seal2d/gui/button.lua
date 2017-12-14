@@ -1,7 +1,6 @@
 local node = require "seal2d.game_object.node"
 local bmfont = require "seal2d.game_object.bmfont"
 local sprite = require "seal2d.game_object.sprite"
-
 local stm = require "seal2d.base.stm"
 
 local button = class("button", function()
@@ -53,7 +52,6 @@ function button:ctor(opt)
 
     self:set_size(w, h)
 
-
     local function on_touch(id, phase, x, y)
         print("id, phase, x, y = ", id, phase, x, y)
         if phase == TOUCH_ENDED then
@@ -64,10 +62,14 @@ function button:ctor(opt)
     self:on_event(function(event_type, ...)
         if event_type == "seal2d_event_touch" then
             on_touch(...)
-        else
-
         end
     end)
+
+    -- self:on_stage()
 end
+
+-- function button:__update(dt)
+
+-- end
 
 return button

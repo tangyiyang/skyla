@@ -15,7 +15,7 @@
 #include "s2d_bmfont.h"
 #include "s2d_profiler.h"
 
-#ifdef S2D_ENABLE_LUA
+#if (S2D_ENABLE_LUA == 1)
 #include "s2d_lua_context.h"
 #endif
 
@@ -94,9 +94,7 @@ public:
     texture_cache*      _texture_cache;
     profiler*           _profiler;
 
-
-
-#ifdef S2D_ENABLE_LUA
+#if (S2D_ENABLE_LUA == 1)
     lua_context*        _lua_context;
 #endif
 

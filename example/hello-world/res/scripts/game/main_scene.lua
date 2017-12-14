@@ -4,13 +4,8 @@ local main_scene = class("main_scene", function()
     return node.new()
 end)
 
-local button = require "seal2d.gui.button"
-
 function main_scene:ctor()
-    -- local logo = seal2d.sprite("res/images/bunny.png")
-    -- self:add_child(logo)
-
-
+    local button = require "seal2d.gui.button"
     local b = button.new {
         normal = "images/ui_button_middle.png",
         text = "click me",
@@ -24,6 +19,5 @@ function main_scene:ctor()
 
     self:add_child(b)
 end
-
 
 return main_scene

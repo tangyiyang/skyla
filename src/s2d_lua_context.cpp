@@ -3,7 +3,7 @@
 #include "s2d_sprite.h"
 #include "s2d_context.h"
 
-#ifdef S2D_ENABLE_LUA
+#if (S2D_ENABLE_LUA == 1)
 
 #ifdef __cplusplus
 extern "C" {
@@ -576,10 +576,10 @@ void lua_context::on_start(context* ctx, const char* script_path)
     call_lua(_lua_state, 0, 0);
 }
 
-void lua_context::on_update(uint32_t dt)
+void lua_context::on_update(float dt)
 {
     lua_getfield(_lua_state, LUA_REGISTRYINDEX, CONTEXT_UPDATE);
-    lua_pushinteger(_lua_state, dt);
+    lua_pushnumber(_lua_state, dt);
     call_lua(_lua_state, 1, 0);
 }
 

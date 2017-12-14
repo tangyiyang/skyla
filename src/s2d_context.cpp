@@ -69,7 +69,7 @@ void context::init_fundamental_components(const size& logic_size)
     _root = new node();
     _profiler = new profiler();
 
-#ifdef S2D_ENABLE_LUA
+#if (S2D_ENABLE_LUA == 1)
     _lua_context = new lua_context();
     _lua_context->init();
 #endif
@@ -90,6 +90,10 @@ void context::update(float dt)
     }
 
     _root->update(dt);
+
+#if (S2D_ENABLE_LUA == 1)
+    _lua_context->on_update(dt);
+#endif
 
     if (!_marked_release_nodes.empty()) {
         std::vector<node*>::iterator it = _marked_release_nodes.begin();
@@ -155,7 +159,7 @@ void context::shutdown()
     delete _camera;
     delete _profiler;
 
-#ifdef S2D_ENABLE_LUA
+#if (S2D_ENABLE_LUA == 1)
     delete _lua_context;
 #endif
 

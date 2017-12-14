@@ -1,4 +1,5 @@
 local seal2d = require "seal2d"
+local director = require "seal2d.director"
 local C = require "seal2d_node"
 
 local node = {
@@ -9,8 +10,8 @@ local node = {
     on_event = C.on_event,
 }
 
-function node.new(t)
-    local obj = t or {
+function node.new()
+    local obj = {
         __cobj = C.new(),
         __parent = nil,
     }
@@ -22,6 +23,11 @@ function node:add_child(child)
     assert(child.__parent == nil)
     child.__parent = self
     C.add_child(self.__cobj, child.__cobj)
+end
+
+function node:on_stage()
+    print("on stage = ", self)
+    director.up_stage(self)
 end
 
 return node

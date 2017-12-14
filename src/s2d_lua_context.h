@@ -9,7 +9,7 @@
 
 #include "s2d_common.h"
 
-#ifdef S2D_ENABLE_LUA
+#if (S2D_ENABLE_LUA == 1)
 
 typedef int LUA_FUNC_HANDLER;
 
@@ -39,7 +39,7 @@ public:
 public:
     void init();
     void on_start(context* ctx, const char* script_path);
-    void on_update(uint32_t dt);
+    void on_update(float dt);
     void on_destroy();
 
 private:
