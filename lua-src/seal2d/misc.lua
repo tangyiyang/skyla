@@ -12,13 +12,12 @@ function misc.class(name, super)
         end
     elseif type(super == 'function') then
         __class.new = function(...)
+
             local obj = super(...)
 
-            -- TODO: this is temporary, find a better way.
-            -- for k, v in pairs(__class) do
-                -- obj[k] = v
-            -- end
-
+            for k,v in pairs(__class) do
+                obj[k] = v
+            end
             obj.__name = name
             obj.__ctor = __class.ctor
             obj:__ctor(...)
@@ -140,8 +139,8 @@ function misc.order_pairs(t)
     end
 
     table.sort(ot, function(a, b)
-        return tostring(a) < tostring(b)
-    end)
+            return tostring(a) < tostring(b)
+        end)
 
     local index = 0
     local function iter()

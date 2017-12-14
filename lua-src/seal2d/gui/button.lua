@@ -65,11 +65,11 @@ function button:ctor(opt)
         end
     end)
 
-    -- self:on_stage()
+    self:up_stage()
 end
 
--- function button:__update(dt)
+function button:__update(dt)
 
--- end
+end
 
 return button
