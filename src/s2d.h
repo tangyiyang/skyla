@@ -1,23 +1,24 @@
 /*
  * public headers for user
  * Author: yiyang
- * Copyright is at end of this file, hope this file would never be more than one page. :)
+ * Copyright is at end of this file. :)
  */
 
 #ifndef s2d_h
 #define s2d_h
 
+#include "s2d_bmfont.h"
 #include "s2d_context.h"
-#include "s2d_util.h"
+#include "s2d_file_system.h"
 #include "s2d_math.h"
+#include "s2d_render_texture.h"
 #include "s2d_sprite.h"
 #include "s2d_spine.h"
-#include "s2d_panel.h"
-#include "s2d_bmfont.h"
-#include "s2d_particle.h"
-#include "s2d_file_system.h"
 #include "s2d_texture.h"
-#include "s2d_render_texture.h"
+#include "s2d_timer.h"
+#include "s2d_panel.h"
+#include "s2d_particle.h"
+#include "s2d_util.h"
 
 #endif 
 

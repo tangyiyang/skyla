@@ -6,11 +6,8 @@ local function main()
 		local util = require "seal2d_util"
 		util.add_search_path("res/")
 
-		print("start...")
 		local main_scene = require "game.main_scene"
-		print("start...1 ")
 		root:add_child(main_scene.new())
-		print("start...2 ")
 	end)
 end
 

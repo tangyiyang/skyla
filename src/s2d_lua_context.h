@@ -26,8 +26,10 @@ extern "C" {
 
 #define SEAL2D_EVENT_TOUCH "seal2d_event_touch"
 #define SEAL2D_USER_FUNC_TABLE "seal2d_user_funcs"
+#define SEAL2D_USER_TIMER_TABLE "seal2d_user_timers"
 #define TRACE_BACK_FUNC_INDEX (1)
 
+#define STACK_DUMP(L) lua_context::stackDump(L);
 NS_S2D
 
 class context;

@@ -62,6 +62,7 @@ void context::init_fundamental_components(const size& logic_size)
     _texture_cache = new texture_cache();
     _sprite_frame_cache = new sprite_frame_cache();
     _render_state = new render_state();
+    _timer_mgr = new timer_mgr();
     _file_system = new file_system();
     _touch_handler = new touch_handler();
     _bmfont_info_cache = new bmfont_info_cache();
@@ -74,6 +75,7 @@ void context::init_fundamental_components(const size& logic_size)
     _lua_context->init();
 #endif
 
+    _timer_mgr->init();
     _render_state->init();
     _file_system->init();
     _camera->init_orthographic(logic_size.width, logic_size.height);
@@ -89,6 +91,7 @@ void context::update(float dt)
         _app->on_begin_update(dt);
     }
 
+    _timer_mgr->update(dt);
     _root->update(dt);
 
 #if (S2D_ENABLE_LUA == 1)
@@ -148,6 +151,7 @@ void context::shutdown()
     _render_state->shutdown();
     _file_system->shutdown();
     _profiler->shutdown();
+    _timer_mgr->shutdown();
 
     delete _touch_handler;
     delete _sprite_frame_cache;
@@ -158,6 +162,7 @@ void context::shutdown()
     delete _root;
     delete _camera;
     delete _profiler;
+    delete _timer_mgr;
 
 #if (S2D_ENABLE_LUA == 1)
     delete _lua_context;

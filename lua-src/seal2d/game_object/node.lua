@@ -1,6 +1,6 @@
 local seal2d = require "seal2d"
-local C = require "seal2d_node"
 local director = require "seal2d.director"
+local C = require "seal2d_node"
 
 local node = {
     init = C.init,

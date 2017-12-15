@@ -18,4 +18,3 @@ function bmfont.new(...)
 end
 
 return bmfont
-

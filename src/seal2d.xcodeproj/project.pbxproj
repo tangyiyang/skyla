@@ -43,6 +43,9 @@
 		4D360C501FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */; };
 		4D360C511FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */; };
 		4D360C521FAD9DF900075D98 /* s2d_particle_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */; };
+		4D40F0B81FE427A7007368A7 /* s2d_timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */; };
+		4D40F0B91FE427A7007368A7 /* s2d_timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */; };
+		4D40F0BA1FE427A7007368A7 /* s2d_timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D40F0B71FE427A7007368A7 /* s2d_timer.h */; };
 		4D4703AD1FC4A1050088FAAF /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D47035A1FC4A1050088FAAF /* Animation.h */; };
 		4D4703AE1FC4A1050088FAAF /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D47035B1FC4A1050088FAAF /* AnimationState.h */; };
 		4D4703AF1FC4A1050088FAAF /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D47035C1FC4A1050088FAAF /* AnimationStateData.h */; };
@@ -312,6 +315,8 @@
 		43D3266B1F8626B40070B743 /* s2d_render_texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_render_texture.h; sourceTree = "<group>"; };
 		4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_particle_renderer.cpp; sourceTree = "<group>"; };
 		4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_particle_renderer.h; sourceTree = "<group>"; };
+		4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_timer.cpp; sourceTree = "<group>"; };
+		4D40F0B71FE427A7007368A7 /* s2d_timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_timer.h; sourceTree = "<group>"; };
 		4D47035A1FC4A1050088FAAF /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		4D47035B1FC4A1050088FAAF /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
 		4D47035C1FC4A1050088FAAF /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationStateData.h; sourceTree = "<group>"; };
@@ -609,6 +614,8 @@
 				43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */,
 				437D76781FC4258E009FF2AF /* s2d_profiler.cpp */,
 				437D76791FC4258E009FF2AF /* s2d_profiler.h */,
+				4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */,
+				4D40F0B71FE427A7007368A7 /* s2d_timer.h */,
 			);
 			name = misc;
 			sourceTree = "<group>";
@@ -899,6 +906,7 @@
 				4D4703B31FC4A1050088FAAF /* Attachment.h in Headers */,
 				4D4703B01FC4A1050088FAAF /* Array.h in Headers */,
 				4D47042A1FC4A3100088FAAF /* s2d_spine.h in Headers */,
+				4D40F0BA1FE427A7007368A7 /* s2d_timer.h in Headers */,
 				4D4703AF1FC4A1050088FAAF /* AnimationStateData.h in Headers */,
 				4D4703AE1FC4A1050088FAAF /* AnimationState.h in Headers */,
 				4D4703C81FC4A1050088FAAF /* SkeletonBounds.h in Headers */,
@@ -1054,6 +1062,7 @@
 				4D4703F91FC4A1060088FAAF /* Json.c in Sources */,
 				4D6782661FA5A8CE007D461F /* fpconv.c in Sources */,
 				4D67826D1FA5A8CE007D461F /* strbuf.c in Sources */,
+				4D40F0B81FE427A7007368A7 /* s2d_timer.cpp in Sources */,
 				4337BC6C1F8521A3004CF11B /* s2d_texture.cpp in Sources */,
 				B6FF63BA1F91FC4E00D7058F /* lbaselib.c in Sources */,
 				B6FF63BC1F91FC4E00D7058F /* lcode.c in Sources */,
@@ -1131,6 +1140,7 @@
 				4337BCE91F852D7B004CF11B /* s2d_program.cpp in Sources */,
 				4D5686731FD9A30900D1FEBD /* s2d_renderer.cpp in Sources */,
 				4337BCEC1F852D7B004CF11B /* s2d_texture.cpp in Sources */,
+				4D40F0B91FE427A7007368A7 /* s2d_timer.cpp in Sources */,
 				4D6782671FA5A8CE007D461F /* fpconv.c in Sources */,
 				4D360C511FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */,
 				4D4703FA1FC4A1060088FAAF /* Json.c in Sources */,
