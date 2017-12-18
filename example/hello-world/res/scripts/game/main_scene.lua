@@ -21,15 +21,19 @@ function main_scene:ctor()
 
     local timer = require "seal2d.base.timer"
 
-    local t = timer.new(1.0, function()
-            print("time up, time = ", os.date("%M:%S", os.time()))
-        end, 100)
-    t:start()
+    local i = 0;
 
-    local r = timer.new(3.0, function()
-            print("time up, time = ", os.date("%M:%S", os.time()))
-        end, 100)
-    r:start()
+    local function loop(t)
+        timer.new(t, function()
+            print(string.format("time up %d, time = %s", i, os.date("%M:%S", os.time())))
+            i = i + 1
+            loop(t)
+        end)
+    end
+
+    loop(1.0)
+    loop(2.0)
+
 end
 
 return main_scene

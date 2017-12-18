@@ -4,12 +4,13 @@ local timer = {
     stop = C.stop,
 }
 
-function timer.new(interval, callback, loop)
+function timer.new(interval, callback)
     local t = {
-        __cobj = C.new(interval, callback, loop)
+        __cobj = C.new(interval, callback)
     }
 
     setmetatable(t, {__index = timer})
+    t:start()
     return t
 end
 

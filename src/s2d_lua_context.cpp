@@ -72,7 +72,6 @@ static int lseal2d_context_get_visible_rect(lua_State* L)
     lua_getfield(L, 1, "__cobj");
     context* C = (context*)lua_touserdata(L, -1);
 
-    lua_context::stackDump(L);
     rect* r = &(C->_visible_rect);
     lua_newtable(L);
     lua_pushnumber(L, r->origin.x);
@@ -190,7 +189,6 @@ static int lseal2d_node_on_event(lua_State* L)
         lua_getfield(L, 1, "__cobj");
         node* n = (node*)lua_touserdata(L, -1);
         lua_pop(L, 1);
-        lua_context::stackDump(L);
 
         lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE);
         lua_pushlightuserdata(L, n);
@@ -432,22 +430,15 @@ static int luaopen_seal2d_util(lua_State* L)
 static int lua_seal2d_timer_new(lua_State* L)
 {
     int n = lua_gettop(L);
-    if (n == 3) {
+    if (n == 2) {
         timer* t = new timer();
 
         float interval = luaL_checknumber(L, 1);
-        float loop = luaL_checkinteger(L, 3);
-
-        STACK_DUMP(L);
 
         lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_TIMER_TABLE);
-        STACK_DUMP(L);
         lua_pushlightuserdata(L, t);
-        STACK_DUMP(L);
         lua_pushvalue(L, 2);
-        STACK_DUMP(L);
         lua_settable(L, -3);
-        STACK_DUMP(L);
 
         t->init(interval, [=](void*){
             lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_TIMER_TABLE); /* event_table */
@@ -456,12 +447,11 @@ static int lua_seal2d_timer_new(lua_State* L)
 
             lua_context::call_lua(L, 0, 0);
             lua_pop(L, -1);
-        }, loop, nullptr);
+        }, nullptr);
 
         lua_pop(L, -1);
 
         lua_pushlightuserdata(L, t);
-        STACK_DUMP(L);
         return 1;
     }
     luaL_error(L, "error args passed to lua_seal2d_timer_new"

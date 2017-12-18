@@ -7,26 +7,26 @@ NS_S2D
 
 typedef std::function<void(void*)> timer_callback_t;
 typedef uint32_t    timer_id_t;
+
 class timer {
 public:
-    void init(float interval, timer_callback_t callback, int loop, void* userdata);
+    void init(float interval, timer_callback_t callback, void* userdata);
     void start();
     void stop();
-
-    inline bool operator< (timer* a)
-    {
-        return !(this->_remain < a->_remain);
-    }
 
 public:
     timer_id_t       _id;
     float            _remain;
     float            _interval;
-    bool             _valid;
     timer_callback_t _callback;
-    int              _loop;
     void*            _user_data;
+};
 
+struct timer_compare {
+    bool operator() (timer* const a, timer* const b)
+    {
+        return a->_remain > b->_remain;
+    }
 };
 
 class timer_mgr {
@@ -44,7 +44,7 @@ public:
     
 private:
     uint32_t    _timer_id_counter;
-    std::priority_queue<timer*> _timers;
+    std::priority_queue<timer*, std::vector<timer*>, timer_compare> _timers;
 };
 
 

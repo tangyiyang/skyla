@@ -3,14 +3,12 @@
 
 NS_S2D
 
-void timer::init(float interval, timer_callback_t callback, int loop, void* userdata)
+void timer::init(float interval, timer_callback_t callback, void* userdata)
 {
     _id = context::C()->_timer_mgr->next_timer_counter();
-    _valid = true;
     _remain = interval;
     _interval = interval;
     _callback = callback;
-    _loop = loop;
 }
 
 void timer::start()
@@ -20,7 +18,7 @@ void timer::start()
 
 void timer::stop()
 {
-    _valid = false;
+    
 }
 
 void timer_mgr::init()
@@ -40,38 +38,22 @@ void timer_mgr::shutdown()
 
 void timer_mgr::update(float dt)
 {
+    if (_timers.empty()) {
+        return;
+    }
+
     timer* t = _timers.top();
     t->_remain -= dt;
     if (t->_remain <= 0) {
-
-        LOGD("update timer %d", t->_id);
-        /* process one timer each update */
-        if (t->_valid && t->_loop > 0) {
-            t->_loop--;
-            t->_callback(t->_user_data);
-
-            if (t->_loop < 0) {
-                t->_valid = false;
-                _timers.pop();
-            } else {
-                t->_remain = (t->_interval + t->_remain);
-            }
-
-            if (!_timers.empty()) {
-                /* get the next timer */
-                timer* next = _timers.top();
-                LOGD("update next timer %d", next->_id);
-                next->_remain -= (t->_interval - t->_remain); /*time compensation*/
-            }
-
-            /* clean up*/
-            if (!t->_valid) {
-                delete t;
-            }
-
+        _timers.pop();
+        if (!_timers.empty()) {
             /* recursivly process the next timer */
+            timer* next = _timers.top();
+            next->_remain -= (t->_interval - t->_remain); /*time compensation*/
             this->update(0);
         }
+        t->_callback(t->_user_data);
+        delete t;
     }
 }
 
