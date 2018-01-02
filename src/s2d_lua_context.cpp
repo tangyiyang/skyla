@@ -202,7 +202,7 @@ static int lseal2d_node_on_event(lua_State* L)
             lua_gettable(L, -2);    /* event_table node function */
             lua_pushstring(L, SEAL2D_EVENT_TOUCH); /* event_table node function "seal2d.event.touch" */
             lua_pushinteger(L, e->_id); /* event_table node function "seal2d.event.touch" id */
-            lua_pushnumber(L, e->_phase); /* event_table node function "seal2d.event.touch" id phase */
+            lua_pushinteger(L, e->_phase); /* event_table node function "seal2d.event.touch" id phase */
             lua_pushnumber(L, e->_pos.x); /* event_table node function "seal2d.event.touch" id phase x */
             lua_pushnumber(L, e->_pos.y); /* event_table node function "seal2d.event.touch" id phase x y*/
 

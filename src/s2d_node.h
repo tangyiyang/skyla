@@ -104,6 +104,14 @@ public:
     {
         _touch_callback = callback;
     }
+    
+    inline std::string to_string()
+    {
+        char buf[256];
+        snprintf(buf, 256, "{id = %llu, type = %s, _pos = {%.2f, %.2f}, _size = {%.2f, %.2f}}",
+                 _id, typeid(this).name(), _pos.x, _pos.y, _size.width, _size.height);
+        return std::string(buf);
+    }
 
 protected:
     node* get_root();

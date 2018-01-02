@@ -25,7 +25,6 @@ function main_scene:ctor()
 
     local function loop(t)
         timer.new(t, function()
-            print(string.format("time up %d, time = %s", i, os.date("%M:%S", os.time())))
             i = i + 1
             loop(t)
         end)

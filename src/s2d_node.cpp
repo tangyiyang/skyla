@@ -53,17 +53,17 @@ void node::draw(render_state* rs)
 void node::hit_test(touch_handler* handler, touch_event* event)
 {
     node* parent = _parent ? _parent : this;
-    affine_transform world_to_local_transform = affine_transform::invert(parent->transform_to(this->get_root()));
+    affine_transform local_to_world_transform = this->transform_to(this->get_root());
+    affine_transform world_to_local_transform = affine_transform::invert(local_to_world_transform);
 
     vec2 local = affine_transform::apply_transform(world_to_local_transform, event->_pos.x, event->_pos.y);
 
     rect bounds = this->bounds_in(_parent);
     bool contains = rect::contains(bounds, local.x, local.y);
-
+    
     if (contains && (event->_phase == touch_event::TOUCH_BEGIN)) {
         handler->add_touch_node(this);
     }
-
     // visit the child recusively
     std::vector<node*>::iterator it = _children.begin();
     for (; it != _children.end(); ++it) {

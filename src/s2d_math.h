@@ -107,6 +107,14 @@ struct rect {
         return (x >= r.origin.x && x <= r.origin.x + r.size.width) &&
                (y >= r.origin.y && y <= r.origin.y + r.size.height);
     }
+    
+    inline std::string to_string()
+    {
+        char buf[64];
+        snprintf(buf, 32, "{x = %.2f, y = %.2f, width = %.2f, height = %.2f}",
+                 origin.x, origin.y, size.width, size.height);
+        return std::string(buf);
+    }
 };
 
 struct affine_transform {

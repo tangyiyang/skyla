@@ -38,8 +38,8 @@ void touch_handler::handle_touch_event(touch_event *event)
 
 void touch_handler::send_touch_events(touch_event* event)
 {
-    std::vector<node*>::iterator it = _touchable_nodes.begin();
-    for (; it != _touchable_nodes.end(); ++it) {
+    std::vector<node*>::reverse_iterator it = _touchable_nodes.rbegin();
+    for (; it != _touchable_nodes.rend(); ++it) {
         (*it)->on_touch(event);
     }
 }
