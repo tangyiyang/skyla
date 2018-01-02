@@ -1,6 +1,7 @@
 #include "s2d_lua_context.h"
 #include "s2d_util.h"
 #include "s2d_sprite.h"
+#include "s2d_panel.h"
 #include "s2d_action.h"
 #include "s2d_context.h"
 
@@ -427,6 +428,42 @@ int luaopen_seal2d_bmfont(lua_State* L)
     return 1;
 }
 
+static int lseal2d_new_panel(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 4) {
+        lua_Number x = luaL_checknumber(L, 1);
+        lua_Number y = luaL_checknumber(L, 2);
+        lua_Number w = luaL_checknumber(L, 3);
+        lua_Number h = luaL_checknumber(L, 4);
+
+        panel* p = new panel();
+        p->init(x, y, w, h);
+        lua_pushlightuserdata(L, p);
+        return 1;
+    }
+
+    luaL_error(L, "invalid number of arguments in lseal2d_new_panel"
+               " expected 4, but got %d", n);
+    return 0;
+}
+
+int luaopen_seal2d_panel(lua_State* L)
+{
+#ifdef luaL_checkversion
+    luaL_checkversion(L);
+#endif
+
+    luaL_Reg lib[] = {
+        { "new",            lseal2d_new_panel },
+        { NULL, NULL },
+    };
+
+    luaL_newlib(L, lib);
+    lua_context::stackDump(L);
+    return 1;
+}
+
 int lseal2d_add_search_path(lua_State* L)
 {
     const char* path = luaL_checkstring(L, 1);
@@ -680,6 +717,7 @@ void lua_context::register_lua_extensions(lua_State* L)
         { "seal2d_node",    luaopen_seal2d_node },
         { "seal2d_sprite",  luaopen_seal2d_sprite },
         { "seal2d_bmfont",  luaopen_seal2d_bmfont },
+        { "seal2d_panel",   luaopen_seal2d_panel },
         { "seal2d_context", luaopen_seal2d_context},
         { "seal2d_util",    luaopen_seal2d_util },
         { "seal2d_timer",   luaopen_seal2d_timer },

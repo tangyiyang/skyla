@@ -15,6 +15,7 @@ NS_S2D
 class panel : public node {
 public:
     void init(const rect& r);
+    void init(float x, float y, float w, float h);
     bool update(float dt) override;
     void draw(render_state* rs) override;
 

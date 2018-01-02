@@ -107,7 +107,22 @@ struct rect {
         return (x >= r.origin.x && x <= r.origin.x + r.size.width) &&
                (y >= r.origin.y && y <= r.origin.y + r.size.height);
     }
-    
+
+    static inline rect merge(const rect& l, const rect& r)
+    {
+        float min_x = std::min(l.origin.x, r.origin.x);
+        float max_x = std::max(l.origin.x + l.size.width, r.origin.x + r.size.width);
+        float min_y = std::min(l.origin.y, r.origin.y);
+        float max_y = std::max(l.origin.y + l.size.height, r.origin.y + r.size.height);
+
+        return {
+            .origin.x = min_x,
+            .origin.y = min_y,
+            .size.width = max_x - min_x,
+            .size.height = max_y - min_y
+        };
+    }
+
     inline std::string to_string()
     {
         char buf[64];

@@ -8,6 +8,15 @@ void panel::init(const rect& r)
     _rect = r;
 }
 
+void panel::init(float x, float y, float w, float h)
+{
+    node::init();
+    _rect.origin.x = x;
+    _rect.origin.y = y;
+    _rect.size.width = w;
+    _rect.size.height = h;
+}
+
 bool panel::update(float dt)
 {
     return node::update(dt);

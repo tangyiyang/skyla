@@ -19,4 +19,3 @@ function sprite.new(...)
 end
 
 return sprite
-

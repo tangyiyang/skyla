@@ -87,7 +87,7 @@ void render_state::push_scissors(const rect& r)
 void render_state::pop_scissors()
 {
     _scissors_stack.pop();
-    if (_scissors_stack.size() == 0) {
+    if (_scissors_stack.empty()) {
         glDisable(GL_SCISSOR_TEST);
     }
 }

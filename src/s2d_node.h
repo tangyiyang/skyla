@@ -48,6 +48,8 @@ public:
     vec2 world_to_local(float world_x, float world_y);
     affine_transform transform_to(node* to);
     affine_transform local_to_world();
+    rect get_cascade_bounding();
+    rect get_bounding_box();
     
 public:
     void run_action(action* act);
