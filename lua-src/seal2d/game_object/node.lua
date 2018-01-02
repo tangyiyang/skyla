@@ -9,6 +9,7 @@ local node = {
     set_size = C.set_size,
     on_event = C.on_event,
     run_action = C.run_action,
+    stop_all_actions = C.stop_all_actions,
 }
 
 function node.new(t)

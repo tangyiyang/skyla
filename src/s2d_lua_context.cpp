@@ -236,6 +236,20 @@ static int lseal2d_node_run_action(lua_State* L)
     return 0;
 }
 
+static int lseal2d_node_stop_all_actions(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 1) {
+        lua_getfield(L, 1, "__cobj");
+        node* n = (node*)lua_touserdata(L, -1);
+        n->stop_all_actions();
+        return 0;
+    }
+    luaL_error(L, "invalid number of arguments passed to lseal2d_node_stop_all_actions"
+               "expected 1, but got %d", n);
+    return 0;
+}
+
 static int lseal2d_node_new(lua_State* L)
 {
     node* n = new node();
@@ -261,6 +275,7 @@ static int luaopen_seal2d_node(lua_State* L)
         { "get_size", lseal2d_node_get_size },
         { "on_event", lseal2d_node_on_event },
         { "run_action", lseal2d_node_run_action },
+        { "stop_all_actions", lseal2d_node_stop_all_actions },
         { NULL, NULL },
     };
 
@@ -527,7 +542,26 @@ static int lua_seal2d_action_move_to(lua_State* L)
         lua_pushlightuserdata(L, a);
         return 1;
     } else {
-        luaL_error(L, "invalid number of arguments for action_move_to, expected %d, got %d", 3, n);
+        luaL_error(L, "invalid number of arguments for lua_seal2d_action_move_to, expected %d, got %d", 3, n);
+        return 0;
+    }
+}
+
+static int lua_seal2d_action_scale_to(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 3) {
+        lua_Number duration = luaL_checknumber(L, 1);
+        lua_Number x = luaL_checknumber(L, 2);
+        lua_Number y = luaL_checknumber(L, 3);
+
+        action_scale_to* a = new action_scale_to();
+        a->init(duration, x, y);
+
+        lua_pushlightuserdata(L, a);
+        return 1;
+    } else {
+        luaL_error(L, "invalid number of arguments for lua_seal2d_action_scale_to, expected %d, got %d", 3, n);
         return 0;
     }
 }
@@ -540,6 +574,7 @@ static int luaopen_seal2d_action(lua_State* L)
     
     luaL_Reg lib[] = {
         { "move_to",  lua_seal2d_action_move_to},
+        { "scale_to", lua_seal2d_action_scale_to},
         { NULL, NULL },
     };
     

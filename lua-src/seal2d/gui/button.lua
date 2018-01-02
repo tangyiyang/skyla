@@ -58,8 +58,9 @@ function button:ctor(opt)
 
         if phase == TOUCH_ENDED then
             opt.callback()
+            self:run_action(action.scale_to(0.1, 1.0, 1.0))
         elseif phase == TOUCH_BEGIN then
-            self:run_action(action.move_to(1.0, 200, 200))
+            self:run_action(action.scale_to(0.1, 0.9, 0.9))
         end
     end
 
