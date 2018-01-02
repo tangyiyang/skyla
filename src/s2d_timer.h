@@ -45,6 +45,7 @@ public:
 private:
     uint32_t    _timer_id_counter;
     std::priority_queue<timer*, std::vector<timer*>, timer_compare> _timers;
+    float       _time_elapsed;
 };
 
 

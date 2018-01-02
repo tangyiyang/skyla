@@ -22,6 +22,8 @@
 
 NS_S2D
 
+class action;
+
 class node {
     /*
      *  The scene-graph implemention class.
@@ -41,12 +43,22 @@ public:
     void remove_child(node* child);
     void remove_all_children();
     void remove_from_parent();
+    void on_detach();
 
     vec2 world_to_local(float world_x, float world_y);
     affine_transform transform_to(node* to);
     affine_transform local_to_world();
+    
+public:
+    void run_action(action* act);
+    void stop_all_actions();
 
 public:
+    inline const vec2& get_pos()
+    {
+        return _pos;
+    }
+    
     inline void set_visible(bool v)
     {
         _visible = v;

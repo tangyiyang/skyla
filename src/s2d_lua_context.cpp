@@ -1,6 +1,7 @@
 #include "s2d_lua_context.h"
 #include "s2d_util.h"
 #include "s2d_sprite.h"
+#include "s2d_action.h"
 #include "s2d_context.h"
 
 #if (S2D_ENABLE_LUA == 1)
@@ -217,6 +218,24 @@ static int lseal2d_node_on_event(lua_State* L)
     return 0;
 }
 
+static int lseal2d_node_run_action(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 2) {
+        lua_getfield(L, 1, "__cobj");
+        node* n = (node*)lua_touserdata(L, -1);
+        
+        action* a = (action*)lua_touserdata(L, 2);
+        n->run_action(a);
+        
+        return 0;
+    }
+    
+    luaL_error(L, "invalid number of arguments passed to lseal2d_node_run_action"
+               "expected 2, but got %d", n);
+    return 0;
+}
+
 static int lseal2d_node_new(lua_State* L)
 {
     node* n = new node();
@@ -241,6 +260,7 @@ static int luaopen_seal2d_node(lua_State* L)
         { "set_size", lseal2d_node_set_size },
         { "get_size", lseal2d_node_get_size },
         { "on_event", lseal2d_node_on_event },
+        { "run_action", lseal2d_node_run_action },
         { NULL, NULL },
     };
 
@@ -493,6 +513,39 @@ static int luaopen_seal2d_timer(lua_State* L)
     return 1;
 }
 
+static int lua_seal2d_action_move_to(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 3) {
+        lua_Number duration = luaL_checknumber(L, 1);
+        lua_Number x = luaL_checknumber(L, 2);
+        lua_Number y = luaL_checknumber(L, 3);
+        
+        action_move* a = new action_move();
+        a->init(duration, x, y);
+        
+        lua_pushlightuserdata(L, a);
+        return 1;
+    } else {
+        luaL_error(L, "invalid number of arguments for action_move_to, expected %d, got %d", 3, n);
+        return 0;
+    }
+}
+
+static int luaopen_seal2d_action(lua_State* L)
+{
+#ifdef luaL_checkversion
+    luaL_checkversion(L);
+#endif
+    
+    luaL_Reg lib[] = {
+        { "move_to",  lua_seal2d_action_move_to},
+        { NULL, NULL },
+    };
+    
+    luaL_newlib(L, lib);
+    return 1;
+}
 
 static int luaopen_seal2d_context(lua_State* L)
 {
@@ -595,6 +648,7 @@ void lua_context::register_lua_extensions(lua_State* L)
         { "seal2d_context", luaopen_seal2d_context},
         { "seal2d_util",    luaopen_seal2d_util },
         { "seal2d_timer",   luaopen_seal2d_timer },
+        { "seal2d_action",  luaopen_seal2d_action },
 
         { NULL, NULL}
     };

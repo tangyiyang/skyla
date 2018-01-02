@@ -1,7 +1,7 @@
 #include "s2d_context.h"
-#include "s2d_node.h"
 #include "s2d_util.h"
-
+#include "s2d_node.h"
+#include "s2d_action.h"
 
 NS_S2D
 
@@ -32,6 +32,7 @@ bool node::update(float dt)
     std::vector<node*>::iterator it = _children.begin();
     while(it != _children.end()) {
         if ((*it)->update(dt)) {
+            (*it)->on_detach();
             delete *it;
             _children.erase(it);
         } else {
@@ -145,6 +146,11 @@ void node::remove_all_children()
     _children.clear();
 }
 
+void node::on_detach()
+{
+    this->stop_all_actions();
+}
+
 void node::remove_from_parent()
 {
     S2D_ASSERT(_parent != nullptr);
@@ -155,6 +161,16 @@ vec2 node::world_to_local(float world_x, float world_y)
 {
     affine_transform world_to_local = affine_transform::invert(local_to_world());
     return affine_transform::apply_transform(world_to_local, world_x, world_y);
+}
+
+void node::run_action(action* act)
+{
+    act->start(this);
+}
+
+void node::stop_all_actions()
+{
+    context::C()->_action_mgr->remove(this);
 }
 
 affine_transform node::transform_to(node* to)

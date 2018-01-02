@@ -15,6 +15,7 @@
 #include "s2d_bmfont.h"
 #include "s2d_profiler.h"
 #include "s2d_timer.h"
+#include "s2d_action.h"
 
 #if (S2D_ENABLE_LUA == 1)
 #include "s2d_lua_context.h"
@@ -90,6 +91,7 @@ public:
     file_system*        _file_system;
     touch_handler*      _touch_handler;
     timer_mgr*          _timer_mgr;
+    action_mgr*         _action_mgr;
     render_state*       _render_state;
     node*               _root;
     sprite_frame_cache* _sprite_frame_cache;
@@ -112,7 +114,6 @@ public:
 
     /* Object lifecycle management */
     std::vector<node*>  _marked_release_nodes;
-    
 public:
     static inline context* C()
     {

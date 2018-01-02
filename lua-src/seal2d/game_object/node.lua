@@ -8,6 +8,7 @@ local node = {
     get_size = C.get_size,
     set_size = C.set_size,
     on_event = C.on_event,
+    run_action = C.run_action,
 }
 
 function node.new(t)

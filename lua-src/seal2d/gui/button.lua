@@ -2,6 +2,7 @@ local node = require "seal2d.game_object.node"
 local bmfont = require "seal2d.game_object.bmfont"
 local sprite = require "seal2d.game_object.sprite"
 local stm = require "seal2d.base.stm"
+local action = require "seal2d_action"
 
 local button = class("button", function()
     return node.new()
@@ -54,8 +55,11 @@ function button:ctor(opt)
 
     local function on_touch(id, phase, x, y)
         print("id, phase, x, y = ", id, phase, x, y)
+
         if phase == TOUCH_ENDED then
             opt.callback()
+        elseif phase == TOUCH_BEGIN then
+            self:run_action(action.move_to(1.0, 200, 200))
         end
     end
 
