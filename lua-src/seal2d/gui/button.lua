@@ -69,8 +69,6 @@ function button:ctor(opt)
             on_touch(...)
         end
     end)
-
-    self:up_stage()
 end
 
 function button:__update(dt)

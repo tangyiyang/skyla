@@ -134,6 +134,29 @@ static int lseal2d_node_get_size(lua_State* L)
     return 2;
 }
 
+static int lseal2d_node_get_pos(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+    const vec2& p = n->get_pos();
+    lua_pushnumber(L, p.x);
+    lua_pushnumber(L, p.y);
+
+    return 2;
+}
+
+static int lseal2d_node_get_bounding_box(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+    const rect& r = n->get_bounding_box();
+    lua_pushnumber(L, r.origin.x);
+    lua_pushnumber(L, r.origin.y);
+    lua_pushnumber(L, r.size.width);
+    lua_pushnumber(L, r.size.height);
+    return 4;
+}
+
 static int lseal2d_node_set_pos(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
@@ -274,6 +297,8 @@ static int luaopen_seal2d_node(lua_State* L)
         { "set_scale", lseal2d_node_set_scale },
         { "set_size", lseal2d_node_set_size },
         { "get_size", lseal2d_node_get_size },
+        { "get_pos", lseal2d_node_get_pos },
+        { "get_bounding_box", lseal2d_node_get_bounding_box },
         { "on_event", lseal2d_node_on_event },
         { "run_action", lseal2d_node_run_action },
         { "stop_all_actions", lseal2d_node_stop_all_actions },
@@ -331,7 +356,7 @@ static int lseal2d_sprite_set_texture(lua_State* L)
     sprite* s = (sprite*)lua_touserdata(L, 1);
     if (n == 2) {
         char* file_name = (char*)luaL_checkstring(L, 2);
-        if (file_name[0] == '#') {
+        if (file_name[0] == '#' && strlen(file_name) > 2) {
             sprite_frame* f = context::C()->_sprite_frame_cache->get(file_name+1);
             s->set_texture(f);
         } else {

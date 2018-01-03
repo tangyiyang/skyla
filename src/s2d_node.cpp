@@ -196,23 +196,24 @@ affine_transform node::local_to_world()
     return transform_to(this->get_root());
 }
 
-rect node::get_cascade_bounding()
+rect node::get_bounding_box()
 {
     rect r = {
         0, 0, _size.width, _size.height
     };
 
-    std::vector<node*>::iterator it = _children.begin();
-    for (; it != _children.end(); ++it) {
-
+    if (!_children.empty()) {
+        std::vector<node*>::iterator it = _children.begin();
+        for (; it != _children.end(); ++it) {
+            rect child_r = (*it)->get_bounding_box();
+            r = r.merge(r, child_r);
+        }
+    } else {
+        this->update_srt();
+        r = affine_transform::apply_transform(_local_transform, r);
     }
 
     return r;
-}
-
-rect node::get_bounding_box()
-{
-    
 }
 
 node* node::get_root()

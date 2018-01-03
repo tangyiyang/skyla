@@ -81,6 +81,10 @@ function misc.print_r(root)
     io.flush()
 end
 
+function misc.printf(...)
+    print(string.format(...))
+end
+
 function misc.contains(rect, x, y)
     return  x >= rect.x and
             x <= rect.x + rect.width and
