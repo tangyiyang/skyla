@@ -41,6 +41,11 @@ public:
         return _writable_path;
     }
 
+    inline const std::string& get_sandbox_path()
+    {
+        return _sandbox_path;
+    }
+
     void add_search_path(const char* relative_path);
     void insert_full_search_path(const char* full_path);
     file_entry* read(const char* path, bool cache);
