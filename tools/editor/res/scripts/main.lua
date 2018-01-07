@@ -1,20 +1,38 @@
-package.path = package.path .. ";res/scripts/?.lua"
+local function main()
+    package.path = package.path .. ";res/scripts/?.lua"
+                                .. ";lua-src/?.lua"
+    local director = require "seal2d.director"
 
-local function initialize()
-    -- the order of calling these functions matters!
-    imgui = require "imgui"
+
+
+    _G["imgui"] = require "imgui"
     require "imgui_consts"
-    require "config"
-    editor = require "editor"
-    record = require "record"
 
-    -- inject serveral global util functions.
-    print_r = require "print_r"
+    local editor = require "editor"
+
+    print("call main()")
+
+
+
+    local function create_func(root)
+        local util = require "seal2d_util"
+        util.add_search_path("res/")
+
+        editor.init()
+    end
+
+    local function update_func(dt)
+        editor.update(dt)
+    end
+
+    local function destroy_func()
+        editor.destroy()
+    end
+
+    director.start(create_func, update_func, destroy_func)
 end
 
-initialize()
-
-xpcall(editor.start, function(err, msg)
+xpcall(main, function(err, msg)
     print(err)
-    print(debug.traceback(2, msg))
+    print(msg)
 end)

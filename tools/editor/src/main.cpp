@@ -4,7 +4,7 @@
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
 
-#include "lua_handler.h"
+#include "lua_editor.h"
 #include "s2d.h"
 #include "entry.h"
 
@@ -86,18 +86,12 @@ node* game_scene(s2d::context* ctx)
 
     float scale_x = visible_rect.size.width / 16.0f;
     float scale_y = visible_rect.size.height / 16.0f;
-    sprite* background = new sprite();
-    background->init("res/editor_resoruces/backgroud.png");
-    background->set_scale(scale_x, scale_y);
-    background->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
-    background->set_anchor(0.5, 0.5);
 
     sprite* s = new sprite();
     s->init("res/seal2d-transparent.png");
     s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
     s->set_anchor(0.5, 0.5);
 
-    layer->add_child(background);
     layer->add_child(s);
 
     return layer;
@@ -137,9 +131,6 @@ int main(int, char**)
 
     ImVec4 clear_color = ImColor(114, 144, 154);
 
-    game_tool::lua_handler* _l = new game_tool::lua_handler();
-    _l->init();
-
 
     entry* game_entry = new entry();
     s2d::context* ctx = new s2d::context(game_entry);
@@ -158,7 +149,6 @@ int main(int, char**)
         glfwPollEvents();
         ImGui_ImplGlfwGL3_NewFrame();
 
-        _l->update(0);
 
         ImGui::SetNextWindowSize(ImVec2(window_width + 10, window_height + 10),
                                  ImGuiSetCond_FirstUseEver);
@@ -174,6 +164,11 @@ int main(int, char**)
             ImGui::ShowTestWindow(&show_test_window);
         }
 
+
+
+        ctx->update(0);
+        ctx->draw();
+
         // Rendering
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
@@ -181,9 +176,6 @@ int main(int, char**)
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui::Render();
-
-        ctx->update(0);
-        ctx->draw();
 
         glfwSwapBuffers(window);
     }

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		430F7CDA1F8382C500D0C98C /* res in Copy Files */ = {isa = PBXBuildFile; fileRef = 430F7CD91F8382B700D0C98C /* res */; };
-		430F7CDD1F83842200D0C98C /* lua_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F7CDB1F83842200D0C98C /* lua_handler.cpp */; };
 		430F7CFB1F83897D00D0C98C /* lua_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F7CFA1F83897D00D0C98C /* lua_editor.cpp */; };
 		43AA98C51F83BB6200368AAD /* lua_imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 439DAB901F83BAAE00832952 /* lua_imgui.cpp */; };
 		43AA98D01F83EEC100368AAD /* nfd_cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CB1F83EEB600368AAD /* nfd_cocoa.m */; };
@@ -16,6 +15,7 @@
 		43AA98D51F83FED700368AAD /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98D31F83FECB00368AAD /* lfs.c */; };
 		43D3265A1F8620C40070B743 /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D326581F8620C40070B743 /* entry.cpp */; };
 		43D326641F86231F0070B743 /* libseal2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D326631F8620E00070B743 /* libseal2d-mac.a */; };
+		4D96304C20027D6100063538 /* lua-src in Copy Files */ = {isa = PBXBuildFile; fileRef = 4D96304920027D5D00063538 /* lua-src */; };
 		4DD3C57E1F9CF2980068632E /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3C5431F9CF2980068632E /* lapi.c */; };
 		4DD3C57F1F9CF2980068632E /* lauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3C5451F9CF2980068632E /* lauxlib.c */; };
 		4DD3C5801F9CF2980068632E /* lbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3C5471F9CF2980068632E /* lbaselib.c */; };
@@ -85,6 +85,7 @@
 			dstPath = .;
 			dstSubfolderSpec = 16;
 			files = (
+				4D96304C20027D6100063538 /* lua-src in Copy Files */,
 				430F7CDA1F8382C500D0C98C /* res in Copy Files */,
 			);
 			name = "Copy Files";
@@ -95,8 +96,6 @@
 /* Begin PBXFileReference section */
 		430F7C031F8376BD00D0C98C /* level_editor_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = level_editor_common.h; sourceTree = "<group>"; };
 		430F7CD91F8382B700D0C98C /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
-		430F7CDB1F83842200D0C98C /* lua_handler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lua_handler.cpp; sourceTree = "<group>"; };
-		430F7CDC1F83842200D0C98C /* lua_handler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lua_handler.h; sourceTree = "<group>"; };
 		430F7CF91F83897D00D0C98C /* lua_editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lua_editor.h; sourceTree = "<group>"; };
 		430F7CFA1F83897D00D0C98C /* lua_editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lua_editor.cpp; sourceTree = "<group>"; };
 		439DAB901F83BAAE00832952 /* lua_imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lua_imgui.cpp; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		43D326581F8620C40070B743 /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
 		43D326591F8620C40070B743 /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
 		43D3265B1F8620E00070B743 /* seal2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = seal2d.xcodeproj; path = ../../../src/seal2d.xcodeproj; sourceTree = "<group>"; };
+		4D96304920027D5D00063538 /* lua-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "lua-src"; path = "../../../lua-src"; sourceTree = "<group>"; };
 		4DD3C5431F9CF2980068632E /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lapi.c; sourceTree = "<group>"; };
 		4DD3C5441F9CF2980068632E /* lapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lapi.h; sourceTree = "<group>"; };
 		4DD3C5451F9CF2980068632E /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lauxlib.c; sourceTree = "<group>"; };
@@ -215,8 +215,6 @@
 			children = (
 				430F7CFA1F83897D00D0C98C /* lua_editor.cpp */,
 				430F7CF91F83897D00D0C98C /* lua_editor.h */,
-				430F7CDB1F83842200D0C98C /* lua_handler.cpp */,
-				430F7CDC1F83842200D0C98C /* lua_handler.h */,
 			);
 			name = luabinding;
 			sourceTree = "<group>";
@@ -395,6 +393,7 @@
 		B66F9DEE1F7AB888002AF54D = {
 			isa = PBXGroup;
 			children = (
+				4D96304920027D5D00063538 /* lua-src */,
 				43D3265B1F8620E00070B743 /* seal2d.xcodeproj */,
 				4DD3C5411F9CF2980068632E /* lua-libs */,
 				B63FEBDC1F7D4C26001BD442 /* libs */,
@@ -526,7 +525,6 @@
 				4DD3C5901F9CF2980068632E /* loadlib.c in Sources */,
 				43AA98D11F83EEC500368AAD /* nfd_common.c in Sources */,
 				430F7CFB1F83897D00D0C98C /* lua_editor.cpp in Sources */,
-				430F7CDD1F83842200D0C98C /* lua_handler.cpp in Sources */,
 				43D3265A1F8620C40070B743 /* entry.cpp in Sources */,
 				4DD3C5841F9CF2980068632E /* lctype.c in Sources */,
 				4DD3C5801F9CF2980068632E /* lbaselib.c in Sources */,

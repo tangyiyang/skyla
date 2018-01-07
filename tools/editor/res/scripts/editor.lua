@@ -1,7 +1,7 @@
-local core = require "editor.core"
+local seal2d = require "seal2d"
 local lfs = require "lfs"
-local print_r = require "print_r"
 local scene_graph_editor = require "scene_graph_editor"
+local record = require "record"
 
 local editor = {
     root_dir_name = "",
@@ -60,15 +60,6 @@ local avaliable_widgets_on_toolbar = {
     {name = "Particle", func = on_toolbar_paritcle},
     {name = "ClippingNode", func = on_toolbar_clipping_node},
 }
-
-function editor.start()
-    print("editor start")
-    core.inject {
-        on_init = editor.init,
-        on_update = editor.update,
-        on_destory = editor.destroy,
-    }
-end
 
 -- we must have these limitations when we have a LARGE folder.
 local max_visit_depth = 128

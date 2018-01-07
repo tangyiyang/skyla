@@ -11,6 +11,8 @@ public:
     void on_resume() override;
     void on_destroy() override;
     void on_resize(context* ctx) override;
+    void on_begin_update(float dt) override;
+    void on_after_update(float dt) override;
 
 private:
     sprite* _background;

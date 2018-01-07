@@ -1,43 +1,38 @@
 #include "entry.h"
+#include "lua_editor.h"
+
+#include "level_editor_common.h"
+#include "lua_imgui.h"
+#include "lfs.h"
+
+static void register_custom_lua_modules(lua_State* L)
+{
+    luaL_Reg lua_modules[] = {
+        { "editor.core", luaopen_editor_core},
+        { "imgui", luaopen_imgui_core},
+        { "lfs", luaopen_lfs},
+        { NULL, NULL}
+    };
+
+    luaL_Reg* lib = lua_modules;
+    lua_getglobal(L, "package");
+    lua_getfield(L, -1, "preload");
+    for (; lib->func; lib++) {
+        lua_pushcfunction(L, lib->func);
+        lua_setfield(L, -2, lib->name);
+    }
+
+    lua_pop(L, 2);
+}
 
 void entry::on_init(context* ctx)
 {
-//    rect visible_rect = ctx->get_visible_rect();
-//    node* root = ctx->get_root();
-//    root->set_size(visible_rect.size.width, visible_rect.size.height);
-//    root->set_anchor(0, 0);
-//    root->set_pos(0, 0);
-//
-//    float yoffset = 150;
-//    node* layer = new node();
-//    layer->init();
-//    layer->set_pos(visible_rect.size.width/2, visible_rect.size.height/2 + yoffset);
-//    layer->set_anchor(0.5, 0.5);
-//    layer->set_size(visible_rect.size.width, visible_rect.size.height);
-//    layer->set_scale(0.5);
-//
-//    float scale_x = visible_rect.size.width / 16.0f;
-//    float scale_y = visible_rect.size.height / 16.0f;
-//    sprite* background = new sprite();
-//    background->init("res/editor_resoruces/backgroud.png");
-//    background->set_scale(scale_x, scale_y);
-//    background->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
-//    background->set_anchor(0.5, 0.5);
-//
-//    sprite* s = new sprite();
-//    s->init("res/seal2d-transparent.png");
-//    s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
-//    s->set_anchor(0.5, 0.5);
-//
-//    root->add_child(layer);
-//    layer->add_child(background);
-//    layer->add_child(s);
-//
-//    render_texture* rt = new render_texture();
-//    rt->init(visible_rect.size.width, visible_rect.size.height);
-//    rt->draw(root);
-}
+    register_custom_lua_modules(ctx->_lua_context->_lua_state);
 
+#if S2D_ENABLE_LUA == 1
+    ctx->_lua_context->on_start(ctx, "res/scripts/main.lua");
+#endif
+}
 
 void entry::on_pause()
 {
@@ -57,4 +52,14 @@ void entry::on_destroy()
 void entry::on_resize(context* ctx)
 {
     LOGD("entry:: on_resize");
+}
+
+void entry::on_begin_update(float dt)
+{
+
+}
+
+void entry::on_after_update(float dt)
+{
+
 }
