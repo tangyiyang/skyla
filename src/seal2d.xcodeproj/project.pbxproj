@@ -43,6 +43,24 @@
 		43BFCDAF1F877DD2007DFD82 /* s2d_touch_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */; };
 		43D3266C1F8626B40070B743 /* s2d_render_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */; };
 		43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 43D3266B1F8626B40070B743 /* s2d_render_texture.h */; };
+		43DBF74E2005CA95000511EB /* s2d_node_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF74C2005CA95000511EB /* s2d_node_lua_binding.cpp */; };
+		43DBF74F2005CA95000511EB /* s2d_node_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF74C2005CA95000511EB /* s2d_node_lua_binding.cpp */; };
+		43DBF7502005CA95000511EB /* s2d_node_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DBF74D2005CA95000511EB /* s2d_node_lua_binding.h */; };
+		43DBF7542005CC77000511EB /* s2d_sprite_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7522005CC77000511EB /* s2d_sprite_lua_binding.cpp */; };
+		43DBF7552005CC77000511EB /* s2d_sprite_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7522005CC77000511EB /* s2d_sprite_lua_binding.cpp */; };
+		43DBF7562005CC77000511EB /* s2d_sprite_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DBF7532005CC77000511EB /* s2d_sprite_lua_binding.h */; };
+		43DBF75A2005CE95000511EB /* s2d_bmfont_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7582005CE95000511EB /* s2d_bmfont_lua_binding.cpp */; };
+		43DBF75B2005CE95000511EB /* s2d_bmfont_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7582005CE95000511EB /* s2d_bmfont_lua_binding.cpp */; };
+		43DBF75C2005CE95000511EB /* s2d_bmfont_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DBF7592005CE95000511EB /* s2d_bmfont_lua_binding.h */; };
+		43DBF75F2005CEEF000511EB /* s2d_action_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF75D2005CEEF000511EB /* s2d_action_lua_binding.cpp */; };
+		43DBF7602005CEEF000511EB /* s2d_action_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF75D2005CEEF000511EB /* s2d_action_lua_binding.cpp */; };
+		43DBF7612005CEEF000511EB /* s2d_action_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DBF75E2005CEEF000511EB /* s2d_action_lua_binding.h */; };
+		43DBF7642005CFD7000511EB /* s2d_timer_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7622005CFD7000511EB /* s2d_timer_lua_binding.cpp */; };
+		43DBF7652005CFD7000511EB /* s2d_timer_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7622005CFD7000511EB /* s2d_timer_lua_binding.cpp */; };
+		43DBF7662005CFD7000511EB /* s2d_timer_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DBF7632005CFD7000511EB /* s2d_timer_lua_binding.h */; };
+		43DBF7692005D052000511EB /* s2d_context_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */; };
+		43DBF76A2005D052000511EB /* s2d_context_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */; };
+		43DBF76B2005D052000511EB /* s2d_context_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DBF7682005D052000511EB /* s2d_context_lua_binding.h */; };
 		4D360C501FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */; };
 		4D360C511FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */; };
 		4D360C521FAD9DF900075D98 /* s2d_particle_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */; };
@@ -318,6 +336,18 @@
 		43BFCDAD1F877DD2007DFD82 /* s2d_touch_handler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_touch_handler.cpp; sourceTree = "<group>"; };
 		43D3266A1F8626B40070B743 /* s2d_render_texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_render_texture.cpp; sourceTree = "<group>"; };
 		43D3266B1F8626B40070B743 /* s2d_render_texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_render_texture.h; sourceTree = "<group>"; };
+		43DBF74C2005CA95000511EB /* s2d_node_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_node_lua_binding.cpp; sourceTree = "<group>"; };
+		43DBF74D2005CA95000511EB /* s2d_node_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_node_lua_binding.h; sourceTree = "<group>"; };
+		43DBF7522005CC77000511EB /* s2d_sprite_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_sprite_lua_binding.cpp; sourceTree = "<group>"; };
+		43DBF7532005CC77000511EB /* s2d_sprite_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_sprite_lua_binding.h; sourceTree = "<group>"; };
+		43DBF7582005CE95000511EB /* s2d_bmfont_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_bmfont_lua_binding.cpp; sourceTree = "<group>"; };
+		43DBF7592005CE95000511EB /* s2d_bmfont_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_bmfont_lua_binding.h; sourceTree = "<group>"; };
+		43DBF75D2005CEEF000511EB /* s2d_action_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_action_lua_binding.cpp; sourceTree = "<group>"; };
+		43DBF75E2005CEEF000511EB /* s2d_action_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_action_lua_binding.h; sourceTree = "<group>"; };
+		43DBF7622005CFD7000511EB /* s2d_timer_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_timer_lua_binding.cpp; sourceTree = "<group>"; };
+		43DBF7632005CFD7000511EB /* s2d_timer_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_timer_lua_binding.h; sourceTree = "<group>"; };
+		43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_context_lua_binding.cpp; sourceTree = "<group>"; };
+		43DBF7682005D052000511EB /* s2d_context_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_context_lua_binding.h; sourceTree = "<group>"; };
 		4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_particle_renderer.cpp; sourceTree = "<group>"; };
 		4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_particle_renderer.h; sourceTree = "<group>"; };
 		4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_timer.cpp; sourceTree = "<group>"; };
@@ -786,6 +816,18 @@
 			children = (
 				B6FF63D81F91FD1900D7058F /* s2d_lua_context.cpp */,
 				B6FF63D91F91FD1900D7058F /* s2d_lua_context.h */,
+				43DBF74C2005CA95000511EB /* s2d_node_lua_binding.cpp */,
+				43DBF74D2005CA95000511EB /* s2d_node_lua_binding.h */,
+				43DBF7522005CC77000511EB /* s2d_sprite_lua_binding.cpp */,
+				43DBF7532005CC77000511EB /* s2d_sprite_lua_binding.h */,
+				43DBF7582005CE95000511EB /* s2d_bmfont_lua_binding.cpp */,
+				43DBF7592005CE95000511EB /* s2d_bmfont_lua_binding.h */,
+				43DBF75D2005CEEF000511EB /* s2d_action_lua_binding.cpp */,
+				43DBF75E2005CEEF000511EB /* s2d_action_lua_binding.h */,
+				43DBF7622005CFD7000511EB /* s2d_timer_lua_binding.cpp */,
+				43DBF7632005CFD7000511EB /* s2d_timer_lua_binding.h */,
+				43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */,
+				43DBF7682005D052000511EB /* s2d_context_lua_binding.h */,
 			);
 			name = script;
 			sourceTree = "<group>";
@@ -880,9 +922,11 @@
 				4D4703B11FC4A1050088FAAF /* Atlas.h in Headers */,
 				4D4703D21FC4A1060088FAAF /* Triangulator.h in Headers */,
 				4D4703C01FC4A1050088FAAF /* MeshAttachment.h in Headers */,
+				43DBF7502005CA95000511EB /* s2d_node_lua_binding.h in Headers */,
 				4D4703C51FC4A1050088FAAF /* RegionAttachment.h in Headers */,
 				4D4703B41FC4A1050088FAAF /* AttachmentLoader.h in Headers */,
 				4D4703C21FC4A1050088FAAF /* PathConstraint.h in Headers */,
+				43DBF7662005CFD7000511EB /* s2d_timer_lua_binding.h in Headers */,
 				4D4703CC1FC4A1050088FAAF /* Skin.h in Headers */,
 				4D4703B21FC4A1050088FAAF /* AtlasAttachmentLoader.h in Headers */,
 				4D4703B81FC4A1050088FAAF /* ClippingAttachment.h in Headers */,
@@ -894,6 +938,7 @@
 				439316B91FA7404500D5DFD2 /* s2d_particle.h in Headers */,
 				4D4703D01FC4A1050088FAAF /* TransformConstraint.h in Headers */,
 				B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */,
+				43DBF76B2005D052000511EB /* s2d_context_lua_binding.h in Headers */,
 				4D4703B51FC4A1050088FAAF /* Bone.h in Headers */,
 				4D4703C71FC4A1050088FAAF /* SkeletonBinary.h in Headers */,
 				4D4703B71FC4A1050088FAAF /* BoundingBoxAttachment.h in Headers */,
@@ -911,6 +956,7 @@
 				437D767C1FC4258E009FF2AF /* s2d_profiler.h in Headers */,
 				43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */,
 				4D4703C31FC4A1050088FAAF /* PathConstraintData.h in Headers */,
+				43DBF7612005CEEF000511EB /* s2d_action_lua_binding.h in Headers */,
 				4D4703B31FC4A1050088FAAF /* Attachment.h in Headers */,
 				4D4703B01FC4A1050088FAAF /* Array.h in Headers */,
 				4D47042A1FC4A3100088FAAF /* s2d_spine.h in Headers */,
@@ -921,7 +967,9 @@
 				4D4703C91FC4A1050088FAAF /* SkeletonClipping.h in Headers */,
 				4D4703BF1FC4A1050088FAAF /* IkConstraintData.h in Headers */,
 				4D4703C61FC4A1050088FAAF /* Skeleton.h in Headers */,
+				43DBF75C2005CE95000511EB /* s2d_bmfont_lua_binding.h in Headers */,
 				4D4703BE1FC4A1050088FAAF /* IkConstraint.h in Headers */,
+				43DBF7562005CC77000511EB /* s2d_sprite_lua_binding.h in Headers */,
 				4D4703CE1FC4A1050088FAAF /* SlotData.h in Headers */,
 				4D4703CD1FC4A1050088FAAF /* Slot.h in Headers */,
 				4D4703B61FC4A1050088FAAF /* BoneData.h in Headers */,
@@ -1029,6 +1077,7 @@
 				B6FF63D61F91FC4E00D7058F /* lvm.c in Sources */,
 				4D47040B1FC4A1060088FAAF /* SkeletonBinary.c in Sources */,
 				4D47041B1FC4A1060088FAAF /* TransformConstraint.c in Sources */,
+				43DBF75F2005CEEF000511EB /* s2d_action_lua_binding.cpp in Sources */,
 				4337BC6A1F8521A3004CF11B /* s2d_sprite.cpp in Sources */,
 				4D4703E11FC4A1060088FAAF /* Attachment.c in Sources */,
 				4D4703F51FC4A1060088FAAF /* IkConstraint.c in Sources */,
@@ -1048,6 +1097,7 @@
 				4D4704281FC4A3100088FAAF /* s2d_spine.cpp in Sources */,
 				4D6782751FA5C0F7007D461F /* md5.c in Sources */,
 				B6FF63D01F91FC4E00D7058F /* lstrlib.c in Sources */,
+				43DBF7692005D052000511EB /* s2d_context_lua_binding.cpp in Sources */,
 				4D4704231FC4A1060088FAAF /* VertexEffect.c in Sources */,
 				B6FF63C81F91FC4E00D7058F /* lmathlib.c in Sources */,
 				4D9F49BB1FAB908200F2170E /* s2d_render_state.cpp in Sources */,
@@ -1055,6 +1105,7 @@
 				B6FF63C01F91FC4E00D7058F /* ldebug.c in Sources */,
 				4D4703EF1FC4A1060088FAAF /* Event.c in Sources */,
 				4D4703D91FC4A1060088FAAF /* AnimationStateData.c in Sources */,
+				43DBF74E2005CA95000511EB /* s2d_node_lua_binding.cpp in Sources */,
 				4D4704031FC4A1060088FAAF /* PathConstraintData.c in Sources */,
 				B6FF63DE1F92022600D7058F /* s2d_panel.cpp in Sources */,
 				4D4703DF1FC4A1060088FAAF /* AtlasAttachmentLoader.c in Sources */,
@@ -1080,17 +1131,20 @@
 				4D4704131FC4A1060088FAAF /* SkeletonJson.c in Sources */,
 				4337BC641F8521A3004CF11B /* s2d_camera.cpp in Sources */,
 				4D47040F1FC4A1060088FAAF /* SkeletonClipping.c in Sources */,
+				43DBF75A2005CE95000511EB /* s2d_bmfont_lua_binding.cpp in Sources */,
 				B6FF63CF1F91FC4E00D7058F /* lstring.c in Sources */,
 				4337BC741F8521BA004CF11B /* cJSON.c in Sources */,
 				4D4704051FC4A1060088FAAF /* PointAttachment.c in Sources */,
 				4D4703F71FC4A1060088FAAF /* IkConstraintData.c in Sources */,
 				B6FF63D71F91FC4E00D7058F /* lzio.c in Sources */,
+				43DBF7542005CC77000511EB /* s2d_sprite_lua_binding.cpp in Sources */,
 				4D360C501FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */,
 				B6FF63C21F91FC4E00D7058F /* ldump.c in Sources */,
 				B6FF63BD1F91FC4E00D7058F /* lcorolib.c in Sources */,
 				B6FF639A1F91FC2800D7058F /* lapi.c in Sources */,
 				B6FF639B1F91FC2800D7058F /* lauxlib.c in Sources */,
 				4D4704191FC4A1060088FAAF /* SlotData.c in Sources */,
+				43DBF7642005CFD7000511EB /* s2d_timer_lua_binding.cpp in Sources */,
 				4D4704211FC4A1060088FAAF /* VertexAttachment.c in Sources */,
 				4D4703E71FC4A1060088FAAF /* BoneData.c in Sources */,
 				4337BC6B1F8521A3004CF11B /* s2d_quad_renderer.cpp in Sources */,
@@ -1132,10 +1186,12 @@
 				4337BCE61F852D7B004CF11B /* s2d_file_system.mm in Sources */,
 				B6FF63A21F91FC4D00D7058F /* ldebug.c in Sources */,
 				4337BCEA1F852D7B004CF11B /* s2d_sprite.cpp in Sources */,
+				43DBF74F2005CA95000511EB /* s2d_node_lua_binding.cpp in Sources */,
 				4D4704141FC4A1060088FAAF /* SkeletonJson.c in Sources */,
 				B6FF63B11F91FC4D00D7058F /* lstring.c in Sources */,
 				B6FF63B81F91FC4D00D7058F /* lvm.c in Sources */,
 				4D4704001FC4A1060088FAAF /* PathAttachment.c in Sources */,
+				43DBF76A2005D052000511EB /* s2d_context_lua_binding.cpp in Sources */,
 				4D4703DE1FC4A1060088FAAF /* Atlas.c in Sources */,
 				4D4703E81FC4A1060088FAAF /* BoneData.c in Sources */,
 				4337BCED1F852D7B004CF11B /* s2d_util.cpp in Sources */,
@@ -1157,6 +1213,7 @@
 				4337BCE41F852D6A004CF11B /* s2d_camera.cpp in Sources */,
 				4D47040C1FC4A1060088FAAF /* SkeletonBinary.c in Sources */,
 				4399D44F1FFB66ED00AA28EA /* s2d_action.cpp in Sources */,
+				43DBF7552005CC77000511EB /* s2d_sprite_lua_binding.cpp in Sources */,
 				B6FF63DF1F92022600D7058F /* s2d_panel.cpp in Sources */,
 				4D4703F01FC4A1060088FAAF /* Event.c in Sources */,
 				4D4704101FC4A1060088FAAF /* SkeletonClipping.c in Sources */,
@@ -1169,10 +1226,12 @@
 				4D4703E01FC4A1060088FAAF /* AtlasAttachmentLoader.c in Sources */,
 				B6FF63A01F91FC4D00D7058F /* lctype.c in Sources */,
 				4337BCFA1F853F20004CF11B /* cJSON.c in Sources */,
+				43DBF7652005CFD7000511EB /* s2d_timer_lua_binding.cpp in Sources */,
 				4D9F49BC1FAB908200F2170E /* s2d_render_state.cpp in Sources */,
 				4337BCEB1F852D7B004CF11B /* s2d_quad_renderer.cpp in Sources */,
 				B6FF63A91F91FC4D00D7058F /* llex.c in Sources */,
 				4D47041C1FC4A1060088FAAF /* TransformConstraint.c in Sources */,
+				43DBF7602005CEEF000511EB /* s2d_action_lua_binding.cpp in Sources */,
 				4337BCE51F852D7B004CF11B /* s2d_context.cpp in Sources */,
 				B6FF63A71F91FC4D00D7058F /* linit.c in Sources */,
 				B6FF63B21F91FC4D00D7058F /* lstrlib.c in Sources */,
@@ -1197,6 +1256,7 @@
 				B6FF63A41F91FC4D00D7058F /* ldump.c in Sources */,
 				4D4703FE1FC4A1060088FAAF /* MeshAttachment.c in Sources */,
 				4D47041A1FC4A1060088FAAF /* SlotData.c in Sources */,
+				43DBF75B2005CE95000511EB /* s2d_bmfont_lua_binding.cpp in Sources */,
 				B6FF63B41F91FC4D00D7058F /* ltablib.c in Sources */,
 				B6FF63B91F91FC4D00D7058F /* lzio.c in Sources */,
 				B6FF63A81F91FC4D00D7058F /* liolib.c in Sources */,
