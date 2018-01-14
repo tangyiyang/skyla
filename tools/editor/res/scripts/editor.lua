@@ -308,7 +308,8 @@ local function draw_file_system()
     imgui.Begin("Works")
     local work_dir = record.settings.work_dir
     if imgui.Button("Open") then
-        local dir = core.pick_folder(work_dir)
+        local editor_core = require "editor.core"
+        local dir = editor_core.pick_folder(work_dir)
         record.settings.work_dir = dir
         record.save()
         reload_file_tree(dir)
