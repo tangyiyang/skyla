@@ -414,7 +414,7 @@ void particle::draw(render_state* rs)
         GLfloat x2 = size_2;
         GLfloat y2 = size_2;
 
-        GLfloat r = -(rotation*PI/180.0f);
+        GLfloat r = -(rotation* M_PI/180.0f);
         GLfloat cr = cosf(r);
         GLfloat sr = sinf(r);
         GLfloat ax = x1 * cr - y1 * sr + x;
@@ -589,7 +589,7 @@ void particle::emit(int n)
         // rotation is dir
         if(_rotation_is_dir) {
             for (int i = start; i < _num_particles; ++i) {
-                float a = (_angle + _angle_var * util::normalized_random())*PI/180.0f;
+                float a = (_angle + _angle_var * util::normalized_random())* M_PI / 180.0f;
 
                 float cos_a = cosf(a);
                 float sin_a = sinf(a);
@@ -601,13 +601,13 @@ void particle::emit(int n)
                 _emitter_data._mode_info._data._gravity.dir_x[i] = dir_x;
                 _emitter_data._mode_info._data._gravity.dir_y[i] = dir_y;
 
-                _emitter_data.rotation[i] = -(atan2(dir_y, dir_x) * 180.0f / PI);
+                _emitter_data.rotation[i] = -(atan2(dir_y, dir_x) * 180.0f / M_PI);
             }
         }
         else
         {
             for (int i = start; i < _num_particles; ++i) {
-                float a = (_angle + _angle_var * util::normalized_random()) * PI / 180.0f;
+                float a = (_angle + _angle_var * util::normalized_random()) * M_PI / 180.0f;
 
                 float cos_a = cosf(a);
                 float sin_a = sinf(a);

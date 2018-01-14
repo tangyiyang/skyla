@@ -14,7 +14,6 @@
 
 NS_S2D
 
-#define PI (3.1415926f)
 #define FLT_EQUAL(a, b) (fabs((a) - (b)) < FLT_EPSILON)
 #define S2D_TEX_COORD_MAX ((1<<16)-1)
 
@@ -162,8 +161,8 @@ struct affine_transform {
 
     static inline affine_transform mk_rotation(float angle)
     {
-        float sin = sinf(angle * PI / 180.0f);
-        float cos = cosf(angle * PI / 180.0f);
+        float sin = sinf(angle * M_PI / 180.0f);
+        float cos = cosf(angle * M_PI / 180.0f);
 
         return affine_transform(cos, sin, -sin, cos, 0, 0);
     }
