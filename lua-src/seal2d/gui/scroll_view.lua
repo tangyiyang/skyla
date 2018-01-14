@@ -42,19 +42,19 @@ function scroll_view:ctor(opt)
             local max_y = cy + h
 
             local to_x, to_y = self.container:get_pos()
-            if min_x > opt.width then
+            if min_x > opt.width - w then
                 to_x = math.abs(w - opt.width)
             end
 
-            if max_x < 0 then
+            if max_x < w then
                 to_x = 0
             end
 
-            if min_y > opt.height then
+            if min_y > opt.height - h then
                 to_y = math.abs(h - opt.height)
             end
 
-            if max_y < 0 then
+            if max_y < h then
                 to_y = 0
             end
 
