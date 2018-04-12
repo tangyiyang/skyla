@@ -7,8 +7,8 @@ local function main()
         local util = require "seal2d_util"
         util.add_search_path("res/")
 
-        local main_scene = require "game.main_scene"
-        root:add_child(main_scene.new())
+        local test_scene = require "game.test_scene"
+        root:add_child(test_scene.new())
     end
 
     local function on_update()

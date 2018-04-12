@@ -6,13 +6,19 @@ local scroll_view = class("scroll_view", function()
 	return node.new()
 end)
 
-local HORIZONTAL = 0
-local VERTICAL = 1
-local BOTH = 2
+local HORIZONTAL = 1
+local VERTICAL = 2
+local BOTH = 4
+
+scroll_view.HORIZONTAL = HORIZONTAL
+scroll_view.VERTICAL = VERTICAL
+scroll_view.BOTH = BOTH
 
 function scroll_view:ctor(opt)
 	assert(opt and type(opt) == 'table')
 	assert(type(opt.width) == 'number' and type(opt.height) == 'number')
+
+    self.direction = opt.direction or BOTH
 
     self.container = node.new()
     self.container:set_anchor(0, 0)
@@ -31,6 +37,17 @@ function scroll_view:ctor(opt)
         elseif phase == TOUCH_MOVED then
 
             local dx, dy = x - last_x, y - last_y
+
+            if self.direction == HORIZONTAL then
+                dy = 0
+            elseif self.direction == VERTICAL then
+                dx = 0
+            elseif self.direction == BOTH then
+
+            else
+                error(string.format("invalid direction: %d", self.direction))
+            end
+
             self.container:set_pos(cx + dx, cy + dy)
             last_x, last_y = x, y
 
@@ -74,9 +91,12 @@ end
 
 function scroll_view:add_content(child)
     local _, _, w, h = child:get_bounding_box()
-    print("content size = ", w, h)
-    self.container:set_size(w, h)
+    -- self.container:set_size(w, h)
 	self.container:add_child(child)
+end
+
+function scroll_view:set_direction(direction)
+    self.direction = direction
 end
 
 return scroll_view
