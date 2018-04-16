@@ -22,19 +22,6 @@ extern int luaopen_cjson(lua_State* L);
 
 NS_S2D
 
-static int traceback (lua_State* L)
-{
-    const char *msg = lua_tostring(L, 1);
-    if (msg) {
-        luaL_traceback(L, L, msg, 1);
-    } else if (!lua_isnoneornil(L, 1)) {
-        if (!luaL_callmeta(L, 1, "__tostring")) {
-            lua_pushliteral(L, "(no error message)");
-        }
-    }
-    return 1;
-}
-
 // TODO: add the binding type checking, we should consider the inheritance checking, sprite is valid for node.
 static bool type_valid(lua_State* L, const char* expected)
 {
@@ -64,6 +51,8 @@ static int lseal2d_inject(lua_State* L)
     lua_setfield(L, LUA_REGISTRYINDEX, CONTEXT_UPDATE);
     lua_getfield(L, -1, "on_destory");
     lua_setfield(L, LUA_REGISTRYINDEX, CONTEXT_DESTROY);
+
+    STACK_DUMP(L);
     lua_pop(L, -1);
     return 0;
 }
@@ -191,7 +180,7 @@ void lua_context::stackDump (lua_State* L)
 
 int lua_context::call_lua(lua_State* L, int n, int r)
 {
-    int err = lua_pcall(L, n, r, TRACE_BACK_FUNC_INDEX);
+    int err = lua_pcall(L, n, r, 0);
     switch(err) {
         case LUA_OK:
             break;
@@ -204,7 +193,7 @@ int lua_context::call_lua(lua_State* L, int n, int r)
             assert(false);
             break;
         case LUA_ERRERR:
-            LOGE("!LUA_ERRERR : %s\n", lua_tostring(L,-1));
+            LOGE("!LUA_ERRERR : %s\n", lua_tostring(L, -1));
             assert(false);
             break;
         case LUA_ERRGCMM:
@@ -262,7 +251,6 @@ void lua_context::init()
     lua_setfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_TIMER_TABLE);
 
     assert(lua_gettop(L) == 0);
-    lua_pushcfunction(L, traceback);
 
     _lua_state = L;
 }

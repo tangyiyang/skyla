@@ -56,8 +56,6 @@ function button:ctor(opt)
     local start_x, start_y
     local should_cancel = false
     local function on_touch(id, phase, x, y)
-        print("id, phase, x, y = ", id, phase, x, y)
-
         if phase == TOUCH_ENDED then
             if not should_cancel then
                 opt.callback()

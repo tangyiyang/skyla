@@ -4,7 +4,23 @@ local test_scene = class("test_scene", function()
     return node.new()
 end)
 
-function test_scene:ctor()
+
+local function bounding_box_test(self)
+    local sprite = require "seal2d.game_object.sprite"
+    local a = sprite.new("images/ui_button_middle.png")
+    a:set_pos(100, 100)
+    self:add_child(a)
+
+    local x, y, w, h = a:get_bounding_box()
+
+    local b = sprite.new("images/ui_button_middle.png")
+    b:set_pos(200, 200)
+    a:add_child(b)
+
+    x, y, w, h = a:get_bounding_box()
+end
+
+local function list_view_test(self)
     local list_view = require("seal2d.gui.list_view")
     local button = require "seal2d.gui.button"
 
@@ -30,6 +46,12 @@ function test_scene:ctor()
 
     list:set_pos(300, 300)
     self:add_child(list)
+end
+
+function test_scene:ctor()
+    -- bounding_box_test(self)
+    list_view_test(self)
+
 end
 
 

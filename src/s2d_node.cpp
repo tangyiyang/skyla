@@ -202,15 +202,17 @@ rect node::get_bounding_box()
         0, 0, _size.width, _size.height
     };
 
+    this->update_srt();
+    affine_transform t = this->transform_to(this->get_root());
+
+    r = affine_transform::apply_transform(t, r);
+
     if (!_children.empty()) {
         std::vector<node*>::iterator it = _children.begin();
         for (; it != _children.end(); ++it) {
-            rect child_r = (*it)->get_bounding_box();
-            r = r.merge(r, child_r);
+            rect child_rect = (*it)->get_bounding_box();
+            r = r.merge(r, child_rect);
         }
-    } else {
-        this->update_srt();
-        r = affine_transform::apply_transform(_local_transform, r);
     }
 
     return r;

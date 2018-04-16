@@ -29,13 +29,12 @@ function scroll_view:ctor(opt)
 
     local last_x, last_y
     local function on_touch(id, phase, x, y)
-        local cx, cy = self.container:get_pos()
         if phase == TOUCH_BEGIN then
 
             last_x, last_y = x, y
 
         elseif phase == TOUCH_MOVED then
-
+            local cx, cy = self.container:get_pos()
             local dx, dy = x - last_x, y - last_y
 
             if self.direction == HORIZONTAL then
@@ -53,29 +52,31 @@ function scroll_view:ctor(opt)
 
         elseif phase == TOUCH_ENDED then
             local _, _, w, h = self.container:get_bounding_box()
+            local cx, cy = self.container:get_pos()
+            local to_x, to_y = cx, cy
+            print(string.format("onEnd, cx = %.2f, cy = %.2f", cx, cy))
             local min_x = cx
             local min_y = cy
             local max_x = cx + w
             local max_y = cy + h
 
-            local to_x, to_y = self.container:get_pos()
-            if min_x > opt.width - w then
-                to_x = math.abs(w - opt.width)
-            end
-
-            if max_x < w then
+            if min_x > 0 then
                 to_x = 0
             end
 
+            print(string.format("opt.width = %2.f, w = %.2f", opt.width, w))
+            if max_x < w then
+                to_x = opt.width - w
+            end
+
             if min_y > opt.height - h then
-                to_y = math.abs(h - opt.height)
+                to_y = h - opt.height
             end
 
             if max_y < h then
                 to_y = 0
             end
 
-            -- TODO: add ease animation
             self.container:run_action(action.move_to(0.1, to_x, to_y))
         end
     end
@@ -91,12 +92,15 @@ end
 
 function scroll_view:add_content(child)
     local _, _, w, h = child:get_bounding_box()
-    -- self.container:set_size(w, h)
 	self.container:add_child(child)
 end
 
 function scroll_view:set_direction(direction)
     self.direction = direction
+end
+
+function scroll_view:can_move_verticle()
+    return self.direction == VERTICAL or self.direction == BOTH
 end
 
 return scroll_view
