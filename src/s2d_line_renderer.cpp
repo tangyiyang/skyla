@@ -26,21 +26,21 @@ void line_renderer::init()
 
     glBindVertexArray(_vao);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex) * _max_vertices, nullptr, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(pos_color_vertex) * _max_vertices, nullptr, GL_STATIC_DRAW);
 
     glVertexAttribPointer(program::VERTEX_ATTR_POS,
                           2,
                           GL_FLOAT,
                           GL_FALSE,
-                          sizeof(pos_tex_color_vertex),
-                          (void*)offsetof(pos_tex_color_vertex, pos));
+                          sizeof(pos_color_vertex),
+                          (void*)offsetof(pos_color_vertex, pos));
     glEnableVertexAttribArray(program::VERTEX_ATTR_POS);
     glVertexAttribPointer(program::VERTEX_ATTR_COLOR,
                           4,
                           GL_UNSIGNED_BYTE,
                           GL_TRUE,
-                          sizeof(pos_tex_color_vertex),
-                          (void*)offsetof(pos_tex_color_vertex, color));
+                          sizeof(pos_color_vertex),
+                          (void*)offsetof(pos_color_vertex, color));
     glEnableVertexAttribArray(program::VERTEX_ATTR_COLOR);
     glBindVertexArray(0);
 
@@ -71,29 +71,42 @@ void line_renderer::flush()
 
 
     glLineWidth(1.0);
+    glBindVertexArray(_vao);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_color_vertex), _vertex_buffer);
 
-    glBindVertexArray(_vao);
+
     glDrawArrays(GL_LINES, 0, _num_vertices);
 
     _program->unuse();
     
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+
+    _num_vertices = 0;
 }
 
-void line_renderer::draw_line(const vec2& begin, const vec2& end, color_t color)
+void line_renderer::draw_line(const affine_transform& world_transform, const vec2& begin, const vec2& end, color_t color)
 {
     if (_num_vertices + 2 > this->_max_vertices) {
         this->flush();
     }
-    
-    _vertex_buffer[_num_vertices + 0].pos = begin;
-    _vertex_buffer[_num_vertices + 0].color = color;
-    _vertex_buffer[_num_vertices + 1].pos = end;
-    _vertex_buffer[_num_vertices + 0].color = color;
 
+    context* ctx = context::C();
+
+    const affine_transform& mv = ctx->_world_view_affine_transform;
+    affine_transform t = affine_transform::concat(world_transform, mv);
+
+    pos_color_vertex* vertex = _vertex_buffer + _num_vertices;
+
+    vertex[0].pos = affine_transform::apply_transform(t, begin.x, begin.y);
+    vertex[0].color = color;
+    vertex[1].pos = affine_transform::apply_transform(t, end.x, end.y);
+    vertex[1].color = color;
+
+    LOGD("vertex buf[0] = %.2f, %.2f", vertex[0].pos.x, vertex[0].pos.y);
+    LOGD("vertex buf[1] = %.2f, %.2f", vertex[1].pos.x, vertex[1].pos.y);
+    LOGD("color = %x", vertex[0].color);
     _num_vertices += 2;
 }
 

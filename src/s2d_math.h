@@ -28,7 +28,7 @@ struct vec2 {
     float x;
     float y;
 
-    static inline vec2 make_vec2(float x, float y)
+    static inline vec2 make(float x, float y)
     {
         struct vec2 v;
         v.x = x;

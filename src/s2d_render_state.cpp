@@ -84,7 +84,7 @@ void render_state::draw_primitive(primitive_node* p)
 
     std::vector<line>::iterator it = p->_lines.begin();
     for (; it != p->_lines.end(); ++it) {
-        r->draw_line(it->begin, it->end, it->color);
+        r->draw_line(p->world_transform(), it->begin, it->end, it->color);
     }
 }
 

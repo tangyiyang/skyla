@@ -18,6 +18,7 @@
 #include "s2d_timer.h"
 #include "s2d_panel.h"
 #include "s2d_particle.h"
+#include "s2d_primitive_node.h"
 #include "s2d_util.h"
 
 #endif 

@@ -17,7 +17,7 @@ public:
     void flush() override;
 
 public:
-    void draw_line(const vec2& begin, const vec2& end, color_t color);
+    void draw_line(const affine_transform& world_transform, const vec2& begin, const vec2& end, color_t color);
 
 private:
     color_t           _cur_color;
