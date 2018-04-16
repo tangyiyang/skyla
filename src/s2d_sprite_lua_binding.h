@@ -18,6 +18,6 @@ int luaopen_seal2d_sprite(lua_State* L);
 
 NS_S2D_END
 
-#endif /* s2d_sprite_lua_binding_h */
+#endif
 
 #endif

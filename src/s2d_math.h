@@ -23,6 +23,11 @@ typedef uint32_t color_t;
 
 #define COLOR_WHITE (0xffffffff)
 #define COLOR_RED   (0xff0000ff)
+#define COLOR_GREEN (0x00ff00ff)
+#define COLOR_BLUE  (0x0000ffff)
+
+#define make_gl_color(color) ((color >> 24) & 0x000000ff) | ((color >> 8) & 0x0000ff00) | ((color << 8) & 0x00ff0000) | ((color << 24) & 0xff000000)
+
 
 struct vec2 {
     float x;

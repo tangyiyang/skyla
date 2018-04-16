@@ -38,4 +38,10 @@ function node:up_stage()
     director.up_stage(self)
 end
 
+function node:set_debug_aabb_visible(visible)
+    if not self.__debug_aabb_node then
+
+    end
+end
+
 return node

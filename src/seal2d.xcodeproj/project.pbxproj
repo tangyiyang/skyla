@@ -35,6 +35,9 @@
 		4337BCEC1F852D7B004CF11B /* s2d_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC5D1F852196004CF11B /* s2d_texture.cpp */; };
 		4337BCED1F852D7B004CF11B /* s2d_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC5F1F852196004CF11B /* s2d_util.cpp */; };
 		4337BCFA1F853F20004CF11B /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC701F8521B7004CF11B /* cJSON.c */; };
+		435299A72084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435299A52084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp */; };
+		435299A82084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435299A52084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp */; };
+		435299A92084D0C000771E10 /* s2d_primitive_node_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 435299A62084D0C000771E10 /* s2d_primitive_node_lua_binding.h */; };
 		437D767A1FC4258E009FF2AF /* s2d_profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 437D76781FC4258E009FF2AF /* s2d_profiler.cpp */; };
 		437D767B1FC4258E009FF2AF /* s2d_profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 437D76781FC4258E009FF2AF /* s2d_profiler.cpp */; };
 		437D767C1FC4258E009FF2AF /* s2d_profiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 437D76791FC4258E009FF2AF /* s2d_profiler.h */; };
@@ -333,6 +336,8 @@
 		4337BC711F8521B7004CF11B /* cJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cJSON.h; sourceTree = "<group>"; };
 		4337BC731F8521B7004CF11B /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		4337BCA21F8524B7004CF11B /* libseal2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libseal2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		435299A52084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_primitive_node_lua_binding.cpp; sourceTree = "<group>"; };
+		435299A62084D0C000771E10 /* s2d_primitive_node_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_primitive_node_lua_binding.h; sourceTree = "<group>"; };
 		437D76781FC4258E009FF2AF /* s2d_profiler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_profiler.cpp; sourceTree = "<group>"; };
 		437D76791FC4258E009FF2AF /* s2d_profiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_profiler.h; sourceTree = "<group>"; };
 		439316B51FA7404500D5DFD2 /* s2d_particle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_particle.cpp; sourceTree = "<group>"; };
@@ -835,6 +840,8 @@
 				43DBF7632005CFD7000511EB /* s2d_timer_lua_binding.h */,
 				43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */,
 				43DBF7682005D052000511EB /* s2d_context_lua_binding.h */,
+				435299A52084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp */,
+				435299A62084D0C000771E10 /* s2d_primitive_node_lua_binding.h */,
 			);
 			name = script;
 			sourceTree = "<group>";
@@ -923,6 +930,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D4703CF1FC4A1050088FAAF /* spine.h in Headers */,
+				435299A92084D0C000771E10 /* s2d_primitive_node_lua_binding.h in Headers */,
 				4D4703B91FC4A1050088FAAF /* Color.h in Headers */,
 				B6FF63E01F92022600D7058F /* s2d_panel.h in Headers */,
 				4D9F49BD1FAB908200F2170E /* s2d_render_state.h in Headers */,
@@ -1137,6 +1145,7 @@
 				B6FF63BA1F91FC4E00D7058F /* lbaselib.c in Sources */,
 				B6FF63BC1F91FC4E00D7058F /* lcode.c in Sources */,
 				4D4704011FC4A1060088FAAF /* PathConstraint.c in Sources */,
+				435299A72084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp in Sources */,
 				4D4703D51FC4A1060088FAAF /* Animation.c in Sources */,
 				4D4704131FC4A1060088FAAF /* SkeletonJson.c in Sources */,
 				4337BC641F8521A3004CF11B /* s2d_camera.cpp in Sources */,
@@ -1202,6 +1211,7 @@
 				4D4704001FC4A1060088FAAF /* PathAttachment.c in Sources */,
 				43DBF76A2005D052000511EB /* s2d_context_lua_binding.cpp in Sources */,
 				4D4703DE1FC4A1060088FAAF /* Atlas.c in Sources */,
+				435299A82084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp in Sources */,
 				4D4703E81FC4A1060088FAAF /* BoneData.c in Sources */,
 				4337BCED1F852D7B004CF11B /* s2d_util.cpp in Sources */,
 				4D4704061FC4A1060088FAAF /* PointAttachment.c in Sources */,

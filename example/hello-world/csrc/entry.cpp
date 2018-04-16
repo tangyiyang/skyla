@@ -21,7 +21,8 @@ void entry::on_init(context* ctx)
 
     primitive_node* p = new primitive_node();
     p->init();
-    p->add_line(vec2::make(0, 0), vec2::make(100, 100), 0xff0000ff);
+    p->add_line(vec2::make(0, 0), vec2::make(100, 100), 0x0000ff00);
+    p->add_rect(vec2::make(100, 100), vec2::make(300, 300), 0xff00ff00);
 
     root->add_child(p);
 //

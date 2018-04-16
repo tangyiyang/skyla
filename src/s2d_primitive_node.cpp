@@ -16,7 +16,8 @@ void primitive_node::draw(render_state* rs)
 
 void primitive_node::add_line(const vec2& begin, const vec2& end, color_t color)
 {
-    _lines.emplace_back(begin, end, color);
+    LOGD("origin = %x, color = %x",color,  make_gl_color(color));
+    _lines.emplace_back(begin, end, make_gl_color(color));
 }
 
 void primitive_node::add_rect(const vec2& bottom_left, const vec2& top_right, color_t color)

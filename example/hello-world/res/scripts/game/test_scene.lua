@@ -48,10 +48,18 @@ local function list_view_test(self)
     self:add_child(list)
 end
 
+local function primitive_basic_test(self)
+    local primitive = require("seal2d.game_object.primitive")
+
+    local p = primitive.new()
+    p:add_line(0, 0, 100, 100, 0xff0000ff);
+    self:add_child(p)
+end
+
 function test_scene:ctor()
     -- bounding_box_test(self)
-    list_view_test(self)
-
+    -- list_view_test(self)
+    primitive_basic_test(self)
 end
 
 
