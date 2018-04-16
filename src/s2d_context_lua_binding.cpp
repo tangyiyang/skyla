@@ -1,6 +1,8 @@
 #include "s2d_context_lua_binding.h"
 #include "s2d_context.h"
 
+#if (S2D_ENABLE_LUA == 1)
+
 NS_S2D
 
 static int lseal2d_context_get_root(lua_State* L)
@@ -48,3 +50,4 @@ int luaopen_seal2d_context(lua_State* L)
 
 NS_S2D_END
 
+#endif

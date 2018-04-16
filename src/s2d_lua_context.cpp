@@ -284,6 +284,6 @@ void lua_context::on_destroy()
     call_lua(_lua_state, 0, 0);
 }
 
-NS_S2D_END
-
 #endif
+
+NS_S2D_END

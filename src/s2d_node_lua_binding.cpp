@@ -1,6 +1,8 @@
 #include "s2d_node_lua_binding.h"
 #include "s2d_node.h"
 
+#if (S2D_ENABLE_LUA == 1)
+
 NS_S2D
 
 static int lseal2d_node_add_child(lua_State* L)
@@ -218,5 +220,7 @@ int luaopen_seal2d_node(lua_State* L)
 
     return 1;
 }
+
+#endif
 
 NS_S2D_END

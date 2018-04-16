@@ -1,6 +1,8 @@
 #include "s2d_timer_lua_binding.h"
 #include "s2d_timer.h"
 
+#if (S2D_ENABLE_LUA == 1)
+
 NS_S2D
 
 static int lua_seal2d_timer_new(lua_State* L)
@@ -70,3 +72,5 @@ int luaopen_seal2d_timer(lua_State* L)
 }
 
 NS_S2D_END
+
+#endif

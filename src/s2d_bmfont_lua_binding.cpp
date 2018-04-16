@@ -1,6 +1,8 @@
 #include "s2d_bmfont_lua_binding.h"
 #include "s2d_bmfont.h"
 
+#if (S2D_ENABLE_LUA == 1)
+
 NS_S2D
 
 int lseal2d_new_bmfont(lua_State* L)
@@ -55,3 +57,5 @@ int luaopen_seal2d_bmfont(lua_State* L)
 }
 
 NS_S2D_END
+
+#endif

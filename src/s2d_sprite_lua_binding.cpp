@@ -2,6 +2,8 @@
 #include "s2d_sprite.h"
 #include "s2d_context.h"
 
+#if (S2D_ENABLE_LUA == 1)
+
 NS_S2D
 
 static int lseal2d_sprite_new(lua_State* L)
@@ -97,3 +99,5 @@ int luaopen_seal2d_sprite(lua_State* L)
 }
 
 NS_S2D_END
+
+#endif

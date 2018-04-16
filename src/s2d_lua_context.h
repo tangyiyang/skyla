@@ -54,6 +54,6 @@ public:
 
 NS_S2D_END
 
-#endif /* end of S2D_ENABLE_LUA */
+#endif
 
 #endif
