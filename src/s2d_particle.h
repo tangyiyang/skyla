@@ -192,7 +192,6 @@ public:
     pos_tex_color_vertex*   _vertices;
     int                     _num_vertices;
     texture*                _texture;
-    affine_transform        _model_view;
     blend_mode              _blend_mode;
 };
 

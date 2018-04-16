@@ -131,6 +131,11 @@ public:
         return std::string(buf);
     }
 
+    inline const affine_transform& world_transform()
+    {
+        return _world_transform;
+    }
+
 protected:
     node* get_root();
     void sort();
@@ -149,6 +154,7 @@ protected:
     size                 _size;
     float                _rotation;
     affine_transform     _local_transform;
+    affine_transform     _world_transform;
     node*                _parent;
     std::vector<node*>   _children;
     touch_callback_t     _touch_callback;

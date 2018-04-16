@@ -288,8 +288,8 @@ void sprite::draw(render_state* rs)
     if (!_visible) {
         return;
     }
+    _world_transform = transform_to(this->get_root());
 
-    _model_view = transform_to(this->get_root());
     if (_texture) {
         rs->draw_sprite(this);
     }

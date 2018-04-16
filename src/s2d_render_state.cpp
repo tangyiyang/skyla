@@ -1,7 +1,9 @@
 #include "s2d_render_state.h"
 #include "s2d_quad_renderer.h"
+#include "s2d_line_renderer.h"
 #include "s2d_sprite.h"
 #include "s2d_particle.h"
+#include "s2d_primitive_node.h"
 
 NS_S2D
 
@@ -11,6 +13,9 @@ void render_state::init()
     _cur_renderer_type = MAX_RENDERER_TYPE;
     _renderers[RENDERER_TYPE_QUAD] = new quad_renderer();
     _renderers[RENDERER_TYPE_QUAD]->init();
+
+    _renderers[RENDERER_TYPE_LINE] = new line_renderer();
+    _renderers[RENDERER_TYPE_LINE]->init();
 }
 
 void render_state::shutdown()
@@ -60,7 +65,7 @@ void render_state::draw_sprite(s2d::sprite *s)
     switch_renderer(RENDERER_TYPE_QUAD);
     quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
 
-    r->draw(s->_model_view, s->_texture, s->_blend_mode, s->_quad, 4);
+    r->draw(s->world_transform(), s->_texture, s->_blend_mode, s->_quad, 4);
 }
 
 void render_state::draw_particle(particle* p)
@@ -69,9 +74,19 @@ void render_state::draw_particle(particle* p)
     switch_renderer(RENDERER_TYPE_QUAD);
     quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
 
-    r->draw(p->_model_view, p->_texture, p->_blend_mode, p->_vertices, p->_num_vertices);
+    r->draw(p->world_transform(), p->_texture, p->_blend_mode, p->_vertices, p->_num_vertices);
 }
 
+void render_state::draw_primitive(primitive_node* p)
+{
+    switch_renderer(RENDERER_TYPE_LINE);
+    line_renderer* r = dynamic_cast<line_renderer*>(_cur_renderer);
+
+    std::vector<line>::iterator it = p->_lines.begin();
+    for (; it != p->_lines.end(); ++it) {
+        r->draw_line(it->begin, it->end, it->color);
+    }
+}
 
 void render_state::push_scissors(const rect& r)
 {

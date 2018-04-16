@@ -13,12 +13,13 @@ NS_S2D
 
 class sprite;
 class particle;
-
+class primitive_node;
 
 class render_state {
 public:
     enum render_type {
         RENDERER_TYPE_QUAD = 0,
+        RENDERER_TYPE_LINE,
         MAX_RENDERER_TYPE,
     };
 
@@ -31,6 +32,7 @@ public:
     void draw_quad(const affine_transform& t, texture* tex, blend_mode b, pos_tex_color_vertex* p);
     void draw_sprite(sprite* s);
     void draw_particle(particle* p);
+    void draw_primitive(primitive_node* p);
 
     void push_scissors(const rect& r);
     void pop_scissors();

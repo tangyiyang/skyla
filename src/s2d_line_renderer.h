@@ -6,10 +6,10 @@
 
 NS_S2D
 
-class s2d_line_renderer : public renderer {
+class line_renderer : public renderer {
 public:
-    s2d_line_renderer();
-    virtual ~s2d_line_renderer() {};
+    line_renderer();
+    virtual ~line_renderer() {};
 
 public:
     void init() override;

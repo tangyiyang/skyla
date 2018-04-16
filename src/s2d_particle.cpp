@@ -392,7 +392,7 @@ bool particle::update(float dt)
 void particle::draw(render_state* rs)
 {
     util::profile_begin("particle-draw");
-    _model_view = transform_to(this->get_root());
+    _world_transform = transform_to(this->get_root());
 
     for (int i = 0, j = 0; i < _num_particles; ++i, j += 4) {
         float x = _emitter_data.x[i];

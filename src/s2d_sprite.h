@@ -82,7 +82,6 @@ private:
 public:
     pos_tex_color_vertex _quad[4];
     texture*             _texture;
-    affine_transform     _model_view;
     enum blend_mode      _blend_mode;
 };
 

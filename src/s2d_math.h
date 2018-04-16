@@ -28,6 +28,14 @@ struct vec2 {
     float x;
     float y;
 
+    static inline vec2 make_vec2(float x, float y)
+    {
+        struct vec2 v;
+        v.x = x;
+        v.y = y;
+        return v;
+    }
+
     static inline void normalize(float x, float y, vec2& out)
     {
         float n = x*x + y*y;

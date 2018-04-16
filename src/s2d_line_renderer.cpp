@@ -3,7 +3,7 @@
 
 NS_S2D
 
-s2d_line_renderer::s2d_line_renderer()
+line_renderer::line_renderer()
 {
     _cur_color = 0;
     _vertex_buffer = nullptr;
@@ -14,7 +14,7 @@ s2d_line_renderer::s2d_line_renderer()
     _vao = 0;
 }
 
-void s2d_line_renderer::init()
+void line_renderer::init()
 {
     _num_vertices = 0;
     _max_vertices = S2D_MAX_LINE_VERTEX_BUFFER_SIZE;
@@ -48,7 +48,7 @@ void s2d_line_renderer::init()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void s2d_line_renderer::shutdown()
+void line_renderer::shutdown()
 {
     _program->shutdown();
 
@@ -57,7 +57,7 @@ void s2d_line_renderer::shutdown()
     free(_vertex_buffer);
 }
 
-void s2d_line_renderer::flush()
+void line_renderer::flush()
 {
     if (!_program) {
         return;
@@ -83,7 +83,7 @@ void s2d_line_renderer::flush()
     glBindVertexArray(0);
 }
 
-void s2d_line_renderer::draw_line(const vec2& begin, const vec2& end, color_t color)
+void line_renderer::draw_line(const vec2& begin, const vec2& end, color_t color)
 {
     if (_num_vertices + 2 > this->_max_vertices) {
         this->flush();
