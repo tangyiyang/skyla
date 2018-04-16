@@ -19,7 +19,6 @@ class render_state {
 public:
     enum render_type {
         RENDERER_TYPE_QUAD = 0,
-        RENDERER_TYPE_PARTICLE,
         MAX_RENDERER_TYPE,
     };
 

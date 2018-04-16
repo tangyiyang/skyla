@@ -61,9 +61,6 @@
 		43DBF7692005D052000511EB /* s2d_context_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */; };
 		43DBF76A2005D052000511EB /* s2d_context_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */; };
 		43DBF76B2005D052000511EB /* s2d_context_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DBF7682005D052000511EB /* s2d_context_lua_binding.h */; };
-		4D360C501FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */; };
-		4D360C511FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */; };
-		4D360C521FAD9DF900075D98 /* s2d_particle_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */; };
 		4D40F0B81FE427A7007368A7 /* s2d_timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */; };
 		4D40F0B91FE427A7007368A7 /* s2d_timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */; };
 		4D40F0BA1FE427A7007368A7 /* s2d_timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D40F0B71FE427A7007368A7 /* s2d_timer.h */; };
@@ -348,8 +345,6 @@
 		43DBF7632005CFD7000511EB /* s2d_timer_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_timer_lua_binding.h; sourceTree = "<group>"; };
 		43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_context_lua_binding.cpp; sourceTree = "<group>"; };
 		43DBF7682005D052000511EB /* s2d_context_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_context_lua_binding.h; sourceTree = "<group>"; };
-		4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_particle_renderer.cpp; sourceTree = "<group>"; };
-		4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_particle_renderer.h; sourceTree = "<group>"; };
 		4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_timer.cpp; sourceTree = "<group>"; };
 		4D40F0B71FE427A7007368A7 /* s2d_timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_timer.h; sourceTree = "<group>"; };
 		4D47035A1FC4A1050088FAAF /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
@@ -629,8 +624,6 @@
 				43D3266B1F8626B40070B743 /* s2d_render_texture.h */,
 				4337BC5B1F852196004CF11B /* s2d_quad_renderer.cpp */,
 				4337BC5C1F852196004CF11B /* s2d_quad_renderer.h */,
-				4D360C4E1FAD9DF900075D98 /* s2d_particle_renderer.cpp */,
-				4D360C4F1FAD9DF900075D98 /* s2d_particle_renderer.h */,
 				4D5686711FD9A07F00D1FEBD /* s2d_renderer.cpp */,
 				4DD9F7861FAB86F700B9F94F /* s2d_renderer.h */,
 				4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */,
@@ -951,7 +944,6 @@
 				4D4703C41FC4A1050088FAAF /* PointAttachment.h in Headers */,
 				4399D4501FFB66ED00AA28EA /* s2d_action.h in Headers */,
 				4D4703FB1FC4A1060088FAAF /* Json.h in Headers */,
-				4D360C521FAD9DF900075D98 /* s2d_particle_renderer.h in Headers */,
 				4D4703BB1FC4A1050088FAAF /* Event.h in Headers */,
 				437D767C1FC4258E009FF2AF /* s2d_profiler.h in Headers */,
 				43D3266D1F8626B40070B743 /* s2d_render_texture.h in Headers */,
@@ -1138,7 +1130,6 @@
 				4D4703F71FC4A1060088FAAF /* IkConstraintData.c in Sources */,
 				B6FF63D71F91FC4E00D7058F /* lzio.c in Sources */,
 				43DBF7542005CC77000511EB /* s2d_sprite_lua_binding.cpp in Sources */,
-				4D360C501FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */,
 				B6FF63C21F91FC4E00D7058F /* ldump.c in Sources */,
 				B6FF63BD1F91FC4E00D7058F /* lcorolib.c in Sources */,
 				B6FF639A1F91FC2800D7058F /* lapi.c in Sources */,
@@ -1207,7 +1198,6 @@
 				4337BCEC1F852D7B004CF11B /* s2d_texture.cpp in Sources */,
 				4D40F0B91FE427A7007368A7 /* s2d_timer.cpp in Sources */,
 				4D6782671FA5A8CE007D461F /* fpconv.c in Sources */,
-				4D360C511FAD9DF900075D98 /* s2d_particle_renderer.cpp in Sources */,
 				4D4703FA1FC4A1060088FAAF /* Json.c in Sources */,
 				B6FF63B61F91FC4D00D7058F /* lundump.c in Sources */,
 				4337BCE41F852D6A004CF11B /* s2d_camera.cpp in Sources */,

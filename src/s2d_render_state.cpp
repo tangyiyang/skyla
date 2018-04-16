@@ -1,6 +1,5 @@
 #include "s2d_render_state.h"
 #include "s2d_quad_renderer.h"
-#include "s2d_particle_renderer.h"
 #include "s2d_sprite.h"
 #include "s2d_particle.h"
 
@@ -12,9 +11,6 @@ void render_state::init()
     _cur_renderer_type = MAX_RENDERER_TYPE;
     _renderers[RENDERER_TYPE_QUAD] = new quad_renderer();
     _renderers[RENDERER_TYPE_QUAD]->init();
-
-    _renderers[RENDERER_TYPE_PARTICLE] = new particle_renderer();
-    _renderers[RENDERER_TYPE_PARTICLE]->init();
 }
 
 void render_state::shutdown()
