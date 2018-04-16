@@ -19,8 +19,10 @@ NS_S2D
 
 #define COLOR4F_TO_UINT32(r, g, b, a) ((((int)(r*255))<<24) + (((int)(g*255))<<16) + (((int)(b*255))<<8) + ((int)a*255))
 
-
 typedef uint32_t color_t;
+
+#define COLOR_WHITE (0xffffffff)
+#define COLOR_RED   (0xff0000ff)
 
 struct vec2 {
     float x;

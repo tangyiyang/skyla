@@ -1,0 +1,101 @@
+#include "s2d_line_renderer.h"
+#include "s2d_context.h"
+
+NS_S2D
+
+s2d_line_renderer::s2d_line_renderer()
+{
+    _cur_color = 0;
+    _vertex_buffer = nullptr;
+    _num_vertices = -1;
+    _max_vertices = 0;
+    _program = nullptr;
+    _vbo = 0;
+    _vao = 0;
+}
+
+void s2d_line_renderer::init()
+{
+    _num_vertices = 0;
+    _max_vertices = S2D_MAX_LINE_VERTEX_BUFFER_SIZE;
+    _vertex_buffer = (pos_color_vertex*)malloc(sizeof(pos_color_vertex) * _max_vertices);
+
+    _program = program::load_default_program(program::EMBEDED_PROGRAM_LINE_DEFAULT);
+    glGenBuffers(1, &_vbo); S2D_ASSERT(_vbo > 0);
+    glGenVertexArrays(1, &_vao);
+
+    glBindVertexArray(_vao);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex) * _max_vertices, nullptr, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(program::VERTEX_ATTR_POS,
+                          2,
+                          GL_FLOAT,
+                          GL_FALSE,
+                          sizeof(pos_tex_color_vertex),
+                          (void*)offsetof(pos_tex_color_vertex, pos));
+    glEnableVertexAttribArray(program::VERTEX_ATTR_POS);
+    glVertexAttribPointer(program::VERTEX_ATTR_COLOR,
+                          4,
+                          GL_UNSIGNED_BYTE,
+                          GL_TRUE,
+                          sizeof(pos_tex_color_vertex),
+                          (void*)offsetof(pos_tex_color_vertex, color));
+    glEnableVertexAttribArray(program::VERTEX_ATTR_COLOR);
+    glBindVertexArray(0);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void s2d_line_renderer::shutdown()
+{
+    _program->shutdown();
+
+    glDeleteBuffers(1, &_vbo);
+    glDeleteVertexArrays(1, &_vao);
+    free(_vertex_buffer);
+}
+
+void s2d_line_renderer::flush()
+{
+    if (!_program) {
+        return;
+    }
+
+    _program->use();
+    CHECK_GL_ERROR;
+    _program->set_uniform("u_projection",
+                          program::UNIFORM_TYPE_MATRIX_3_FV,
+                          context::C()->_camera->_matrix.m);
+
+
+    glLineWidth(1.0);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_color_vertex), _vertex_buffer);
+
+    glBindVertexArray(_vao);
+    glDrawArrays(GL_LINES, 0, _num_vertices);
+
+    _program->unuse();
+    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+}
+
+void s2d_line_renderer::draw_line(const vec2& begin, const vec2& end, color_t color)
+{
+    if (_num_vertices + 2 > this->_max_vertices) {
+        this->flush();
+    }
+    
+    _vertex_buffer[_num_vertices + 0].pos = begin;
+    _vertex_buffer[_num_vertices + 0].color = color;
+    _vertex_buffer[_num_vertices + 1].pos = end;
+    _vertex_buffer[_num_vertices + 0].color = color;
+
+    _num_vertices += 2;
+}
+
+NS_S2D_END
+

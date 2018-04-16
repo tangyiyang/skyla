@@ -52,14 +52,14 @@ void quad_renderer::init()
                           GL_TRUE,
                           sizeof(pos_tex_color_vertex),
                           (void*)offsetof(pos_tex_color_vertex, uv));
-    glEnableVertexAttribArray(program::VERTEX_ATTR_COLOR);
+    glEnableVertexAttribArray(program::VERTEX_ATTR_TEX_COORD);
     glVertexAttribPointer(program::VERTEX_ATTR_COLOR,
                           4,
                           GL_UNSIGNED_BYTE,
                           GL_TRUE,
                           sizeof(pos_tex_color_vertex),
                           (void*)offsetof(pos_tex_color_vertex, color));
-    glEnableVertexAttribArray(program::VERTEX_ATTR_TEX_COORD);
+    glEnableVertexAttribArray(program::VERTEX_ATTR_COLOR);
     glBindVertexArray(0);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

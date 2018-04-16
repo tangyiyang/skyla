@@ -18,6 +18,8 @@ public:
 
     enum EMBEDED_PROGRAMS {
         EMBEDED_PROGRAM_SPRITE_DEFAULT = 0,
+        EMBEDED_PROGRAM_LINE_DEFAULT,
+
         EMBEDED_PROGRAM_MAX
     };
 

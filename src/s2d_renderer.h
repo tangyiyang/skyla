@@ -23,6 +23,11 @@ struct pos_tex_color_vertex {
     color_t color;
 };
 
+struct pos_color_vertex {
+    vec2 pos;
+    color_t color;
+};
+
 enum blend_mode {
     BLEND_MODE_NONE    = -1,
     BLEND_MODE_NORMAL  = 0,

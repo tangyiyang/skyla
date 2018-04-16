@@ -17,7 +17,7 @@ NS_S2D
 class quad_renderer : public renderer {
 public:
     quad_renderer();
-
+    virtual ~quad_renderer() {};
 public:
     void init();
     void shutdown();

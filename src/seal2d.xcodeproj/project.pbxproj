@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4310578A20847B54000ED7EE /* s2d_primitive_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4310578820847B54000ED7EE /* s2d_primitive_node.cpp */; };
+		4310578B20847B54000ED7EE /* s2d_primitive_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4310578820847B54000ED7EE /* s2d_primitive_node.cpp */; };
+		4310578C20847B54000ED7EE /* s2d_primitive_node.h in Headers */ = {isa = PBXBuildFile; fileRef = 4310578920847B54000ED7EE /* s2d_primitive_node.h */; };
+		4310578F20847E40000ED7EE /* s2d_line_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4310578D20847E40000ED7EE /* s2d_line_renderer.cpp */; };
+		4310579020847E40000ED7EE /* s2d_line_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4310578D20847E40000ED7EE /* s2d_line_renderer.cpp */; };
+		4310579120847E40000ED7EE /* s2d_line_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4310578E20847E40000ED7EE /* s2d_line_renderer.h */; };
 		4337BC641F8521A3004CF11B /* s2d_camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC471F852195004CF11B /* s2d_camera.cpp */; };
 		4337BC651F8521A3004CF11B /* s2d_context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC4B1F852195004CF11B /* s2d_context.cpp */; };
 		4337BC661F8521A3004CF11B /* s2d_file_system.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC4E1F852195004CF11B /* s2d_file_system.mm */; };
@@ -291,6 +297,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4310578820847B54000ED7EE /* s2d_primitive_node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_primitive_node.cpp; sourceTree = "<group>"; };
+		4310578920847B54000ED7EE /* s2d_primitive_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_primitive_node.h; sourceTree = "<group>"; };
+		4310578D20847E40000ED7EE /* s2d_line_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_line_renderer.cpp; sourceTree = "<group>"; };
+		4310578E20847E40000ED7EE /* s2d_line_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_line_renderer.h; sourceTree = "<group>"; };
 		4337BC391F852151004CF11B /* libseal2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libseal2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4337BC461F852195004CF11B /* s2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d.h; sourceTree = "<group>"; };
 		4337BC471F852195004CF11B /* s2d_camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_camera.cpp; sourceTree = "<group>"; };
@@ -609,6 +619,8 @@
 				4D4704271FC4A3100088FAAF /* s2d_spine.h */,
 				4399D44C1FFB66ED00AA28EA /* s2d_action.cpp */,
 				4399D44D1FFB66ED00AA28EA /* s2d_action.h */,
+				4310578820847B54000ED7EE /* s2d_primitive_node.cpp */,
+				4310578920847B54000ED7EE /* s2d_primitive_node.h */,
 			);
 			name = game_objects;
 			sourceTree = "<group>";
@@ -628,6 +640,8 @@
 				4DD9F7861FAB86F700B9F94F /* s2d_renderer.h */,
 				4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */,
 				4D9F49BA1FAB908200F2170E /* s2d_render_state.h */,
+				4310578D20847E40000ED7EE /* s2d_line_renderer.cpp */,
+				4310578E20847E40000ED7EE /* s2d_line_renderer.h */,
 			);
 			name = renderer;
 			sourceTree = "<group>";
@@ -933,6 +947,7 @@
 				B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */,
 				43DBF76B2005D052000511EB /* s2d_context_lua_binding.h in Headers */,
 				4D4703B51FC4A1050088FAAF /* Bone.h in Headers */,
+				4310578C20847B54000ED7EE /* s2d_primitive_node.h in Headers */,
 				4D4703C71FC4A1050088FAAF /* SkeletonBinary.h in Headers */,
 				4D4703B71FC4A1050088FAAF /* BoundingBoxAttachment.h in Headers */,
 				4D4703D11FC4A1060088FAAF /* TransformConstraintData.h in Headers */,
@@ -960,6 +975,7 @@
 				4D4703BF1FC4A1050088FAAF /* IkConstraintData.h in Headers */,
 				4D4703C61FC4A1050088FAAF /* Skeleton.h in Headers */,
 				43DBF75C2005CE95000511EB /* s2d_bmfont_lua_binding.h in Headers */,
+				4310579120847E40000ED7EE /* s2d_line_renderer.h in Headers */,
 				4D4703BE1FC4A1050088FAAF /* IkConstraint.h in Headers */,
 				43DBF7562005CC77000511EB /* s2d_sprite_lua_binding.h in Headers */,
 				4D4703CE1FC4A1050088FAAF /* SlotData.h in Headers */,
@@ -1073,6 +1089,7 @@
 				4337BC6A1F8521A3004CF11B /* s2d_sprite.cpp in Sources */,
 				4D4703E11FC4A1060088FAAF /* Attachment.c in Sources */,
 				4D4703F51FC4A1060088FAAF /* IkConstraint.c in Sources */,
+				4310578A20847B54000ED7EE /* s2d_primitive_node.cpp in Sources */,
 				4D47040D1FC4A1060088FAAF /* SkeletonBounds.c in Sources */,
 				B6FF63CC1F91FC4E00D7058F /* lopcodes.c in Sources */,
 				4D4704111FC4A1060088FAAF /* SkeletonData.c in Sources */,
@@ -1082,6 +1099,7 @@
 				B6FF63BE1F91FC4E00D7058F /* lctype.c in Sources */,
 				B6FF63D31F91FC4E00D7058F /* ltm.c in Sources */,
 				4337BC691F8521A3004CF11B /* s2d_program.cpp in Sources */,
+				4310578F20847E40000ED7EE /* s2d_line_renderer.cpp in Sources */,
 				B6FF63D21F91FC4E00D7058F /* ltablib.c in Sources */,
 				4D4703DB1FC4A1060088FAAF /* Array.c in Sources */,
 				4D4703FD1FC4A1060088FAAF /* MeshAttachment.c in Sources */,
@@ -1197,6 +1215,7 @@
 				4D5686731FD9A30900D1FEBD /* s2d_renderer.cpp in Sources */,
 				4337BCEC1F852D7B004CF11B /* s2d_texture.cpp in Sources */,
 				4D40F0B91FE427A7007368A7 /* s2d_timer.cpp in Sources */,
+				4310578B20847B54000ED7EE /* s2d_primitive_node.cpp in Sources */,
 				4D6782671FA5A8CE007D461F /* fpconv.c in Sources */,
 				4D4703FA1FC4A1060088FAAF /* Json.c in Sources */,
 				B6FF63B61F91FC4D00D7058F /* lundump.c in Sources */,
@@ -1251,6 +1270,7 @@
 				B6FF63B91F91FC4D00D7058F /* lzio.c in Sources */,
 				B6FF63A81F91FC4D00D7058F /* liolib.c in Sources */,
 				4D4703EC1FC4A1060088FAAF /* ClippingAttachment.c in Sources */,
+				4310579020847E40000ED7EE /* s2d_line_renderer.cpp in Sources */,
 				4D47040E1FC4A1060088FAAF /* SkeletonBounds.c in Sources */,
 				B6FF63AF1F91FC4D00D7058F /* loslib.c in Sources */,
 				4D4704221FC4A1060088FAAF /* VertexAttachment.c in Sources */,

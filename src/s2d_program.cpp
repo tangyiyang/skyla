@@ -26,8 +26,34 @@ static const char* fs_sprite = ""
 " varying highp vec2 v_tex_coord;                           \n"
 " varying lowp vec4 v_color;                                \n"
 " uniform sampler2D texture0;                               \n"
-" void main() {\n"
+" void main() {                                             \n"
 "     gl_FragColor = v_color * texture2D(texture0, v_tex_coord); \n"
+" }                                                         \n";
+
+
+static const char* vs_line = ""
+#if S2D_IS_DESKTOP
+"#version 100\n"
+#endif
+""
+" attribute mediump vec2 pos;                               \n"
+" attribute lowp    vec4 color;                             \n"
+" varying lowp vec4 v_color;                                \n"
+
+" uniform mat3 u_projection;                                \n"
+" void main() {                                             \n"
+    "vec3 tmp = u_projection * vec3(pos.x, pos.y, 0.0);     \n"
+    "gl_Position = vec4(tmp.x, tmp.y, 0.0, 1.0);            \n"
+    "v_color = color;                                       \n"
+"}                                                          \n";
+
+static const char* fs_line = ""
+#if S2D_IS_DESKTOP
+"#version 100                                               \n"
+#endif
+" varying lowp vec4 v_color;                                \n"
+" void main() {                                             \n"
+"     gl_FragColor = v_color;                               \n"
 " }                                                         \n";
 
 NS_S2D
@@ -38,6 +64,8 @@ program* program::load_default_program(EMBEDED_PROGRAMS type)
     {
         vs_sprite,
         fs_sprite,
+        vs_line,
+        fs_line
     };
     int vs_index = type*2;
     int fs_index = type*2 + 1;
