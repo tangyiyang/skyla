@@ -31,9 +31,14 @@
 #include "s2d_context.h"
 #include "entry.h"
 
-static void resize_callback(GLFWwindow* window, int width, int height)
+static void frame_buffer_resize_callback(GLFWwindow* window, int width, int height)
 {
-    glViewport(0, 0, width, height);
+    s2d::context* ctx = (s2d::context*)glfwGetWindowUserPointer(window);
+    if (ctx) {
+        ctx->set_viewport_rect({0, 0, (float)width, (float)height});
+        glViewport(0, 0, width, height);
+    }
+
 }
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -117,24 +122,25 @@ int main(int argc, char** argv)
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
+    glfwSetWindowUserPointer(window, ctx);
 
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
-    glfwSetFramebufferSizeCallback(window, resize_callback);
+    glfwSetFramebufferSizeCallback(window, frame_buffer_resize_callback);
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, cursor_pos_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
-    
 
     // Set initial aspect ratio
     glfwGetFramebufferSize(window, &width, &height);
-    resize_callback(window, width, height);
+    frame_buffer_resize_callback(window, width, height);
 
     glfwSetTime(0.0);
 
     ctx->init(3, win_width, win_height);
     ctx->set_content_scale_factor(width/win_width);
+
 
     double dt = 0.0f;
     while (!glfwWindowShouldClose(window)) {

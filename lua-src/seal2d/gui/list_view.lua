@@ -14,8 +14,10 @@ function list_view:ctor(opt)
     assert(type(opt.cell_create_func) == "function")
 
     local container = scroll_view.new {width = opt.width, height = opt.height}
-    print_r(container)
+    container:set_pos(0, 0)
+    container:set_anchor(0, 0)
     container:set_direction(opt.mode == "row" and scroll_view.HORIZONTAL or scroll_view.VERTICAL)
+    self:set_size(opt.width, opt.height)
     self:add_child(container)
 
     local index = 1

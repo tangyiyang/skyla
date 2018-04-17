@@ -63,6 +63,12 @@ public:
 
     void set_logic_size(float width, float height);
     void set_content_scale_factor(float factor);
+
+    inline void set_viewport_rect(const rect& r)
+    {
+        _viewport_rect = r;
+    }
+
     inline float get_content_scale_factor()
     {
         return _content_scale_factor;

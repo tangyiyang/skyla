@@ -47,7 +47,8 @@ local function list_view_test(self)
                                 n_cell = 5,
                                 cell_create_func = cell_create_func
                             }
-    list:set_anchor(0, 0)
+    list:set_anchor(0.5, 0.5)
+
     print("visible_rect: x, y, w, h= ", visible_rect.x, visible_rect.y, visible_rect.width, visible_rect.height)
     list:set_pos(visible_rect.width/2, visible_rect.height/2)
     self:add_child(list)

@@ -43,15 +43,8 @@ void context::update_resolution_settings(float window_width, float window_height
             break;
     }
 
-    _viewport_rect.size.width = _logic_size.width * _scale_factor.x;
-    _viewport_rect.size.height = _logic_size.height * _scale_factor.y;
-    _viewport_rect.origin.x = (_window_size.width - _viewport_rect.size.width)/2;
-    _viewport_rect.origin.y = (_window_size.height - _viewport_rect.size.height)/2;
-
     LOGD("** resolution compat mode = %d", _resolution_compat_type);
     LOGD("** window size = {%.2f, %.2f}", _window_size.width, _window_size.height);
-    LOGD("** viewport origin = {%.2f, %.2f}", _viewport_rect.origin.x, _viewport_rect.origin.y);
-    LOGD("** viewport size = {%.2f, %.2f}", _viewport_rect.size.width, _viewport_rect.size.height);
     LOGD("** logic_size size = {%.2f, %.2f}", _logic_size.width, _logic_size.height);
     LOGD("** visible origin = {%.2f, %.2f}", _visible_rect.origin.x, _visible_rect.origin.y);
     LOGD("** visible size = {%.2f, %.2f}", _visible_rect.size.width, _visible_rect.size.height);
@@ -116,11 +109,10 @@ void context::update(float dt)
 
 void context::draw()
 {
-    _content_scale_factor = 2;
     glViewport(_viewport_rect.origin.x,
                _viewport_rect.origin.y,
-               _viewport_rect.size.width * _content_scale_factor,
-               _viewport_rect.size.height * _content_scale_factor);
+               _viewport_rect.size.width,
+               _viewport_rect.size.height);
 
     _render_state->clear();
     
