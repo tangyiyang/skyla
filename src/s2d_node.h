@@ -36,7 +36,7 @@ public:
     virtual void draw(render_state* rs);
     virtual void hit_test(touch_handler* handler, touch_event* event);
     virtual void on_touch(touch_event* event);
-    virtual rect bounds_in(node* space);
+    virtual rect local_bounds();
 
 public:
     void add_child(node* child, uint32_t z_order = 0);

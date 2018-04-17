@@ -43,7 +43,6 @@ public:
     void draw(render_state* rs) override;
     void hit_test(touch_handler* handler, touch_event* event) override;
     void on_touch(touch_event* event) override;
-    rect bounds_in(node* space) override;
 
 private:
     spAnimationState*    _state;

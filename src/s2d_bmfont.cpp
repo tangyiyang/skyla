@@ -147,11 +147,6 @@ void bmfont::init(const char* text, const char* font_atlas)
     this->set_text(text);
 }
 
-rect bmfont::bounds_in(node* space)
-{
-    return node::bounds_in(space);
-}
-
 void bmfont::set_text(const char* text)
 {
     /* if text is null or empty string, we simply clean up the vertex. */

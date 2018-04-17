@@ -84,7 +84,6 @@ public:
 
 public:
     void init(const char* text, const char* font_atlas);
-    virtual rect bounds_in(node* space) override;
     /*
      *  bmfont doesn't need hit_test for most cases.
      *

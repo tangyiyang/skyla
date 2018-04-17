@@ -104,9 +104,6 @@ void line_renderer::draw_line(const affine_transform& world_transform, const vec
     vertex[1].pos = affine_transform::apply_transform(t, end.x, end.y);
     vertex[1].color = color;
 
-    LOGD("vertex buf[0] = %.2f, %.2f", vertex[0].pos.x, vertex[0].pos.y);
-    LOGD("vertex buf[1] = %.2f, %.2f", vertex[1].pos.x, vertex[1].pos.y);
-    LOGD("color = %x", vertex[0].color);
     _num_vertices += 2;
 }
 

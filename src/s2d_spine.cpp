@@ -200,9 +200,4 @@ void spine_anim::on_touch(touch_event* event)
 
 }
 
-rect spine_anim::bounds_in(node* space)
-{
-    return node::bounds_in(this);
-}
-
 NS_S2D_END

@@ -116,10 +116,11 @@ void context::update(float dt)
 
 void context::draw()
 {
+    _content_scale_factor = 2;
     glViewport(_viewport_rect.origin.x,
                _viewport_rect.origin.y,
                _viewport_rect.size.width * _content_scale_factor,
-               _viewport_rect.size.height* _content_scale_factor);
+               _viewport_rect.size.height * _content_scale_factor);
 
     _render_state->clear();
     
@@ -238,10 +239,6 @@ void context::set_content_scale_factor(float factor)
     }
 
     _content_scale_factor = factor;
-    update_resolution_settings(_window_size.width, _window_size.height);
-    if (_app) {
-        _app->on_resize(this);
-    }
 }
 
 NS_S2D_END

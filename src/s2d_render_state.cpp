@@ -1,3 +1,4 @@
+#include "s2d_context.h"
 #include "s2d_render_state.h"
 #include "s2d_quad_renderer.h"
 #include "s2d_line_renderer.h"
@@ -90,9 +91,13 @@ void render_state::draw_primitive(primitive_node* p)
 
 void render_state::push_scissors(const rect& r)
 {
+    float content_scale_factor = context::C()->get_content_scale_factor();
     _scissors_stack.push(r);
     glEnable(GL_SCISSOR_TEST);
-    glScissor(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    glScissor(r.origin.x * content_scale_factor,
+              r.origin.y * content_scale_factor,
+              r.size.width * content_scale_factor,
+              r.size.height * content_scale_factor);
 }
 
 void render_state::pop_scissors()

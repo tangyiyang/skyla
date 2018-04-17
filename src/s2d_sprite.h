@@ -70,7 +70,6 @@ public:
 public:
     bool update(float dt)       override;
     void draw(render_state* rs) override;
-    rect bounds_in(node* space) override;
 
 protected:
     void update_srt();

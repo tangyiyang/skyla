@@ -62,7 +62,11 @@ public:
     void on_touch_cancl(float x, float y);
 
     void set_logic_size(float width, float height);
-    void set_content_scale_factor(float factor); // for engine internal usage only!
+    void set_content_scale_factor(float factor);
+    inline float get_content_scale_factor()
+    {
+        return _content_scale_factor;
+    }
 
     inline node* get_root()
     {
