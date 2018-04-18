@@ -211,6 +211,9 @@
 		4D9F49BC1FAB908200F2170E /* s2d_render_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */; };
 		4D9F49BD1FAB908200F2170E /* s2d_render_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D9F49BA1FAB908200F2170E /* s2d_render_state.h */; };
 		4DD9F7891FAB86F700B9F94F /* s2d_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DD9F7861FAB86F700B9F94F /* s2d_renderer.h */; };
+		B631CF082087AEBF00DBF621 /* s2d_spine_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B631CF062087AEBF00DBF621 /* s2d_spine_lua_binding.cpp */; };
+		B631CF092087AEBF00DBF621 /* s2d_spine_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B631CF062087AEBF00DBF621 /* s2d_spine_lua_binding.cpp */; };
+		B631CF0A2087AEBF00DBF621 /* s2d_spine_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B631CF072087AEBF00DBF621 /* s2d_spine_lua_binding.h */; };
 		B67565161F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
 		B67565171F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */; };
 		B67565181F8F374F0077C2D7 /* s2d_bmfont.h in Headers */ = {isa = PBXBuildFile; fileRef = B67565151F8F374F0077C2D7 /* s2d_bmfont.h */; };
@@ -456,6 +459,8 @@
 		4D9F49B91FAB908200F2170E /* s2d_render_state.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_render_state.cpp; sourceTree = "<group>"; };
 		4D9F49BA1FAB908200F2170E /* s2d_render_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_render_state.h; sourceTree = "<group>"; };
 		4DD9F7861FAB86F700B9F94F /* s2d_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_renderer.h; sourceTree = "<group>"; };
+		B631CF062087AEBF00DBF621 /* s2d_spine_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_spine_lua_binding.cpp; sourceTree = "<group>"; };
+		B631CF072087AEBF00DBF621 /* s2d_spine_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_spine_lua_binding.h; sourceTree = "<group>"; };
 		B67565141F8F374F0077C2D7 /* s2d_bmfont.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_bmfont.cpp; sourceTree = "<group>"; };
 		B67565151F8F374F0077C2D7 /* s2d_bmfont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_bmfont.h; sourceTree = "<group>"; };
 		B6FF635B1F91FC0700D7058F /* lapi.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lapi.c; sourceTree = "<group>"; };
@@ -842,6 +847,8 @@
 				43DBF7682005D052000511EB /* s2d_context_lua_binding.h */,
 				435299A52084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp */,
 				435299A62084D0C000771E10 /* s2d_primitive_node_lua_binding.h */,
+				B631CF062087AEBF00DBF621 /* s2d_spine_lua_binding.cpp */,
+				B631CF072087AEBF00DBF621 /* s2d_spine_lua_binding.h */,
 			);
 			name = script;
 			sourceTree = "<group>";
@@ -978,6 +985,7 @@
 				4D40F0BA1FE427A7007368A7 /* s2d_timer.h in Headers */,
 				4D4703AF1FC4A1050088FAAF /* AnimationStateData.h in Headers */,
 				4D4703AE1FC4A1050088FAAF /* AnimationState.h in Headers */,
+				B631CF0A2087AEBF00DBF621 /* s2d_spine_lua_binding.h in Headers */,
 				4D4703C81FC4A1050088FAAF /* SkeletonBounds.h in Headers */,
 				4D4703C91FC4A1050088FAAF /* SkeletonClipping.h in Headers */,
 				4D4703BF1FC4A1050088FAAF /* IkConstraintData.h in Headers */,
@@ -1089,6 +1097,7 @@
 				4337BC661F8521A3004CF11B /* s2d_file_system.mm in Sources */,
 				B67565161F8F374F0077C2D7 /* s2d_bmfont.cpp in Sources */,
 				B6FF63C41F91FC4E00D7058F /* lgc.c in Sources */,
+				B631CF082087AEBF00DBF621 /* s2d_spine_lua_binding.cpp in Sources */,
 				4D4703F31FC4A1060088FAAF /* extension.c in Sources */,
 				B6FF63D61F91FC4E00D7058F /* lvm.c in Sources */,
 				4D47040B1FC4A1060088FAAF /* SkeletonBinary.c in Sources */,
@@ -1231,6 +1240,7 @@
 				B6FF63B61F91FC4D00D7058F /* lundump.c in Sources */,
 				4337BCE41F852D6A004CF11B /* s2d_camera.cpp in Sources */,
 				4D47040C1FC4A1060088FAAF /* SkeletonBinary.c in Sources */,
+				B631CF092087AEBF00DBF621 /* s2d_spine_lua_binding.cpp in Sources */,
 				4399D44F1FFB66ED00AA28EA /* s2d_action.cpp in Sources */,
 				43DBF7552005CC77000511EB /* s2d_sprite_lua_binding.cpp in Sources */,
 				B6FF63DF1F92022600D7058F /* s2d_panel.cpp in Sources */,

@@ -4,10 +4,13 @@
 NS_S2D
 
 extern "C" {
+
 void _spAtlasPage_createTexture (spAtlasPage* self, const char* path)
 {
     texture* tex = util::load_texture(path);
     self->rendererObject = tex;
+
+    // TODO: build the spine texture into sprite frame, this would benifit memory.
 }
 
 void _spAtlasPage_disposeTexture (spAtlasPage* self)
@@ -33,6 +36,7 @@ spine_anim::spine_anim()
     _attachment_loader = nullptr;
     _state = nullptr;
 }
+
 spine_anim::~spine_anim()
 {
     if (_skeleton) {

@@ -7,6 +7,7 @@
 
 #include "s2d_node_lua_binding.h"
 #include "s2d_sprite_lua_binding.h"
+#include "s2d_spine_lua_binding.h"
 #include "s2d_bmfont_lua_binding.h"
 #include "s2d_action_lua_binding.h"
 #include "s2d_timer_lua_binding.h"
@@ -216,6 +217,7 @@ void lua_context::register_lua_extensions(lua_State* L)
         { "seal2d",            luaopen_seal2d           },
         { "seal2d_node",       luaopen_seal2d_node      },
         { "seal2d_sprite",     luaopen_seal2d_sprite    },
+        { "seal2d_spine",      luaopen_seal2d_spine     },
         { "seal2d_primitive",  luaopen_seal2d_primitive },
         { "seal2d_bmfont",     luaopen_seal2d_bmfont    },
         { "seal2d_panel",      luaopen_seal2d_panel     },

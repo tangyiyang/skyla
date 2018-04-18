@@ -142,7 +142,6 @@ int main(int argc, char** argv)
     ctx->init(3, win_width, win_height);
     ctx->set_content_scale_factor(width/win_width);
 
-
     double dt = 0.0f;
     while (!glfwWindowShouldClose(window)) {
         if(!glfwGetWindowAttrib(window, GLFW_ICONIFIED)) { // prevent cpu 100% when in background.

@@ -33,6 +33,15 @@ local function bmfont_test(self)
 	end
 end
 
+local function spine_test(self)
+	local visible_rect = require("seal2d.context"):get_visible_rect()
+	local spine = require "seal2d.game_object.spine"
+	local s = spine.new("spines/unit_skull.json", "spines/unit_skull.atlas")
+	s:set_anim("attack_1", 0, 1)
+	s:set_pos(visible_rect.width/2, visible_rect.height/2)
+	self:add_child(s)
+end
+
 local function primitive_basic_test(self)
     local primitive = require("seal2d.game_object.primitive")
 
@@ -48,7 +57,8 @@ local function load_tests(self)
 
     local test_cases = {
     	{ name = "sprite", func = sprite_test },
-    	{ name = "bmfont", func = bmfont_test }
+    	{ name = "bmfont", func = bmfont_test },
+    	{ name = "spine", func = spine_test }
 	}
 
     local function cell_create_func(index)

@@ -24,7 +24,7 @@ static int lseal2d_sprite_new(lua_State* L)
         s = new sprite();
         s->init();
     } else {
-        luaL_error(L, "invalid arguments to seal2d.new_sprite");
+        luaL_error(L, "invalid arguments to seal2d.new_sprite, expected 0 or 1, but got %d", n);
         return 0;
     }
 
