@@ -3,4 +3,4 @@
 
 
 # What is this?
-Simple, Fast, Stable 2D Mobile game eninge.
+A Simple and Reliable 2D game engine.
