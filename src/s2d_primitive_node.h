@@ -29,7 +29,7 @@ public:
 
 public:
     void add_line(const vec2& begin, const vec2& end, color_t color);
-    void add_rect(const vec2& bottom_left, const vec2& top_right, color_t color);
+    void add_rect(const vec2& bottom_left, const size& size, color_t color);
 
 public:
     std::vector<line> _lines;

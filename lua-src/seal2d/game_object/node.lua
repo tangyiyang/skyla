@@ -12,6 +12,7 @@ local node = {
     set_pos = C.set_pos,
     set_scale = C.set_scale,
     set_size = C.set_size,
+    set_visible = C.set_visible,
 
     get_size = C.get_size,
     get_pos = C.get_pos,
@@ -38,8 +39,19 @@ function node:up_stage()
     director.up_stage(self)
 end
 
-function node:set_debug_aabb_visible(visible)
+function node:set_debug_aabb_visible(visible, recursive)
     if not self.__debug_aabb_node then
+        local primitive = require "seal2d.game_object.primitive"
+        local box = primitive.new()
+        local w, h = self:get_size()
+        box:add_rect(0, 0, w, h, COLOR_RED)
+        self:add_child(box)
+        self.__debug_aabb_node = box
+    end
+
+    self.__debug_aabb_node:set_visible(visible)
+
+    if recursive then
 
     end
 end

@@ -91,6 +91,11 @@ struct color4f {
 struct size {
     float width;
     float height;
+
+    static inline size make(float width, float height)
+    {
+        return {width, height};
+    }
 };
 
 class math {

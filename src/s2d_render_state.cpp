@@ -40,13 +40,13 @@ renderer* render_state::switch_renderer(render_type type)
     if (_cur_renderer_type == MAX_RENDERER_TYPE) {
         /* lazy initialize */
         _cur_renderer_type = type;
-        _cur_renderer = _renderers[type];
     } else {
         if (_cur_renderer_type != type) {
             _cur_renderer->flush();
-            _cur_renderer = _renderers[type];
+            _cur_renderer_type = type;
         }
     }
+    _cur_renderer = _renderers[type];
     return _cur_renderer;
 }
 

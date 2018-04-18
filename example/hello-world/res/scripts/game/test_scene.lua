@@ -12,13 +12,7 @@ local function bounding_box_test(self)
     a:set_anchor(0, 0)
     self:add_child(a)
 
-    local x, y, w, h = a:get_bounding_box()
-
-    -- local b = sprite.new("images/ui_button_middle.png")
-    -- b:set_pos(200, 200)
-    -- a:add_child(b)
-
-    -- x, y, w, h = a:get_bounding_box()
+    a:set_debug_aabb_visible(true)
 end
 
 local function list_view_test(self)
@@ -63,8 +57,8 @@ local function primitive_basic_test(self)
 end
 
 function test_scene:ctor()
-    -- bounding_box_test(self)
-    list_view_test(self)
+    bounding_box_test(self)
+    -- list_view_test(self)
     -- primitive_basic_test(self)
 end
 
