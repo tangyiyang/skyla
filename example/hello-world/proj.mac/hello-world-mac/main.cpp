@@ -33,12 +33,13 @@
 
 static void frame_buffer_resize_callback(GLFWwindow* window, int width, int height)
 {
+    int win_width, win_height;
     s2d::context* ctx = (s2d::context*)glfwGetWindowUserPointer(window);
-    if (ctx) {
-        ctx->set_viewport_rect({0, 0, (float)width, (float)height});
-        glViewport(0, 0, width, height);
-    }
 
+    glfwGetWindowSize(window, &win_width, &win_height);
+    ctx->set_viewport_rect({0, 0, (float)width, (float)height});
+    glViewport(0, 0, width, height);
+    ctx->set_content_scale_factor(width/win_width);
 }
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
