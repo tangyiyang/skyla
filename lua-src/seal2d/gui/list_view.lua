@@ -1,3 +1,7 @@
+-- A simple list view implementation, it provides simple layout for same items.
+-- Author: yiyang
+-- Copyright: see copyright at s2d.h
+
 local node = require "seal2d.game_object.node"
 local action = require "seal2d_action"
 local scroll_view =require("seal2d.gui.scroll_view")
@@ -21,7 +25,7 @@ function list_view:ctor(opt)
     self:add_child(container)
 
     local index = 1
-    local cell = opt.cell_create_func(opt, index)
+    local cell = opt.cell_create_func(index)
     local cell_width, cell_height = cell:get_size()
 
     local x, y, x_advance, y_advance
@@ -33,20 +37,19 @@ function list_view:ctor(opt)
         x_advance, y_advance = 0, -cell_height
     end
 
-    print("x, y = ", x ,y)
-    print("width, height = ", opt.width, opt.height)
+    local function append_cell(cell)
+		cell:set_pos(x, y)
+    	container:add_content(cell)
+	    x = x + x_advance
+	    y = y + y_advance
+	    index = index + 1
+    end
 
-    cell:set_pos(x, y)
-    container:add_content(cell)
+    append_cell(cell)
 
-    index = index + 1
     while index <= opt.n_cell do
-        cell = opt.cell_create_func(opt, index)
-        cell:set_pos(x, y)
-        container:add_content(cell)
-        x = x + x_advance
-        y = y + y_advance
-        index = index + 1
+        cell = opt.cell_create_func(index)
+		append_cell(cell)
     end
 end
 

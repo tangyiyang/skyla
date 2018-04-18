@@ -4,8 +4,7 @@ local test_scene = class("test_scene", function()
     return node.new()
 end)
 
-
-local function bounding_box_test(self)
+local function sprite_test(self)
     local sprite = require "seal2d.game_object.sprite"
     local a = sprite.new("images/ui_button_middle.png")
     a:set_pos(100, 100)
@@ -15,37 +14,23 @@ local function bounding_box_test(self)
     a:set_debug_aabb_visible(true)
 end
 
-local function list_view_test(self)
-    local list_view = require("seal2d.gui.list_view")
-    local button = require "seal2d.gui.button"
-    local visible_rect = require("seal2d.context"):get_visible_rect()
+local function bmfont_test(self)
+	local bmfont = require "seal2d.game_object.bmfont"
+	local case = "The quick brown fox jumps over the lazy dog"
 
-    local function cell_create_func(index)
-        print("call create func: index = ", index)
-        local b = button.new {
-                                normal = "images/ui_button_middle.png",
-                                text = "click me",
-                                font = "fonts/animated_32_ffffff.fnt",
-                                callback = function()
-                                    print("responsed.")
-                                end
-                            }
-        return b
-    end
+	local fonts = {
+		"fonts/animated_32_ffffff.fnt",
+		"fonts/arial_bold_32_light_blue.fnt"
+	}
 
-
-
-    local list = list_view.new {
-                                mode = "row",
-                                width = 400, height = 150,
-                                n_cell = 5,
-                                cell_create_func = cell_create_func
-                            }
-    list:set_anchor(0.5, 0.5)
-
-    print("visible_rect: x, y, w, h= ", visible_rect.x, visible_rect.y, visible_rect.width, visible_rect.height)
-    list:set_pos(visible_rect.width/2, visible_rect.height/2)
-    self:add_child(list)
+	local visible_rect = require("seal2d.context"):get_visible_rect()
+	for i = 1, #fonts do
+		local f = fonts[i]
+		local t = bmfont.new(case, f)
+		t:set_pos(visible_rect.width/2, visible_rect.height - (i-1)*64)
+		t:set_anchor(0.5, 1)
+		self:add_child(t)
+	end
 end
 
 local function primitive_basic_test(self)
@@ -56,10 +41,44 @@ local function primitive_basic_test(self)
     self:add_child(p)
 end
 
+local function load_tests(self)
+	local list_view = require("seal2d.gui.list_view")
+    local button = require "seal2d.gui.button"
+    local visible_rect = require("seal2d.context"):get_visible_rect()
+
+    local test_cases = {
+    	{ name = "sprite", func = sprite_test },
+    	{ name = "bmfont", func = bmfont_test }
+	}
+
+    local function cell_create_func(index)
+    	print("index = ", index)
+    	local case = test_cases[index]
+        local b = button.new {
+                                normal = "images/ui_button_tiny.png",
+                                text = case.name,
+                                font = "fonts/animated_32_ffffff.fnt",
+                                callback = function()
+									return case.func(self)
+								end
+                            }
+        return b
+    end
+
+    print("#test_cases = ", #test_cases)
+    local list = list_view.new {
+                                mode = "col",
+                                width = 104, height = visible_rect.height,
+                                n_cell = #test_cases,
+                                cell_create_func = cell_create_func
+                            }
+    list:set_anchor(0, 0.5)
+    list:set_pos(0, visible_rect.height/2)
+    self:add_child(list)
+end
+
 function test_scene:ctor()
-    bounding_box_test(self)
-    -- list_view_test(self)
-    -- primitive_basic_test(self)
+	load_tests(self)
 end
 
 

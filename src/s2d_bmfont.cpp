@@ -173,7 +173,7 @@ void bmfont::update_text(const char* new_text)
     const uint8_t* p = (const uint8_t*)new_text;
 
     float cursor_x = 0.0f;
-    float cursor_y = _font_info->common.lineHeight - _font_info->common.base;
+    float cursor_y = 0.0f;
 
     for (int i = 0; i < len; i ++) {
         if (util::utf8_decode(&state, &codepoint, p[i]) == UTF8_ACCEPT) {
@@ -192,8 +192,9 @@ void bmfont::append_glyph(uint32_t codepoint, float *cursor_x, float *cursor_y)
 {
     bmfont_character* charac = _font_info->_characters.at(codepoint);
 
+    int yoffset = _font_info->common.lineHeight - charac->yoffset - charac->height;
     float pen_x = *cursor_x + charac->xoffset;
-    float pen_y = *cursor_y /* + charac->yoffset */;
+    float pen_y = *cursor_y + yoffset;
 
     rect r = rect::make_rect(charac->x, charac->y, charac->width, charac->height);
 

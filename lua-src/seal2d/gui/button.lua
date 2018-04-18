@@ -8,6 +8,7 @@ local button = class("button", function()
     return node.new()
 end)
 
+local DEFAULT_TEXT_MARGIN = 16
 -- opt: {
     -- callback: events when clicked the button
     -- animated_callback: tween animation call back for the button
@@ -15,8 +16,8 @@ end)
     -- selected: selected sprite-frame
     -- disabled: disabled sprite-frame
     -- text: string displayed on button
+    -- text_margin: margin in pixel, due to text width often smaller than the button width
     -- font: font file for text, only support bmfont currently
-    -- font_size: size for text
 -- }
 function button:ctor(opt)
     assert(opt and type(opt) == 'table')
@@ -47,6 +48,13 @@ function button:ctor(opt)
     if opt.text and opt.font then
         local t = bmfont.new(opt.text, opt.font)
         t:set_pos(w/2, h/2)
+
+        -- TODO: add better fits
+        local tw, th = t:get_size()
+        local margin = opt.text_margin or DEFAULT_TEXT_MARGIN
+        local text_scale = (w - margin)/ tw
+        t:set_scale(text_scale)
+
         self:add_child(t)
         self.text = t
     end
