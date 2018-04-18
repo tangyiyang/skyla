@@ -56,27 +56,13 @@ void node::hit_test(touch_handler* handler, touch_event* event)
     affine_transform local_to_world_transform = this->transform_to(this->get_root());
     affine_transform world_to_local_transform = affine_transform::invert(local_to_world_transform);
 
-    vec2 anchor_point_in_pixel = vec2::make(this->_size.width * this->_anchor.x,
-                                            this->_size.height * this->_anchor.y);
-
     vec2 local = affine_transform::apply_transform(world_to_local_transform, event->_pos.x, event->_pos.y);
 
-    local.x -= anchor_point_in_pixel.x;
-    local.y -= anchor_point_in_pixel.y;
-
-    LOGD("event.pos = %.2f, %.2f", event->_pos.x, event->_pos.y);
-    LOGD("locale = %.2f, %.2f", local.x, local.y);
     rect bounds = this->local_bounds();
     bool contains = rect::contains(bounds, local.x, local.y);
 
-    LOGD("bounds = %.2f, %.2f, %.2f, %.2f", bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height);
-    
     if (contains && (event->_phase == touch_event::TOUCH_BEGIN)) {
-        static int i = 0;
-        LOGD("touched %d", i++);
         handler->add_touch_node(this);
-    } else {
-        int i = 0;
     }
     // visit the child recusively
     std::vector<node*>::iterator it = _children.begin();
