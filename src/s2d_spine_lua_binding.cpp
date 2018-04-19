@@ -41,6 +41,35 @@ int lua_seal2d_spine_set_anim(lua_State* L)
     }
 }
 
+int lua_seal2d_spine_get_all_anim_names(lua_State* L)
+{
+    int n = lua_gettop(L);
+    if (n == 1) {
+        lua_getfield(L, 1, "__cobj");
+        spine_anim* n = (spine_anim*)lua_touserdata(L, -1);
+
+        lua_pop(L, -1);
+        spSkeleton* skeleton = n->get_skeleton();
+        int count = skeleton->data->animationsCount;
+
+        lua_newtable(L);
+        STACK_DUMP(L);
+        for (int i = 0; i < count; ++i) {
+            const char* name = skeleton->data->animations[i]->name;
+            lua_pushinteger(L, i+1);
+            STACK_DUMP(L);
+            lua_pushstring(L, name);
+            STACK_DUMP(L);
+            lua_rawset(L, -3);
+            STACK_DUMP(L);
+        }
+        return 1;
+    } else {
+        luaL_error(L, "invalid number of arguments, expected 1, got = %d", n);
+        return 0;
+    }
+}
+
 int luaopen_seal2d_spine(lua_State* L)
 {
 #ifdef luaL_checkversion
@@ -50,6 +79,7 @@ int luaopen_seal2d_spine(lua_State* L)
     luaL_Reg lib[] = {
         { "new",  lua_seal2d_spine_new },
         { "set_anim", lua_seal2d_spine_set_anim },
+        { "get_all_anim_names", lua_seal2d_spine_get_all_anim_names },
         { NULL, NULL },
     };
 

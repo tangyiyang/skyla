@@ -31,12 +31,19 @@ private:
     void on_amim_event(spEventType type, spTrackEntry* entry, spEvent* event);
 
 public:
+
+    inline spSkeleton* get_skeleton()
+    {
+        return _skeleton;
+    }
+
     inline void set_callback(anim_callback_t callback)
     {
         _callback = callback;
     }
 
     void set_anim(const char* name, int track, int loop);
+
 
     void init(const char* skeleton_file, const char* atlas_file);
     bool update(float dt) override;
