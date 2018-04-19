@@ -1,15 +1,14 @@
 local node = require "seal2d.game_object.node"
+local sprite = require "seal2d.game_object.sprite"
 
 local test_scene = class("test_scene", function()
     return node.new()
 end)
 
 local function sprite_test(self)
-    local sprite = require "seal2d.game_object.sprite"
     local visible_rect = require("seal2d.context"):get_visible_rect()
 
     local function premutiply_alpha_test()
-        sprite.load_frames("images/ui_atlas.json", "images/ui_atlas.png")
         local s = sprite.new("#prist_magicball.png")
         s:set_pos(visible_rect.width/2, visible_rect.height/2)
         self:add_child(s)
@@ -76,7 +75,7 @@ local function load_tests(self)
     	print("index = ", index)
     	local case = test_cases[index]
         local b = button.new {
-                                normal = "images/ui_button_tiny.png",
+                                normal = "#ui_button_tiny.png",
                                 text = case.name,
                                 font = "fonts/animated_32_ffffff.fnt",
                                 callback = function()
@@ -99,6 +98,9 @@ local function load_tests(self)
 end
 
 function test_scene:ctor()
+    sprite.load_frames("images/ui_atlas.json", "images/ui_atlas.png")
+
+
 	load_tests(self)
 end
 
