@@ -97,9 +97,11 @@ bool spine_anim::update(float dt)
     }
 
     if (_state) {
+        spSkeleton_update(_skeleton, dt);
+
+        
         spAnimationState_update(_state, dt);
         spAnimationState_apply(_state, _skeleton);
-        spSkeleton_update(_skeleton, dt);
         spSkeleton_updateWorldTransform(_skeleton);
     }
 
@@ -111,75 +113,82 @@ void spine_anim::draw(render_state* rs)
     float buffer[8] = {0};
     pos_tex_color_vertex quad[4];
     float r, g, b, a;
+    float* uv = nullptr;
     float multiplier;
+    spAtlasRegion* region;
 
     for (int i = 0, n = _skeleton->slotsCount; i < n; ++i) {
         spSlot* slot = _skeleton->drawOrder[i];
-        if (!slot->attachment) continue;
+        if (!slot->attachment) {
+            continue;
+        }
+
+        blend_mode mode = BLEND_MODE_NONE;
+        switch (slot->data->blendMode) {
+            case SP_BLEND_MODE_NORMAL:
+                mode = BLEND_MODE_NORMAL;
+                break;
+            case SP_BLEND_MODE_ADDITIVE:
+                mode = BLEND_MODE_ADDTIVE;
+                break;
+            case SP_BLEND_MODE_MULTIPLY:
+                mode = BLEND_MODE_MUTIPLY;
+                break;
+            case SP_BLEND_MODE_SCREEN:
+                mode = BLEND_MODE_SCREEN;
+                break;
+            default:
+                break;
+        }
 
         switch (slot->attachment->type) {
             case SP_ATTACHMENT_REGION: {
                 spRegionAttachment* attachment = (spRegionAttachment*)slot->attachment;
-                spAtlasRegion* region = (spAtlasRegion*)attachment->rendererObject;
                 spRegionAttachment_computeWorldVertices(attachment, slot->bone, buffer, 0, 2);
 
+                region = (spAtlasRegion*)attachment->rendererObject;
                 a = attachment->color.a * _skeleton->color.a * slot->color.a;
                 multiplier = ((texture*)region->page->rendererObject)->_premultiply_alpha ? a : 255;
                 r = attachment->color.r * _skeleton->color.r * slot->color.r * multiplier;
                 g = attachment->color.g * _skeleton->color.g * slot->color.g * multiplier;
                 b = attachment->color.b * _skeleton->color.b * slot->color.b * multiplier;
 
+                uv = attachment->uvs;
+                region = (spAtlasRegion*)attachment->rendererObject;
+
                 /*Coord order of spine: BR, BL, UL, UR*/
                 /*Coord order of ours:  UL, BL, UR, BR*/
                 quad[0].pos.x = buffer[2*2+0];
                 quad[0].pos.y = buffer[2*2+1];
                 quad[0].color = COLOR4F_TO_UINT32(r, g, b, a);
-                quad[0].uv.u = attachment->uvs[2*2+0] * ((1<<16)-1);
-                quad[0].uv.v = attachment->uvs[2*2+1] * ((1<<16)-1);
+                quad[0].uv.u = uv[2*2+0] * ((1<<16)-1);
+                quad[0].uv.v = uv[2*2+1] * ((1<<16)-1);
 
                 quad[1].pos.x = buffer[1*2+0];
                 quad[1].pos.y = buffer[1*2+1];
                 quad[1].color = COLOR4F_TO_UINT32(r, g, b, a);
-                quad[1].uv.u = attachment->uvs[1*2+0] * ((1<<16)-1);
-                quad[1].uv.v = attachment->uvs[1*2+1] * ((1<<16)-1);
+                quad[1].uv.u = uv[1*2+0] * ((1<<16)-1);
+                quad[1].uv.v = uv[1*2+1] * ((1<<16)-1);
 
                 quad[2].pos.x = buffer[3*2+0];
                 quad[2].pos.y = buffer[3*2+1];
                 quad[2].color = COLOR4F_TO_UINT32(r, g, b, a);
-                quad[2].uv.u = attachment->uvs[3*2+0] * ((1<<16)-1);
-                quad[2].uv.v = attachment->uvs[3*2+1] * ((1<<16)-1);
+                quad[2].uv.u = uv[3*2+0] * ((1<<16)-1);
+                quad[2].uv.v = uv[3*2+1] * ((1<<16)-1);
 
                 quad[3].pos.x = buffer[0*2+0];
                 quad[3].pos.y = buffer[0*2+1];
                 quad[3].color = COLOR4F_TO_UINT32(r, g, b, a);
-                quad[3].uv.u = attachment->uvs[0*2+0] * ((1<<16)-1);
-                quad[3].uv.v = attachment->uvs[0*2+1] * ((1<<16)-1);
-
-                blend_mode mode = BLEND_MODE_NONE;
-                switch (slot->data->blendMode) {
-                    case SP_BLEND_MODE_NORMAL:
-                        mode = BLEND_MODE_NORMAL;
-                        break;
-                    case SP_BLEND_MODE_ADDITIVE:
-                        mode = BLEND_MODE_ADDTIVE;
-                        break;
-                    case SP_BLEND_MODE_MULTIPLY:
-                        mode = BLEND_MODE_MUTIPLY;
-                        break;
-                    case SP_BLEND_MODE_SCREEN:
-                        mode = BLEND_MODE_SCREEN;
-                        break;
-                    default:
-                        break;
-                }
+                quad[3].uv.u = uv[0*2+0] * ((1<<16)-1);
+                quad[3].uv.v = uv[0*2+1] * ((1<<16)-1);
 
                 rs->draw_quad(_local_transform, (texture*)region->page->rendererObject, mode, quad);
 
                 break;
             }
             case SP_ATTACHMENT_MESH: {
-                // TODO:
-//                LOGD("no mesh");
+                // TODO: support later
+                LOGE("mesh not supported for spine yet.");
                 break;
             }
             default:
