@@ -51,7 +51,7 @@ texture::texture()
     _size = {0, 0};
     _name = 0;
     _upside_down = true;
-    _premultiply_alpha = false;//true;
+    _premultiply_alpha = true;
 }
 
 texture::~texture()

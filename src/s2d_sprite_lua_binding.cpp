@@ -6,6 +6,20 @@
 
 NS_S2D
 
+static int lseal2d_sprite_frame_cache_load(lua_State* L)
+{
+    int n = lua_gettop(L);
+
+    if (n == 2) {
+        const char* json_atlas = luaL_checkstring(L, 1);
+        const char* texture_file = luaL_checkstring(L, 2);
+        context::C()->_sprite_frame_cache->load(json_atlas, texture_file);
+    } else {
+        luaL_error(L, "invalid number of arguments, expected 2, got = %d", n);
+    }
+    return 0;
+}
+
 static int lseal2d_sprite_new(lua_State* L)
 {
     int n = lua_gettop(L);
@@ -34,7 +48,8 @@ static int lseal2d_sprite_new(lua_State* L)
 
 static int lseal2d_sprite_set_color(lua_State* L)
 {
-    sprite* s = (sprite*)lua_touserdata(L, 1);
+    lua_getfield(L, 1, "__cobj");
+    sprite* s = (sprite*)lua_touserdata(L, -1);
     lua_Integer color = luaL_checkinteger(L, 2);
     s->set_color((uint32_t)color);
     return 0;
@@ -49,8 +64,9 @@ static int lseal2d_sprite_set_texture(lua_State* L)
         return 0;
     }
 
-    sprite* s = (sprite*)lua_touserdata(L, 1);
     if (n == 2) {
+        lua_getfield(L, 1, "__cobj");
+        sprite* s = (sprite*)lua_touserdata(L, -1);
         char* file_name = (char*)luaL_checkstring(L, 2);
         if (file_name[0] == '#' && strlen(file_name) > 2) {
             sprite_frame* f = context::C()->_sprite_frame_cache->get(file_name+1);
@@ -71,7 +87,8 @@ static int lseal2d_sprite_set_blend_mode(lua_State* L)
                    "expected more than 2, but got %d", n);
         return 0;
     }
-    sprite* s = (sprite*)lua_touserdata(L, 1);
+    lua_getfield(L, 1, "__cobj");
+    sprite* s = (sprite*)lua_touserdata(L, -1);
     lua_Integer mode = luaL_checkinteger(L, 2);
 
     S2D_ASSERT(mode >= 0 && mode < BLEND_MODE_MAX);
@@ -87,10 +104,11 @@ int luaopen_seal2d_sprite(lua_State* L)
 #endif
 
     luaL_Reg lib[] = {
-        { "new",            lseal2d_sprite_new },
-        { "set_texture",    lseal2d_sprite_set_texture },
-        { "set_color",      lseal2d_sprite_set_color},
-        { "set_blend_mode", lseal2d_sprite_set_blend_mode},
+        { "new",                lseal2d_sprite_new },
+        { "load_frames",        lseal2d_sprite_frame_cache_load },
+        { "set_texture",        lseal2d_sprite_set_texture },
+        { "set_color",          lseal2d_sprite_set_color},
+        { "set_blend_mode",     lseal2d_sprite_set_blend_mode},
         { NULL, NULL },
     };
 

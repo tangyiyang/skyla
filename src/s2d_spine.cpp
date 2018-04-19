@@ -110,6 +110,8 @@ void spine_anim::draw(render_state* rs)
 {
     float buffer[8] = {0};
     pos_tex_color_vertex quad[4];
+    float r, g, b, a;
+    float multiplier;
 
     for (int i = 0, n = _skeleton->slotsCount; i < n; ++i) {
         spSlot* slot = _skeleton->drawOrder[i];
@@ -121,41 +123,35 @@ void spine_anim::draw(render_state* rs)
                 spAtlasRegion* region = (spAtlasRegion*)attachment->rendererObject;
                 spRegionAttachment_computeWorldVertices(attachment, slot->bone, buffer, 0, 2);
 
+                a = attachment->color.a * _skeleton->color.a * slot->color.a;
+                multiplier = ((texture*)region->page->rendererObject)->_premultiply_alpha ? a : 255;
+                r = attachment->color.r * _skeleton->color.r * slot->color.r * multiplier;
+                g = attachment->color.g * _skeleton->color.g * slot->color.g * multiplier;
+                b = attachment->color.b * _skeleton->color.b * slot->color.b * multiplier;
+
                 /*Coord order of spine: BR, BL, UL, UR*/
                 /*Coord order of ours:  UL, BL, UR, BR*/
                 quad[0].pos.x = buffer[2*2+0];
                 quad[0].pos.y = buffer[2*2+1];
-                quad[0].color = COLOR4F_TO_UINT32(attachment->color.r,
-                                                  attachment->color.g,
-                                                  attachment->color.b,
-                                                  attachment->color.a);
+                quad[0].color = COLOR4F_TO_UINT32(r, g, b, a);
                 quad[0].uv.u = attachment->uvs[2*2+0] * ((1<<16)-1);
                 quad[0].uv.v = attachment->uvs[2*2+1] * ((1<<16)-1);
 
                 quad[1].pos.x = buffer[1*2+0];
                 quad[1].pos.y = buffer[1*2+1];
-                quad[1].color = COLOR4F_TO_UINT32(attachment->color.r,
-                                                  attachment->color.g,
-                                                  attachment->color.b,
-                                                  attachment->color.a);
+                quad[1].color = COLOR4F_TO_UINT32(r, g, b, a);
                 quad[1].uv.u = attachment->uvs[1*2+0] * ((1<<16)-1);
                 quad[1].uv.v = attachment->uvs[1*2+1] * ((1<<16)-1);
 
                 quad[2].pos.x = buffer[3*2+0];
                 quad[2].pos.y = buffer[3*2+1];
-                quad[2].color = COLOR4F_TO_UINT32(attachment->color.r,
-                                                  attachment->color.g,
-                                                  attachment->color.b,
-                                                  attachment->color.a);
+                quad[2].color = COLOR4F_TO_UINT32(r, g, b, a);
                 quad[2].uv.u = attachment->uvs[3*2+0] * ((1<<16)-1);
                 quad[2].uv.v = attachment->uvs[3*2+1] * ((1<<16)-1);
 
                 quad[3].pos.x = buffer[0*2+0];
                 quad[3].pos.y = buffer[0*2+1];
-                quad[3].color = COLOR4F_TO_UINT32(attachment->color.r,
-                                                  attachment->color.g,
-                                                  attachment->color.b,
-                                                  attachment->color.a);
+                quad[3].color = COLOR4F_TO_UINT32(r, g, b, a);
                 quad[3].uv.u = attachment->uvs[0*2+0] * ((1<<16)-1);
                 quad[3].uv.v = attachment->uvs[0*2+1] * ((1<<16)-1);
 

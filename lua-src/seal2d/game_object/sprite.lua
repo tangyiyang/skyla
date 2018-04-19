@@ -4,6 +4,8 @@ local C = require "seal2d_sprite"
 local parent = require "seal2d.game_object.node"
 
 local sprite = {
+    load_frames = C.load_frames,
+
     init = C.init,
     set_texture = C.set_texture,
 }

@@ -1,40 +1,40 @@
 
 ui_grid.png
-size: 512,128
+size: 266,266
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 ui_grid_1
   rotate: false
-  xy: 2, 2
+  xy: 2, 178
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ui_grid_2
   rotate: false
-  xy: 90, 2
+  xy: 2, 90
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ui_grid_3
   rotate: false
-  xy: 178, 2
+  xy: 90, 178
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ui_grid_4
   rotate: false
-  xy: 266, 2
+  xy: 2, 2
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ui_grid_5
   rotate: false
-  xy: 354, 2
+  xy: 90, 90
   size: 86, 86
   orig: 86, 86
   offset: 0, 0

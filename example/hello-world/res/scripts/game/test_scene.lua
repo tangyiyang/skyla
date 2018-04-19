@@ -6,12 +6,23 @@ end)
 
 local function sprite_test(self)
     local sprite = require "seal2d.game_object.sprite"
-    local a = sprite.new("images/ui_button_middle.png")
-    a:set_pos(100, 100)
-    a:set_anchor(0, 0)
-    self:add_child(a)
+    local visible_rect = require("seal2d.context"):get_visible_rect()
 
-    a:set_debug_aabb_visible(true)
+    local function premutiply_alpha_test()
+        sprite.load_frames("images/ui_atlas.json", "images/ui_atlas.png")
+        local s = sprite.new("#prist_magicball.png")
+        s:set_pos(visible_rect.width/2, visible_rect.height/2)
+        self:add_child(s)
+    end
+
+    premutiply_alpha_test()
+
+    -- local a = sprite.new("images/ui_button_middle.png")
+    -- a:set_pos(100, 100)
+    -- a:set_anchor(0, 0)
+    -- self:add_child(a)
+
+    -- a:set_debug_aabb_visible(true)
 end
 
 local function bmfont_test(self)
@@ -36,8 +47,8 @@ end
 local function spine_test(self)
 	local visible_rect = require("seal2d.context"):get_visible_rect()
 	local spine = require "seal2d.game_object.spine"
-	local s = spine.new("spines/unit_skull.json", "spines/unit_skull.atlas")
-	s:set_anim("attack_1", 0, 1)
+	local s = spine.new("spines/ui_grid.json", "spines/ui_grid.atlas")
+	s:set_anim("gone", 0, 1)
 	s:set_pos(visible_rect.width/2, visible_rect.height/2)
 	self:add_child(s)
 end
