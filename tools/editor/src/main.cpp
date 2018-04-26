@@ -88,7 +88,8 @@ node* game_scene(s2d::context* ctx)
     float scale_y = visible_rect.size.height / 16.0f;
 
     sprite* s = new sprite();
-    s->init("res/seal2d-transparent.png");
+    s->init();
+    s->set_texture_with_file("res/seal2d-transparent.png");
     s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
     s->set_anchor(0.5, 0.5);
 
