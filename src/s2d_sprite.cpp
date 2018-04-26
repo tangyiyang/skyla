@@ -76,7 +76,7 @@ void sprite::set_texture_rect(texture* tex, const rect& r)
 
     texture_blend_protocol::set_texture(tex);
 
-    this->set_quad(r, tex);
+    this->set_quad_with_rect(tex, r);
     _size = r.size;
 }
 
@@ -86,7 +86,7 @@ void sprite::set_texture_with_file(const char* tex_file)
 
     texture_blend_protocol::set_texture(tex);
 
-    this->set_quad(nullptr, tex);
+    this->set_quad_with_frame(tex, nullptr);
     _size = tex->_size;
 }
 
@@ -96,11 +96,11 @@ void sprite::set_texture_with_frame(sprite_frame* frame)
     
     texture_blend_protocol::set_texture(frame->_texture);
 
-    this->set_quad(frame, _texture);
+    this->set_quad_with_frame(_texture, frame);
     _size = frame->_source_size;
 }
 
-void sprite::set_quad(const rect& r, texture* tex)
+void sprite::set_quad_with_rect(texture* tex, const rect& r)
 {
     float tex_w = tex->_size.width;
     float tex_h = tex->_size.height;
@@ -109,10 +109,10 @@ void sprite::set_quad(const rect& r, texture* tex)
     float x = r.origin.x;
     float y = r.origin.y;
 
-    uint16_t left = (uint16_t)(x/tex_w * (float)S2D_TEX_COORD_MAX);
-    uint16_t right = (uint16_t)((x+w)/tex_w * (float)S2D_TEX_COORD_MAX);
-    uint16_t bottom = (uint16_t)(y/tex_h * (float)S2D_TEX_COORD_MAX);
-    uint16_t top = (uint16_t)((y+h)/tex_h * (float)S2D_TEX_COORD_MAX);
+    uint16_t left   = uniform_to_uint16 ((x)   / tex_w);
+    uint16_t right  = uniform_to_uint16 ((x+w) / tex_w);
+    uint16_t bottom = uniform_to_uint16 ((y)   / tex_h);
+    uint16_t top    = uniform_to_uint16 ((y+h) / tex_h);
 
     _quad[0].pos.x = 0;
     _quad[0].pos.y = 0;
@@ -139,7 +139,7 @@ void sprite::set_quad(const rect& r, texture* tex)
     _quad[3].color = 0xffffffff;
 }
 
-void sprite::set_quad(sprite_frame* frame, texture* tex)
+void sprite::set_quad_with_frame(texture* tex, sprite_frame* frame)
 {
     if (frame) {
         // load part of the texture by the rect provided by frame.
@@ -156,10 +156,10 @@ void sprite::set_quad(sprite_frame* frame, texture* tex)
             std::swap(w, h);
         }
 
-        uint16_t left = (uint16_t)(x/tex_w * (float)S2D_TEX_COORD_MAX);
-        uint16_t right = (uint16_t)((x+w)/tex_w * (float)S2D_TEX_COORD_MAX);
-        uint16_t bottom = (uint16_t)(y/tex_h * (float)S2D_TEX_COORD_MAX);
-        uint16_t top = (uint16_t)((y+h)/tex_h * (float)S2D_TEX_COORD_MAX);
+        uint16_t left   = uniform_to_uint16 ((x)   / tex_w);
+        uint16_t right  = uniform_to_uint16 ((x+w) / tex_w);
+        uint16_t bottom = uniform_to_uint16 ((y)   / tex_h);
+        uint16_t top    = uniform_to_uint16 ((y+h) / tex_h);
         
         /* Notice:
          *  quad[0] -> bottom-left
@@ -216,10 +216,10 @@ void sprite::set_quad(sprite_frame* frame, texture* tex)
             // for rare cases, such as render-texture is not.
             std::swap(bottom, top);
         }
-        /*  0------3
+        /*  1------2
          *  |      |
          *  |      |
-         *  1------2
+         *  0------3
          *
          */
         

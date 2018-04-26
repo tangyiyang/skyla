@@ -15,9 +15,10 @@
 NS_S2D
 
 #define FLT_EQUAL(a, b) (fabs((a) - (b)) < FLT_EPSILON)
-#define S2D_TEX_COORD_MAX ((1<<16)-1)
 
+#define S2D_TEX_COORD_MAX (SHRT_MAX)
 
+#define uniform_to_uint16(u) (uint16_t)((u)*((float)(S2D_TEX_COORD_MAX)))
 #define make_gl_color(color) ((color >> 24) & 0x000000ff) | ((color >> 8) & 0x0000ff00) | ((color << 8) & 0x00ff0000) | ((color << 24) & 0xff000000)
 
 #define COLOR4F_TO_UINT32(r, g, b, a) make_gl_color(((((int)(r*255))<<24) + (((int)(g*255))<<16) + (((int)(b*255))<<8) + ((int)a*255)))

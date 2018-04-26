@@ -67,8 +67,8 @@ protected:
     void update_srt();
 
 private:
-    void set_quad(const rect& r, texture* tex);
-    void set_quad(sprite_frame* frame, texture* tex);
+    void set_quad_with_rect(texture* tex, const rect& r);
+    void set_quad_with_frame(texture* tex, sprite_frame* frame);
 
 public:
     pos_tex_color_vertex _quad[4];
