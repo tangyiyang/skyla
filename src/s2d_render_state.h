@@ -41,11 +41,11 @@ private:
     renderer* switch_renderer(render_type type);
 
 private:
-    render_type  _cur_renderer_type;
-    renderer* _cur_renderer;
-    renderer* _renderers[MAX_RENDERER_TYPE];
+    render_type      _cur_renderer_type;
+    renderer*        _cur_renderer;
+    renderer*        _renderers[MAX_RENDERER_TYPE];
     std::stack<rect> _scissors_stack;
-    blend_mode _mode;
+    blend_mode       _mode;
 };
 
 NS_S2D_END

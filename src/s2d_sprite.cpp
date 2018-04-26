@@ -66,70 +66,41 @@ void sprite_frame_cache::shutdown()
 void sprite::init()
 {
     node::init();
-    _texture = nullptr;
+    texture_blend_protocol::init();
 }
 
-void sprite::init(const char* tex_file)
-{
-    S2D_ASSERT(tex_file);
-    node::init();
-    this->set_texture(tex_file);
-}
-
-void sprite::init(sprite_frame* frame)
-{
-    S2D_ASSERT(frame);
-    node::init();
-
-    this->set_texture(frame);
-}
-
-void sprite::init(const rect& r, texture* tex)
+void sprite::set_texture_rect(texture* tex, const rect& r)
 {
     S2D_ASSERT(tex);
     node::init();
-    
-    _texture = tex;
-    this->set_texture_coord(r, tex);
-    // TODO: cacl the size
+
+    texture_blend_protocol::set_texture(tex);
+
+    this->set_quad(r, tex);
     _size = r.size;
 }
 
-void sprite::init(texture* tex)
-{
-    S2D_ASSERT(tex);
-    node::init();
-    this->set_texture(tex);
-    this->set_texture_coord(nullptr, tex);
-    _size = tex->_size;
-}
-
-void sprite::set_texture(const char* tex_file)
+void sprite::set_texture_with_file(const char* tex_file)
 {
     texture* tex = context::C()->_texture_cache->load(tex_file);
-    this->set_texture(tex);
-    this->set_texture_coord(nullptr, tex);
+
+    texture_blend_protocol::set_texture(tex);
+
+    this->set_quad(nullptr, tex);
     _size = tex->_size;
 }
 
-void sprite::set_texture(sprite_frame* frame)
+void sprite::set_texture_with_frame(sprite_frame* frame)
 {
     S2D_ASSERT(frame);
+    
+    texture_blend_protocol::set_texture(frame->_texture);
 
-    this->set_texture(frame->_texture);
-    this->set_texture_coord(frame, _texture);
+    this->set_quad(frame, _texture);
     _size = frame->_source_size;
 }
 
-void sprite::set_texture(texture* tex)
-{
-    S2D_ASSERT(tex);
-
-    _texture = tex;
-    _blend_mode = _texture->_premultiply_alpha ? BLEND_MODE_NORMAL : BLEND_MODE_ALPHA;
-}
-
-void sprite::set_texture_coord(const rect& r, texture* tex)
+void sprite::set_quad(const rect& r, texture* tex)
 {
     float tex_w = tex->_size.width;
     float tex_h = tex->_size.height;
@@ -168,7 +139,7 @@ void sprite::set_texture_coord(const rect& r, texture* tex)
     _quad[3].color = 0xffffffff;
 }
 
-void sprite::set_texture_coord(sprite_frame* frame, texture* tex)
+void sprite::set_quad(sprite_frame* frame, texture* tex)
 {
     if (frame) {
         // load part of the texture by the rect provided by frame.

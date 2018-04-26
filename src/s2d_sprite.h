@@ -37,34 +37,26 @@ private:
     std::map<std::string, sprite_frame*> _cache;
 };
 
-class sprite: public node {
+class sprite: public node,
+              public texture_blend_protocol {
     /*
      * The Quad Sprite.
      */
 public:
     void init() override;
-    void init(const char* tex_file);
-    void init(sprite_frame* frame);
-    void init(const rect& r, texture* tex);
-    void init(texture* tex);
-
+                  
 public:
-    void set_texture(const char* tex_file);
-    void set_texture(sprite_frame* frame);
     void set_texture(texture* tex);
-
+    void set_texture_with_file(const char* tex_file);
+    void set_texture_with_frame(sprite_frame* frame);
+    void set_texture_rect(texture* tex, const rect& r);
+                  
 public:
-    /* inline setters */
     inline void set_color(uint32_t color)
     {
         for (int i = 0; i < 4; ++i) {
             _quad[i].color = color;
         }
-    }
-
-    inline void set_blend_mode(blend_mode mode)
-    {
-        _blend_mode = mode;
     }
 
 public:
@@ -75,13 +67,11 @@ protected:
     void update_srt();
 
 private:
-    void set_texture_coord(const rect& r, texture* tex);
-    void set_texture_coord(sprite_frame* frame, texture* tex);
+    void set_quad(const rect& r, texture* tex);
+    void set_quad(sprite_frame* frame, texture* tex);
 
 public:
     pos_tex_color_vertex _quad[4];
-    texture*             _texture;
-    enum blend_mode      _blend_mode;
 };
 
 NS_S2D_END

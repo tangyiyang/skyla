@@ -13,6 +13,7 @@
 #include "s2d_math.h"
 #include "s2d_render_texture.h"
 #include "s2d_sprite.h"
+#include "s2d_scale9sprite.h"
 #include "s2d_spine.h"
 #include "s2d_texture.h"
 #include "s2d_timer.h"

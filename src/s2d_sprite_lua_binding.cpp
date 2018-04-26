@@ -27,12 +27,13 @@ static int lseal2d_sprite_new(lua_State* L)
     sprite* s = nullptr;
     if (n == 1) {
         s = new sprite();
+        s->init();
         char* file_name = (char*)luaL_checkstring(L, 1);
         if (file_name[0] == '#') {
             sprite_frame* f = context::C()->_sprite_frame_cache->get(file_name+1);
-            s->init(f);
+            s->set_texture_with_frame(f);
         } else {
-            s->init(file_name);
+            s->set_texture_with_file(file_name);
         }
     } else if (n == 0) {
         s = new sprite();
@@ -70,9 +71,9 @@ static int lseal2d_sprite_set_texture(lua_State* L)
         char* file_name = (char*)luaL_checkstring(L, 2);
         if (file_name[0] == '#' && strlen(file_name) > 2) {
             sprite_frame* f = context::C()->_sprite_frame_cache->get(file_name+1);
-            s->set_texture(f);
+            s->set_texture_with_frame(f);
         } else {
-            s->set_texture(file_name);
+            s->set_texture_with_file(file_name);
         }
     }
 

@@ -199,7 +199,8 @@ void bmfont::append_glyph(uint32_t codepoint, float *cursor_x, float *cursor_y)
     rect r = rect::make_rect(charac->x, charac->y, charac->width, charac->height);
 
     sprite* c_sprite = new sprite();
-    c_sprite->init(r, _texture);
+    c_sprite->init();
+    c_sprite->set_texture_rect(_texture, r);
     c_sprite->set_pos(pen_x, pen_y);
     c_sprite->set_anchor(0, 0);
     this->add_child(c_sprite);
