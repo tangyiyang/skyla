@@ -23,6 +23,15 @@ struct pos_tex_color_vertex {
     vec2 pos;
     uv_t uv;
     color_t color;
+
+    inline static void assign(pos_tex_color_vertex* vert, float x, float y, uint16_t u, uint16_t v, color_t color)
+    {
+        vert->pos.x = x;
+        vert->pos.y = y;
+        vert->uv.u = u;
+        vert->uv.v = v;
+        vert->color = color;
+    }
 };
 
 struct pos_color_vertex {

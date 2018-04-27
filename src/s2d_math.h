@@ -30,8 +30,6 @@ typedef uint32_t color_t;
 #define COLOR_GREEN (0x00ff00ff)
 #define COLOR_BLUE  (0x0000ffff)
 
-
-
 struct vec2 {
     float x;
     float y;
