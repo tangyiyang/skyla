@@ -26,7 +26,7 @@ public:
 
 public:
     void init() override;
-
+    void draw(render_state* rs) override;
 public:
     void set_texture(const char* tex_file);
     void set_texture(sprite_frame* frame);

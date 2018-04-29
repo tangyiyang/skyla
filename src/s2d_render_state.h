@@ -12,6 +12,7 @@
 NS_S2D
 
 class sprite;
+class scale9sprite;
 class particle;
 class primitive_node;
 
@@ -31,6 +32,7 @@ public:
 
     void draw_quad(const affine_transform& t, texture* tex, blend_mode b, pos_tex_color_vertex* p);
     void draw_sprite(sprite* s);
+    void draw_scale9sprite(scale9sprite* s);
     void draw_particle(particle* p);
     void draw_primitive(primitive_node* p);
 

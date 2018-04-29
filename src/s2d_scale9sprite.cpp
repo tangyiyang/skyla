@@ -12,6 +12,20 @@ void scale9sprite::init()
     _inset_rect = {0, 0, 0, 0};
 }
 
+void scale9sprite::draw(render_state* rs)
+{
+    if (!_visible) {
+        return;
+    }
+    _world_transform = transform_to(this->get_root());
+
+    if (_texture) {
+//        rs->daw(this);
+    }
+
+    node::draw(rs);
+}
+
 void scale9sprite::set_texture(const char* tex_file)
 {
     texture* tex = context::C()->_texture_cache->load(tex_file);
@@ -78,103 +92,52 @@ void scale9sprite::set_quad_with_frame(texture* tex, sprite_frame* frame)
         pos_tex_color_vertex::assign(_vertices + 3, 0,  iy, l,  it, COLOR_WHITE); // 11
 
         // rect H:
-        pos_tex_color_vertex::assign(_vertices + 4, ix,      0,  il, t,  COLOR_WHITE); // 1
-        pos_tex_color_vertex::assign(_vertices + 5, ix + iw, 0,  ir, t,  COLOR_WHITE); // 2
-        pos_tex_color_vertex::assign(_vertices + 6, ix + iw, iy, ir, it, COLOR_WHITE); // 13
-        pos_tex_color_vertex::assign(_vertices + 7, ix,      iy, il, it, COLOR_WHITE); // 12
+        pos_tex_color_vertex::assign(_vertices + 4, ix,    0,  il, t,  COLOR_WHITE); // 1
+        pos_tex_color_vertex::assign(_vertices + 5, ix+iw, 0,  ir, t,  COLOR_WHITE); // 2
+        pos_tex_color_vertex::assign(_vertices + 6, ix+iw, iy, ir, it, COLOR_WHITE); // 13
+        pos_tex_color_vertex::assign(_vertices + 7, ix,    iy, il, it, COLOR_WHITE); // 12
 
         // rect I:
-        pos_tex_color_vertex::assign(_vertices + 8, ix + iw,     0,  ir,t,  COLOR_WHITE); // 2
-        pos_tex_color_vertex::assign(_vertices + 9, _size.width, 0,  r, t,  COLOR_WHITE); // 3
-        pos_tex_color_vertex::assign(_vertices + 10, _size.width, iy, r, it, COLOR_WHITE); // 4
-        pos_tex_color_vertex::assign(_vertices + 11, ix + iw,     iy, ir, it, COLOR_WHITE); // 13
+        pos_tex_color_vertex::assign(_vertices + 8,  ix+iw,       0,  ir, t,  COLOR_WHITE); // 2
+        pos_tex_color_vertex::assign(_vertices + 9,  _size.width, 0,  r,  t,  COLOR_WHITE); // 3
+        pos_tex_color_vertex::assign(_vertices + 10, _size.width, iy, r,  it, COLOR_WHITE); // 4
+        pos_tex_color_vertex::assign(_vertices + 11, ix+iw,       iy, ir, it, COLOR_WHITE); // 13
 
         // rect F:
-        pos_tex_color_vertex::assign(_vertices + 12, ix + iw,     iy, ir, it, COLOR_WHITE); // 13
-        pos_tex_color_vertex::assign(_vertices + 13, _size.width, iy,  r, it,  COLOR_WHITE); // 4
-        pos_tex_color_vertex::assign(_vertices + 14, _size.width, iy+ih, r, ib, COLOR_WHITE); // 5
-        pos_tex_color_vertex::assign(_vertices + 15, ix + iw,     iy+ih, ir, ib, COLOR_WHITE); // 14
+        pos_tex_color_vertex::assign(_vertices + 12, ix+iw,       iy,    ir, it, COLOR_WHITE); // 13
+        pos_tex_color_vertex::assign(_vertices + 13, _size.width, iy,    r,  it, COLOR_WHITE); // 4
+        pos_tex_color_vertex::assign(_vertices + 14, _size.width, iy+ih, r,  ib, COLOR_WHITE); // 5
+        pos_tex_color_vertex::assign(_vertices + 15, ix+iw,       iy+ih, ir, ib, COLOR_WHITE); // 14
 
         // rect C:
-        pos_tex_color_vertex::assign(_vertices + 16, ix + iw,     iy+ih, ir, ib, COLOR_WHITE); // 14
-        pos_tex_color_vertex::assign(_vertices + 17, _size.width, iy+ih, r, ib,  COLOR_WHITE); // 5
-        pos_tex_color_vertex::assign(_vertices + 18, _size.width, _size.height, r, b, COLOR_WHITE); // 6
-        pos_tex_color_vertex::assign(_vertices + 19, ix + iw,     _size.height, ir, b, COLOR_WHITE); // 7
-//
-//        _vertices[1].pos.x = ix;
-//        _vertices[1].pos.y = 0;
-//        _vertices[1].uv.u  = il;
-//        _vertices[1].uv.v  = t;
-//
-//        _vertices[2].pos.x = ix + iw;
-//        _vertices[2].pos.y = 0;
-//        _vertices[2].uv.u  = ir;
-//        _vertices[2].uv.v  = t;
-//
-//        _vertices[3].pos.x = _size.width;
-//        _vertices[3].pos.y = 0;
-//        _vertices[3].uv.u  = r;
-//        _vertices[3].uv.v  = t;
-//
-//        _vertices[4].pos.x = _size.width;
-//        _vertices[4].pos.y = iy;
-//        _vertices[4].uv.u  = r;
-//        _vertices[4].uv.v  = it;
-//
-//        _vertices[5].pos.x = _size.width;
-//        _vertices[5].pos.y = iy + ih;
-//        _vertices[5].uv.u  = r;
-//        _vertices[5].uv.v  = ib;
-//
-//        _vertices[6].pos.x = _size.width;
-//        _vertices[6].pos.y = _size.height;
-//        _vertices[6].uv.u  = r;
-//        _vertices[6].uv.v  = b;
-//
-//        _vertices[7].pos.x = ix + iw;
-//        _vertices[7].pos.y = _size.height;
-//        _vertices[7].uv.u  = ir;
-//        _vertices[7].uv.v  = b;
-//
-//        _vertices[8].pos.x = ix;
-//        _vertices[8].pos.y = _size.height;
-//        _vertices[8].uv.u  = il;
-//        _vertices[8].uv.v  = b;
-//
-//        _vertices[9].pos.x = 0;
-//        _vertices[9].pos.y = _size.height;
-//        _vertices[9].uv.u  = l;
-//        _vertices[9].uv.v  = b;
-//
-//        _vertices[10].pos.x = 0;
-//        _vertices[10].pos.y = iy + ih;
-//        _vertices[10].uv.u  = l;
-//        _vertices[10].uv.v  = ib;
-//
-//        _vertices[11].pos.x = 0;
-//        _vertices[11].pos.y = iy;
-//        _vertices[11].uv.u  = l;
-//        _vertices[11].uv.v  = it;
-//
-//        _vertices[12].pos.x = ix;
-//        _vertices[12].pos.y = iy;
-//        _vertices[12].uv.u  = il;
-//        _vertices[12].uv.v  = it;
-//
-//        _vertices[13].pos.x = ix + iw;
-//        _vertices[13].pos.y = iy;
-//        _vertices[13].uv.u  = ir;
-//        _vertices[13].uv.v  = it;
-//
-//        _vertices[14].pos.x = ix + iw;
-//        _vertices[14].pos.y = iy + ih;
-//        _vertices[14].uv.u  = ir;
-//        _vertices[14].uv.v  = ib;
-//
-//        _vertices[15].pos.x = ix;
-//        _vertices[15].pos.y = iy + ih;
-//        _vertices[15].uv.u  = il;
-//        _vertices[15].uv.v  = ib;
+        pos_tex_color_vertex::assign(_vertices + 16, ix+iw,       iy+ih,        ir, ib, COLOR_WHITE); // 14
+        pos_tex_color_vertex::assign(_vertices + 17, _size.width, iy+ih,        r,  ib, COLOR_WHITE); // 5
+        pos_tex_color_vertex::assign(_vertices + 18, _size.width, _size.height, r,  b,  COLOR_WHITE); // 6
+        pos_tex_color_vertex::assign(_vertices + 19, ix+iw,       _size.height, ir, b,  COLOR_WHITE); // 7
+
+        // rect B:
+        pos_tex_color_vertex::assign(_vertices + 20, ix,    iy+ih,        il, ib, COLOR_WHITE); // 15
+        pos_tex_color_vertex::assign(_vertices + 21, ix+iw, iy+ih,        ir, ib, COLOR_WHITE); // 14
+        pos_tex_color_vertex::assign(_vertices + 22, ix+iw, _size.height, ir, b,  COLOR_WHITE); // 7
+        pos_tex_color_vertex::assign(_vertices + 23, ix,    _size.height,  il, b,  COLOR_WHITE); // 8
+
+        // rect A:
+        pos_tex_color_vertex::assign(_vertices + 24, 0,  iy+ih,        l,  ib, COLOR_WHITE); // 10
+        pos_tex_color_vertex::assign(_vertices + 25, ix, iy+ih,        il, ib, COLOR_WHITE); // 15
+        pos_tex_color_vertex::assign(_vertices + 26, ix, _size.height, il, b,  COLOR_WHITE); // 8
+        pos_tex_color_vertex::assign(_vertices + 27, 0,  _size.height, l,  b,  COLOR_WHITE); // 9
+
+        // rect D:
+        pos_tex_color_vertex::assign(_vertices + 28, 0,  iy,    l,  it, COLOR_WHITE); // 11
+        pos_tex_color_vertex::assign(_vertices + 29, ix, iy,    il, it, COLOR_WHITE); // 12
+        pos_tex_color_vertex::assign(_vertices + 30, ix, iy+ih, il, ib, COLOR_WHITE); // 15
+        pos_tex_color_vertex::assign(_vertices + 31, 0,  iy+ih, l,  ib, COLOR_WHITE); // 10
+
+        // rect E:
+        pos_tex_color_vertex::assign(_vertices + 32, ix,    iy,    il, it, COLOR_WHITE); // 11
+        pos_tex_color_vertex::assign(_vertices + 33, ix+iw, iy,    ir, it, COLOR_WHITE); // 12
+        pos_tex_color_vertex::assign(_vertices + 34, ix+iw, iy+ih, ir, ib, COLOR_WHITE); // 15
+        pos_tex_color_vertex::assign(_vertices + 35, ix,    iy+ih, il, ib, COLOR_WHITE); // 10
     }
 }
 

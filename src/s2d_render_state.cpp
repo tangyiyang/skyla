@@ -3,6 +3,7 @@
 #include "s2d_quad_renderer.h"
 #include "s2d_line_renderer.h"
 #include "s2d_sprite.h"
+#include "s2d_scale9sprite.h"
 #include "s2d_particle.h"
 #include "s2d_primitive_node.h"
 
@@ -67,6 +68,14 @@ void render_state::draw_sprite(s2d::sprite *s)
     quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
 
     r->draw(s->world_transform(), s->_texture, s->_blend_mode, s->_quad, 4);
+}
+
+void render_state::draw_scale9sprite(scale9sprite* s)
+{
+    switch_renderer(RENDERER_TYPE_QUAD);
+    quad_renderer* r = dynamic_cast<quad_renderer*>(_cur_renderer);
+
+    r->draw(s->world_transform(), s->_texture, s->_blend_mode, s->_vertices, 36);
 }
 
 void render_state::draw_particle(particle* p)
