@@ -18,33 +18,19 @@ void entry::on_init(context* ctx)
     node* root = ctx->get_root();
     root->set_anchor(0, 0);
     root->set_pos(0, 0);
+//
+//    primitive_node* p = new primitive_node();
+//    p->init();
+//    p->add_line(vec2::make(0, 0), vec2::make(100, 100), 0x0000ff00);
+//    root->add_child(p);
 
-    primitive_node* p = new primitive_node();
-    p->init();
-    p->add_line(vec2::make(0, 0), vec2::make(100, 100), 0x0000ff00);
-    p->add_rect(vec2::make(100, 100), vec2::make(300, 300), 0xff00ff00);
+    scale9sprite* s = new scale9sprite();
+    s->init();
+    s->set_texture("res/images/scale9slice_test.png");
+    s->set_size(size::make(400, 400));
+    s->set_pos(200, 200);
+    root->add_child(s);
 
-    root->add_child(p);
-//
-//    panel* first = new panel();
-//    root->add_child(first);
-//
-//    first->init(rect::make_rect(0, 0, 500, 500));
-//    first->set_pos(0, 0);
-//    first->set_anchor(0, 0);
-//
-//    const char* tests[] = {"attack_0.png", "attack_1.png",
-//                        "attack_2.png", "attack_3.png",
-//                        "attack_4.png"};
-//
-//    for (int i = 0; i < sizeof(tests)/sizeof(const char*); ++i) {
-//        sprite_frame* f = ctx->_sprite_frame_cache->get(tests[i]);
-//        sprite* s = new sprite();
-//        s->init(f);
-//        s->set_pos( 0 + i*120, 0);
-//        s->set_anchor(0, 0);
-//        first->add_child(s);
-//    }
 
 #endif
 }

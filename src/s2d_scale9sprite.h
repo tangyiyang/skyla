@@ -21,8 +21,8 @@ public:
     };
 
 public:
-    scale9sprite();
-    virtual ~scale9sprite();
+    scale9sprite() {}
+    virtual ~scale9sprite() {}
 
 public:
     void init() override;
@@ -31,6 +31,7 @@ public:
     void set_texture(const char* tex_file);
     void set_texture(sprite_frame* frame);
     void set_texture(texture* tex);
+    void set_size(const size& size);
 
     inline void set_draw_mode(DRAW_MODE mode)
     {
