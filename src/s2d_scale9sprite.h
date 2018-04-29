@@ -26,6 +26,7 @@ public:
 
 public:
     void init() override;
+    bool update(float dt) override;
     void draw(render_state* rs) override;
 public:
     void set_texture(const char* tex_file);
@@ -33,15 +34,8 @@ public:
     void set_texture(texture* tex);
     void set_size(const size& size);
 
-    inline void set_draw_mode(DRAW_MODE mode)
-    {
-        _draw_mode = mode;
-    }
-
-    inline void set_inset_rect(const rect& r)
-    {
-        _inset_rect = r;
-    }
+    void set_draw_mode(DRAW_MODE mode);
+    void set_border(const border& border);
 
 private:
     inline void set_quad_with_frame(texture* tex, sprite_frame* frame);
@@ -49,7 +43,10 @@ private:
 public:
     pos_tex_color_vertex _vertices[36];
     DRAW_MODE            _draw_mode;
-    rect                 _inset_rect;
+    border               _border;
+    sprite_frame*        _frame;
+    size                 _origin_size;
+    bool                 _dirty;
 };
 
 NS_S2D_END

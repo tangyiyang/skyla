@@ -108,11 +108,28 @@ public:
     }
 };
 
+struct border {
+    float left;
+    float right;
+    float bottom;
+    float top;
+
+    static inline border make(float left, float right, float bottom, float top)
+    {
+        border b;
+        b.left = left;
+        b.right = right;
+        b.bottom = bottom;
+        b.top = top;
+        return b;
+    }
+};
+
 struct rect {
     vec2 origin;
     size size;
 
-    static inline rect make_rect(float x, float y, float w, float h)
+    static inline rect make(float x, float y, float w, float h)
     {
         rect r;
         r.origin.x = x;
@@ -216,7 +233,7 @@ struct affine_transform {
         float min_y = std::min(std::min(tl.y, tr.y), std::min(bl.y, br.y));
         float max_y = std::max(std::max(tl.y, tr.y), std::max(tl.y, br.y));
 
-        return rect::make_rect(min_x, min_y, (max_x - min_x), (max_y - min_y));
+        return rect::make(min_x, min_y, (max_x - min_x), (max_y - min_y));
     }
 
     static inline void inplace_concat(affine_transform& left,

@@ -26,11 +26,11 @@ void entry::on_init(context* ctx)
 
     scale9sprite* s = new scale9sprite();
     s->init();
-    s->set_texture("res/images/scale9slice_test.png");
+    s->set_texture("res/images/color_pad.png");
+    s->set_border(border::make(25, 25, 25, 25));
     s->set_size(size::make(400, 400));
     s->set_pos(200, 200);
     root->add_child(s);
-
 
 #endif
 }
