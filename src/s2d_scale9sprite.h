@@ -28,24 +28,26 @@ public:
     void init() override;
     bool update(float dt) override;
     void draw(render_state* rs) override;
+    
 public:
-    void set_texture(const char* tex_file);
-    void set_texture(sprite_frame* frame);
     void set_texture(texture* tex);
+    void set_texture_with_file(const char* tex_file);
+    void set_texture_with_frame(sprite_frame* frame);
     void set_size(const size& size);
-
+    
     void set_draw_mode(DRAW_MODE mode);
     void set_border(const border& border);
 
 private:
-    inline void set_quad_with_frame(texture* tex, sprite_frame* frame);
+    void update_vertices();
+    void update_vertices_in_slice_mode();
+    void update_vertices_in_tile_mode();
 
 public:
     pos_tex_color_vertex _vertices[36];
     DRAW_MODE            _draw_mode;
     border               _border;
     sprite_frame*        _frame;
-    size                 _origin_size;
     bool                 _dirty;
 };
 

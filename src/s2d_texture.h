@@ -22,6 +22,7 @@ public:
     
     bool init(const char* file);
     bool init(uint8_t* raw_data, size_t len);
+    
     inline void bind()
     {
         glActiveTexture(GL_TEXTURE0);
@@ -37,7 +38,7 @@ public:
     texture_id_t    _id;
     size            _size;
     GLuint          _name;
-    bool            _upside_down; /* if a texture is upside-down, render-texture is false.*/
+    bool            _upside_down; /* if a texture is upside-down, render-texture is true.*/
     bool            _premultiply_alpha;
     
     static texture_id_t _texture_id_counter;

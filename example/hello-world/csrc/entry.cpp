@@ -14,6 +14,7 @@ void entry::on_init(context* ctx)
     LOGD("entry:: on_init");
 
     ctx->_sprite_frame_cache->load("res/animations/pirate.json", "res/animations/pirate.png");
+    ctx->_sprite_frame_cache->load("res/images/ui_atlas.json", "res/images/ui_atlas.png");
 
     node* root = ctx->get_root();
     root->set_anchor(0, 0);
@@ -24,10 +25,13 @@ void entry::on_init(context* ctx)
 //    p->add_line(vec2::make(0, 0), vec2::make(100, 100), 0x0000ff00);
 //    root->add_child(p);
 
+    sprite_frame* frame = ctx->_sprite_frame_cache->get("color_pad.png");
+
     scale9sprite* s = new scale9sprite();
     s->init();
-    s->set_texture("res/images/color_pad.png");
     s->set_border(border::make(25, 25, 25, 25));
+    s->set_texture_with_frame(frame);
+//    s->set_texture_with_file("res/images/color_pad.png");
     s->set_size(size::make(400, 400));
     s->set_pos(200, 200);
     root->add_child(s);

@@ -1,5 +1,13 @@
 {"frames": {
 
+"color_pad.png":
+{
+	"frame": {"x":2,"y":106,"w":100,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
+	"sourceSize": {"w":100,"h":100}
+},
 "prist_magicball.png":
 {
 	"frame": {"x":194,"y":2,"w":58,"h":54},
@@ -26,7 +34,7 @@
 },
 "ui_button_tiny.png":
 {
-	"frame": {"x":106,"y":88,"w":63,"h":63},
+	"frame": {"x":104,"y":106,"w":63,"h":63},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":63,"h":63},
@@ -39,6 +47,6 @@
 	"format": "RGBA8888",
 	"size": {"w":256,"h":256},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a14d7ca98ab991a76539bdb10be819e6:1/1$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a2fef3e10212fa6512d661d0e42a1def:1/1$"
 }
 }

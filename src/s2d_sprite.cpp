@@ -161,7 +161,12 @@ void sprite::set_quad_with_frame(texture* tex, sprite_frame* frame)
         uint16_t bottom = uniform_to_uint16 ((y)   / tex_h);
         uint16_t top    = uniform_to_uint16 ((y+h) / tex_h);
         
-        /* Notice:
+        /*
+         *  1------2
+         *  |      |
+         *  |      |
+         *  0------3
+         *
          *  quad[0] -> bottom-left
          *  quad[1] -> bottom-right
          *  quad[2] -> top-left
@@ -204,7 +209,6 @@ void sprite::set_quad_with_frame(texture* tex, sprite_frame* frame)
         _quad[3].pos.y = oh;
         _quad[3].color = 0xffffffff;
     } else {
-        
         // load the whole texture
         uint16_t left = 0;
         uint16_t right = S2D_TEX_COORD_MAX;
@@ -216,13 +220,7 @@ void sprite::set_quad_with_frame(texture* tex, sprite_frame* frame)
             // for rare cases, such as render-texture is not.
             std::swap(bottom, top);
         }
-        /*  1------2
-         *  |      |
-         *  |      |
-         *  0------3
-         *
-         */
-        
+
         _quad[0].pos.x = 0;
         _quad[0].pos.y = 0;
         _quad[0].uv.u = left;
