@@ -1,3 +1,9 @@
+/*
+ * Lua bindings for Spine.
+ * Author: yiyang
+ * Copyright: see copyright at s2d.h
+ */
+
 #ifndef s2d_spine_lua_binding_h
 #define s2d_spine_lua_binding_h
 

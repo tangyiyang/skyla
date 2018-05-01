@@ -33,10 +33,10 @@ public:
     void set_texture(texture* tex);
     void set_texture_with_file(const char* tex_file);
     void set_texture_with_frame(sprite_frame* frame);
-    void set_size(const size& size);
+    void set_size(float width, float height);
     
     void set_draw_mode(DRAW_MODE mode);
-    void set_border(const border& border);
+    void set_border(float left, float right, float bottom, float top);
 
 private:
     void update_vertices();

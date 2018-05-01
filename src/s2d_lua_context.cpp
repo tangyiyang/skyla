@@ -5,14 +5,15 @@
 #include "s2d_action.h"
 #include "s2d_context.h"
 
-#include "s2d_node_lua_binding.h"
-#include "s2d_sprite_lua_binding.h"
-#include "s2d_spine_lua_binding.h"
-#include "s2d_bmfont_lua_binding.h"
 #include "s2d_action_lua_binding.h"
-#include "s2d_timer_lua_binding.h"
+#include "s2d_bmfont_lua_binding.h"
 #include "s2d_context_lua_binding.h"
+#include "s2d_node_lua_binding.h"
 #include "s2d_primitive_node_lua_binding.h"
+#include "s2d_sprite_lua_binding.h"
+#include "s2d_scale9sprite_lua_binding.h"
+#include "s2d_spine_lua_binding.h"
+#include "s2d_timer_lua_binding.h"
 
 #if (S2D_ENABLE_LUA == 1)
 
@@ -23,22 +24,6 @@ extern int luaopen_cjson(lua_State* L);
 #endif
 
 NS_S2D
-
-// TODO: add the binding type checking, we should consider the inheritance checking, sprite is valid for node.
-static bool type_valid(lua_State* L, const char* expected)
-{
-#if ENABLE_TYPE_CHECK
-    lua_getmetatable(L, 1);
-    lua_getfield(L, -1, "__type");
-    const char* type = lua_tostring(L, -1);
-    if (strcmp(type, expected) != 0) {
-        luaL_error(L, "lseal2d_sprite_set_pos, require: %s, but got: %s", expected, type);
-        return false;
-    }
-    lua_pop(L, 2);
-    return true;
-#endif
-}
 
 static int lseal2d_inject(lua_State* L)
 {
@@ -213,18 +198,19 @@ int lua_context::call_lua(lua_State* L, int n, int r)
 void lua_context::register_lua_extensions(lua_State* L)
 {
     luaL_Reg lua_modules[] = {
-        { "cjson",             luaopen_cjson            },
-        { "seal2d",            luaopen_seal2d           },
-        { "seal2d_node",       luaopen_seal2d_node      },
-        { "seal2d_sprite",     luaopen_seal2d_sprite    },
-        { "seal2d_spine",      luaopen_seal2d_spine     },
-        { "seal2d_primitive",  luaopen_seal2d_primitive },
-        { "seal2d_bmfont",     luaopen_seal2d_bmfont    },
-        { "seal2d_panel",      luaopen_seal2d_panel     },
-        { "seal2d_context",    luaopen_seal2d_context   },
-        { "seal2d_util",       luaopen_seal2d_util      },
-        { "seal2d_timer",      luaopen_seal2d_timer     },
-        { "seal2d_action",     luaopen_seal2d_action    },
+        { "cjson",               luaopen_cjson               },
+        { "seal2d",              luaopen_seal2d              },
+        { "seal2d_node",         luaopen_seal2d_node         },
+        { "seal2d_sprite",       luaopen_seal2d_sprite       },
+        { "seal2d_scale9sprite", luaopen_seal2d_scale9sprite },
+        { "seal2d_spine",        luaopen_seal2d_spine        },
+        { "seal2d_primitive",    luaopen_seal2d_primitive    },
+        { "seal2d_bmfont",       luaopen_seal2d_bmfont       },
+        { "seal2d_panel",        luaopen_seal2d_panel        },
+        { "seal2d_context",      luaopen_seal2d_context      },
+        { "seal2d_util",         luaopen_seal2d_util         },
+        { "seal2d_timer",        luaopen_seal2d_timer        },
+        { "seal2d_action",       luaopen_seal2d_action       },
 
         { NULL, NULL}
     };

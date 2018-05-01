@@ -1,5 +1,6 @@
 local node = require "seal2d.game_object.node"
 local sprite = require "seal2d.game_object.sprite"
+local scale9sprite = require "seal2d.game_object.scale9sprite"
 
 local test_scene = class("test_scene", function()
     return node.new()
@@ -15,13 +16,17 @@ local function sprite_test(self)
     end
 
     premutiply_alpha_test()
+end
 
-    -- local a = sprite.new("images/ui_button_middle.png")
-    -- a:set_pos(100, 100)
-    -- a:set_anchor(0, 0)
-    -- self:add_child(a)
+local function scale9sprite_test(self)
+    local visible_rect = require("seal2d.context"):get_visible_rect()
 
-    -- a:set_debug_aabb_visible(true)
+    local s = scale9sprite.new("#color_pad.png")
+    s:set_pos(visible_rect.width/2, visible_rect.height/2)
+    s:set_border(25, 25, 25, 25)
+    s:set_size(400, 400)
+    self:add_child(s)
+
 end
 
 local function bmfont_test(self)
@@ -70,6 +75,7 @@ local function load_tests(self)
 
     local test_cases = {
     	{ name = "sprite", func = sprite_test },
+        { name = "scale9", func = scale9sprite_test },
     	{ name = "bmfont", func = bmfont_test },
     	{ name = "spine", func = spine_test }
 	}

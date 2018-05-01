@@ -41,9 +41,9 @@ void scale9sprite::draw(render_state* rs)
     node::draw(rs);
 }
 
-void scale9sprite::set_size(const size& size)
+void scale9sprite::set_size(float width, float height)
 {
-    _size = size;
+    _size = size::make(width, height);
     _dirty = true;
 }
 
@@ -68,9 +68,9 @@ void scale9sprite::set_texture_with_frame(sprite_frame* frame)
     _dirty = true;
 }
 
-void scale9sprite::set_border(const border& border)
+void scale9sprite::set_border(float left, float right, float bottom, float top)
 {
-    _border = border;
+    _border = border::make(left, right, bottom, top);
     _dirty = true;
 }
 

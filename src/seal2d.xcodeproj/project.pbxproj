@@ -73,6 +73,9 @@
 		43DBF7692005D052000511EB /* s2d_context_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */; };
 		43DBF76A2005D052000511EB /* s2d_context_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */; };
 		43DBF76B2005D052000511EB /* s2d_context_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DBF7682005D052000511EB /* s2d_context_lua_binding.h */; };
+		4D3DA7EE2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D3DA7EC2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp */; };
+		4D3DA7EF2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D3DA7EC2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp */; };
+		4D3DA7F02098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D3DA7ED2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.h */; };
 		4D40F0B81FE427A7007368A7 /* s2d_timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */; };
 		4D40F0B91FE427A7007368A7 /* s2d_timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */; };
 		4D40F0BA1FE427A7007368A7 /* s2d_timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D40F0B71FE427A7007368A7 /* s2d_timer.h */; };
@@ -368,6 +371,8 @@
 		43DBF7632005CFD7000511EB /* s2d_timer_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_timer_lua_binding.h; sourceTree = "<group>"; };
 		43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_context_lua_binding.cpp; sourceTree = "<group>"; };
 		43DBF7682005D052000511EB /* s2d_context_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_context_lua_binding.h; sourceTree = "<group>"; };
+		4D3DA7EC2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_scale9sprite_lua_binding.cpp; sourceTree = "<group>"; };
+		4D3DA7ED2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_scale9sprite_lua_binding.h; sourceTree = "<group>"; };
 		4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_timer.cpp; sourceTree = "<group>"; };
 		4D40F0B71FE427A7007368A7 /* s2d_timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_timer.h; sourceTree = "<group>"; };
 		4D47035A1FC4A1050088FAAF /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
@@ -856,6 +861,8 @@
 				435299A62084D0C000771E10 /* s2d_primitive_node_lua_binding.h */,
 				B631CF062087AEBF00DBF621 /* s2d_spine_lua_binding.cpp */,
 				B631CF072087AEBF00DBF621 /* s2d_spine_lua_binding.h */,
+				4D3DA7EC2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp */,
+				4D3DA7ED2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.h */,
 			);
 			name = script;
 			sourceTree = "<group>";
@@ -971,6 +978,7 @@
 				4D4703B51FC4A1050088FAAF /* Bone.h in Headers */,
 				4310578C20847B54000ED7EE /* s2d_primitive_node.h in Headers */,
 				4D4703C71FC4A1050088FAAF /* SkeletonBinary.h in Headers */,
+				4D3DA7F02098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.h in Headers */,
 				4D4703B71FC4A1050088FAAF /* BoundingBoxAttachment.h in Headers */,
 				439D59B9208A1C03008CD67C /* s2d_scale9sprite.h in Headers */,
 				4D4703D11FC4A1060088FAAF /* TransformConstraintData.h in Headers */,
@@ -1111,6 +1119,7 @@
 				4D47040B1FC4A1060088FAAF /* SkeletonBinary.c in Sources */,
 				4D47041B1FC4A1060088FAAF /* TransformConstraint.c in Sources */,
 				43DBF75F2005CEEF000511EB /* s2d_action_lua_binding.cpp in Sources */,
+				4D3DA7EE2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp in Sources */,
 				4337BC6A1F8521A3004CF11B /* s2d_sprite.cpp in Sources */,
 				4D4703E11FC4A1060088FAAF /* Attachment.c in Sources */,
 				4D4703F51FC4A1060088FAAF /* IkConstraint.c in Sources */,
@@ -1226,6 +1235,7 @@
 				4D4704141FC4A1060088FAAF /* SkeletonJson.c in Sources */,
 				B6FF63B11F91FC4D00D7058F /* lstring.c in Sources */,
 				B6FF63B81F91FC4D00D7058F /* lvm.c in Sources */,
+				4D3DA7EF2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp in Sources */,
 				4D4704001FC4A1060088FAAF /* PathAttachment.c in Sources */,
 				43DBF76A2005D052000511EB /* s2d_context_lua_binding.cpp in Sources */,
 				4D4703DE1FC4A1060088FAAF /* Atlas.c in Sources */,

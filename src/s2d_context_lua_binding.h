@@ -1,7 +1,6 @@
 /*
  * Lua bindings for Global Context.
  * Author: yiyang
- * Created-at: 01/10/2018
  * Copyright: see copyright at s2d.h
  */
 

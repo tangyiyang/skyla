@@ -1,7 +1,6 @@
 /*
  * Lua bindings for Node.
  * Author: yiyang
- * Created-at: 01/10/2018
  * Copyright: see copyright at s2d.h
  */
 
@@ -9,7 +8,6 @@
 #define s2d_node_lua_binding_h
 
 #include "s2d_lua_context.h"
-
 
 NS_S2D
 
