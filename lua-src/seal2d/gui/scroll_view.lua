@@ -54,7 +54,6 @@ function scroll_view:ctor(opt)
             local _, _, w, h = self.container:get_bounding_box()
             local cx, cy = self.container:get_pos()
             local to_x, to_y = cx, cy
-            print(string.format("onEnd, cx = %.2f, cy = %.2f", cx, cy))
             local min_x = cx
             local min_y = cy
             local max_x = cx + w
@@ -64,7 +63,6 @@ function scroll_view:ctor(opt)
                 to_x = 0
             end
 
-            print(string.format("opt.width = %2.f, w = %.2f", opt.width, w))
             if max_x < w then
                 to_x = opt.width - w
             end

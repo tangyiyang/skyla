@@ -66,7 +66,6 @@ int luaopen_seal2d_scale9sprite(lua_State* L)
         { "new",      lua_seal2d_scale9sprite_new },
         { "set_border", lseal2d_scale9sprite_set_border },
         { "set_size", lsea2d_scale9sprite_set_size },
-
         
         { NULL, NULL },
     };

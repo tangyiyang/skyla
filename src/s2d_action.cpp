@@ -42,8 +42,9 @@ void action_mgr::remove(node* target)
     std::map<node*, std::vector<action*> >::iterator it = _target_action_map.find(target);
     if (it != _target_action_map.end()) {
         std::vector<action*>& actions = _target_action_map[target];
-        for (std::vector<action*>::iterator it = _actions.begin(); it != _actions.end(); ++it){
-            this->remove(*it);
+        std::vector<action*>::iterator it_action = _actions.begin();
+        for (; it_action != _actions.end(); ++it_action){
+            this->remove(*it_action);
         }
         actions.clear();
         _target_action_map.erase(target);

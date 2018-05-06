@@ -35,7 +35,6 @@ void panel::draw(render_state* rs)
 
     rs->flush();
     rs->pop_scissors();
-
 }
 
 NS_S2D_END
