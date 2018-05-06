@@ -90,6 +90,8 @@ void context::update(float dt)
     _action_mgr->update(dt);
     _root->update(dt);
 
+    _render_state->flush();
+
 #if (S2D_ENABLE_LUA == 1)
     _lua_context->on_update(dt);
 #endif

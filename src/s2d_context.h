@@ -95,35 +95,35 @@ private:
 
 public:
     /* The Core Components */
-    app_protocol*       _app;
-    bmfont_info_cache*  _bmfont_info_cache;
-    camera*             _camera;
-    file_system*        _file_system;
-    touch_handler*      _touch_handler;
-    timer_mgr*          _timer_mgr;
-    action_mgr*         _action_mgr;
-    render_state*       _render_state;
-    node*               _root;
-    sprite_frame_cache* _sprite_frame_cache;
-    texture_cache*      _texture_cache;
-    profiler*           _profiler;
+    app_protocol*           _app;
+    bmfont_info_cache*      _bmfont_info_cache;
+    camera*                 _camera;
+    file_system*            _file_system;
+    touch_handler*          _touch_handler;
+    timer_mgr*              _timer_mgr;
+    action_mgr*             _action_mgr;
+    render_state*           _render_state;
+    node*                   _root;
+    sprite_frame_cache*     _sprite_frame_cache;
+    texture_cache*          _texture_cache;
+    profiler*               _profiler;
 
 #if (S2D_ENABLE_LUA == 1)
-    lua_context*        _lua_context;
+    lua_context*            _lua_context;
 #endif
 
     /* Core Coordinate System */
-    affine_transform _world_view_affine_transform;
-    size             _logic_size;
-    size             _window_size;
-    rect             _viewport_rect;
-    rect             _visible_rect;
-    vec2             _scale_factor;
-    RESOLUTION_COMPAT_TYPE _resolution_compat_type;
-    float            _content_scale_factor; // on retina screen, this may be 2 or 3.
+    affine_transform        _world_view_affine_transform;
+    size                    _logic_size;
+    size                    _window_size;
+    rect                    _viewport_rect;
+    rect                    _visible_rect;
+    vec2                    _scale_factor;
+    RESOLUTION_COMPAT_TYPE  _resolution_compat_type;
+    float                   _content_scale_factor; // on retina screen, this may be 2 or 3.
 
     /* Object lifecycle management */
-    std::vector<node*>  _marked_release_nodes;
+    std::vector<node*>      _marked_release_nodes;
 public:
     static inline context* C()
     {

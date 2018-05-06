@@ -113,6 +113,12 @@ void render_state::pop_scissors()
 {
     _scissors_stack.pop();
     if (_scissors_stack.empty()) {
+        context* C = context::C();
+        float content_scale_factor = C->get_content_scale_factor();
+        glScissor(0,
+                  0,
+                  C->_window_size.width * content_scale_factor,
+                  C->_window_size.height * content_scale_factor);
         glDisable(GL_SCISSOR_TEST);
     }
 }

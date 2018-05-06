@@ -26,14 +26,16 @@ void panel::draw(render_state* rs)
 {
     affine_transform transform = transform_to(this->get_root());
 
+    rs->flush();
+
     rect _world_rect = affine_transform::apply_transform(transform, _rect);
     rs->push_scissors(_world_rect);
-    rs->flush();
 
     node::draw(rs);
 
     rs->flush();
     rs->pop_scissors();
+
 }
 
 NS_S2D_END
