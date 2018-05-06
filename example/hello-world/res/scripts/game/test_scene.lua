@@ -6,30 +6,40 @@ local test_scene = class("test_scene", function()
     return node.new()
 end)
 
-local function sprite_test(self)
+local function wrap_before_test(self, func, test_layer)
+    return function()
+        test_layer:remove_all_children()
+        return func(self, test_layer)
+    end
+end
+
+local function sprite_test(self, parent)
     local visible_rect = require("seal2d.context"):get_visible_rect()
 
     local function premutiply_alpha_test()
+        print "call sprite test"
         local s = sprite.new("#prist_magicball.png")
-        s:set_pos(visible_rect.width/2, visible_rect.height/2)
-        self:add_child(s)
+        -- s:set_pos(visible_rect.width/2, visible_rect.height/2)
+        s:set_pos(100, 100)
+        print " call add sprite"
+        parent:add_child(s)
     end
 
     premutiply_alpha_test()
 end
 
-local function scale9sprite_test(self)
+local function scale9sprite_test(self, parent)
     local visible_rect = require("seal2d.context"):get_visible_rect()
 
     local s = scale9sprite.new("#color_pad.png")
     s:set_pos(visible_rect.width/2, visible_rect.height/2)
     s:set_border(25, 25, 25, 25)
     s:set_size(400, 400)
-    self:add_child(s)
+    parent:add_child(s)
 
 end
 
-local function bmfont_test(self)
+local function bmfont_test(self, parent)
 	local bmfont = require "seal2d.game_object.bmfont"
 	local case = "The quick brown fox jumps over the lazy dog"
 
@@ -44,11 +54,11 @@ local function bmfont_test(self)
 		local t = bmfont.new(case, f)
 		t:set_pos(visible_rect.width/2, visible_rect.height - (i-1)*64)
 		t:set_anchor(0.5, 1)
-		self:add_child(t)
+		parent:add_child(t)
 	end
 end
 
-local function spine_test(self)
+local function spine_test(self, parent)
 	local visible_rect = require("seal2d.context"):get_visible_rect()
 	local spine = require "seal2d.game_object.spine"
 	local s = spine.new("spines/unit_skull.json", "spines/unit_skull.atlas")
@@ -57,19 +67,19 @@ local function spine_test(self)
 	s:set_anim("attack_1", 0, 1)
 	s:set_pos(visible_rect.width/2, visible_rect.height/2)
 
-	self:add_child(s)
+	parent:add_child(s)
 end
 
-local function primitive_basic_test(self)
+local function primitive_basic_test(self, parent)
     local primitive = require("seal2d.game_object.primitive")
 
     local p = primitive.new()
     p:add_line(0, 0, 100, 100, 0xff0000ff);
-    self:add_child(p)
+    parent:add_child(p)
 end
 
-local function load_tests(self)
-	local list_view = require("seal2d.gui.list_view")
+local function load_tests(self, test_layer)
+	local list_view = require "seal2d.gui.list_view"
     local button = require "seal2d.gui.button"
     local visible_rect = require("seal2d.context"):get_visible_rect()
 
@@ -81,20 +91,22 @@ local function load_tests(self)
 	}
 
     local function cell_create_func(index)
-    	print("index = ", index)
     	local case = test_cases[index]
         local b = button.new {
                                 normal = "#ui_button_tiny.png",
                                 text = case.name,
                                 font = "fonts/animated_32_ffffff.fnt",
                                 callback = function()
-									return case.func(self)
-								end
+                                    return wrap_before_test(self, test_cases[index].func, test_layer)()
+                                end
                             }
         return b
     end
 
-    print("#test_cases = ", #test_cases)
+
+    printf("we have %d test cases", #test_cases)
+
+    -- left side list view
     local list = list_view.new {
                                 mode = "col",
                                 width = 104, height = visible_rect.height,
@@ -109,8 +121,25 @@ end
 function test_scene:ctor()
     sprite.load_frames("images/ui_atlas.json", "images/ui_atlas.png")
 
+    -- all the test nodes is added to this layer.
+    local test_layer = node.new()
+    self:add_child(test_layer)
 
-	load_tests(self)
+	load_tests(self, test_layer)
+
+    -- local visible_rect = require("seal2d.context"):get_visible_rect()
+
+    -- for i = 1, 5 do
+    --     local s = sprite.new("#color_pad.png")
+    --     s:set_pos(visible_rect.width/2, visible_rect.height/2)
+    --     test_layer:add_child(s)
+
+    --     test_layer:remove_all_children()
+
+    --     local s1 = sprite.new("#color_pad.png")
+    --     s1:set_pos(visible_rect.width/2, visible_rect.height/2)
+    --     test_layer:add_child(s1)
+    -- end
 end
 
 

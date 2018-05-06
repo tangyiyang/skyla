@@ -14,6 +14,14 @@ static int lseal2d_node_add_child(lua_State* L)
     return 0;
 }
 
+static int lseal2d_node_remove_all_children(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+    n->remove_all_children();
+    return 0;
+}
+
 static int lseal2d_node_set_visible(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
@@ -201,6 +209,7 @@ int luaopen_seal2d_node(lua_State* L)
     luaL_Reg lib[] = {
         { "new",         lseal2d_node_new },
         { "add_child", lseal2d_node_add_child },
+        { "remove_all_children", lseal2d_node_remove_all_children },
         { "set_visible", lseal2d_node_set_visible},
         { "set_pos", lseal2d_node_set_pos },
         { "set_anchor", lseal2d_node_set_anchor },
