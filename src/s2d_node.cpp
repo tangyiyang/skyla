@@ -23,12 +23,16 @@ void node::init()
     _dirty_flags = DIRTY_ALL;
     _children.clear();
     _touch_callback = nullptr;
+    _update_callback = nullptr;
 }
 
 bool node::update(float dt)
 {
     this->sort();
     this->update_srt();
+    if (_update_callback) {
+        _update_callback(dt);
+    }
     std::vector<node*>::iterator it = _children.begin();
     while(it != _children.end()) {
         if ((*it)->update(dt)) {

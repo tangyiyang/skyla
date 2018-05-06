@@ -15,7 +15,7 @@ NS_S2D
 class node;
 struct touch_event;
 
-typedef std::function<void(void*, touch_event*)> touch_callback_t;
+typedef std::function<void(node*, touch_event*)> touch_callback_t;
 
 struct touch_event {
     enum TOUCH_EVENT_PHASE {

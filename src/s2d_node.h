@@ -20,6 +20,8 @@
 #define DIRTY_SRT (DIRTY_TRANSFORM | DIRTY_SCALE | DIRTY_ROTATION)
 #define DIRTY_ALL (DIRTY_SRT | DIRTY_Z)
 
+typedef std::function<void(float)> update_callback_t;
+
 NS_S2D
 
 class action;
@@ -122,6 +124,11 @@ public:
     {
         _touch_callback = callback;
     }
+
+    inline void set_update_callback(update_callback_t callback)
+    {
+        _update_callback = callback;
+    }
     
     inline std::string to_string()
     {
@@ -158,8 +165,9 @@ protected:
     node*                _parent;
     std::vector<node*>   _children;
     touch_callback_t     _touch_callback;
+    update_callback_t    _update_callback;
 
-    static uint64_t _node_id_counter;
+    static uint64_t      _node_id_counter;
 };
 
 NS_S2D_END

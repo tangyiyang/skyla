@@ -138,8 +138,7 @@ static int lseal2d_node_on_event(lua_State* L)
         lua_pushvalue(L, 2);
         lua_settable(L, -3);
 
-        n->set_touch_callback([=](void*, touch_event* e){
-
+        n->set_touch_callback([=](node*, touch_event* e) {
             lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE); /* event_table */
             lua_pushlightuserdata(L, n); /* event_table node */
             lua_gettable(L, -2);    /* event_table node function */
