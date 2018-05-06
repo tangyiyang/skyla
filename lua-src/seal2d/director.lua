@@ -30,6 +30,7 @@ function director.start(create_func, update_callback, destroy_callback)
     _G["seal2d"] = require "seal2d"
     _G["misc"] = require "seal2d.misc"
     _G["consts"] = require "seal2d.base.consts"
+    _G["go"] = require "seal2d.game_object.go"
 
     local function inject(mod)
         for k, v in pairs(mod) do
@@ -39,6 +40,7 @@ function director.start(create_func, update_callback, destroy_callback)
 
     inject(misc)
     inject(consts)
+    inject(go)
 
     seal2d.inject {
         on_start = on_start,
