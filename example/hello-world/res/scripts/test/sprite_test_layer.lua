@@ -13,7 +13,6 @@ end
 
 function sprite_test_layer:ctor()
     local visible_rect = require("seal2d.context"):get_visible_rect()
-
     self:set_anchor(0, 0)
     self:set_size(visible_rect.width, visible_rect.height)
 

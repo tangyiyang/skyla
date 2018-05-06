@@ -165,33 +165,56 @@ void lua_context::stackDump (lua_State* L)
     LOGD_NO_NEW_LINE("\n");
 }
 
+
+/*
+ ** Message handler used to run all chunks,
+ *  this function is copied from lua.c
+ */
+static int msghandler (lua_State *L) {
+    const char *msg = lua_tostring(L, 1);
+    if (msg == NULL) {  /* is error object not a string? */
+        if (luaL_callmeta(L, 1, "__tostring") &&  /* does it have a metamethod */
+            lua_type(L, -1) == LUA_TSTRING)  /* that produces a string? */
+            return 1;  /* that is the message */
+        else
+            msg = lua_pushfstring(L, "(error object is a %s value)",
+                                  luaL_typename(L, 1));
+    }
+    luaL_traceback(L, L, msg, 1);  /* append a standard traceback */
+    return 1;  /* return the traceback */
+}
+
 int lua_context::call_lua(lua_State* L, int n, int r)
 {
-    int err = lua_pcall(L, n, r, 0);
+    int base = lua_gettop(L) - n;  /* function index */
+    lua_pushcfunction(L, msghandler);  /* push message handler */
+    lua_insert(L, base);  /* put it under function and args */
+    int err = lua_pcall(L, n, r, base);
     switch(err) {
         case LUA_OK:
             break;
         case LUA_ERRRUN:
             LOGE("!LUA_ERRRUN : %s\n", lua_tostring(L,-1));
-            assert(false);
+            S2D_ASSERT(false);
             break;
         case LUA_ERRMEM:
             LOGE("!LUA_ERRMEM : %s\n", lua_tostring(L,-1));
-            assert(false);
+            S2D_ASSERT(false);
             break;
         case LUA_ERRERR:
             LOGE("!LUA_ERRERR : %s\n", lua_tostring(L, -1));
-            assert(false);
+            S2D_ASSERT(false);
             break;
         case LUA_ERRGCMM:
             LOGE("!LUA_ERRRUN : %s\n", lua_tostring(L,-1));
-            assert(false);
+            S2D_ASSERT(false);
             break;
         default:
             LOGE("!Unknown Lua error : %s\n", lua_tostring(L,-1));
-            assert(false);
+            S2D_ASSERT(false);
             break;
     }
+    lua_remove(L, base);  /* remove message handler from the stack */
     return err;
 }
 
