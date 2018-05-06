@@ -1,5 +1,6 @@
 local node = require "seal2d.game_object.node"
 local sprite = require "seal2d.game_object.sprite"
+local button = require "seal2d.gui.button"
 local scale9sprite = require "seal2d.game_object.scale9sprite"
 
 local test_scene = class("test_scene", function()
@@ -14,18 +15,9 @@ local function wrap_before_test(self, func, test_layer)
 end
 
 local function sprite_test(self, parent)
-    local visible_rect = require("seal2d.context"):get_visible_rect()
+    local sprite_test_layer = require "test.sprite_test_layer"
 
-    local function premutiply_alpha_test()
-        print "call sprite test"
-        local s = sprite.new("#prist_magicball.png")
-        -- s:set_pos(visible_rect.width/2, visible_rect.height/2)
-        s:set_pos(100, 100)
-        print " call add sprite"
-        parent:add_child(s)
-    end
-
-    premutiply_alpha_test()
+    parent:add_child(sprite_test_layer.new())
 end
 
 local function scale9sprite_test(self, parent)
@@ -80,7 +72,6 @@ end
 
 local function load_tests(self, test_layer)
 	local list_view = require "seal2d.gui.list_view"
-    local button = require "seal2d.gui.button"
     local visible_rect = require("seal2d.context"):get_visible_rect()
 
     local test_cases = {
@@ -126,20 +117,6 @@ function test_scene:ctor()
     self:add_child(test_layer)
 
 	load_tests(self, test_layer)
-
-    -- local visible_rect = require("seal2d.context"):get_visible_rect()
-
-    -- for i = 1, 5 do
-    --     local s = sprite.new("#color_pad.png")
-    --     s:set_pos(visible_rect.width/2, visible_rect.height/2)
-    --     test_layer:add_child(s)
-
-    --     test_layer:remove_all_children()
-
-    --     local s1 = sprite.new("#color_pad.png")
-    --     s1:set_pos(visible_rect.width/2, visible_rect.height/2)
-    --     test_layer:add_child(s1)
-    -- end
 end
 
 
