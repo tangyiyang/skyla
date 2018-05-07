@@ -33,10 +33,10 @@ function node.new(t)
     return obj
 end
 
-function node:add_child(child)
+function node:add_child(child, zorder)
     assert(child.__parent == nil)
     child.__parent = self
-    C.add_child(self.__cobj, child.__cobj)
+    C.add_child(self.__cobj, child.__cobj, zorder or 0)
 end
 
 function node:up_stage()

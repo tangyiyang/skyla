@@ -33,7 +33,7 @@ function sprite_test_layer:ctor()
     label:set_pos(visible_rect.width/2, visible_rect.height)
     label:set_anchor(0.5, 1)
 
-    self:add_child(label)
+    self:add_child(label, 1)
 
     local counter_label = go.bmfont.new(
         "count: ",
@@ -44,7 +44,6 @@ function sprite_test_layer:ctor()
     counter_label:set_anchor(1, 1)
 
     self:add_child(counter_label, 1)
-
 
     local begin_time_stamp
     local sprites = {}

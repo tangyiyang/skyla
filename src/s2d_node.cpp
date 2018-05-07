@@ -114,7 +114,11 @@ void node::update_srt()
 
 static bool comapre_z(node* a, node* b)
 {
-    return a->get_zorder() < b->get_zorder();
+    if (a->get_zorder() != b->get_zorder()) {
+        return a->get_zorder() < b->get_zorder();
+    } else {
+        return a->get_zcounter() < b->get_zcounter();
+    }
 }
 
 void node::sort()
@@ -128,8 +132,10 @@ void node::sort()
 void node::add_child(node* child, uint32_t z_order/*= 0*/)
 {
     child->_z_counter++;
-
+    child->_z_order = z_order;
     child->_parent = this;
+
+    this->_dirty_flags |= DIRTY_Z;
     _children.push_back(child);
 }
 

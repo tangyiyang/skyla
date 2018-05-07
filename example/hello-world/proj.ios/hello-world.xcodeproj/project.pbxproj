@@ -17,6 +17,8 @@
 		43CB96A81F76B66000E6CF36 /* s2d_node_test_case.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB96A61F76B66000E6CF36 /* s2d_node_test_case.mm */; };
 		43DF78D41F66694E00EC6747 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A7F0941F656FDB00E1CE26 /* GLKit.framework */; };
 		43DF78D81F667C3400EC6747 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DF78D71F667C3400EC6747 /* QuartzCore.framework */; };
+		4D8F59B420A0B6BB003CAEDB /* lua-src in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F59B220A0B6BB003CAEDB /* lua-src */; };
+		4D8F59B520A0B6BB003CAEDB /* lua-src in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F59B220A0B6BB003CAEDB /* lua-src */; };
 		4DDD0B101F6E727E0021E4DB /* res in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD0B0F1F6E727E0021E4DB /* res */; };
 		B6A7F0781F656F3800E1CE26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F0771F656F3800E1CE26 /* main.m */; };
 		B6A7F07B1F656F3800E1CE26 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B6A7F07A1F656F3800E1CE26 /* AppDelegate.mm */; };
@@ -71,6 +73,7 @@
 		43CB96A61F76B66000E6CF36 /* s2d_node_test_case.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = s2d_node_test_case.mm; sourceTree = "<group>"; };
 		43CB96A71F76B66000E6CF36 /* s2d_node_test_case.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = s2d_node_test_case.h; sourceTree = "<group>"; };
 		43DF78D71F667C3400EC6747 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4D8F59B220A0B6BB003CAEDB /* lua-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "lua-src"; path = "../../../lua-src"; sourceTree = "<group>"; };
 		4DDD0B0F1F6E727E0021E4DB /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
 		B6A7F0731F656F3800E1CE26 /* hello-world.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-world.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A7F0771F656F3800E1CE26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 		B6A7F06A1F656F3800E1CE26 = {
 			isa = PBXGroup;
 			children = (
+				4D8F59B220A0B6BB003CAEDB /* lua-src */,
 				4337BC751F8521EE004CF11B /* seal2d.xcodeproj */,
 				4DDD0B0F1F6E727E0021E4DB /* res */,
 				B6A7F0751F656F3800E1CE26 /* hello-world */,
@@ -315,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D8F59B520A0B6BB003CAEDB /* lua-src in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D8F59B420A0B6BB003CAEDB /* lua-src in Resources */,
 				B6A7F0861F656F3800E1CE26 /* LaunchScreen.storyboard in Resources */,
 				4DDD0B101F6E727E0021E4DB /* res in Resources */,
 				B6A7F0831F656F3800E1CE26 /* Assets.xcassets in Resources */,

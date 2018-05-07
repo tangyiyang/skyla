@@ -115,6 +115,11 @@ public:
         return _z_order;
     }
 
+    inline uint32_t get_zcounter()
+    {
+        return _z_counter;
+    }
+
     inline void set_zorder(uint32_t z)
     {
         _z_order = z;

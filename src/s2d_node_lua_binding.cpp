@@ -9,8 +9,8 @@ static int lseal2d_node_add_child(lua_State* L)
 {
     node* n = (node*)lua_touserdata(L, 1);
     node* child = (node*)lua_touserdata(L, 2);
-
-    n->add_child(child);
+    lua_Integer zorder = luaL_checkinteger(L, 3);
+    n->add_child(child, zorder);
     return 0;
 }
 
