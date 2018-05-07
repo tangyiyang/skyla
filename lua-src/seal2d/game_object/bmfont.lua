@@ -5,6 +5,7 @@ local parent = require "seal2d.game_object.node"
 
 local bmfont = {
     init = C.init,
+    set_text = C.set_text
 }
 
 setmetatable(bmfont, {__index = parent})

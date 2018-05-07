@@ -133,22 +133,21 @@ static int lseal2d_node_on_touch(lua_State* L)
         node* n = (node*)lua_touserdata(L, -1);
         lua_pop(L, 1);
 
-        lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE);
+        lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_TOUCH_FUNC_TABLE);
         lua_pushlightuserdata(L, n);
         lua_pushvalue(L, 2);
         lua_settable(L, -3);
 
         n->set_touch_callback([=](node*, touch_event* e) {
-            lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE); /* event_table */
+            lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_TOUCH_FUNC_TABLE); /* event_table */
             lua_pushlightuserdata(L, n); /* event_table node */
             lua_gettable(L, -2);    /* event_table node function */
-            lua_pushstring(L, SEAL2D_EVENT_TOUCH); /* event_table node function "seal2d.event.touch" */
             lua_pushinteger(L, e->_id); /* event_table node function "seal2d.event.touch" id */
             lua_pushinteger(L, e->_phase); /* event_table node function "seal2d.event.touch" id phase */
             lua_pushnumber(L, e->_pos.x); /* event_table node function "seal2d.event.touch" id phase x */
             lua_pushnumber(L, e->_pos.y); /* event_table node function "seal2d.event.touch" id phase x y*/
 
-            lua_context::call_lua(L, 5, 0);
+            lua_context::call_lua(L, 4, 0);
             lua_pop(L, -1);
         });
         return 0;
@@ -157,6 +156,37 @@ static int lseal2d_node_on_touch(lua_State* L)
     luaL_error(L, "invalid number of arguments passed to seal2d_node_on_touch"
                "expected 2, but got %d", n_args);
     return 0;
+}
+
+static int lsea2d_node_on_update(lua_State* L)
+{
+    int n_args = lua_gettop(L);
+    if (n_args == 2) {
+        lua_getfield(L, 1, "__cobj");
+        node* n = (node*)lua_touserdata(L, -1);
+        lua_pop(L, 1);
+
+        lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_UPDATE_FUNC_TABLE);
+        lua_pushlightuserdata(L, n);
+        lua_pushvalue(L, 2);
+        lua_settable(L, -3);
+
+        n->set_update_callback([=](node*, float dt) {
+            lua_getfield(L, LUA_REGISTRYINDEX, SEAL2D_UPDATE_FUNC_TABLE); /* event_table */
+            lua_pushlightuserdata(L, n); /* event_table node */
+            lua_gettable(L, -2);    /* event_table node function */
+            lua_pushnumber(L, dt); /* event_table node function "seal2d.event.touch" id */
+
+            lua_context::call_lua(L, 1, 0);
+            lua_pop(L, -1);
+        });
+        return 0;
+    }
+
+    luaL_error(L, "invalid number of arguments passed to seal2d_node_on_touch"
+               "expected 2, but got %d", n_args);
+    return 0;
+
 }
 
 static int lseal2d_node_run_action(lua_State* L)
@@ -219,6 +249,7 @@ int luaopen_seal2d_node(lua_State* L)
         { "get_pos", lseal2d_node_get_pos },
         { "get_bounding_box", lseal2d_node_get_bounding_box },
         { "on_touch", lseal2d_node_on_touch },
+        { "on_update", lsea2d_node_on_update },
         { "run_action", lseal2d_node_run_action },
         { "stop_all_actions", lseal2d_node_stop_all_actions },
         { NULL, NULL },

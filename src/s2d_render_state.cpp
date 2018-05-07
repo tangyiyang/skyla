@@ -32,7 +32,7 @@ void render_state::shutdown()
 
 void render_state::clear()
 {
-    glClearColor(0, 0, 0, 0);
+    glClearColor(0.86, 0.86, 0.86, 0);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 

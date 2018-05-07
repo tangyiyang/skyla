@@ -5,11 +5,13 @@ local C = require "seal2d_node"
 local node = {
     init = C.init,
     on_touch = C.on_touch,
+    on_update = C.on_update,
     run_action = C.run_action,
     stop_all_actions = C.stop_all_actions,
 
     set_anchor = C.set_anchor,
     set_pos = C.set_pos,
+    set_rotation = C.set_rotation,
     set_scale = C.set_scale,
     set_size = C.set_size,
     set_visible = C.set_visible,

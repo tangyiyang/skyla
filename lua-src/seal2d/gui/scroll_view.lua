@@ -28,7 +28,8 @@ function scroll_view:ctor(opt)
     self:add_child(self.panel)
 
     local last_x, last_y
-    local function on_touch(id, phase, x, y)
+
+    self:on_touch(function (id, phase, x, y)
         if phase == TOUCH_BEGIN then
 
             last_x, last_y = x, y
@@ -76,12 +77,6 @@ function scroll_view:ctor(opt)
             end
 
             self.container:run_action(action.move_to(0.1, to_x, to_y))
-        end
-    end
-
-    self:on_touch(function(event_type, ...)
-        if event_type == "seal2d_event_touch" then
-            on_touch(...)
         end
     end)
 

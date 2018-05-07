@@ -257,11 +257,9 @@ void lua_context::init()
 
     register_lua_extensions(L);
 
-    lua_newtable(L);
-    lua_setfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_FUNC_TABLE);
-
-    lua_newtable(L);
-    lua_setfield(L, LUA_REGISTRYINDEX, SEAL2D_USER_TIMER_TABLE);
+    register_user_table(SEAL2D_TOUCH_FUNC_TABLE);
+    register_user_table(SEAL2D_UPDATE_FUNC_TABLE);
+    register_user_table(SEAL2D_USER_TIMER_TABLE);
 
     assert(lua_gettop(L) == 0);
 

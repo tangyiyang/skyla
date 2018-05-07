@@ -25,9 +25,15 @@ extern "C" {
 #define CONTEXT_DESTROY "CONTEXT_DESTROY"
 
 #define SEAL2D_EVENT_TOUCH "seal2d_event_touch"
-#define SEAL2D_USER_FUNC_TABLE "seal2d_user_funcs"
+#define SEAL2D_TOUCH_FUNC_TABLE  "seal2d_touch_funcs"
+#define SEAL2D_UPDATE_FUNC_TABLE "seal2d_update_funcs"
 #define SEAL2D_USER_TIMER_TABLE "seal2d_user_timers"
-#define TRACE_BACK_FUNC_INDEX (1)
+
+#define register_user_table(name) do { \
+            lua_newtable(L); \
+            lua_setfield(L, LUA_REGISTRYINDEX, name); \
+        }while(0); \
+
 
 #define STACK_DUMP(L) lua_context::stackDump(L);
 NS_S2D

@@ -63,7 +63,8 @@ function button:ctor(opt)
 
     local start_x, start_y
     local should_cancel = false
-    local function on_touch(id, phase, x, y)
+
+    self:on_touch(function (id, phase, x, y)
         if phase == TOUCH_ENDED then
             if not should_cancel then
                 opt.callback()
@@ -79,12 +80,6 @@ function button:ctor(opt)
                 should_cancel = true
                 self:run_action(action.scale_to(0.1, 1.0, 1.0))
             end
-        end
-    end
-
-    self:on_touch(function(event_type, ...)
-        if event_type == "seal2d_event_touch" then
-            on_touch(...)
         end
     end)
 end

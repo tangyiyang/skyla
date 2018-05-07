@@ -26,16 +26,11 @@ int lseal2d_new_bmfont(lua_State* L)
 
 int lseal2d_bmfont_set_text(lua_State* L)
 {
-    int n = lua_gettop(L);
-    if (n == 2){
-        bmfont* b = (bmfont*)lua_touserdata(L, 1);
-        const char* text = luaL_checkstring(L, 2);
-        b->set_text(text);
-        return 1;
-    }
+    lua_getfield(L, 1, "__cobj");
+    bmfont* b = (bmfont*)lua_touserdata(L, -1);
+    const char* text = luaL_checkstring(L, 2);
+    b->set_text(text);
 
-    luaL_error(L, "invalid number of arguments in seal2d_new_bmfont"
-               " expected 2, but got %d", n);
     return 0;
 }
 
