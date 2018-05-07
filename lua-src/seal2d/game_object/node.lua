@@ -4,7 +4,7 @@ local C = require "seal2d_node"
 
 local node = {
     init = C.init,
-    on_event = C.on_event,
+    on_touch = C.on_touch,
     run_action = C.run_action,
     stop_all_actions = C.stop_all_actions,
 

@@ -31,7 +31,7 @@ bool node::update(float dt)
     this->sort();
     this->update_srt();
     if (_update_callback) {
-        _update_callback(dt);
+        _update_callback(this, dt);
     }
     std::vector<node*>::iterator it = _children.begin();
     while(it != _children.end()) {
@@ -142,7 +142,7 @@ void node::remove_all_children()
 {
     std::vector<node*>::iterator it = _children.begin();
     for (; it != _children.end(); ++it) {
-        delete (*it);
+        (*it)->_dirty_flags |= DIRTY_MARKED_RELEASE;
     }
     _children.clear();
 }

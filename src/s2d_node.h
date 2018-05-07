@@ -20,11 +20,12 @@
 #define DIRTY_SRT (DIRTY_TRANSFORM | DIRTY_SCALE | DIRTY_ROTATION)
 #define DIRTY_ALL (DIRTY_SRT | DIRTY_Z)
 
-typedef std::function<void(float)> update_callback_t;
-
 NS_S2D
 
 class action;
+class node;
+
+typedef std::function<void(node*, float)> update_callback_t;
 
 class node {
     /*

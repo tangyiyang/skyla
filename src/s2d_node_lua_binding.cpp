@@ -125,7 +125,7 @@ static int lseal2d_node_set_scale(lua_State* L)
     return 0;
 }
 
-static int lseal2d_node_on_event(lua_State* L)
+static int lseal2d_node_on_touch(lua_State* L)
 {
     int n_args = lua_gettop(L);
     if (n_args == 2) {
@@ -218,7 +218,7 @@ int luaopen_seal2d_node(lua_State* L)
         { "get_size", lseal2d_node_get_size },
         { "get_pos", lseal2d_node_get_pos },
         { "get_bounding_box", lseal2d_node_get_bounding_box },
-        { "on_event", lseal2d_node_on_event },
+        { "on_touch", lseal2d_node_on_touch },
         { "run_action", lseal2d_node_run_action },
         { "stop_all_actions", lseal2d_node_stop_all_actions },
         { NULL, NULL },

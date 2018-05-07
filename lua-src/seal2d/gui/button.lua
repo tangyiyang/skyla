@@ -82,7 +82,7 @@ function button:ctor(opt)
         end
     end
 
-    self:on_event(function(event_type, ...)
+    self:on_touch(function(event_type, ...)
         if event_type == "seal2d_event_touch" then
             on_touch(...)
         end
