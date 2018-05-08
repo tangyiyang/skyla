@@ -1,7 +1,9 @@
 #include "md5.h"
 
-#include "s2d_util.h"
+#include "s2d_platform.h"
 #include "s2d_context.h"
+
+#include "s2d_util.h"
 
 #include <zlib.h> /*It looks like every platform has libz, all we need is to link with -lz.*/
 
@@ -124,4 +126,16 @@ std::string util::md5(file_entry* file_entry)
     return std::string((const char*)result, 32);
 }
 
+const char* util::get_platform()
+{
+#if S2D_IS_IOS
+    return "iOS";
+#elif S2D_IS_ANDROID
+    return "Android";
+#elif S2D_IS_MAC
+    return "Darwin"
+#else
+    return ""
+#endif
+}
 NS_S2D_END

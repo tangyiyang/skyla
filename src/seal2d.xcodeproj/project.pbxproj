@@ -73,6 +73,9 @@
 		43DBF7692005D052000511EB /* s2d_context_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */; };
 		43DBF76A2005D052000511EB /* s2d_context_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */; };
 		43DBF76B2005D052000511EB /* s2d_context_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DBF7682005D052000511EB /* s2d_context_lua_binding.h */; };
+		43ED79F620A1459400FC17E1 /* s2d_util_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43ED79F420A1459400FC17E1 /* s2d_util_lua_binding.cpp */; };
+		43ED79F720A1459400FC17E1 /* s2d_util_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43ED79F420A1459400FC17E1 /* s2d_util_lua_binding.cpp */; };
+		43ED79F820A1459400FC17E1 /* s2d_util_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ED79F520A1459400FC17E1 /* s2d_util_lua_binding.h */; };
 		4D3DA7EE2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D3DA7EC2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp */; };
 		4D3DA7EF2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D3DA7EC2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp */; };
 		4D3DA7F02098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D3DA7ED2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.h */; };
@@ -371,6 +374,8 @@
 		43DBF7632005CFD7000511EB /* s2d_timer_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_timer_lua_binding.h; sourceTree = "<group>"; };
 		43DBF7672005D052000511EB /* s2d_context_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_context_lua_binding.cpp; sourceTree = "<group>"; };
 		43DBF7682005D052000511EB /* s2d_context_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_context_lua_binding.h; sourceTree = "<group>"; };
+		43ED79F420A1459400FC17E1 /* s2d_util_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_util_lua_binding.cpp; sourceTree = "<group>"; };
+		43ED79F520A1459400FC17E1 /* s2d_util_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_util_lua_binding.h; sourceTree = "<group>"; };
 		4D3DA7EC2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_scale9sprite_lua_binding.cpp; sourceTree = "<group>"; };
 		4D3DA7ED2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s2d_scale9sprite_lua_binding.h; sourceTree = "<group>"; };
 		4D40F0B61FE427A7007368A7 /* s2d_timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = s2d_timer.cpp; sourceTree = "<group>"; };
@@ -863,6 +868,8 @@
 				B631CF072087AEBF00DBF621 /* s2d_spine_lua_binding.h */,
 				4D3DA7EC2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.cpp */,
 				4D3DA7ED2098BE6300A9AB76 /* s2d_scale9sprite_lua_binding.h */,
+				43ED79F420A1459400FC17E1 /* s2d_util_lua_binding.cpp */,
+				43ED79F520A1459400FC17E1 /* s2d_util_lua_binding.h */,
 			);
 			name = script;
 			sourceTree = "<group>";
@@ -954,6 +961,7 @@
 				435299A92084D0C000771E10 /* s2d_primitive_node_lua_binding.h in Headers */,
 				4D4703B91FC4A1050088FAAF /* Color.h in Headers */,
 				B6FF63E01F92022600D7058F /* s2d_panel.h in Headers */,
+				43ED79F820A1459400FC17E1 /* s2d_util_lua_binding.h in Headers */,
 				4D9F49BD1FAB908200F2170E /* s2d_render_state.h in Headers */,
 				4D4703B11FC4A1050088FAAF /* Atlas.h in Headers */,
 				4D4703D21FC4A1060088FAAF /* Triangulator.h in Headers */,
@@ -1177,6 +1185,7 @@
 				4D4704131FC4A1060088FAAF /* SkeletonJson.c in Sources */,
 				4337BC641F8521A3004CF11B /* s2d_camera.cpp in Sources */,
 				4D47040F1FC4A1060088FAAF /* SkeletonClipping.c in Sources */,
+				43ED79F620A1459400FC17E1 /* s2d_util_lua_binding.cpp in Sources */,
 				43DBF75A2005CE95000511EB /* s2d_bmfont_lua_binding.cpp in Sources */,
 				B6FF63CF1F91FC4E00D7058F /* lstring.c in Sources */,
 				4337BC741F8521BA004CF11B /* cJSON.c in Sources */,
@@ -1240,6 +1249,7 @@
 				43DBF76A2005D052000511EB /* s2d_context_lua_binding.cpp in Sources */,
 				4D4703DE1FC4A1060088FAAF /* Atlas.c in Sources */,
 				435299A82084D0C000771E10 /* s2d_primitive_node_lua_binding.cpp in Sources */,
+				43ED79F720A1459400FC17E1 /* s2d_util_lua_binding.cpp in Sources */,
 				4D4703E81FC4A1060088FAAF /* BoneData.c in Sources */,
 				4337BCED1F852D7B004CF11B /* s2d_util.cpp in Sources */,
 				4D4704061FC4A1060088FAAF /* PointAttachment.c in Sources */,

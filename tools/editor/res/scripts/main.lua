@@ -12,8 +12,6 @@ local function main()
 
     print("call main()")
 
-
-
     local function create_func(root)
         local util = require "seal2d_util"
         util.add_search_path("res/")

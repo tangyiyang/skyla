@@ -72,6 +72,8 @@ public:
     {
         return -1.0f + (((double)rand())/RAND_MAX) * (1.0 - (-1.0));
     }
+
+    static const char* get_platform();
 };
 
 NS_S2D_END
