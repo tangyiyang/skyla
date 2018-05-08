@@ -9,8 +9,8 @@ NS_S2D
 
 int luaopen_seal2d_util(lua_State* L);
 
-NS_S2D_END
-
 #endif
+
+NS_S2D_END
 
 #endif

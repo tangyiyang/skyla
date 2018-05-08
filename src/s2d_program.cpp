@@ -75,6 +75,7 @@ program* program::load_default_program(EMBEDED_PROGRAMS type)
     CHECK_GL_ERROR
     program* p = new program();
     p->init(vs, fs);
+    CHECK_GL_ERROR
     return p;
 }
 

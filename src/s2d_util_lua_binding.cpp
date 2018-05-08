@@ -56,6 +56,7 @@ int luaopen_seal2d_util(lua_State* L)
     return 1;
 }
 
+NS_S2D_END
+
 #endif
 
-NS_S2D_END
