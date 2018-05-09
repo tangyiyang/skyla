@@ -127,28 +127,70 @@
 
     glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
 
-    
     self.game_context->draw();
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    CGFloat scaleFactor = [self.view contentScaleFactor];
 
+    // TODO: add multi-touch support later.
+    int x = 0;
+    int y = 0;
+    for (UITouch *touch in touches) {
+        x = [touch locationInView: [touch view]].x * scaleFactor;
+        y = [touch locationInView: [touch view]].y * scaleFactor;
+        break;
+    }
+    self.game_context->on_touch_begin(x, y);
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    CGFloat scaleFactor = [self.view contentScaleFactor];
 
+    // TODO: add multi-touch support later.
+    int x = 0;
+    int y = 0;
+    for (UITouch *touch in touches) {
+        x = [touch locationInView: [touch view]].x * scaleFactor;
+        y = [touch locationInView: [touch view]].y * scaleFactor;
+        break;
+    }
+    self.game_context->on_touch_begin(x, y);
 }
 
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    CGFloat scaleFactor = [self.view contentScaleFactor];
+
+    // TODO: add multi-touch support later.
+    int x = 0;
+    int y = 0;
+    for (UITouch *touch in touches) {
+        x = [touch locationInView: [touch view]].x * scaleFactor;
+        y = [touch locationInView: [touch view]].y * scaleFactor;
+        break;
+    }
+
+    self.game_context->on_touch_moved(x, y);
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    CGFloat scaleFactor = [self.view contentScaleFactor];
 
+    // TODO: add multi-touch support later.
+    int x = 0;
+    int y = 0;
+    for (UITouch *touch in touches) {
+        x = [touch locationInView: [touch view]].x * scaleFactor;
+        y = [touch locationInView: [touch view]].y * scaleFactor;
+        break;
+    }
+
+    self.game_context->on_touch_cancl(x, y);
 }
 
 @end
