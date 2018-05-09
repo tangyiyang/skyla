@@ -22,7 +22,7 @@ quad_renderer::quad_renderer()
 void quad_renderer::init()
 {
     _num_vertices = 0;
-    _max_vertices = S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE;
+    _max_vertices = S2D_MAX_VERTEX_PER_DRAW_CALL;
     _num_indexes = 0;
     _max_indexes = _max_vertices/4*6;
     _vertex_buffer = (pos_tex_color_vertex*)malloc(sizeof(pos_tex_color_vertex) * _max_vertices);
@@ -37,7 +37,7 @@ void quad_renderer::init()
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos_tex_color_vertex) * _max_vertices, nullptr, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_t) * _max_indexes, nullptr, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_t) * _max_indexes, nullptr, GL_STATIC_DRAW);
 
     glVertexAttribPointer(program::VERTEX_ATTR_POS,
                           2,
@@ -116,12 +116,13 @@ void quad_renderer::draw(const affine_transform& world_transform,
     affine_transform t = affine_transform::concat(world_transform, mv);
 
     pos_tex_color_vertex* p = _vertex_buffer + _num_vertices;
+
     for (int i = 0; i < n; ++i) {
         (p+i)->pos = affine_transform::apply_transform(t, quad[i].pos.x, quad[i].pos.y);
         (p+i)->color = quad[i].color;
         (p+i)->uv = quad[i].uv;
     }
-    
+
     _num_vertices += n;
 }
 
@@ -145,9 +146,10 @@ void quad_renderer::flush()
     glBlendFunc(_blend_func.src, _blend_func.dst);
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, _num_vertices * sizeof(pos_tex_color_vertex), _vertex_buffer);
+    glBufferData(GL_ARRAY_BUFFER, _num_vertices * sizeof(pos_tex_color_vertex), _vertex_buffer, GL_STATIC_DRAW);
+    
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
-    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, _num_indexes * sizeof(index_t), _index_buffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, _num_indexes * sizeof(index_t), _index_buffer, GL_DYNAMIC_DRAW);
 
     glBindVertexArray(_vao);
     glDrawElements(GL_TRIANGLES, _num_indexes, GL_UNSIGNED_SHORT, 0);

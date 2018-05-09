@@ -7,8 +7,8 @@
 #ifndef s2d_config_h
 #define s2d_config_h
 
-#ifndef S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE 
-#define S2D_MAX_SPRITE_VERTEX_BUFFER_SIZE (1024*16)
+#ifndef S2D_MAX_VERTEX_PER_DRAW_CALL
+#define S2D_MAX_VERTEX_PER_DRAW_CALL (1024*16)
 #endif
 
 #ifndef S2D_MAX_LINE_VERTEX_BUFFER_SIZE

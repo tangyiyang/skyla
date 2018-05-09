@@ -173,6 +173,7 @@ void context::on_touch_begin(float x, float y)
         x, _window_size.height - y,
         touch_event::TOUCH_BEGIN
     };
+    LOGD("begin: x, y = %.2f, %.2f", x, y);
     _touch_handler->handle_touch_event(&e);
 }
 
@@ -183,6 +184,8 @@ void context::on_touch_moved(float x, float y)
         x, _window_size.height - y,
         touch_event::TOUCH_MOVED
     };
+
+    LOGD("move: x, y = %.2f, %.2f", x, y);
     _touch_handler->handle_touch_event(&e);
 }
 
@@ -193,6 +196,7 @@ void context::on_touch_ended(float x, float y)
         x, _window_size.height - y,
         touch_event::TOUCH_ENDED
     };
+    LOGD("end: x, y = %.2f, %.2f", x, y);
     _touch_handler->handle_touch_event(&e);
 }
 

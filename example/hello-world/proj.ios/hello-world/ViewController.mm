@@ -120,14 +120,7 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    CGSize viewSize = [view bounds].size;
-    CGFloat scaleFactor = [view contentScaleFactor];
-    glClearColor(0.5, 0.5, 0.5, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    glViewport(0, 0, viewSize.width * scaleFactor , viewSize.height * scaleFactor);
-
-    self.game_context->draw();
+   self.game_context->draw();
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -157,7 +150,7 @@
         y = [touch locationInView: [touch view]].y * scaleFactor;
         break;
     }
-    self.game_context->on_touch_begin(x, y);
+    self.game_context->on_touch_moved(x, y);
 }
 
 
@@ -174,7 +167,7 @@
         break;
     }
 
-    self.game_context->on_touch_moved(x, y);
+    self.game_context->on_touch_ended(x, y);
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event

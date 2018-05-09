@@ -4,6 +4,8 @@ local sprite_test_layer = class("sprite_test_layer", function()
     return go.node.new()
 end)
 
+local mode = "click" -- click
+
 local function negative_or_positive()
     return math.random(2) % 2 == 0 and 1 or -1
 end
@@ -57,12 +59,19 @@ function sprite_test_layer:ctor()
         end
     end)
 
+    if mode == "auto" then
+        local s = spawn(self, 2000, sprites)
+        counter_label:set_text(string.format("count: %d", #sprites))
+    end
+
     self:on_update(function(dt)
         if begin_time_stamp then
-            local now = os.time()
-            local spawn_count = 2 ^ (now - begin_time_stamp)
-            local s = spawn(self, spawn_count, sprites)
-            counter_label:set_text(string.format("count: %d", #sprites))
+            if mode == "click" then
+                local now = os.time()
+                local spawn_count = 2 ^ (now - begin_time_stamp)
+                local s = spawn(self, spawn_count, sprites)
+                counter_label:set_text(string.format("count: %d", #sprites))
+            end
         end
 
         for i = 1, #sprites do

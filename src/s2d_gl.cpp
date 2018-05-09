@@ -23,8 +23,17 @@ void gl::check_extension(uint32_t glversion)
     glGetIntegerv(GL_NUM_EXTENSIONS, &n);
 
     float line_width[2] = {0, 0};
+    int max_vertices = 0;
+    int max_indices = 0;
+    int max_texture_size = 0;
     glGetFloatv(GL_ALIASED_LINE_WIDTH_RANGE, line_width);
+    glGetIntegerv(GL_MAX_ELEMENTS_VERTICES, &max_vertices);
+    glGetIntegerv(GL_MAX_ELEMENTS_INDICES, &max_indices);
+    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture_size);
     LOGD("gl line width range: {%.2f, %.2f}", line_width[0], line_width[1]);
+    LOGD("gl max vertices: %d", max_vertices);
+    LOGD("gl max indices: %d", max_indices);
+    LOGD("gl max texture size: %d", max_texture_size);
     LOGD("gl_extensions:");
     for (int i = 0; i < n; ++i) {
         LOGD("%d: %s", i, (const char*)glGetStringi(GL_EXTENSIONS, i));
