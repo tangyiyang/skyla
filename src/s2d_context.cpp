@@ -90,8 +90,6 @@ void context::update(float dt)
     _action_mgr->update(dt);
     _root->update(dt);
 
-    _render_state->flush();
-
 #if (S2D_ENABLE_LUA == 1)
     _lua_context->on_update(dt);
 #endif
@@ -111,11 +109,6 @@ void context::update(float dt)
 
 void context::draw()
 {
-    glViewport(_viewport_rect.origin.x,
-               _viewport_rect.origin.y,
-               _viewport_rect.size.width,
-               _viewport_rect.size.height);
-
     _render_state->clear();
     
     _root->draw(_render_state);

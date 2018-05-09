@@ -133,9 +133,9 @@ const char* util::get_platform()
 #elif S2D_IS_ANDROID
     return "Android";
 #elif S2D_IS_MAC
-    return "Darwin"
+    return "Darwin";
 #else
-    return ""
+    return "";
 #endif
 }
 NS_S2D_END
