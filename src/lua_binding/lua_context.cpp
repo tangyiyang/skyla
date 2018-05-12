@@ -1,8 +1,6 @@
 #include "lua_context.h"
 #include "core/util.h"
-#include "game_objects/sprite.h"
 #include "game_objects/panel.h"
-#include "action.h"
 #include "skyla_context.h"
 
 #include "action_lua_binding.h"

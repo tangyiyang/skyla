@@ -769,24 +769,24 @@
 		4D4FACAE20A69CB300F08C89 /* game_objects */ = {
 			isa = PBXGroup;
 			children = (
-				4D4FAD7420A6AC1900F08C89 /* action.cpp */,
 				4D4FAD7320A6AC1900F08C89 /* action.h */,
-				4D4FACAF20A69CB300F08C89 /* particle.cpp */,
-				4D4FACBC20A69CB300F08C89 /* particle.h */,
-				4D4FACB020A69CB300F08C89 /* spine.cpp */,
-				4D4FACB420A69CB300F08C89 /* spine.h */,
-				4D4FACB320A69CB300F08C89 /* sprite.cpp */,
-				4D4FACBA20A69CB300F08C89 /* sprite.h */,
-				4D4FACB120A69CB300F08C89 /* primitive_node.cpp */,
-				4D4FACB220A69CB300F08C89 /* primitive_node.h */,
-				4D4FACB520A69CB300F08C89 /* node.cpp */,
-				4D4FACB620A69CB300F08C89 /* node.h */,
-				4D4FACB720A69CB300F08C89 /* bmfont.cpp */,
+				4D4FAD7420A6AC1900F08C89 /* action.cpp */,
 				4D4FACBE20A69CB300F08C89 /* bmfont.h */,
-				4D4FACB820A69CB300F08C89 /* panel.cpp */,
-				4D4FACBB20A69CB300F08C89 /* panel.h */,
-				4D4FACBD20A69CB300F08C89 /* scale9sprite.cpp */,
+				4D4FACB720A69CB300F08C89 /* bmfont.cpp */,
+				4D4FACB620A69CB300F08C89 /* node.h */,
+				4D4FACB520A69CB300F08C89 /* node.cpp */,
+				4D4FACB420A69CB300F08C89 /* spine.h */,
+				4D4FACB020A69CB300F08C89 /* spine.cpp */,
+				4D4FACBA20A69CB300F08C89 /* sprite.h */,
+				4D4FACB320A69CB300F08C89 /* sprite.cpp */,
 				4D4FACB920A69CB300F08C89 /* scale9sprite.h */,
+				4D4FACBD20A69CB300F08C89 /* scale9sprite.cpp */,
+				4D4FACBB20A69CB300F08C89 /* panel.h */,
+				4D4FACB820A69CB300F08C89 /* panel.cpp */,
+				4D4FACBC20A69CB300F08C89 /* particle.h */,
+				4D4FACAF20A69CB300F08C89 /* particle.cpp */,
+				4D4FACB220A69CB300F08C89 /* primitive_node.h */,
+				4D4FACB120A69CB300F08C89 /* primitive_node.cpp */,
 			);
 			path = game_objects;
 			sourceTree = "<group>";
@@ -794,20 +794,20 @@
 		4D4FACBF20A69CB300F08C89 /* renderer */ = {
 			isa = PBXGroup;
 			children = (
-				4D4FACC020A69CB300F08C89 /* program.cpp */,
-				4D4FACC120A69CB300F08C89 /* render_texture.cpp */,
 				4D4FACC220A69CB300F08C89 /* renderer.h */,
-				4D4FACC320A69CB300F08C89 /* texture.cpp */,
-				4D4FACC420A69CB300F08C89 /* quad_renderer.h */,
+				4D4FACCD20A69CB300F08C89 /* renderer.cpp */,
 				4D4FACC520A69CB300F08C89 /* render_state.h */,
 				4D4FACC620A69CB300F08C89 /* render_state.cpp */,
-				4D4FACC720A69CB300F08C89 /* quad_renderer.cpp */,
-				4D4FACC820A69CB300F08C89 /* texture.h */,
 				4D4FACC920A69CB300F08C89 /* program.h */,
-				4D4FACCA20A69CB300F08C89 /* line_renderer.cpp */,
+				4D4FACC020A69CB300F08C89 /* program.cpp */,
 				4D4FACCB20A69CB300F08C89 /* render_texture.h */,
+				4D4FACC120A69CB300F08C89 /* render_texture.cpp */,
+				4D4FACC820A69CB300F08C89 /* texture.h */,
+				4D4FACC320A69CB300F08C89 /* texture.cpp */,
+				4D4FACC420A69CB300F08C89 /* quad_renderer.h */,
+				4D4FACC720A69CB300F08C89 /* quad_renderer.cpp */,
 				4D4FACCC20A69CB300F08C89 /* line_renderer.h */,
-				4D4FACCD20A69CB300F08C89 /* renderer.cpp */,
+				4D4FACCA20A69CB300F08C89 /* line_renderer.cpp */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -815,18 +815,18 @@
 		4D4FACCE20A69CB300F08C89 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				4D4FACCF20A69CB300F08C89 /* util.cpp */,
-				4D4FACD020A69CB300F08C89 /* profiler.cpp */,
-				4D4FACD120A69CB300F08C89 /* camera.cpp */,
-				4D4FACD220A69CB300F08C89 /* camera.h */,
-				4D4FACD320A69CB300F08C89 /* touch_handler.cpp */,
-				4D4FACD420A69CB300F08C89 /* timer.cpp */,
-				4D4FACD620A69CB300F08C89 /* timer.h */,
-				4D4FACD720A69CB300F08C89 /* util.h */,
 				4D4FACD820A69CB300F08C89 /* skyla_math.h */,
 				4D4FACD920A69CB300F08C89 /* ref_counter.h */,
 				4D4FACDA20A69CB300F08C89 /* profiler.h */,
+				4D4FACD020A69CB300F08C89 /* profiler.cpp */,
+				4D4FACD720A69CB300F08C89 /* util.h */,
+				4D4FACCF20A69CB300F08C89 /* util.cpp */,
+				4D4FACD620A69CB300F08C89 /* timer.h */,
+				4D4FACD420A69CB300F08C89 /* timer.cpp */,
+				4D4FACD220A69CB300F08C89 /* camera.h */,
+				4D4FACD120A69CB300F08C89 /* camera.cpp */,
 				4D4FACDC20A69CB300F08C89 /* touch_handler.h */,
+				4D4FACD320A69CB300F08C89 /* touch_handler.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -834,28 +834,28 @@
 		4D4FACDD20A69CB300F08C89 /* lua_binding */ = {
 			isa = PBXGroup;
 			children = (
-				4D4FACDE20A69CB300F08C89 /* bmfont_lua_binding.h */,
-				4D4FACDF20A69CB300F08C89 /* bmfont_lua_binding.cpp */,
-				4D4FACE020A69CB300F08C89 /* context_lua_binding.cpp */,
-				4D4FACE120A69CB300F08C89 /* primitive_node_lua_binding.h */,
-				4D4FACE220A69CB300F08C89 /* scale9sprite_lua_binding.cpp */,
-				4D4FACE320A69CB300F08C89 /* context_lua_binding.h */,
-				4D4FACE420A69CB300F08C89 /* timer_lua_binding.cpp */,
-				4D4FACE520A69CB300F08C89 /* primitive_node_lua_binding.cpp */,
-				4D4FACE620A69CB300F08C89 /* timer_lua_binding.h */,
-				4D4FACE720A69CB300F08C89 /* sprite_lua_binding.h */,
 				4D4FACE820A69CB300F08C89 /* lua_context.h */,
-				4D4FACE920A69CB300F08C89 /* spine_lua_binding.h */,
-				4D4FACEA20A69CB300F08C89 /* util_lua_binding.h */,
 				4D4FACEB20A69CB300F08C89 /* lua_context.cpp */,
-				4D4FACEC20A69CB300F08C89 /* spine_lua_binding.cpp */,
-				4D4FACED20A69CB300F08C89 /* scale9sprite_lua_binding.h */,
-				4D4FACEE20A69CB300F08C89 /* util_lua_binding.cpp */,
-				4D4FACEF20A69CB300F08C89 /* node_lua_binding.cpp */,
+				4D4FACE320A69CB300F08C89 /* context_lua_binding.h */,
+				4D4FACE020A69CB300F08C89 /* context_lua_binding.cpp */,
 				4D4FACF020A69CB300F08C89 /* action_lua_binding.h */,
 				4D4FACF120A69CB300F08C89 /* action_lua_binding.cpp */,
 				4D4FACF220A69CB300F08C89 /* node_lua_binding.h */,
+				4D4FACEF20A69CB300F08C89 /* node_lua_binding.cpp */,
+				4D4FACE720A69CB300F08C89 /* sprite_lua_binding.h */,
 				4D4FACF320A69CB300F08C89 /* sprite_lua_binding.cpp */,
+				4D4FACE920A69CB300F08C89 /* spine_lua_binding.h */,
+				4D4FACEC20A69CB300F08C89 /* spine_lua_binding.cpp */,
+				4D4FACED20A69CB300F08C89 /* scale9sprite_lua_binding.h */,
+				4D4FACE220A69CB300F08C89 /* scale9sprite_lua_binding.cpp */,
+				4D4FACEA20A69CB300F08C89 /* util_lua_binding.h */,
+				4D4FACEE20A69CB300F08C89 /* util_lua_binding.cpp */,
+				4D4FACDE20A69CB300F08C89 /* bmfont_lua_binding.h */,
+				4D4FACDF20A69CB300F08C89 /* bmfont_lua_binding.cpp */,
+				4D4FACE120A69CB300F08C89 /* primitive_node_lua_binding.h */,
+				4D4FACE520A69CB300F08C89 /* primitive_node_lua_binding.cpp */,
+				4D4FACE620A69CB300F08C89 /* timer_lua_binding.h */,
+				4D4FACE420A69CB300F08C89 /* timer_lua_binding.cpp */,
 			);
 			path = lua_binding;
 			sourceTree = "<group>";
@@ -863,11 +863,11 @@
 		4D4FACF520A69CB300F08C89 /* platform */ = {
 			isa = PBXGroup;
 			children = (
-				4D4FACF620A69CB300F08C89 /* gl.cpp */,
-				4D4FACF720A69CB300F08C89 /* file_system.mm */,
-				4D4FACF820A69CB300F08C89 /* gl.h */,
 				4D4FACF920A69CB300F08C89 /* platform.h */,
+				4D4FACF820A69CB300F08C89 /* gl.h */,
+				4D4FACF620A69CB300F08C89 /* gl.cpp */,
 				4D4FACFA20A69CB300F08C89 /* file_system.h */,
+				4D4FACF720A69CB300F08C89 /* file_system.mm */,
 			);
 			path = platform;
 			sourceTree = "<group>";
