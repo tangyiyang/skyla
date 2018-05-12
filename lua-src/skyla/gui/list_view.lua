@@ -2,9 +2,9 @@
 -- Author: yiyang
 -- Copyright: see copyright at s2d.h
 
-local node = require "seal2d.game_object.node"
-local action = require "seal2d_action"
-local scroll_view =require("seal2d.gui.scroll_view")
+local node = require "skyla.game_object.node"
+local action = require "skyla_action"
+local scroll_view =require("skyla.gui.scroll_view")
 
 local list_view = class("list_view", function()
     return node.new()

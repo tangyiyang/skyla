@@ -1,9 +1,9 @@
-local seal2d = require "seal2d"
-local C = require "seal2d_context"
-local node = require "seal2d.game_object.node"
+local skyla = require "skyla"
+local C = require "skyla_context"
+local node = require "skyla.game_object.node"
 
 local context = {
-    __cobj = seal2d.get_context(),
+    __cobj = skyla.get_context(),
     __root = nil,
     get_visible_rect = C.get_visible_rect
 }

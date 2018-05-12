@@ -6,7 +6,7 @@ void entry::on_init(context* ctx)
     this->_app_name = "seal2d.hello-world";
     this->_app_version = "v0.0.1";
 
-#if S2D_ENABLE_LUA == 1
+#if SKYLA_ENABLE_LUA == 1
     ctx->_lua_context->on_start(ctx, "res/scripts/main.lua");
 #else
 

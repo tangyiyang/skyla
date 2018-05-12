@@ -1,7 +1,7 @@
-local seal2d = require "seal2d"
-local C = require "seal2d_spine"
+local skyla = require "skyla"
+local C = require "skyla_spine"
 
-local parent = require "seal2d.game_object.node"
+local parent = require "skyla.game_object.node"
 
 local spine = {
     init = C.init,

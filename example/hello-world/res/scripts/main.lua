@@ -1,5 +1,5 @@
 local function main()
-    local util = require "seal2d_util"
+    local util = require "skyla_util"
 
     local platform = util.get_platform()
     print("platform = ", platform)
@@ -14,7 +14,7 @@ local function main()
                                     .. ";lua-src/?.lua"
     end
 
-	local director = require "seal2d.director"
+	local director = require "skyla.director"
 
     local function create_func(root)
         util.add_search_path("res/")

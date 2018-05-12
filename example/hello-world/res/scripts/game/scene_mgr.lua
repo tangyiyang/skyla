@@ -1,4 +1,4 @@
-local stm = require "seal2d.base.stm"
+local stm = require "skyla.base.stm"
 
 local scene_state = stm.create {
     { name = "start_test", from = "main_scene", to = "test_scene" },

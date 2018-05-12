@@ -10,7 +10,7 @@
 #include "skyla_context.h"
 #include "core/timer.h"
 #include "core/util.h"
-#include "core/math.h"
+#include "core/skyla_math.h"
 #include "platform/file_system.h"
 #include "game_objects/bmfont.h"
 #include "game_objects/particle.h"

@@ -20,7 +20,7 @@
 #include "skyla_config.h"
 #include "skyla_macro.h"
 #include "core/ref_counter.h"
-#include "core/math.h"
+#include "core/skyla_math.h"
 #include "platform/platform.h"
 #include "platform/gl.h"
 

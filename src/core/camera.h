@@ -8,7 +8,7 @@
 #define skyla_camera_h
 
 #include "skyla_common.h"
-#include "core/math.h"
+#include "core/skyla_math.h"
 
 NS_SKYLA
 

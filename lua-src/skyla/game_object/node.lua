@@ -1,6 +1,6 @@
-local seal2d = require "seal2d"
-local director = require "seal2d.director"
-local C = require "seal2d_node"
+local skyla = require "skyla"
+local director = require "skyla.director"
+local C = require "skyla_node"
 
 local node = {
     init = C.init,
@@ -45,7 +45,7 @@ end
 
 function node:set_debug_aabb_visible(visible, recursive)
     if not self.__debug_aabb_node then
-        local primitive = require "seal2d.game_object.primitive"
+        local primitive = require "skyla.game_object.primitive"
         local box = primitive.new()
         local w, h = self:get_size()
         box:add_rect(0, 0, w, h, COLOR_RED)

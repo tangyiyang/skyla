@@ -6,7 +6,7 @@ local destroy_func
 local game_objects = {}
 
 local function on_start()
-    local ctx = require "seal2d.context"
+    local ctx = require "skyla.context"
     local root = ctx:get_root()
 
     scene_create_func(root)
@@ -27,10 +27,10 @@ end
 function director.start(create_func, update_callback, destroy_callback)
     print("*** Entering Lua Scripts ***")
 
-    _G["seal2d"] = require "seal2d"
-    _G["misc"] = require "seal2d.misc"
-    _G["consts"] = require "seal2d.base.consts"
-    _G["go"] = require "seal2d.game_object.go"
+    _G["skyla"] = require "skyla"
+    _G["misc"] = require "skyla.misc"
+    _G["consts"] = require "skyla.base.consts"
+    _G["go"] = require "skyla.game_object.go"
 
     local function inject(mod)
         for k, v in pairs(mod) do
@@ -42,7 +42,7 @@ function director.start(create_func, update_callback, destroy_callback)
     inject(consts)
     inject(go)
 
-    seal2d.inject {
+    skyla.inject {
         on_start = on_start,
         on_update = on_update,
         on_destroy = on_destroy,

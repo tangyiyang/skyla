@@ -2,8 +2,8 @@
     This is a quick and dirty json format parser for scene.
 ]]
 
-local seal2d = require "seal2d"
-local util = require "seal2d.util"
+local skyla = require "skyla"
+local util = require "skyla.util"
 local cjson = require "cjson"
 
 local scene_loader = {}
@@ -60,13 +60,13 @@ local function set_sprite(sprite, ctx, opt)
 end
 
 local function load_node(...)
-    local node = seal2d.node()
+    local node = skyla.node()
     set_node(node, ...)
     return node
 end
 
 local function load_sprite(...)
-    local spr = seal2d.sprite()
+    local spr = skyla.sprite()
     set_node(spr, ...)
     set_sprite(spr, ...)
     return spr

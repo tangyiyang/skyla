@@ -1,7 +1,7 @@
-local node = require "seal2d.game_object.node"
-local sprite = require "seal2d.game_object.sprite"
-local button = require "seal2d.gui.button"
-local scale9sprite = require "seal2d.game_object.scale9sprite"
+local node = require "skyla.game_object.node"
+local sprite = require "skyla.game_object.sprite"
+local button = require "skyla.gui.button"
+local scale9sprite = require "skyla.game_object.scale9sprite"
 
 local test_scene = class("test_scene", function()
     return node.new()
@@ -21,7 +21,7 @@ local function sprite_test(self, parent)
 end
 
 local function scale9sprite_test(self, parent)
-    local visible_rect = require("seal2d.context"):get_visible_rect()
+    local visible_rect = require("skyla.context"):get_visible_rect()
 
     local s = scale9sprite.new("#color_pad.png")
     s:set_pos(visible_rect.width/2, visible_rect.height/2)
@@ -32,7 +32,7 @@ local function scale9sprite_test(self, parent)
 end
 
 local function bmfont_test(self, parent)
-	local bmfont = require "seal2d.game_object.bmfont"
+	local bmfont = require "skyla.game_object.bmfont"
 	local case = "The quick brown fox jumps over the lazy dog"
 
 	local fonts = {
@@ -40,7 +40,7 @@ local function bmfont_test(self, parent)
 		"fonts/arial_bold_32_light_blue.fnt"
 	}
 
-	local visible_rect = require("seal2d.context"):get_visible_rect()
+	local visible_rect = require("skyla.context"):get_visible_rect()
 	for i = 1, #fonts do
 		local f = fonts[i]
 		local t = bmfont.new(case, f)
@@ -51,8 +51,8 @@ local function bmfont_test(self, parent)
 end
 
 local function spine_test(self, parent)
-	local visible_rect = require("seal2d.context"):get_visible_rect()
-	local spine = require "seal2d.game_object.spine"
+	local visible_rect = require("skyla.context"):get_visible_rect()
+	local spine = require "skyla.game_object.spine"
 	local s = spine.new("spines/unit_skull.json", "spines/unit_skull.atlas")
     local names = s:get_all_anim_names()
     print_r(names)
@@ -63,7 +63,7 @@ local function spine_test(self, parent)
 end
 
 local function primitive_basic_test(self, parent)
-    local primitive = require("seal2d.game_object.primitive")
+    local primitive = require("skyla.game_object.primitive")
 
     local p = primitive.new()
     p:add_line(0, 0, 100, 100, 0xff0000ff);
@@ -71,8 +71,8 @@ local function primitive_basic_test(self, parent)
 end
 
 local function load_tests(self, test_layer)
-	local list_view = require "seal2d.gui.list_view"
-    local visible_rect = require("seal2d.context"):get_visible_rect()
+	local list_view = require "skyla.gui.list_view"
+    local visible_rect = require("skyla.context"):get_visible_rect()
 
     local test_cases = {
     	{ name = "sprite", func = sprite_test },

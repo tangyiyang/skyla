@@ -1,7 +1,7 @@
 local function main()
     package.path = package.path .. ";res/scripts/?.lua"
                                 .. ";lua-src/?.lua"
-    local director = require "seal2d.director"
+    local director = require "skyla.director"
 
 
 
@@ -13,7 +13,7 @@ local function main()
     print("call main()")
 
     local function create_func(root)
-        local util = require "seal2d_util"
+        local util = require "skyla_util"
         util.add_search_path("res/")
 
         editor.init()

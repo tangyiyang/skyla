@@ -1,4 +1,4 @@
-local C = require "seal2d_timer"
+local C = require "skyla_timer"
 local timer = {
     start = C.start,
     stop = C.stop,

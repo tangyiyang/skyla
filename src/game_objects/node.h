@@ -8,8 +8,8 @@
 #define skyla_node_h
 
 #include "skyla_common.h"
-#include "touch_handler.h"
-#include "render_state.h"
+#include "core/touch_handler.h"
+#include "renderer/render_state.h"
 
 #define DIRTY_TRANSFORM      (1<<0)
 #define DIRTY_SCALE          (1<<1)

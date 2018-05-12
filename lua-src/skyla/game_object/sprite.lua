@@ -1,7 +1,7 @@
-local seal2d = require "seal2d"
-local C = require "seal2d_sprite"
+local skyla = require "skyla"
+local C = require "skyla_sprite"
 
-local parent = require "seal2d.game_object.node"
+local parent = require "skyla.game_object.node"
 
 local sprite = {
     load_frames = C.load_frames,

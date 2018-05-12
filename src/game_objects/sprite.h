@@ -11,8 +11,8 @@
 
 #include "game_objects/node.h"
 #include "renderer/texture.h"
-#include "program.h"
-#include "render_state.h"
+#include "renderer/program.h"
+#include "renderer/render_state.h"
 
 NS_SKYLA
 

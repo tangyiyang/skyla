@@ -28,13 +28,13 @@
 
 #include <GLFW/glfw3.h>
 
-#include "s2d_context.h"
+#include "skyla_context.h"
 #include "entry.h"
 
 static void frame_buffer_resize_callback(GLFWwindow* window, int width, int height)
 {
     int win_width, win_height;
-    s2d::context* ctx = (s2d::context*)glfwGetWindowUserPointer(window);
+    skyla::context* ctx = (skyla::context*)glfwGetWindowUserPointer(window);
 
     glfwGetWindowSize(window, &win_width, &win_height);
     ctx->set_viewport_rect({0, 0, (float)width, (float)height});
@@ -68,7 +68,7 @@ static void cursor_pos_callback(GLFWwindow* window, double x, double y)
         return;
     }
 
-    s2d::context* C = s2d::context::C();
+    skyla::context* C = skyla::context::C();
     if (pressing) {
         C->on_touch_moved(x, y);
     }
@@ -81,7 +81,7 @@ static void cursor_pos_callback(GLFWwindow* window, double x, double y)
 
 static void mouse_button_callback(GLFWwindow* window, int button, int action, int modifier)
 {
-    s2d::context* C = s2d::context::C();
+    skyla::context* C = skyla::context::C();
     double x, y;
     glfwGetCursorPos(window, &x, &y);
     if (action == GLFW_RELEASE) {
@@ -101,7 +101,7 @@ int main(int argc, char** argv)
     GLFWwindow* window;
 
     entry* game_entry = new entry();
-    s2d::context* ctx = new s2d::context(game_entry);
+    skyla::context* ctx = new skyla::context(game_entry);
 
     if (!glfwInit()) {
         fprintf(stderr, "Failed to initialize GLFW\n");

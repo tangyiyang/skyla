@@ -1,6 +1,6 @@
-local node = require "seal2d.game_object.node"
-local panel = require "seal2d.game_object.panel"
-local action = require "seal2d_action"
+local node = require "skyla.game_object.node"
+local panel = require "skyla.game_object.panel"
+local action = require "skyla_action"
 
 local scroll_view = class("scroll_view", function()
 	return node.new()

@@ -1,4 +1,4 @@
-local button = require "seal2d.gui.button"
+local button = require "skyla.gui.button"
 
 local util = {}
 

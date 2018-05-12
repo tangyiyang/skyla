@@ -1,7 +1,7 @@
-local seal2d = require "seal2d"
-local C = require "seal2d_scale9sprite"
+local skyla = require "skyla"
+local C = require "skyla_scale9sprite"
 
-local parent = require "seal2d.game_object.node"
+local parent = require "skyla.game_object.node"
 
 local scale9sprite = {
     init = C.init,

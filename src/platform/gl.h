@@ -13,10 +13,10 @@
 #if SKYLA_IS_IOS
 #include <OpenGLES/ES3/gl.h>
 #include <OpenGLES/ES3/glext.h>
-//#elif SKYLA_IS_MAC
-//#include <OpenGL/gl3.h>
-//#else
-//#error "opengl not included."
+#elif SKYLA_IS_MAC
+#include <OpenGL/gl3.h>
+#else
+#error "opengl not included."
 #endif
 
 #ifdef DEBUG

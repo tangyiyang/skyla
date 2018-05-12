@@ -1,11 +1,11 @@
-local node = require "seal2d.game_object.node"
+local node = require "skyla.game_object.node"
 
 local main_scene = class("main_scene", function()
     return node.new()
 end)
 
 function main_scene:ctor()
-    -- local button = require "seal2d.gui.button"
+    -- local button = require "skyla.gui.button"
     -- local b = button.new {
     --     normal = "images/ui_button_middle.png",
     --     text = "click me",
@@ -19,7 +19,7 @@ function main_scene:ctor()
 
     -- -- self:add_child(b)
 
-    -- local sprite = require "seal2d.game_object.sprite"
+    -- local sprite = require "skyla.game_object.sprite"
 
     -- local view_width = 200
     -- local view_height = 400
@@ -31,7 +31,7 @@ function main_scene:ctor()
     -- big_sprite:set_anchor(0, 0)
     -- -- big_sprite:set_pos(100, 100)
     -- -- big_sprite:set_scale(3)
-    -- local action = require "seal2d_action"
+    -- local action = require "skyla_action"
     -- -- big_sprite:run_action(action.move_to(20.0, 100, 500))
     -- -- self:add_child(big_sprite)
     -- local big_sprite_2 = sprite.new("images/ui_button_middle.png")
@@ -44,7 +44,7 @@ function main_scene:ctor()
     -- -- local x, y, w, h = big_sprite:get_bounding_box()
     -- -- print("x, y, w, h = ", x, y, w, h)
 
-    -- local scroll_view = require "seal2d.gui.scroll_view"
+    -- local scroll_view = require "skyla.gui.scroll_view"
 
     -- local v = scroll_view.new {
     --                             width = view_width,

@@ -1,4 +1,4 @@
-local seal2d = require "seal2d"
+local skyla = require "skyla"
 local lfs = require "lfs"
 local scene_graph_editor = require "scene_graph_editor"
 local record = require "record"

@@ -187,7 +187,7 @@
 		4D4FAD3A20A69CB300F08C89 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4FACD420A69CB300F08C89 /* timer.cpp */; };
 		4D4FAD3C20A69CB300F08C89 /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4FACD620A69CB300F08C89 /* timer.h */; };
 		4D4FAD3D20A69CB300F08C89 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4FACD720A69CB300F08C89 /* util.h */; };
-		4D4FAD3E20A69CB300F08C89 /* math.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4FACD820A69CB300F08C89 /* math.h */; };
+		4D4FAD3E20A69CB300F08C89 /* skyla_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4FACD820A69CB300F08C89 /* skyla_math.h */; };
 		4D4FAD3F20A69CB300F08C89 /* ref_counter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4FACD920A69CB300F08C89 /* ref_counter.h */; };
 		4D4FAD4020A69CB300F08C89 /* profiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4FACDA20A69CB300F08C89 /* profiler.h */; };
 		4D4FAD4320A69CB300F08C89 /* touch_handler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4FACDC20A69CB300F08C89 /* touch_handler.h */; };
@@ -455,7 +455,7 @@
 		4D4FACD420A69CB300F08C89 /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
 		4D4FACD620A69CB300F08C89 /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		4D4FACD720A69CB300F08C89 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
-		4D4FACD820A69CB300F08C89 /* math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = math.h; sourceTree = "<group>"; };
+		4D4FACD820A69CB300F08C89 /* skyla_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = skyla_math.h; sourceTree = "<group>"; };
 		4D4FACD920A69CB300F08C89 /* ref_counter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ref_counter.h; sourceTree = "<group>"; };
 		4D4FACDA20A69CB300F08C89 /* profiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = profiler.h; sourceTree = "<group>"; };
 		4D4FACDC20A69CB300F08C89 /* touch_handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = touch_handler.h; sourceTree = "<group>"; };
@@ -823,7 +823,7 @@
 				4D4FACD420A69CB300F08C89 /* timer.cpp */,
 				4D4FACD620A69CB300F08C89 /* timer.h */,
 				4D4FACD720A69CB300F08C89 /* util.h */,
-				4D4FACD820A69CB300F08C89 /* math.h */,
+				4D4FACD820A69CB300F08C89 /* skyla_math.h */,
 				4D4FACD920A69CB300F08C89 /* ref_counter.h */,
 				4D4FACDA20A69CB300F08C89 /* profiler.h */,
 				4D4FACDC20A69CB300F08C89 /* touch_handler.h */,
@@ -1033,7 +1033,7 @@
 				4D4703BB1FC4A1050088FAAF /* Event.h in Headers */,
 				4D4FAD0920A69CB300F08C89 /* primitive_node.h in Headers */,
 				4D4703C31FC4A1050088FAAF /* PathConstraintData.h in Headers */,
-				4D4FAD3E20A69CB300F08C89 /* math.h in Headers */,
+				4D4FAD3E20A69CB300F08C89 /* skyla_math.h in Headers */,
 				4D4FAD4320A69CB300F08C89 /* touch_handler.h in Headers */,
 				4D4703B31FC4A1050088FAAF /* Attachment.h in Headers */,
 				4D4703B01FC4A1050088FAAF /* Array.h in Headers */,

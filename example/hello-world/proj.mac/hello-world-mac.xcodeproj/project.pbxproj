@@ -13,34 +13,34 @@
 		4337BCD71F852BB6004CF11B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCD61F852BB6004CF11B /* CoreVideo.framework */; };
 		4337BCD91F852BBF004CF11B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCD81F852BBF004CF11B /* IOKit.framework */; };
 		4337BCDD1F852BF8004CF11B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCDC1F852BF8004CF11B /* AppKit.framework */; };
-		4337BCE11F852C8A004CF11B /* libseal2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCAF1F8524BD004CF11B /* libseal2d-mac.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		4337BCF91F853EE2004CF11B /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BCF71F853EDE004CF11B /* entry.cpp */; };
 		4337BCFC1F8544CD004CF11B /* res in Copy Files */ = {isa = PBXBuildFile; fileRef = 4337BCFB1F8544C0004CF11B /* res */; };
 		4337BCFE1F8610F2004CF11B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCFD1F8610F2004CF11B /* GLUT.framework */; };
+		4D8A3BF920A6B08A00E87FC7 /* libskyla-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8A3BF220A6AF1000E87FC7 /* libskyla-mac.a */; };
 		4DB22E0B1FDEF8F9004B4747 /* lua-src in Copy Files */ = {isa = PBXBuildFile; fileRef = 4DB22E0A1FDEF8F8004B4747 /* lua-src */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4337BC971F852477004CF11B /* PBXContainerItemProxy */ = {
+		4D8A3BEF20A6AF1000E87FC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4337BC931F852477004CF11B /* seal2d.xcodeproj */;
+			containerPortal = 4D8A3BEA20A6AF1000E87FC7 /* skyla.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4337BC391F852151004CF11B;
-			remoteInfo = seal2d;
+			remoteInfo = skyla;
 		};
-		4337BCAE1F8524BD004CF11B /* PBXContainerItemProxy */ = {
+		4D8A3BF120A6AF1000E87FC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4337BC931F852477004CF11B /* seal2d.xcodeproj */;
+			containerPortal = 4D8A3BEA20A6AF1000E87FC7 /* skyla.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4337BCA21F8524B7004CF11B;
-			remoteInfo = "seal2d-mac";
+			remoteInfo = "skyla-mac";
 		};
-		4337BCE21F852D44004CF11B /* PBXContainerItemProxy */ = {
+		4D8A3BF720A6B08500E87FC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4337BC931F852477004CF11B /* seal2d.xcodeproj */;
+			containerPortal = 4D8A3BEA20A6AF1000E87FC7 /* skyla.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 4337BCA11F8524B7004CF11B;
-			remoteInfo = "seal2d-mac";
+			remoteInfo = "skyla-mac";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -62,7 +62,6 @@
 /* Begin PBXFileReference section */
 		4337BC891F852453004CF11B /* hello-world-mac */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "hello-world-mac"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4337BC8C1F852453004CF11B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		4337BC931F852477004CF11B /* seal2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = seal2d.xcodeproj; path = ../../../src/seal2d.xcodeproj; sourceTree = "<group>"; };
 		4337BCD01F852B96004CF11B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		4337BCD21F852BA7004CF11B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		4337BCD41F852BAE004CF11B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -77,6 +76,7 @@
 		4337BCF81F853EDE004CF11B /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
 		4337BCFB1F8544C0004CF11B /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
 		4337BCFD1F8610F2004CF11B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		4D8A3BEA20A6AF1000E87FC7 /* skyla.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = skyla.xcodeproj; path = ../../../src/skyla.xcodeproj; sourceTree = "<group>"; };
 		4DB22E0A1FDEF8F8004B4747 /* lua-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "lua-src"; path = "../../../lua-src"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4337BCE11F852C8A004CF11B /* libseal2d-mac.a in Frameworks */,
+				4D8A3BF920A6B08A00E87FC7 /* libskyla-mac.a in Frameworks */,
 				4337BCDD1F852BF8004CF11B /* AppKit.framework in Frameworks */,
 				4337BCD31F852BA7004CF11B /* CoreFoundation.framework in Frameworks */,
 				4337BCD91F852BBF004CF11B /* IOKit.framework in Frameworks */,
@@ -101,8 +101,8 @@
 		4337BC801F852453004CF11B = {
 			isa = PBXGroup;
 			children = (
+				4D8A3BEA20A6AF1000E87FC7 /* skyla.xcodeproj */,
 				4DB22E0A1FDEF8F8004B4747 /* lua-src */,
-				4337BC931F852477004CF11B /* seal2d.xcodeproj */,
 				4337BCB21F852707004CF11B /* libs */,
 				4337BC8B1F852453004CF11B /* hello-world-mac */,
 				4337BCFB1F8544C0004CF11B /* res */,
@@ -126,15 +126,6 @@
 				4337BC8C1F852453004CF11B /* main.cpp */,
 			);
 			path = "hello-world-mac";
-			sourceTree = "<group>";
-		};
-		4337BC941F852477004CF11B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4337BC981F852477004CF11B /* libseal2d.a */,
-				4337BCAF1F8524BD004CF11B /* libseal2d-mac.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		4337BC9B1F85248D004CF11B /* Frameworks */ = {
@@ -205,6 +196,15 @@
 			path = ../../csrc;
 			sourceTree = "<group>";
 		};
+		4D8A3BEB20A6AF1000E87FC7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4D8A3BF020A6AF1000E87FC7 /* libskyla.a */,
+				4D8A3BF220A6AF1000E87FC7 /* libskyla-mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -220,7 +220,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				4337BCE31F852D44004CF11B /* PBXTargetDependency */,
+				4D8A3BF820A6B08500E87FC7 /* PBXTargetDependency */,
 			);
 			name = "hello-world-mac";
 			productName = "hello-world-mac";
@@ -254,8 +254,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 4337BC941F852477004CF11B /* Products */;
-					ProjectRef = 4337BC931F852477004CF11B /* seal2d.xcodeproj */;
+					ProductGroup = 4D8A3BEB20A6AF1000E87FC7 /* Products */;
+					ProjectRef = 4D8A3BEA20A6AF1000E87FC7 /* skyla.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -266,18 +266,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4337BC981F852477004CF11B /* libseal2d.a */ = {
+		4D8A3BF020A6AF1000E87FC7 /* libskyla.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libseal2d.a;
-			remoteRef = 4337BC971F852477004CF11B /* PBXContainerItemProxy */;
+			path = libskyla.a;
+			remoteRef = 4D8A3BEF20A6AF1000E87FC7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4337BCAF1F8524BD004CF11B /* libseal2d-mac.a */ = {
+		4D8A3BF220A6AF1000E87FC7 /* libskyla-mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libseal2d-mac.a";
-			remoteRef = 4337BCAE1F8524BD004CF11B /* PBXContainerItemProxy */;
+			path = "libskyla-mac.a";
+			remoteRef = 4D8A3BF120A6AF1000E87FC7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -312,10 +312,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4337BCE31F852D44004CF11B /* PBXTargetDependency */ = {
+		4D8A3BF820A6B08500E87FC7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "seal2d-mac";
-			targetProxy = 4337BCE21F852D44004CF11B /* PBXContainerItemProxy */;
+			name = "skyla-mac";
+			targetProxy = 4D8A3BF720A6B08500E87FC7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

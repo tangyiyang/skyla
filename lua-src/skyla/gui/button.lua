@@ -1,8 +1,8 @@
-local node = require "seal2d.game_object.node"
-local bmfont = require "seal2d.game_object.bmfont"
-local sprite = require "seal2d.game_object.sprite"
-local stm = require "seal2d.base.stm"
-local action = require "seal2d_action"
+local node = require "skyla.game_object.node"
+local bmfont = require "skyla.game_object.bmfont"
+local sprite = require "skyla.game_object.sprite"
+local stm = require "skyla.base.stm"
+local action = require "skyla_action"
 
 local button = class("button", function()
     return node.new()

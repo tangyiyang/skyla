@@ -12,7 +12,7 @@ end
 
 local function spawn(self, spawn_count, container)
     for i = 1, spawn_count do
-        local visible_rect = require("seal2d.context"):get_visible_rect()
+        local visible_rect = require("skyla.context"):get_visible_rect()
         local s = go.sprite.new("res/images/bunny.png")
         s:set_pos(math.random(visible_rect.width), math.random(visible_rect.height))
         s.speed_x = math.random(200) * negative_or_positive()
@@ -23,7 +23,7 @@ local function spawn(self, spawn_count, container)
 end
 
 function sprite_test_layer:ctor()
-    local visible_rect = require("seal2d.context"):get_visible_rect()
+    local visible_rect = require("skyla.context"):get_visible_rect()
     self:set_anchor(0, 0)
     self:set_size(visible_rect.width, visible_rect.height)
 
