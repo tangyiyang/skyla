@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include "lua_editor.h"
-#include "s2d.h"
+#include "skyla.h"
 #include "entry.h"
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
@@ -72,7 +72,7 @@ static void error_callback(int error, const char* description)
 
 // tmp code, remove later on
 
-node* game_scene(s2d::context* ctx)
+node* game_scene(skyla::context* ctx)
 {
     rect visible_rect = ctx->get_visible_rect();
 
@@ -134,7 +134,7 @@ int main(int, char**)
 
 
     entry* game_entry = new entry();
-    s2d::context* ctx = new s2d::context(game_entry);
+    skyla::context* ctx = new skyla::context(game_entry);
     ctx->init(3, width, height);
     ctx->set_content_scale_factor(content_scale_factor);
 

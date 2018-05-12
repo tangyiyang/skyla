@@ -1,9 +1,9 @@
 #ifndef entry_h
 #define entry_h
 
-#include "s2d.h"
+#include "skyla.h"
 
-using namespace s2d;
+using namespace skyla;
 class entry : public app_protocol {
 public:
     void on_init(context* ctx) override;

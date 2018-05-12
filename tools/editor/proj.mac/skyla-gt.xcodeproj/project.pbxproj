@@ -14,6 +14,7 @@
 		43AA98D11F83EEC500368AAD /* nfd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CC1F83EEB600368AAD /* nfd_common.c */; };
 		43AA98D51F83FED700368AAD /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98D31F83FECB00368AAD /* lfs.c */; };
 		43D3265A1F8620C40070B743 /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D326581F8620C40070B743 /* entry.cpp */; };
+		4D8A3C0420A6BEE000E87FC7 /* libskyla-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8A3C0120A6BE8D00E87FC7 /* libskyla-mac.a */; };
 		4D96304C20027D6100063538 /* lua-src in Copy Files */ = {isa = PBXBuildFile; fileRef = 4D96304920027D5D00063538 /* lua-src */; };
 		4DD3C57E1F9CF2980068632E /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3C5431F9CF2980068632E /* lapi.c */; };
 		4DD3C57F1F9CF2980068632E /* lauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3C5451F9CF2980068632E /* lauxlib.c */; };
@@ -59,6 +60,30 @@
 		B6D098E11F7ABEDF003280F4 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D098E01F7ABEDF003280F4 /* IOKit.framework */; };
 		B6D098E51F7ABF31003280F4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D098E41F7ABF31003280F4 /* CoreVideo.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4D8A3BFE20A6BE8D00E87FC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43D3265B1F8620E00070B743 /* skyla.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4337BC391F852151004CF11B;
+			remoteInfo = skyla;
+		};
+		4D8A3C0020A6BE8D00E87FC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43D3265B1F8620E00070B743 /* skyla.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4337BCA21F8524B7004CF11B;
+			remoteInfo = "skyla-mac";
+		};
+		4D8A3C0220A6BEDA00E87FC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43D3265B1F8620E00070B743 /* skyla.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4337BCA11F8524B7004CF11B;
+			remoteInfo = "skyla-mac";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		B66F9DF51F7AB888002AF54D /* Copy Files */ = {
@@ -181,6 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D8A3C0420A6BEE000E87FC7 /* libskyla-mac.a in Frameworks */,
 				B6D098E51F7ABF31003280F4 /* CoreVideo.framework in Frameworks */,
 				B6D098E11F7ABEDF003280F4 /* IOKit.framework in Frameworks */,
 				B6D098DF1F7ABEA6003280F4 /* Cocoa.framework in Frameworks */,
@@ -236,6 +262,15 @@
 				43AA98D41F83FECB00368AAD /* lfs.h */,
 			);
 			path = "lua-fs";
+			sourceTree = "<group>";
+		};
+		4D8A3BFA20A6BE8D00E87FC7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4D8A3BFF20A6BE8D00E87FC7 /* libskyla.a */,
+				4D8A3C0120A6BE8D00E87FC7 /* libskyla-mac.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4DD3C5411F9CF2980068632E /* lua-libs */ = {
@@ -424,6 +459,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4D8A3C0320A6BEDA00E87FC7 /* PBXTargetDependency */,
 			);
 			name = "skyla-gt";
 			productName = "seal2d-gt";
@@ -455,12 +491,35 @@
 			mainGroup = B66F9DEE1F7AB888002AF54D;
 			productRefGroup = B66F9DF81F7AB888002AF54D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4D8A3BFA20A6BE8D00E87FC7 /* Products */;
+					ProjectRef = 43D3265B1F8620E00070B743 /* skyla.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B66F9DF61F7AB888002AF54D /* skyla-gt */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4D8A3BFF20A6BE8D00E87FC7 /* libskyla.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libskyla.a;
+			remoteRef = 4D8A3BFE20A6BE8D00E87FC7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4D8A3C0120A6BE8D00E87FC7 /* libskyla-mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libskyla-mac.a";
+			remoteRef = 4D8A3C0020A6BE8D00E87FC7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B66F9DF31F7AB888002AF54D /* Sources */ = {
@@ -516,6 +575,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4D8A3C0320A6BEDA00E87FC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "skyla-mac";
+			targetProxy = 4D8A3C0220A6BEDA00E87FC7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B66F9DFC1F7AB888002AF54D /* Debug */ = {

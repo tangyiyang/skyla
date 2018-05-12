@@ -28,10 +28,7 @@ static void register_custom_lua_modules(lua_State* L)
 void entry::on_init(context* ctx)
 {
     register_custom_lua_modules(ctx->_lua_context->_lua_state);
-
-#if S2D_ENABLE_LUA == 1
     ctx->_lua_context->on_start(ctx, "res/scripts/main.lua");
-#endif
 }
 
 void entry::on_pause()
