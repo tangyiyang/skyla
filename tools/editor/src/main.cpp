@@ -77,19 +77,18 @@ node* game_scene(skyla::context* ctx)
     rect visible_rect = ctx->get_visible_rect();
 
     float yoffset = 150;
+
     node* layer = new node();
     layer->init();
-    layer->set_pos(visible_rect.size.width/2, visible_rect.size.height/2 + yoffset);
-    layer->set_anchor(0.5, 0.5);
-    layer->set_size(visible_rect.size.width, visible_rect.size.height);
-    layer->set_scale(0.5);
+    layer->set_pos(0, 0);
+    layer->set_anchor(0, 0);
 
     float scale_x = visible_rect.size.width / 16.0f;
     float scale_y = visible_rect.size.height / 16.0f;
 
     sprite* s = new sprite();
     s->init();
-    s->set_texture_with_file("res/seal2d-transparent.png");
+    s->set_texture_with_file("res/logo.png");
     s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
     s->set_anchor(0.5, 0.5);
 
@@ -143,9 +142,13 @@ int main(int, char**)
     int window_width = width/2;
     int window_height = height/2;
     node* rendered_scene = game_scene(ctx);
+
+    ctx->_root->add_child(rendered_scene);
+
     render_texture* rt = new render_texture();
     rt->init(width, height);
     rt->draw(rendered_scene);
+    
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         ImGui_ImplGlfwGL3_NewFrame();
@@ -153,7 +156,6 @@ int main(int, char**)
 
         ImGui::SetNextWindowSize(ImVec2(window_width + 10, window_height + 10),
                                  ImGuiSetCond_FirstUseEver);
-
         ImGui::Begin("game-scene");
         {
             ImGui::Image((void*)rt->_name, ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
@@ -165,11 +167,9 @@ int main(int, char**)
             ImGui::ShowTestWindow(&show_test_window);
         }
 
-
-
         ctx->update(0);
         ctx->draw();
-
+        
         // Rendering
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);

@@ -30,7 +30,8 @@ bool render_texture::init(float width, float height)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _name, 0);
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, _name, 0);
+//    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _name, 0);
     GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
     glDrawBuffers(1, DrawBuffers);
 
@@ -51,13 +52,14 @@ void render_texture::draw(node* tree)
     glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
     glViewport(0, 0, _size.width, _size.height);
 
-    glClearColor(1, 1, 1, 0);
+    glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
 //    glEnable(GL_BLEND);
 //    glBlendFunc(GL_ONE, GL_ONE);
 
     // TODO: we should have an visit function to display different types.
     tree->update(0);
+    tree->draw(C->_render_state);
     C->_render_state->flush();
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
