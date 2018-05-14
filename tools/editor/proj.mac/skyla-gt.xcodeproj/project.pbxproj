@@ -14,6 +14,7 @@
 		43AA98D11F83EEC500368AAD /* nfd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CC1F83EEB600368AAD /* nfd_common.c */; };
 		43AA98D51F83FED700368AAD /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98D31F83FECB00368AAD /* lfs.c */; };
 		43D3265A1F8620C40070B743 /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D326581F8620C40070B743 /* entry.cpp */; };
+		4D78A4C920A7393E00BEFD9E /* imgui.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 4D78A4C820A7393900BEFD9E /* imgui.ini */; };
 		4D8A3C0420A6BEE000E87FC7 /* libskyla-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8A3C0120A6BE8D00E87FC7 /* libskyla-mac.a */; };
 		4D96304C20027D6100063538 /* lua-src in Copy Files */ = {isa = PBXBuildFile; fileRef = 4D96304920027D5D00063538 /* lua-src */; };
 		4DD3C57E1F9CF2980068632E /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3C5431F9CF2980068632E /* lapi.c */; };
@@ -92,6 +93,7 @@
 			dstPath = .;
 			dstSubfolderSpec = 16;
 			files = (
+				4D78A4C920A7393E00BEFD9E /* imgui.ini in Copy Files */,
 				4D96304C20027D6100063538 /* lua-src in Copy Files */,
 				430F7CDA1F8382C500D0C98C /* res in Copy Files */,
 			);
@@ -117,6 +119,8 @@
 		43D326581F8620C40070B743 /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
 		43D326591F8620C40070B743 /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
 		43D3265B1F8620E00070B743 /* skyla.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = skyla.xcodeproj; path = ../../../src/skyla.xcodeproj; sourceTree = "<group>"; };
+		4D78A4C320A7327000BEFD9E /* example_project */ = {isa = PBXFileReference; lastKnownFileType = folder; name = example_project; path = ../../example_project; sourceTree = "<group>"; };
+		4D78A4C820A7393900BEFD9E /* imgui.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imgui.ini; sourceTree = "<group>"; };
 		4D96304920027D5D00063538 /* lua-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "lua-src"; path = "../../../lua-src"; sourceTree = "<group>"; };
 		4DD3C5431F9CF2980068632E /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lapi.c; sourceTree = "<group>"; };
 		4DD3C5441F9CF2980068632E /* lapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lapi.h; sourceTree = "<group>"; };
@@ -264,6 +268,15 @@
 			path = "lua-fs";
 			sourceTree = "<group>";
 		};
+		4D78A4C720A7393900BEFD9E /* configs */ = {
+			isa = PBXGroup;
+			children = (
+				4D78A4C820A7393900BEFD9E /* imgui.ini */,
+			);
+			name = configs;
+			path = ../configs;
+			sourceTree = "<group>";
+		};
 		4D8A3BFA20A6BE8D00E87FC7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,11 +413,13 @@
 		B66F9DEE1F7AB888002AF54D = {
 			isa = PBXGroup;
 			children = (
+				4D78A4C720A7393900BEFD9E /* configs */,
 				4D96304920027D5D00063538 /* lua-src */,
 				43D3265B1F8620E00070B743 /* skyla.xcodeproj */,
 				4DD3C5411F9CF2980068632E /* lua-libs */,
 				B63FEBDC1F7D4C26001BD442 /* libs */,
 				B66F9E011F7AB90A002AF54D /* src */,
+				4D78A4C320A7327000BEFD9E /* example_project */,
 				430F7CD91F8382B700D0C98C /* res */,
 				B66F9DF81F7AB888002AF54D /* Products */,
 				B66F9E041F7ABC42002AF54D /* Frameworks */,

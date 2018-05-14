@@ -1,0 +1,97 @@
+{
+    "hash": "244e96571eebc53",
+    "version": "0.0.1",
+    "work_dir": "",
+    "data": {
+        "name": "default-scene-name",
+        "setup": {
+            "id": 1,
+            "type": "node",
+            "display_name": "root_node",
+            "var": "root",
+            "visible": true,
+            "scale": {
+                "x": 1.0,
+                "y": 1.0
+            },
+            "position": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "z_order": 0,
+            "size": {
+                "width": 1280,
+                "height": 720
+            },
+            "anchor": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "children": [
+                {
+                    "id": 3,
+                    "type": "sprite",
+                    "display_name": "logo",
+                    "texture" : {
+                        "type": "full-image",
+                        "file": "seal2d-transparent.png"
+                    },
+                    "position" : {
+                        "x": 640,
+                        "y": 360
+                    },
+                    "anchor" : {
+                        "x" : 0.5,
+                        "y" : 0.5
+                    },
+
+                    "children": [
+                        {
+                            "id": 4,
+                            "type": "sprite",
+                            "display_name": "logo3",
+                            "texture" : {
+                                "type": "full-image",
+                                "file": "seal2d-transparent.png"
+                            },
+                            "position" : {
+                                "x": 640,
+                                "y": 360
+                            },
+                            "anchor" : {
+                                "x" : 0.5,
+                                "y" : 0.5
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "type": "sprite",
+                    "display_name": "logo2",
+                    "texture" : {
+                        "type": "full-image",
+                        "file": "seal2d-transparent.png"
+                    },
+                    "position" : {
+                        "x": 640,
+                        "y": 360
+                    },
+                    "anchor" : {
+                        "x" : 0.5,
+                        "y" : 0.5
+                    }
+                }
+            ],
+            "layout": {
+                "pivot": 5
+            }
+        },
+        "animation": {
+            "timelines": {
+                "enter": {},
+                "exit": {}
+            }
+        }
+    }
+}

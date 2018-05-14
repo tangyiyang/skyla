@@ -3,14 +3,10 @@ local function main()
                                 .. ";lua-src/?.lua"
     local director = require "skyla.director"
 
-
-
     _G["imgui"] = require "imgui"
     require "imgui_consts"
 
     local editor = require "editor"
-
-    print("call main()")
 
     local function create_func(root)
         local util = require "skyla_util"

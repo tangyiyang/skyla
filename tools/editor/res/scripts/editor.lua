@@ -271,29 +271,30 @@ local function draw_editor_scene()
 end
 
 local function editable(file_name)
-    return string.match(file_name, ".scene$")
+    return string.match(file_name, ".json$")
 end
 
-local function reload_scene(file_name)
-    local full_path = string.format("%s/%s", record.settings.work_dir, file_name)
+local function reload_scene(full_relative_path)
+    local full_path = string.format("%s/%s", record.settings.work_dir, full_relative_path)
     scene_graph_editor.load(full_path)
 end
 
-local function on_click_scene_file(file_name)
-    print("click scene file :", file_name)
-    reload_scene(file_name)
+local function on_click_file(relative_path, file_name)
+    local full_relative_path = relative_path .. file_name
+    reload_scene(full_relative_path)
 end
 
 local draw_file_tree
-draw_file_tree = function(name, file_tree)
+draw_file_tree = function(name, file_tree, relative_path)
     if imgui.TreeNode(name) then
         for k, v in pairs(file_tree) do
             if type(v) == "table" then
-                draw_file_tree(k, v)
+                relative_path = string.format("%s/%s/", relative_path, k)
+                draw_file_tree(k, v, relative_path)
             else
                 if editable(k) then
                     if imgui.Button(k) then
-                        on_click_scene_file(k)
+                        on_click_file(relative_path, k)
                     end
                 else
                     imgui.Text(k)
@@ -320,8 +321,9 @@ local function draw_file_system()
     imgui.InputText("path", record.settings.work_dir)
     imgui.Separator()
 
-    -- draw the file tree
-    draw_file_tree(editor.root_dir_name, editor.file_tree)
+    -- draw the file tree and caculate the relative path while visiting
+    local relative_path = ""
+    draw_file_tree(editor.root_dir_name, editor.file_tree, relative_path)
 
     imgui.End()
 end
