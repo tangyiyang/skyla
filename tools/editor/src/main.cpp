@@ -74,27 +74,25 @@ static void error_callback(int error, const char* description)
 
 node* game_scene(skyla::context* ctx)
 {
-    rect visible_rect = ctx->get_visible_rect();
+    lua_State* L = ctx->_lua_context->_lua_state;
+    bool ok = ctx->_lua_context->load_lua_file("res/scripts/game_scene_renderer.lua");
+    lua_context::call_lua(L, 0, LUA_MULTRET);
+    lua_context::stackDump(ctx->_lua_context->_lua_state);
 
-    float yoffset = 150;
+    lua_getglobal(L, "global_game_scene");
+    lua_context::stackDump(ctx->_lua_context->_lua_state);
 
-    node* layer = new node();
-    layer->init();
-    layer->set_pos(0, 0);
-    layer->set_anchor(0, 0);
-
-    float scale_x = visible_rect.size.width / 16.0f;
-    float scale_y = visible_rect.size.height / 16.0f;
-
-    sprite* s = new sprite();
-    s->init();
-    s->set_texture_with_file("res/logo.png");
-    s->set_pos(visible_rect.size.width/2, visible_rect.size.height/2);
-    s->set_anchor(0.5, 0.5);
-
-    layer->add_child(s);
-
-    return layer;
+    lua_context::call_lua(L, 0, 1);
+    if (ok) {
+        lua_context::stackDump(ctx->_lua_context->_lua_state);
+        node* n = (node*)(lua_touserdata(L, -1));
+        lua_pop(L, -1);
+        return n;
+    } else {
+        LOGE("error load the scene file for editor, check game_scene_renderer.lua");
+        exit(-1);
+        return nullptr;
+    }
 }
 
 int main(int, char**)
@@ -148,15 +146,15 @@ int main(int, char**)
     render_texture* rt = new render_texture();
     rt->init(width, height);
     rt->draw(rendered_scene);
-    
+
+    bool _window_open = false;
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         ImGui_ImplGlfwGL3_NewFrame();
 
-
         ImGui::SetNextWindowSize(ImVec2(window_width + 10, window_height + 10),
                                  ImGuiSetCond_FirstUseEver);
-        ImGui::Begin("game-scene");
+        ImGui::Begin("game-scene", &_window_open, ImGuiWindowFlags_NoMove);
         {
             ImGui::Image((void*)rt->_name, ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
         }

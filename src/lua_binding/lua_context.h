@@ -45,6 +45,9 @@ public:
     static int call_lua(lua_State* L, int n, int r);
 
 public:
+    bool load_lua_file(const char* script_path);
+
+public:
     void init();
     void on_start(context* ctx, const char* script_path);
     void on_update(float dt);

@@ -10,6 +10,8 @@ local function on_start()
     local root = ctx:get_root()
 
     scene_create_func(root)
+
+    _G["go"].ctx = ctx
 end
 
 local function on_update(dt)

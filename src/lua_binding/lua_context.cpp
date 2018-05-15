@@ -213,6 +213,20 @@ void lua_context::register_lua_extensions(lua_State* L)
     lua_pop(L, 2);
 }
 
+bool lua_context::load_lua_file(const char* script_path)
+{
+    lua_State* L = _lua_state;
+
+    file_entry* f = util::load_file(script_path, false);
+    int r = luaL_loadbufferx(L, (const char*)f->_buffer, f->_size, script_path, NULL);
+    if (r != LUA_OK) {
+        LOGE("error load lua file, %s\n");
+        exit(-1);
+    }
+
+    return true;
+}
+
 void lua_context::init()
 {
     lua_State* L = luaL_newstate();
@@ -232,17 +246,10 @@ void lua_context::init()
 
 void lua_context::on_start(context* ctx, const char* script_path)
 {
-    lua_State* L = _lua_state;
+    load_lua_file(script_path);
+    call_lua(_lua_state, 0, LUA_MULTRET);
 
-    file_entry* f = util::load_file(script_path, false);
-    int r = luaL_loadbufferx(L, (const char*)f->_buffer, f->_size, script_path, NULL);
-    if (r != LUA_OK) {
-        LOGE("error load lua file, %s\n");
-        exit(-1);
-    }
-    call_lua(L, 0, LUA_MULTRET);
-
-    lua_getfield(L, LUA_REGISTRYINDEX, CONTEXT_START);
+    lua_getfield(_lua_state, LUA_REGISTRYINDEX, CONTEXT_START);
     call_lua(_lua_state, 0, 0);
 }
 
