@@ -34,7 +34,7 @@
                     "display_name": "logo",
                     "texture" : {
                         "type": "full-image",
-                        "file": "seal2d-transparent.png"
+                        "file": "logo.png"
                     },
                     "position" : {
                         "x": 640,
