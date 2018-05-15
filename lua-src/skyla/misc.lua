@@ -121,14 +121,14 @@ function misc.shuffle(total)
     assert(total)
     local base = {}
     local results = {}
-    for i=1, total do
+    for i = 1, total do
         base[i] = i
     end
-    for i=1, total do
+    for i = 1, total do
         local k = math.random(i, total)
         base[i], base[k] =  base[k],  base[i]
     end
-    for i=1, total do
+    for i = 1, total do
         results[i] = base[i]
     end
     return results

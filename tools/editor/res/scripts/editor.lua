@@ -1,7 +1,9 @@
 local skyla = require "skyla"
+local stack = require "skyla.base.stack"
 local lfs = require "lfs"
 local scene_graph_editor = require "scene_graph_editor"
 local record = require "record"
+
 
 local editor = {
     root_dir_name = "",
@@ -271,7 +273,7 @@ local function draw_editor_scene()
 end
 
 local function editable(file_name)
-    return string.match(file_name, ".json$")
+    return string.match(file_name, ".json$") or string.match(file_name, ".png$")
 end
 
 local function reload_scene(full_relative_path)
@@ -279,22 +281,38 @@ local function reload_scene(full_relative_path)
     scene_graph_editor.load(full_path)
 end
 
-local function on_click_file(relative_path, file_name)
-    local full_relative_path = relative_path .. file_name
+local relative_path_from_file_tree
+function relative_path_from_file_tree(file_tree, file_name, visit_path)
+    for k, v in pairs(file_tree) do
+        if type(v) == "table" then
+            visit_path[#visit_path + 1] = k
+            relative_path_from_file_tree(v, file_name, visit_path)
+        else
+            if v == file_name then
+                return table.concat(visit_path, "/")
+            end
+        end
+    end
+end
+
+local function on_click_file(file_tree, file_name, visit_stack)
+    local relative_path = visit_stack:concat("/")
+    local full_relative_path = string.format("%s/%s", relative_path, file_name)
+
     reload_scene(full_relative_path)
 end
 
 local draw_file_tree
-draw_file_tree = function(name, file_tree, relative_path)
+draw_file_tree = function(name, file_tree, visit_stack)
+    visit_stack:push(name)
     if imgui.TreeNode(name) then
         for k, v in pairs(file_tree) do
             if type(v) == "table" then
-                relative_path = string.format("%s/%s/", relative_path, k)
-                draw_file_tree(k, v, relative_path)
+                draw_file_tree(k, v, visit_stack)
             else
                 if editable(k) then
                     if imgui.Button(k) then
-                        on_click_file(relative_path, k)
+                        on_click_file(file_tree, k, visit_stack)
                     end
                 else
                     imgui.Text(k)
@@ -303,6 +321,7 @@ draw_file_tree = function(name, file_tree, relative_path)
         end
         imgui.TreePop()
     end
+    visit_stack:pop()
 end
 
 local function draw_file_system()
@@ -322,9 +341,8 @@ local function draw_file_system()
     imgui.Separator()
 
     -- draw the file tree and caculate the relative path while visiting
-    local relative_path = ""
-    draw_file_tree(editor.root_dir_name, editor.file_tree, relative_path)
-
+    local s = stack.new()
+    draw_file_tree(editor.root_dir_name, editor.file_tree, s)
     imgui.End()
 end
 
