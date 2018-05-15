@@ -52,7 +52,7 @@ local function set_sprite(sprite, ctx, opt)
         if t.type == "full-image" then
             sprite:set_texture(res_full_path(ctx, t.file))
         elseif t.type == "atlas" then
-
+            sprite:set_texture("#" .. t.sprite_frame_name)
         else
             assert(false, "unkown sprite texture type, file corrupted?")
         end

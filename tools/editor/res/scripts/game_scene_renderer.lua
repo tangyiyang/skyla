@@ -16,7 +16,6 @@ function global_game_scene()
 
     canvas = game_layer
 
-    game_scene_renderer.game_layer = game_layer
     return game_layer.__cobj
 end
 
