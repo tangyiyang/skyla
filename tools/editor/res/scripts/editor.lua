@@ -276,6 +276,19 @@ local function editable(file_name)
     return string.match(file_name, ".json$") or string.match(file_name, ".png$")
 end
 
+local function proc_scene(file_name)
+    print("call proc_scene, file_name = ", file_name)
+end
+
+local function proc_png(file_name)
+    print("call proc_png, file_name = ", file_name)
+end
+
+local file_proc_funcs = {
+    ["json"] = proc_scene,
+    ["png"] = proc_png,
+}
+
 local function reload_scene(full_relative_path)
     local full_path = string.format("%s/%s", record.settings.work_dir, full_relative_path)
     scene_graph_editor.load(full_path)
@@ -296,10 +309,16 @@ function relative_path_from_file_tree(file_tree, file_name, visit_path)
 end
 
 local function on_click_file(file_tree, file_name, visit_stack)
-    local relative_path = visit_stack:concat("/")
+    local relative_path = visit_stack:concat("/", 2)
     local full_relative_path = string.format("%s/%s", relative_path, file_name)
 
-    reload_scene(full_relative_path)
+    local suffix = string.sub(file_name, string.find(file_name, "%.")+1, #file_name)
+    local f = file_proc_funcs[suffix]
+    if f then
+        f(file_name)
+    else
+        error(string.format("unsupported file type, file_name = %s", file_name))
+    end
 end
 
 local draw_file_tree
