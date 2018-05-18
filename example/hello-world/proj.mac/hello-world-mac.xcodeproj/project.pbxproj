@@ -295,7 +295,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -r ../raw/editor_project/* ../res/";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 

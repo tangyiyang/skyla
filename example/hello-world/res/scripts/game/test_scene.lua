@@ -1,6 +1,7 @@
 local node = require "skyla.game_object.node"
 local sprite = require "skyla.game_object.sprite"
 local button = require "skyla.gui.button"
+local list_view = require "skyla.gui.list_view"
 local scale9sprite = require "skyla.game_object.scale9sprite"
 
 local test_scene = class("test_scene", function()
@@ -28,7 +29,6 @@ local function scale9sprite_test(self, parent)
     s:set_border(25, 25, 25, 25)
     s:set_size(400, 400)
     parent:add_child(s)
-
 end
 
 local function bmfont_test(self, parent)
@@ -51,11 +51,39 @@ local function bmfont_test(self, parent)
 end
 
 local function spine_test(self, parent)
+
 	local visible_rect = require("skyla.context"):get_visible_rect()
 	local spine = require "skyla.game_object.spine"
 	local s = spine.new("spines/unit_skull.json", "spines/unit_skull.atlas")
     local names = s:get_all_anim_names()
-    print_r(names)
+
+
+
+     -- left side list view
+    local list = list_view.new {
+                                mode = "col",
+                                width = 104, height = visible_rect.height,
+                                n_cell = #names,
+                                cell_create_func = function(index)
+                                    print("name = ", names[index])
+                                    local name = names[index]
+                                    local b = button.new {
+                                                        normal = "#ui_button_tiny.png",
+                                                        text = name,
+                                                        font = "fonts/animated_32_ffffff.fnt",
+                                                        callback = function()
+                                                            print("click name = ", name)
+                                                            s:set_anim(name, 0, 1)
+                                                        end
+                                                    }
+                                    return b
+                                end
+                            }
+    list:set_anchor(0, 0.5)
+    list:set_pos(100, visible_rect.height/2)
+    parent:add_child(list)
+
+
 	s:set_anim("attack_1", 0, 1)
 	s:set_pos(visible_rect.width/2, visible_rect.height/2)
 
@@ -71,7 +99,6 @@ local function primitive_basic_test(self, parent)
 end
 
 local function load_tests(self, test_layer)
-	local list_view = require "skyla.gui.list_view"
     local visible_rect = require("skyla.context"):get_visible_rect()
 
     local test_cases = {
