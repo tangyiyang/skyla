@@ -9,11 +9,16 @@
 /* Begin PBXBuildFile section */
 		430F7CDA1F8382C500D0C98C /* res in Copy Files */ = {isa = PBXBuildFile; fileRef = 430F7CD91F8382B700D0C98C /* res */; };
 		430F7CFB1F83897D00D0C98C /* lua_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F7CFA1F83897D00D0C98C /* lua_editor.cpp */; };
-		43AA98C51F83BB6200368AAD /* lua_imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 439DAB901F83BAAE00832952 /* lua_imgui.cpp */; };
-		43AA98D01F83EEC100368AAD /* nfd_cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CB1F83EEB600368AAD /* nfd_cocoa.m */; };
-		43AA98D11F83EEC500368AAD /* nfd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98CC1F83EEB600368AAD /* nfd_common.c */; };
-		43AA98D51F83FED700368AAD /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 43AA98D31F83FECB00368AAD /* lfs.c */; };
 		43D3265A1F8620C40070B743 /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D326581F8620C40070B743 /* entry.cpp */; };
+		4D4C85F520AFD08700B685F6 /* gl3w.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85D920AFD08600B685F6 /* gl3w.c */; };
+		4D4C85F620AFD08700B685F6 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85DB20AFD08600B685F6 /* imgui.cpp */; };
+		4D4C85F720AFD08700B685F6 /* imgui_impl_glfw_gl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85E020AFD08600B685F6 /* imgui_impl_glfw_gl3.cpp */; };
+		4D4C85F820AFD08700B685F6 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85E220AFD08600B685F6 /* imgui_demo.cpp */; };
+		4D4C85F920AFD08700B685F6 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85E320AFD08600B685F6 /* imgui_draw.cpp */; };
+		4D4C85FA20AFD08700B685F6 /* lua_imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85E520AFD08600B685F6 /* lua_imgui.cpp */; };
+		4D4C85FC20AFD08700B685F6 /* nfd_cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85EC20AFD08600B685F6 /* nfd_cocoa.m */; };
+		4D4C85FD20AFD08700B685F6 /* nfd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85EE20AFD08600B685F6 /* nfd_common.c */; };
+		4D4C85FF20AFD08700B685F6 /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85F320AFD08700B685F6 /* lfs.c */; };
 		4D78A4C920A7393E00BEFD9E /* imgui.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 4D78A4C820A7393900BEFD9E /* imgui.ini */; };
 		4D8A3C0420A6BEE000E87FC7 /* libskyla-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8A3C0120A6BE8D00E87FC7 /* libskyla-mac.a */; };
 		4D96304C20027D6100063538 /* lua-src in Copy Files */ = {isa = PBXBuildFile; fileRef = 4D96304920027D5D00063538 /* lua-src */; };
@@ -50,11 +55,6 @@
 		4DD3C59C1F9CF2980068632E /* lutf8lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3C5791F9CF2980068632E /* lutf8lib.c */; };
 		4DD3C59D1F9CF2980068632E /* lvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3C57A1F9CF2980068632E /* lvm.c */; };
 		4DD3C59E1F9CF2980068632E /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DD3C57C1F9CF2980068632E /* lzio.c */; };
-		B63FEBE91F7D4ED1001BD442 /* gl3w.c in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE51F7D4ED1001BD442 /* gl3w.c */; };
-		B63FEBEA1F7D4EDD001BD442 /* imgui_impl_glfw_gl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE31F7D4C64001BD442 /* imgui_impl_glfw_gl3.cpp */; };
-		B63FEBEB1F7D4EEA001BD442 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBE01F7D4C34001BD442 /* imgui.cpp */; };
-		B63FEBF01F7D4F7C001BD442 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBEF1F7D4F7C001BD442 /* imgui_draw.cpp */; };
-		B63FEBF21F7D4FE1001BD442 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B63FEBF11F7D4FE0001BD442 /* imgui_demo.cpp */; };
 		B66F9E031F7AB913002AF54D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B66F9E021F7AB913002AF54D /* main.cpp */; };
 		B66F9E061F7ABC42002AF54D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B66F9E051F7ABC42002AF54D /* OpenGL.framework */; };
 		B6D098DF1F7ABEA6003280F4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D098DE1F7ABEA6003280F4 /* Cocoa.framework */; };
@@ -107,18 +107,33 @@
 		430F7CD91F8382B700D0C98C /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
 		430F7CF91F83897D00D0C98C /* lua_editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lua_editor.h; sourceTree = "<group>"; };
 		430F7CFA1F83897D00D0C98C /* lua_editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lua_editor.cpp; sourceTree = "<group>"; };
-		439DAB901F83BAAE00832952 /* lua_imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lua_imgui.cpp; sourceTree = "<group>"; };
-		439DAB911F83BAAE00832952 /* lua_imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lua_imgui.h; sourceTree = "<group>"; };
-		43AA98C81F83EEB600368AAD /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
-		43AA98CA1F83EEB600368AAD /* nfd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nfd.h; sourceTree = "<group>"; };
-		43AA98CB1F83EEB600368AAD /* nfd_cocoa.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nfd_cocoa.m; sourceTree = "<group>"; };
-		43AA98CC1F83EEB600368AAD /* nfd_common.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = nfd_common.c; sourceTree = "<group>"; };
-		43AA98CD1F83EEB600368AAD /* nfd_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nfd_common.h; sourceTree = "<group>"; };
-		43AA98D31F83FECB00368AAD /* lfs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lfs.c; sourceTree = "<group>"; };
-		43AA98D41F83FECB00368AAD /* lfs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lfs.h; sourceTree = "<group>"; };
 		43D326581F8620C40070B743 /* entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entry.cpp; sourceTree = "<group>"; };
 		43D326591F8620C40070B743 /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
 		43D3265B1F8620E00070B743 /* skyla.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = skyla.xcodeproj; path = ../../../src/skyla.xcodeproj; sourceTree = "<group>"; };
+		4D4C85D520AFD08600B685F6 /* imgui_impl_glfw_gl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_glfw_gl3.h; sourceTree = "<group>"; };
+		4D4C85D620AFD08600B685F6 /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
+		4D4C85D720AFD08600B685F6 /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
+		4D4C85D820AFD08600B685F6 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
+		4D4C85D920AFD08600B685F6 /* gl3w.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl3w.c; sourceTree = "<group>"; };
+		4D4C85DA20AFD08600B685F6 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		4D4C85DB20AFD08600B685F6 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
+		4D4C85DC20AFD08600B685F6 /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
+		4D4C85DE20AFD08600B685F6 /* glcorearb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glcorearb.h; sourceTree = "<group>"; };
+		4D4C85DF20AFD08600B685F6 /* gl3w.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl3w.h; sourceTree = "<group>"; };
+		4D4C85E020AFD08600B685F6 /* imgui_impl_glfw_gl3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_glfw_gl3.cpp; sourceTree = "<group>"; };
+		4D4C85E120AFD08600B685F6 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
+		4D4C85E220AFD08600B685F6 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
+		4D4C85E320AFD08600B685F6 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		4D4C85E520AFD08600B685F6 /* lua_imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_imgui.cpp; sourceTree = "<group>"; };
+		4D4C85E620AFD08600B685F6 /* lua_imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_imgui.h; sourceTree = "<group>"; };
+		4D4C85E820AFD08600B685F6 /* nfd_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nfd_common.h; sourceTree = "<group>"; };
+		4D4C85EB20AFD08600B685F6 /* nfd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nfd.h; sourceTree = "<group>"; };
+		4D4C85EC20AFD08600B685F6 /* nfd_cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nfd_cocoa.m; sourceTree = "<group>"; };
+		4D4C85ED20AFD08600B685F6 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		4D4C85EE20AFD08600B685F6 /* nfd_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nfd_common.c; sourceTree = "<group>"; };
+		4D4C85F120AFD08700B685F6 /* stb_tilemap_editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_tilemap_editor.h; sourceTree = "<group>"; };
+		4D4C85F320AFD08700B685F6 /* lfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lfs.c; sourceTree = "<group>"; };
+		4D4C85F420AFD08700B685F6 /* lfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lfs.h; sourceTree = "<group>"; };
 		4D78A4C320A7327000BEFD9E /* example_project */ = {isa = PBXFileReference; lastKnownFileType = folder; name = example_project; path = ../../example_project; sourceTree = "<group>"; };
 		4D78A4C820A7393900BEFD9E /* imgui.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imgui.ini; sourceTree = "<group>"; };
 		4D96304920027D5D00063538 /* lua-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "lua-src"; path = "../../../lua-src"; sourceTree = "<group>"; };
@@ -181,20 +196,6 @@
 		4DD3C57B1F9CF2980068632E /* lvm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lvm.h; sourceTree = "<group>"; };
 		4DD3C57C1F9CF2980068632E /* lzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lzio.c; sourceTree = "<group>"; };
 		4DD3C57D1F9CF2980068632E /* lzio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lzio.h; sourceTree = "<group>"; };
-		B63FEBDF1F7D4C34001BD442 /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
-		B63FEBE01F7D4C34001BD442 /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
-		B63FEBE11F7D4C34001BD442 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
-		B63FEBE21F7D4C34001BD442 /* imgui_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
-		B63FEBE31F7D4C64001BD442 /* imgui_impl_glfw_gl3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_glfw_gl3.cpp; sourceTree = "<group>"; };
-		B63FEBE41F7D4C64001BD442 /* imgui_impl_glfw_gl3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui_impl_glfw_gl3.h; sourceTree = "<group>"; };
-		B63FEBE51F7D4ED1001BD442 /* gl3w.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl3w.c; sourceTree = "<group>"; };
-		B63FEBE71F7D4ED1001BD442 /* gl3w.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl3w.h; sourceTree = "<group>"; };
-		B63FEBE81F7D4ED1001BD442 /* glcorearb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glcorearb.h; sourceTree = "<group>"; };
-		B63FEBEC1F7D4F23001BD442 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
-		B63FEBED1F7D4F23001BD442 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
-		B63FEBEE1F7D4F23001BD442 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
-		B63FEBEF1F7D4F7C001BD442 /* imgui_draw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
-		B63FEBF11F7D4FE0001BD442 /* imgui_demo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
 		B66F9DF71F7AB888002AF54D /* skyla-gt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "skyla-gt"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66F9E021F7AB913002AF54D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		B66F9E051F7ABC42002AF54D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -230,40 +231,77 @@
 			name = luabinding;
 			sourceTree = "<group>";
 		};
-		439DAB8F1F83BAAE00832952 /* lua-imgui */ = {
+		4D4C85D420AFD08600B685F6 /* imgui */ = {
 			isa = PBXGroup;
 			children = (
-				439DAB901F83BAAE00832952 /* lua_imgui.cpp */,
-				439DAB911F83BAAE00832952 /* lua_imgui.h */,
+				4D4C85D520AFD08600B685F6 /* imgui_impl_glfw_gl3.h */,
+				4D4C85D620AFD08600B685F6 /* imgui.h */,
+				4D4C85D720AFD08600B685F6 /* imconfig.h */,
+				4D4C85D820AFD08600B685F6 /* stb_rect_pack.h */,
+				4D4C85D920AFD08600B685F6 /* gl3w.c */,
+				4D4C85DA20AFD08600B685F6 /* stb_truetype.h */,
+				4D4C85DB20AFD08600B685F6 /* imgui.cpp */,
+				4D4C85DC20AFD08600B685F6 /* imgui_internal.h */,
+				4D4C85DD20AFD08600B685F6 /* GL */,
+				4D4C85E020AFD08600B685F6 /* imgui_impl_glfw_gl3.cpp */,
+				4D4C85E120AFD08600B685F6 /* stb_textedit.h */,
+				4D4C85E220AFD08600B685F6 /* imgui_demo.cpp */,
+				4D4C85E320AFD08600B685F6 /* imgui_draw.cpp */,
+			);
+			path = imgui;
+			sourceTree = "<group>";
+		};
+		4D4C85DD20AFD08600B685F6 /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				4D4C85DE20AFD08600B685F6 /* glcorearb.h */,
+				4D4C85DF20AFD08600B685F6 /* gl3w.h */,
+			);
+			path = GL;
+			sourceTree = "<group>";
+		};
+		4D4C85E420AFD08600B685F6 /* lua-imgui */ = {
+			isa = PBXGroup;
+			children = (
+				4D4C85E520AFD08600B685F6 /* lua_imgui.cpp */,
+				4D4C85E620AFD08600B685F6 /* lua_imgui.h */,
 			);
 			path = "lua-imgui";
 			sourceTree = "<group>";
 		};
-		43AA98C71F83EEB600368AAD /* nativefiledialog */ = {
+		4D4C85E720AFD08600B685F6 /* nativefiledialog */ = {
 			isa = PBXGroup;
 			children = (
-				43AA98C81F83EEB600368AAD /* common.h */,
-				43AA98C91F83EEB600368AAD /* include */,
-				43AA98CB1F83EEB600368AAD /* nfd_cocoa.m */,
-				43AA98CC1F83EEB600368AAD /* nfd_common.c */,
-				43AA98CD1F83EEB600368AAD /* nfd_common.h */,
+				4D4C85E820AFD08600B685F6 /* nfd_common.h */,
+				4D4C85EA20AFD08600B685F6 /* include */,
+				4D4C85EC20AFD08600B685F6 /* nfd_cocoa.m */,
+				4D4C85ED20AFD08600B685F6 /* common.h */,
+				4D4C85EE20AFD08600B685F6 /* nfd_common.c */,
 			);
 			path = nativefiledialog;
 			sourceTree = "<group>";
 		};
-		43AA98C91F83EEB600368AAD /* include */ = {
+		4D4C85EA20AFD08600B685F6 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				43AA98CA1F83EEB600368AAD /* nfd.h */,
+				4D4C85EB20AFD08600B685F6 /* nfd.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
 		};
-		43AA98D21F83FECB00368AAD /* lua-fs */ = {
+		4D4C85F020AFD08700B685F6 /* stb_tilemap_editor */ = {
 			isa = PBXGroup;
 			children = (
-				43AA98D31F83FECB00368AAD /* lfs.c */,
-				43AA98D41F83FECB00368AAD /* lfs.h */,
+				4D4C85F120AFD08700B685F6 /* stb_tilemap_editor.h */,
+			);
+			path = stb_tilemap_editor;
+			sourceTree = "<group>";
+		};
+		4D4C85F220AFD08700B685F6 /* lua-fs */ = {
+			isa = PBXGroup;
+			children = (
+				4D4C85F320AFD08700B685F6 /* lfs.c */,
+				4D4C85F420AFD08700B685F6 /* lfs.h */,
 			);
 			path = "lua-fs";
 			sourceTree = "<group>";
@@ -364,50 +402,14 @@
 		B63FEBDC1F7D4C26001BD442 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				B63FEBDD1F7D4C34001BD442 /* common */,
+				4D4C85D420AFD08600B685F6 /* imgui */,
+				4D4C85F220AFD08700B685F6 /* lua-fs */,
+				4D4C85E420AFD08600B685F6 /* lua-imgui */,
+				4D4C85E720AFD08600B685F6 /* nativefiledialog */,
+				4D4C85F020AFD08700B685F6 /* stb_tilemap_editor */,
 			);
 			name = libs;
 			path = ../libs;
-			sourceTree = "<group>";
-		};
-		B63FEBDD1F7D4C34001BD442 /* common */ = {
-			isa = PBXGroup;
-			children = (
-				43AA98D21F83FECB00368AAD /* lua-fs */,
-				43AA98C71F83EEB600368AAD /* nativefiledialog */,
-				439DAB8F1F83BAAE00832952 /* lua-imgui */,
-				B63FEBDE1F7D4C34001BD442 /* imgui */,
-			);
-			path = common;
-			sourceTree = "<group>";
-		};
-		B63FEBDE1F7D4C34001BD442 /* imgui */ = {
-			isa = PBXGroup;
-			children = (
-				B63FEBF11F7D4FE0001BD442 /* imgui_demo.cpp */,
-				B63FEBEF1F7D4F7C001BD442 /* imgui_draw.cpp */,
-				B63FEBEC1F7D4F23001BD442 /* stb_rect_pack.h */,
-				B63FEBED1F7D4F23001BD442 /* stb_textedit.h */,
-				B63FEBEE1F7D4F23001BD442 /* stb_truetype.h */,
-				B63FEBE61F7D4ED1001BD442 /* GL */,
-				B63FEBE51F7D4ED1001BD442 /* gl3w.c */,
-				B63FEBE31F7D4C64001BD442 /* imgui_impl_glfw_gl3.cpp */,
-				B63FEBE41F7D4C64001BD442 /* imgui_impl_glfw_gl3.h */,
-				B63FEBDF1F7D4C34001BD442 /* imconfig.h */,
-				B63FEBE01F7D4C34001BD442 /* imgui.cpp */,
-				B63FEBE11F7D4C34001BD442 /* imgui.h */,
-				B63FEBE21F7D4C34001BD442 /* imgui_internal.h */,
-			);
-			path = imgui;
-			sourceTree = "<group>";
-		};
-		B63FEBE61F7D4ED1001BD442 /* GL */ = {
-			isa = PBXGroup;
-			children = (
-				B63FEBE71F7D4ED1001BD442 /* gl3w.h */,
-				B63FEBE81F7D4ED1001BD442 /* glcorearb.h */,
-			);
-			path = GL;
 			sourceTree = "<group>";
 		};
 		B66F9DEE1F7AB888002AF54D = {
@@ -543,21 +545,24 @@
 			files = (
 				4DD3C5821F9CF2980068632E /* lcode.c in Sources */,
 				4DD3C5861F9CF2980068632E /* ldebug.c in Sources */,
+				4D4C85F720AFD08700B685F6 /* imgui_impl_glfw_gl3.cpp in Sources */,
 				4DD3C5921F9CF2980068632E /* lopcodes.c in Sources */,
 				4DD3C59E1F9CF2980068632E /* lzio.c in Sources */,
 				4DD3C5901F9CF2980068632E /* loadlib.c in Sources */,
-				43AA98D11F83EEC500368AAD /* nfd_common.c in Sources */,
 				430F7CFB1F83897D00D0C98C /* lua_editor.cpp in Sources */,
 				43D3265A1F8620C40070B743 /* entry.cpp in Sources */,
 				4DD3C5841F9CF2980068632E /* lctype.c in Sources */,
 				4DD3C5801F9CF2980068632E /* lbaselib.c in Sources */,
+				4D4C85FF20AFD08700B685F6 /* lfs.c in Sources */,
+				4D4C85FC20AFD08700B685F6 /* nfd_cocoa.m in Sources */,
 				4DD3C58F1F9CF2980068632E /* lmem.c in Sources */,
 				4DD3C5981F9CF2980068632E /* ltable.c in Sources */,
-				43AA98D01F83EEC100368AAD /* nfd_cocoa.m in Sources */,
 				4DD3C5951F9CF2980068632E /* lstate.c in Sources */,
 				4DD3C5911F9CF2980068632E /* lobject.c in Sources */,
+				4D4C85F620AFD08700B685F6 /* imgui.cpp in Sources */,
 				4DD3C5961F9CF2980068632E /* lstring.c in Sources */,
 				4DD3C5811F9CF2980068632E /* lbitlib.c in Sources */,
+				4D4C85FD20AFD08700B685F6 /* nfd_common.c in Sources */,
 				4DD3C58D1F9CF2980068632E /* llex.c in Sources */,
 				4DD3C5881F9CF2980068632E /* ldump.c in Sources */,
 				4DD3C59D1F9CF2980068632E /* lvm.c in Sources */,
@@ -565,26 +570,23 @@
 				4DD3C5941F9CF2980068632E /* lparser.c in Sources */,
 				4DD3C5971F9CF2980068632E /* lstrlib.c in Sources */,
 				4DD3C59A1F9CF2980068632E /* ltm.c in Sources */,
-				43AA98D51F83FED700368AAD /* lfs.c in Sources */,
+				4D4C85F920AFD08700B685F6 /* imgui_draw.cpp in Sources */,
 				4DD3C59C1F9CF2980068632E /* lutf8lib.c in Sources */,
+				4D4C85F520AFD08700B685F6 /* gl3w.c in Sources */,
 				4DD3C5871F9CF2980068632E /* ldo.c in Sources */,
-				B63FEBE91F7D4ED1001BD442 /* gl3w.c in Sources */,
 				4DD3C5891F9CF2980068632E /* lfunc.c in Sources */,
 				4DD3C59B1F9CF2980068632E /* lundump.c in Sources */,
-				43AA98C51F83BB6200368AAD /* lua_imgui.cpp in Sources */,
 				4DD3C58B1F9CF2980068632E /* linit.c in Sources */,
-				B63FEBEB1F7D4EEA001BD442 /* imgui.cpp in Sources */,
 				4DD3C57F1F9CF2980068632E /* lauxlib.c in Sources */,
 				4DD3C5991F9CF2980068632E /* ltablib.c in Sources */,
-				B63FEBF21F7D4FE1001BD442 /* imgui_demo.cpp in Sources */,
 				4DD3C5931F9CF2980068632E /* loslib.c in Sources */,
 				B66F9E031F7AB913002AF54D /* main.cpp in Sources */,
 				4DD3C5851F9CF2980068632E /* ldblib.c in Sources */,
 				4DD3C5831F9CF2980068632E /* lcorolib.c in Sources */,
 				4DD3C57E1F9CF2980068632E /* lapi.c in Sources */,
-				B63FEBF01F7D4F7C001BD442 /* imgui_draw.cpp in Sources */,
-				B63FEBEA1F7D4EDD001BD442 /* imgui_impl_glfw_gl3.cpp in Sources */,
 				4DD3C58C1F9CF2980068632E /* liolib.c in Sources */,
+				4D4C85F820AFD08700B685F6 /* imgui_demo.cpp in Sources */,
+				4D4C85FA20AFD08700B685F6 /* lua_imgui.cpp in Sources */,
 				4DD3C58A1F9CF2980068632E /* lgc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -716,9 +718,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../libs/glfw/include",
-					"$(SRCROOT)/../libs/common/imgui",
-					"$(SRCROOT)/../libs/common/lua-imgui",
-					"$(SRCROOT)/../libs/common/nativefiledialog",
+					"$(SRCROOT)/../libs/imgui",
+					"$(SRCROOT)/../libs/lua-imgui",
+					"$(SRCROOT)/../libs/nativefiledialog",
 					"$(SRCROOT)/../../../src",
 					"$(SRCROOT)/../../../lua-libs/lua-5.3.4",
 				);
@@ -742,9 +744,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../libs/glfw/include",
-					"$(SRCROOT)/../libs/common/imgui",
-					"$(SRCROOT)/../libs/common/lua-imgui",
-					"$(SRCROOT)/../libs/common/nativefiledialog",
+					"$(SRCROOT)/../libs/imgui",
+					"$(SRCROOT)/../libs/lua-imgui",
+					"$(SRCROOT)/../libs/nativefiledialog",
 					"$(SRCROOT)/../../../src",
 					"$(SRCROOT)/../../../lua-libs/lua-5.3.4",
 				);
