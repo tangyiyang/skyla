@@ -68,8 +68,6 @@ function scene_graph_editor.load(file_full_path)
 
     print("the scene data is")
     print_r(decoded)
-
-
 end
 
 function scene_graph_editor.render()
