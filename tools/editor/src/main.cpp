@@ -145,16 +145,26 @@ int main(int, char**)
     render_texture* rt = new render_texture();
     rt->init(width, height);
 
-
+    ImGuiIO& io = ImGui::GetIO();
+    float mouse_x, mouse_y;
+    float center_x, center_y;
     bool _window_open = false;
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         ImGui_ImplGlfwGL3_NewFrame();
 
-        ImGui::SetNextWindowSize(ImVec2(window_width + 10, window_height + 10),
+        ImGui::SetNextWindowSize(ImVec2(window_width, window_height),
                                  ImGuiSetCond_FirstUseEver);
         ImGui::Begin("game-scene", &_window_open, ImGuiWindowFlags_NoMove);
         {
+            mouse_x = io.MousePos.x;
+            mouse_y = io.MousePos.y;
+
+            center_x = (ImGui::GetWindowSize().x - ImGui::GetCursorPosX() - window_width)/2;
+            center_y = (ImGui::GetWindowSize().y - ImGui::GetCursorPosY() - window_height)/2;
+            ImGui::SetCursorPosX(center_x);
+            ImGui::SetCursorPosY(center_y);
+
             rt->draw(rendered_scene);
             ImGui::Image((void*)rt->_name, ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
         }
@@ -167,7 +177,7 @@ int main(int, char**)
 
         ctx->update(0);
         ctx->draw();
-        
+
         // Rendering
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);

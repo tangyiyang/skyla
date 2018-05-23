@@ -70,11 +70,14 @@ bool texture::init(const char* file)
 
     file_entry* f = util::load_file(file, false);
 
-    this->init(f->_buffer, (int)f->_size);
-
-    f->release();
-
-    return true;
+    if (f) {
+        this->init(f->_buffer, (int)f->_size);
+        f->release();
+        return true;
+    } else {
+        LOGE("file: %s, could not be located.", file);
+        return false;
+    }
 }
 
 bool texture::init(uint8_t* raw_data, size_t len)
