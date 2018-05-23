@@ -17,7 +17,6 @@ end
 
 local function sprite_test(self, parent)
     local sprite_test_layer = require "test.sprite_test_layer"
-
     parent:add_child(sprite_test_layer.new())
 end
 
@@ -57,8 +56,6 @@ local function spine_test(self, parent)
 	local s = spine.new("spines/unit_skull.json", "spines/unit_skull.atlas")
     local names = s:get_all_anim_names()
 
-
-
      -- left side list view
     local list = list_view.new {
                                 mode = "col",
@@ -90,6 +87,13 @@ local function spine_test(self, parent)
 	parent:add_child(s)
 end
 
+
+local function scene_loader_test(self, parent)
+    local scene_loader_test = require "test.scene_loader_test_layer"
+
+    parent:add_child(scene_loader_test.new())
+end
+
 local function primitive_basic_test(self, parent)
     local primitive = require("skyla.game_object.primitive")
 
@@ -105,7 +109,8 @@ local function load_tests(self, test_layer)
     	{ name = "sprite", func = sprite_test },
         { name = "scale9", func = scale9sprite_test },
     	{ name = "bmfont", func = bmfont_test },
-    	{ name = "spine", func = spine_test }
+    	{ name = "spine", func = spine_test },
+        { name = "scene_loader", func = scene_loader_test },
 	}
 
     local function cell_create_func(index)
@@ -138,6 +143,9 @@ end
 
 function test_scene:ctor()
     sprite.load_frames("images/ui_atlas.json", "images/ui_atlas.png")
+
+
+    local scene_loader = require "skyla.scene_loader"
 
     -- all the test nodes is added to this layer.
     local test_layer = node.new()

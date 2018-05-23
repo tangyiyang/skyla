@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4337BC741F8521BA004CF11B /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC701F8521B7004CF11B /* cJSON.c */; };
 		4337BCFA1F853F20004CF11B /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC701F8521B7004CF11B /* cJSON.c */; };
-		4D41B71720AF45320045FAE1 /* stb_tilemap_editor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D41B71620AF45310045FAE1 /* stb_tilemap_editor.h */; };
 		4D4703AD1FC4A1050088FAAF /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D47035A1FC4A1050088FAAF /* Animation.h */; };
 		4D4703AE1FC4A1050088FAAF /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D47035B1FC4A1050088FAAF /* AnimationState.h */; };
 		4D4703AF1FC4A1050088FAAF /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D47035C1FC4A1050088FAAF /* AnimationStateData.h */; };
@@ -337,7 +336,6 @@
 		4337BC711F8521B7004CF11B /* cJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cJSON.h; sourceTree = "<group>"; };
 		4337BC731F8521B7004CF11B /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		4337BCA21F8524B7004CF11B /* libskyla-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libskyla-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D41B71620AF45310045FAE1 /* stb_tilemap_editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_tilemap_editor.h; sourceTree = "<group>"; };
 		4D47035A1FC4A1050088FAAF /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		4D47035B1FC4A1050088FAAF /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
 		4D47035C1FC4A1050088FAAF /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationStateData.h; sourceTree = "<group>"; };
@@ -604,7 +602,6 @@
 		4337BC6E1F8521B7004CF11B /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				4D41B71520AF45310045FAE1 /* stb_tilemap_editor */,
 				4D4703571FC4A1050088FAAF /* spine-c */,
 				4D6782721FA5C0F7007D461F /* md5 */,
 				4337BC6F1F8521B7004CF11B /* cJSON */,
@@ -629,14 +626,6 @@
 				4337BC731F8521B7004CF11B /* stb_image.h */,
 			);
 			path = stb_image;
-			sourceTree = "<group>";
-		};
-		4D41B71520AF45310045FAE1 /* stb_tilemap_editor */ = {
-			isa = PBXGroup;
-			children = (
-				4D41B71620AF45310045FAE1 /* stb_tilemap_editor.h */,
-			);
-			path = stb_tilemap_editor;
 			sourceTree = "<group>";
 		};
 		4D4703571FC4A1050088FAAF /* spine-c */ = {
@@ -1021,7 +1010,6 @@
 				4D4FAD2320A69CB300F08C89 /* render_state.h in Headers */,
 				4D4703FC1FC4A1060088FAAF /* kvec.h in Headers */,
 				4D4703D01FC4A1050088FAAF /* TransformConstraint.h in Headers */,
-				4D41B71720AF45320045FAE1 /* stb_tilemap_editor.h in Headers */,
 				4D4FAD7220A69CB300F08C89 /* skyla_macro.h in Headers */,
 				4D4703B51FC4A1050088FAAF /* Bone.h in Headers */,
 				4D4703C71FC4A1050088FAAF /* SkeletonBinary.h in Headers */,

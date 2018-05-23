@@ -31,14 +31,14 @@
                 {
                     "id": 3,
                     "type": "sprite",
-                    "display_name": "logo",
+                    "display_name": "bunny",
                     "texture" : {
                         "type": "full-image",
-                        "file": "logo.png"
+                        "file": "images/bunny.png"
                     },
                     "position" : {
-                        "x": 640,
-                        "y": 360
+                        "x": 100,
+                        "y": 100
                     },
                     "anchor" : {
                         "x" : 0.5,
@@ -49,14 +49,14 @@
                         {
                             "id": 4,
                             "type": "sprite",
-                            "display_name": "logo3",
+                            "display_name": "bunny2",
                             "texture" : {
                                 "type": "full-image",
-                                "file": "seal2d-transparent.png"
+                                "file": "images/bunny.png"
                             },
                             "position" : {
-                                "x": 640,
-                                "y": 360
+                                "x": 100,
+                                "y": 200
                             },
                             "anchor" : {
                                 "x" : 0.5,
@@ -68,14 +68,14 @@
                 {
                     "id": 4,
                     "type": "sprite",
-                    "display_name": "logo2",
+                    "display_name": "bunny3",
                     "texture" : {
                         "type": "full-image",
-                        "file": "seal2d-transparent.png"
+                        "file": "images/bunny.png"
                     },
                     "position" : {
-                        "x": 640,
-                        "y": 360
+                        "x": 200,
+                        "y": 100
                     },
                     "anchor" : {
                         "x" : 0.5,

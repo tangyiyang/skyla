@@ -3,8 +3,9 @@
 ]]
 
 local skyla = require "skyla"
-local util = require "skyla.util"
+local util = require "skyla_util"
 local cjson = require "cjson"
+local go = require "skyla.game_object.go"
 
 local scene_loader = {}
 
@@ -14,9 +15,10 @@ end
 
 local function set_node(node, ctx, opt)
     assert(node)
-    print("node = ", node)
-    print_r(node)
-    node:set_visible(not not opt.visible)
+
+    if opt.visible ~= nil then
+        node:set_visible(opt.visible)
+    end
 
     if opt.scale then
         node:set_scale(opt.scale.x, opt.scale.y)
@@ -60,13 +62,13 @@ local function set_sprite(sprite, ctx, opt)
 end
 
 local function load_node(...)
-    local node = skyla.node()
+    local node = go.node.new()
     set_node(node, ...)
     return node
 end
 
 local function load_sprite(...)
-    local spr = skyla.sprite()
+    local spr = go.sprite.new()
     set_node(spr, ...)
     set_sprite(spr, ...)
     return spr

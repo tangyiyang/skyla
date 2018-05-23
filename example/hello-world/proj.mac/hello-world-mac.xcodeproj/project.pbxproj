@@ -14,10 +14,11 @@
 		4337BCD91F852BBF004CF11B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCD81F852BBF004CF11B /* IOKit.framework */; };
 		4337BCDD1F852BF8004CF11B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCDC1F852BF8004CF11B /* AppKit.framework */; };
 		4337BCF91F853EE2004CF11B /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4337BCF71F853EDE004CF11B /* entry.cpp */; };
-		4337BCFC1F8544CD004CF11B /* res in Copy Files */ = {isa = PBXBuildFile; fileRef = 4337BCFB1F8544C0004CF11B /* res */; };
+		4337BCFC1F8544CD004CF11B /* res in Copy Files (3 items) */ = {isa = PBXBuildFile; fileRef = 4337BCFB1F8544C0004CF11B /* res */; };
 		4337BCFE1F8610F2004CF11B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4337BCFD1F8610F2004CF11B /* GLUT.framework */; };
+		4D156F3720B4E417001AA65C /* example_project in Copy Files (3 items) */ = {isa = PBXBuildFile; fileRef = 4D156F3620B4E412001AA65C /* example_project */; };
 		4D8A3BF920A6B08A00E87FC7 /* libskyla-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8A3BF220A6AF1000E87FC7 /* libskyla-mac.a */; };
-		4DB22E0B1FDEF8F9004B4747 /* lua-src in Copy Files */ = {isa = PBXBuildFile; fileRef = 4DB22E0A1FDEF8F8004B4747 /* lua-src */; };
+		4DB22E0B1FDEF8F9004B4747 /* lua-src in Copy Files (3 items) */ = {isa = PBXBuildFile; fileRef = 4DB22E0A1FDEF8F8004B4747 /* lua-src */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,16 +46,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4337BC871F852453004CF11B /* Copy Files */ = {
+		4337BC871F852453004CF11B /* Copy Files (3 items) */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = .;
 			dstSubfolderSpec = 16;
 			files = (
-				4DB22E0B1FDEF8F9004B4747 /* lua-src in Copy Files */,
-				4337BCFC1F8544CD004CF11B /* res in Copy Files */,
+				4D156F3720B4E417001AA65C /* example_project in Copy Files (3 items) */,
+				4DB22E0B1FDEF8F9004B4747 /* lua-src in Copy Files (3 items) */,
+				4337BCFC1F8544CD004CF11B /* res in Copy Files (3 items) */,
 			);
-			name = "Copy Files";
+			name = "Copy Files (3 items)";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -76,6 +78,7 @@
 		4337BCF81F853EDE004CF11B /* entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entry.h; sourceTree = "<group>"; };
 		4337BCFB1F8544C0004CF11B /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
 		4337BCFD1F8610F2004CF11B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		4D156F3620B4E412001AA65C /* example_project */ = {isa = PBXFileReference; lastKnownFileType = folder; name = example_project; path = ../../../tools/example_project; sourceTree = "<group>"; };
 		4D8A3BEA20A6AF1000E87FC7 /* skyla.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = skyla.xcodeproj; path = ../../../src/skyla.xcodeproj; sourceTree = "<group>"; };
 		4DB22E0A1FDEF8F8004B4747 /* lua-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "lua-src"; path = "../../../lua-src"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +108,7 @@
 				4DB22E0A1FDEF8F8004B4747 /* lua-src */,
 				4337BCB21F852707004CF11B /* libs */,
 				4337BC8B1F852453004CF11B /* hello-world-mac */,
+				4D156F3620B4E412001AA65C /* example_project */,
 				4337BCFB1F8544C0004CF11B /* res */,
 				4337BC8A1F852453004CF11B /* Products */,
 				4337BC9B1F85248D004CF11B /* Frameworks */,
@@ -215,7 +219,7 @@
 				4337BC851F852453004CF11B /* Sources */,
 				4337BC861F852453004CF11B /* Frameworks */,
 				4D67825B1FA59B7A007D461F /* Run Script */,
-				4337BC871F852453004CF11B /* Copy Files */,
+				4337BC871F852453004CF11B /* Copy Files (3 items) */,
 			);
 			buildRules = (
 			);
