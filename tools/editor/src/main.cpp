@@ -44,7 +44,7 @@ void MousePosCallback(GLFWwindow* window, double x, double y)
     }
     static char title_text[256] = "";
     snprintf(title_text, 256, "%s:(%d, %d)",
-             "seal2d",
+             "skyla-editor",
              (int)(x), (int)(context::C()->_window_size.height - y));
     glfwSetWindowTitle(window, title_text);
 }
@@ -129,7 +129,6 @@ int main(int, char**)
 
     ImVec4 clear_color = ImColor(114, 144, 154);
 
-
     entry* game_entry = new entry();
     skyla::context* ctx = new skyla::context(game_entry);
     ctx->init(3, width, height);
@@ -145,7 +144,7 @@ int main(int, char**)
 
     render_texture* rt = new render_texture();
     rt->init(width, height);
-    rt->draw(rendered_scene);
+
 
     bool _window_open = false;
     while (!glfwWindowShouldClose(window)) {
@@ -156,6 +155,7 @@ int main(int, char**)
                                  ImGuiSetCond_FirstUseEver);
         ImGui::Begin("game-scene", &_window_open, ImGuiWindowFlags_NoMove);
         {
+            rt->draw(rendered_scene);
             ImGui::Image((void*)rt->_name, ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
         }
         ImGui::End();

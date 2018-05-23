@@ -54,6 +54,14 @@ function draw_node(node_data)
     end
 end
 
+local function load_scene(graph)
+    local scene_loader = require("skyla.scene_loader")
+    local game_scene_renderer = require "game_scene_renderer"
+
+    require("skyla_util").add_search_path("example_project/")
+    local node = scene_loader.load_from_data(graph)
+    game_scene_renderer.reset_child(node)
+end
 
 function scene_graph_editor.load(file_full_path)
     -- we build a data structure to display the scene graph
@@ -68,6 +76,8 @@ function scene_graph_editor.load(file_full_path)
 
     print("the scene data is")
     print_r(decoded)
+
+    load_scene(decoded)
 end
 
 function scene_graph_editor.render()

@@ -1,8 +1,10 @@
-local canvas
+-- TODO: refactor me!
+local game_scene_renderer = {
+}
 
 function global_game_scene()
-    if canvas then
-        assert(false, "global_game_scene initlize func should be called only once.")
+    if __scene_graph_canvas then
+        assert(false, "game scene render canvas already loaded.")
         return
     end
 
@@ -14,14 +16,18 @@ function global_game_scene()
 
     root:add_child(game_layer)
 
-    canvas = game_layer
-
+    --[[
+        FIXME: this is quite hacky, this function is called in
+        C++ level, by using this global variable to store the data we
+        have created. should we do all the stuff in Lua level?
+    ]]
+    _G["__scene_graph_canvas"] = game_layer
     return game_layer.__cobj
 end
 
 
-local game_scene_renderer = { }
-function game_scene_renderer.reload_child(child)
+function game_scene_renderer.reset_child(child)
+    local canvas = __scene_graph_canvas
     assert(canvas, "global game canvas not created.")
     canvas:remove_all_children()
     canvas:add_child(child)

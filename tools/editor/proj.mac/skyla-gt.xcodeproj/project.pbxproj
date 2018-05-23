@@ -10,6 +10,7 @@
 		430F7CDA1F8382C500D0C98C /* res in Copy Files */ = {isa = PBXBuildFile; fileRef = 430F7CD91F8382B700D0C98C /* res */; };
 		430F7CFB1F83897D00D0C98C /* lua_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430F7CFA1F83897D00D0C98C /* lua_editor.cpp */; };
 		43D3265A1F8620C40070B743 /* entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D326581F8620C40070B743 /* entry.cpp */; };
+		4D156F3A20B4FB4C001AA65C /* example_project in Copy Files */ = {isa = PBXBuildFile; fileRef = 4D78A4C320A7327000BEFD9E /* example_project */; };
 		4D4C85F520AFD08700B685F6 /* gl3w.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85D920AFD08600B685F6 /* gl3w.c */; };
 		4D4C85F620AFD08700B685F6 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85DB20AFD08600B685F6 /* imgui.cpp */; };
 		4D4C85F720AFD08700B685F6 /* imgui_impl_glfw_gl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C85E020AFD08600B685F6 /* imgui_impl_glfw_gl3.cpp */; };
@@ -93,6 +94,7 @@
 			dstPath = .;
 			dstSubfolderSpec = 16;
 			files = (
+				4D156F3A20B4FB4C001AA65C /* example_project in Copy Files */,
 				4D78A4C920A7393E00BEFD9E /* imgui.ini in Copy Files */,
 				4D96304C20027D6100063538 /* lua-src in Copy Files */,
 				430F7CDA1F8382C500D0C98C /* res in Copy Files */,

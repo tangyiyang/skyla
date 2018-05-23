@@ -100,10 +100,8 @@ local function parse(ctx, opt)
     return node
 end
 
-function scene_loader.load(file_path, cache)
-    local data = util.load_file(file_path, cache)
-    local graph = cjson.decode(data)
-
+function scene_loader.load_from_data(data)
+    local graph = data
     local ctx = {
         ["version"] = graph.version,
         ["work_dir"] = graph.work_dir
@@ -111,6 +109,12 @@ function scene_loader.load(file_path, cache)
 
     local opt = graph.data.setup
     return parse(ctx, opt)
+end
+
+function scene_loader.load(file_path, cache)
+    local data = util.load_file(file_path, cache)
+    local graph = cjson.decode(data)
+    load_from_data(graph)
 end
 
 return scene_loader

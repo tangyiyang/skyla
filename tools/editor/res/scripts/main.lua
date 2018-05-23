@@ -6,6 +6,13 @@ local function main()
     _G["imgui"] = require "imgui"
     require "imgui_consts"
 
+
+    print("package.preload: ")
+    for k, v in pairs(package.preload) do
+        print(k, v)
+    end
+
+
     local editor = require "editor"
 
     local function create_func(root)
