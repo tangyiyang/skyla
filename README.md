@@ -1,6 +1,5 @@
 ![logo](https://github.com/tangyiyang/seal2d/blob/master/logo.png?raw=true)
 
-# About Skyla
 A Simple and Complete 2D cross platform game engine. 
 This project is under heavy development right now, As a side project, I hope I would release v0.1 very soon. :)
 
