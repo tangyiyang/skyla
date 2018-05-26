@@ -43,43 +43,6 @@
                     "anchor" : {
                         "x" : 0.5,
                         "y" : 0.5
-                    },
-
-                    "children": [
-                        {
-                            "id": 4,
-                            "type": "sprite",
-                            "display_name": "bunny2",
-                            "texture" : {
-                                "type": "full-image",
-                                "file": "images/bunny.png"
-                            },
-                            "position" : {
-                                "x": 100,
-                                "y": 200
-                            },
-                            "anchor" : {
-                                "x" : 0.5,
-                                "y" : 0.5
-                            }
-                        }
-                    ]
-                },
-                {
-                    "id": 4,
-                    "type": "sprite",
-                    "display_name": "bunny3",
-                    "texture" : {
-                        "type": "full-image",
-                        "file": "images/bunny.png"
-                    },
-                    "position" : {
-                        "x": 200,
-                        "y": 100
-                    },
-                    "anchor" : {
-                        "x" : 0.5,
-                        "y" : 0.5
                     }
                 }
             ],

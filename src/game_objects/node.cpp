@@ -131,6 +131,19 @@ void node::sort()
 
 void node::add_child(node* child, uint32_t z_order/*= 0*/)
 {
+#ifdef DEBUG
+    if (child->get_id() != 0) {
+        SKYLA_ASSERT(child->_parent == nullptr);
+    }
+
+    std::vector<node*>::iterator it = _children.begin();
+    for (; it != _children.end(); ++it) {
+        if (child == *it) {
+            SKYLA_ASSERT(false);
+        }
+    }
+#endif
+
     child->_z_counter++;
     child->_z_order = z_order;
     child->_parent = this;

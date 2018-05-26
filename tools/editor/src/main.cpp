@@ -19,15 +19,13 @@ static skyla::vec2 translate_to_canvas(float mouse_pos_x,
                                        float cursor_x,
                                        float cursor_y,
                                        float window_pos_x,
-                                       float window_pos_y,
-                                       float window_width,
-                                       float window_height)
+                                       float window_pos_y)
 {
     float xt = mouse_pos_x - window_pos_x - cursor_x;
     float yt = mouse_pos_y - window_pos_y - cursor_y;
 
     float x = xt * 2;
-    float y = (CANAS_HEIGHT - yt)*2;
+    float y = yt * 2;
 
     return skyla::vec2::make(x, y);
 }
@@ -168,14 +166,8 @@ int main(int, char**)
     int window_height = height/2;
     node* rendered_scene = game_scene(ctx);
 
-    ctx->_root->add_child(rendered_scene);
-
     render_texture* rt = new render_texture();
     rt->init(width, height);
-
-    float center_x, center_y;
-    float window_title_height = 22; // this is the default height of a imgui window
-    float actual_window_height;
 
     bool _window_open = false;
     while (!glfwWindowShouldClose(window)) {
@@ -192,14 +184,12 @@ int main(int, char**)
                                            ImGui::GetCursorPosX(),
                                            ImGui::GetCursorPosY(),
                                            ImGui::GetWindowPos().x,
-                                           ImGui::GetWindowPos().y,
-                                           ImGui::GetWindowSize().x,
-                                           ImGui::GetWindowSize().y);
+                                           ImGui::GetWindowPos().y);
             dispatch_mouse_event_to_canvas(pos);
 
             rt->draw(rendered_scene);
 
-            ImGui::Image((void*)rt->_name, ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
+            ImGui::Image((ImTextureID)rt->_name, ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
         }
         ImGui::End();
 

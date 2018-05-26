@@ -166,6 +166,7 @@ void context::shutdown()
     }
 }
 
+//#define SKYLA_TOUCH_LOG
 void context::on_touch_begin(float x, float y)
 {
     touch_event e = {
@@ -174,7 +175,9 @@ void context::on_touch_begin(float x, float y)
         touch_event::TOUCH_BEGIN
     };
 
+#ifdef SKYLA_TOUCH_LOG
     LOGD("context:: touch begin, x, y = %.2f, %.2f", x, y);
+#endif
     _touch_handler->handle_touch_event(&e);
 }
 
@@ -185,8 +188,9 @@ void context::on_touch_moved(float x, float y)
         x, _window_size.height - y,
         touch_event::TOUCH_MOVED
     };
-
+#ifdef SKYLA_TOUCH_LOG
     LOGD("context:: touch move, x, y = %.2f, %.2f", x, y);
+#endif
     _touch_handler->handle_touch_event(&e);
 }
 
@@ -197,8 +201,9 @@ void context::on_touch_ended(float x, float y)
         x, _window_size.height - y,
         touch_event::TOUCH_ENDED
     };
-
+#ifdef SKYLA_TOUCH_LOG
     LOGD("context:: touch end, x, y = %.2f, %.2f", x, y);
+#endif
     _touch_handler->handle_touch_event(&e);
 }
 
@@ -209,6 +214,9 @@ void context::on_touch_cancl(float x, float y)
         x, _window_size.height - y,
         touch_event::TOUCH_CANCL
     };
+#ifdef SKYLA_TOUCH_LOG
+    LOGD("context:: touch cancel, x, y = %.2f, %.2f", x, y);
+#endif
     _touch_handler->handle_touch_event(&e);
 }
 

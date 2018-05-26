@@ -4,6 +4,7 @@ local C = require "skyla_node"
 
 local node = {
     init = C.init,
+    get_id = C.get_id,
     on_touch = C.on_touch,
     on_update = C.on_update,
     run_action = C.run_action,

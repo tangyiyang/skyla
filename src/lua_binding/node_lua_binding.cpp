@@ -221,6 +221,15 @@ static int lskyla_node_stop_all_actions(lua_State* L)
     return 0;
 }
 
+static int lskyla_node_get_id(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+    lua_pushnumber(L, n->get_id());
+
+    return 1;
+}
+
 static int lskyla_node_new(lua_State* L)
 {
     node* n = new node();
@@ -237,6 +246,7 @@ int luaopen_skyla_node(lua_State* L)
 
     luaL_Reg lib[] = {
         { "new",         lskyla_node_new },
+        { "get_id",    lskyla_node_get_id },
         { "add_child", lskyla_node_add_child },
         { "remove_all_children", lskyla_node_remove_all_children },
         { "set_visible", lskyla_node_set_visible},
