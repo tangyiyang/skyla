@@ -71,13 +71,13 @@ local function load_node(...)
 end
 
 local function load_sprite(...)
-    local spr = go.sprite.new()
-    set_node(spr, ...)
-    set_sprite(spr, ...)
-    spr:on_touch(function(_, phase, x, y)
-        printf("sprite, id = %d, phase = %d, x = %.2f, y = %.2f", spr:get_id(), phase, x, y)
+    local sprite = go.sprite.new()
+    set_node(sprite, ...)
+    set_sprite(sprite, ...)
+    sprite:on_touch(function(_, phase, x, y)
+        printf("sprite, id = %d, phase = %d, x = %.2f, y = %.2f", sprite:get_id(), phase, x, y)
     end)
-    return spr
+    return sprite
 end
 
 local load_funcs = {

@@ -103,14 +103,9 @@ node* game_scene(skyla::context* ctx)
     lua_State* L = ctx->_lua_context->_lua_state;
     bool ok = ctx->_lua_context->load_lua_file("res/scripts/game_scene_renderer.lua");
     lua_context::call_lua(L, 0, LUA_MULTRET);
-    lua_context::stackDump(ctx->_lua_context->_lua_state);
-
     lua_getglobal(L, "global_game_scene");
-    lua_context::stackDump(ctx->_lua_context->_lua_state);
-
     lua_context::call_lua(L, 0, 1);
     if (ok) {
-        lua_context::stackDump(ctx->_lua_context->_lua_state);
         node* n = (node*)(lua_touserdata(L, -1));
         lua_pop(L, -1);
         return n;

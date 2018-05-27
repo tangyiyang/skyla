@@ -75,7 +75,6 @@ int luaopen_skyla_panel(lua_State* L)
     };
 
     luaL_newlib(L, lib);
-    lua_context::stackDump(L);
     return 1;
 }
 

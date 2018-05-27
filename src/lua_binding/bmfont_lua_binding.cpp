@@ -47,7 +47,6 @@ int luaopen_skyla_bmfont(lua_State* L)
     };
 
     luaL_newlib(L, lib);
-    lua_context::stackDump(L);
     return 1;
 }
 
