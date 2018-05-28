@@ -64,9 +64,6 @@ end
 local function load_node(...)
     local node = go.node.new()
     set_node(node, ...)
-    node:on_touch(function(_, phase, x, y)
-        printf("node, phase = %d, x = %.2f, y = %.2f", phase, x, y)
-    end)
     return node
 end
 
@@ -74,9 +71,6 @@ local function load_sprite(...)
     local sprite = go.sprite.new()
     set_node(sprite, ...)
     set_sprite(sprite, ...)
-    sprite:on_touch(function(_, phase, x, y)
-        printf("sprite, id = %d, phase = %d, x = %.2f, y = %.2f", sprite:get_id(), phase, x, y)
-    end)
     return sprite
 end
 

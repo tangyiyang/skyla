@@ -10,7 +10,19 @@ void touch_handler::init()
     _touchable_nodes.reserve(SKYLA_INITIAL_TOUCHABLE_NODES);
 }
 
-void touch_handler::handle_touch_event(touch_event *event)
+const std::vector<node*> touch_handler::touch_event_test(touch_event* event)
+{
+    _touchable_nodes.clear();
+
+    node* root = context::C()->get_root();
+    root->hit_test(this, event);
+
+    std::vector<node*> copy(_touchable_nodes);
+    _touchable_nodes.clear();
+    return copy;
+}
+
+void touch_handler::handle_touch_event(touch_event* event)
 {
     node* root = context::C()->get_root();
     switch (event->_phase) {
