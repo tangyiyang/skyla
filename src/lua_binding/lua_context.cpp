@@ -1,4 +1,5 @@
 #include "lua_context.h"
+
 #include "core/util.h"
 #include "game_objects/panel.h"
 #include "skyla_context.h"
@@ -12,6 +13,7 @@
 #include "scale9sprite_lua_binding.h"
 #include "spine_lua_binding.h"
 #include "timer_lua_binding.h"
+#include "texture_lua_binding.h"
 #include "util_lua_binding.h"
 
 #if (SKYLA_ENABLE_LUA == 1)
@@ -184,7 +186,7 @@ int lua_context::call_lua(lua_State* L, int n, int r)
 void lua_context::register_lua_extensions(lua_State* L)
 {
     luaL_Reg lua_modules[] = {
-        { "cjson",               luaopen_cjson               },
+        { "cjson",              luaopen_cjson              },
         { "skyla",              luaopen_skyla              },
         { "skyla_node",         luaopen_skyla_node         },
         { "skyla_sprite",       luaopen_skyla_sprite       },
@@ -196,6 +198,7 @@ void lua_context::register_lua_extensions(lua_State* L)
         { "skyla_context",      luaopen_skyla_context      },
         { "skyla_util",         luaopen_skyla_util         },
         { "skyla_timer",        luaopen_skyla_timer        },
+        { "skyla_texture",      luaopen_skyla_texture      },
         { "skyla_action",       luaopen_skyla_action       },
 
         { NULL, NULL}

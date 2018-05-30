@@ -4,9 +4,12 @@ local C = require "skyla_node"
 
 local node = {
     init = C.init,
-    get_id = C.get_id,
+
     on_touch = C.on_touch,
     on_update = C.on_update,
+
+    local_to_world = C.local_to_world,
+
     run_action = C.run_action,
     stop_all_actions = C.stop_all_actions,
 
@@ -17,9 +20,9 @@ local node = {
     set_size = C.set_size,
     set_visible = C.set_visible,
 
+    get_id = C.get_id,
     get_size = C.get_size,
     get_pos = C.get_pos,
-
     get_bounding_box = C.get_bounding_box,
 
     remove_all_children = C.remove_all_children

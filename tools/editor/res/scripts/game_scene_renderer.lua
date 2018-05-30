@@ -41,7 +41,7 @@ function global_game_scene()
         game_layer:add_child(panel)
     end
 
-    -- draw_background_grids()
+    draw_background_grids()
 
     _G["__scene_graph_canvas"] = game_layer
     return game_layer.__cobj

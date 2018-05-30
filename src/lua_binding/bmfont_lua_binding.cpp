@@ -42,7 +42,7 @@ int luaopen_skyla_bmfont(lua_State* L)
 
     luaL_Reg lib[] = {
         { "new",            lskyla_new_bmfont },
-        { "set_text",       lskyla_bmfont_set_text   },
+        { "set_text",       lskyla_bmfont_set_text },
         { NULL, NULL },
     };
 

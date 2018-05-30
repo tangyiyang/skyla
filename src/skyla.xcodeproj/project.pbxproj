@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4337BC741F8521BA004CF11B /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC701F8521B7004CF11B /* cJSON.c */; };
 		4337BCFA1F853F20004CF11B /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 4337BC701F8521B7004CF11B /* cJSON.c */; };
+		4348C08C20BEE8580082667E /* texture_lua_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 4348C08A20BEE8570082667E /* texture_lua_binding.h */; };
+		4348C08D20BEE8580082667E /* texture_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4348C08B20BEE8580082667E /* texture_lua_binding.cpp */; };
+		4348C08E20BEE8580082667E /* texture_lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4348C08B20BEE8580082667E /* texture_lua_binding.cpp */; };
 		4D4703AD1FC4A1050088FAAF /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D47035A1FC4A1050088FAAF /* Animation.h */; };
 		4D4703AE1FC4A1050088FAAF /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D47035B1FC4A1050088FAAF /* AnimationState.h */; };
 		4D4703AF1FC4A1050088FAAF /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D47035C1FC4A1050088FAAF /* AnimationStateData.h */; };
@@ -336,6 +339,8 @@
 		4337BC711F8521B7004CF11B /* cJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cJSON.h; sourceTree = "<group>"; };
 		4337BC731F8521B7004CF11B /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		4337BCA21F8524B7004CF11B /* libskyla-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libskyla-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4348C08A20BEE8570082667E /* texture_lua_binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture_lua_binding.h; sourceTree = "<group>"; };
+		4348C08B20BEE8580082667E /* texture_lua_binding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture_lua_binding.cpp; sourceTree = "<group>"; };
 		4D47035A1FC4A1050088FAAF /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		4D47035B1FC4A1050088FAAF /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
 		4D47035C1FC4A1050088FAAF /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationStateData.h; sourceTree = "<group>"; };
@@ -834,6 +839,8 @@
 		4D4FACDD20A69CB300F08C89 /* lua_binding */ = {
 			isa = PBXGroup;
 			children = (
+				4348C08B20BEE8580082667E /* texture_lua_binding.cpp */,
+				4348C08A20BEE8570082667E /* texture_lua_binding.h */,
 				4D4FACE820A69CB300F08C89 /* lua_context.h */,
 				4D4FACEB20A69CB300F08C89 /* lua_context.cpp */,
 				4D4FACE320A69CB300F08C89 /* context_lua_binding.h */,
@@ -1015,6 +1022,7 @@
 				4D4703C71FC4A1050088FAAF /* SkeletonBinary.h in Headers */,
 				4D4703B71FC4A1050088FAAF /* BoundingBoxAttachment.h in Headers */,
 				4D4FAD1620A69CB300F08C89 /* panel.h in Headers */,
+				4348C08C20BEE8580082667E /* texture_lua_binding.h in Headers */,
 				4D4FAD1520A69CB300F08C89 /* sprite.h in Headers */,
 				4D4703D11FC4A1060088FAAF /* TransformConstraintData.h in Headers */,
 				4D4FAD6A20A69CB300F08C89 /* gl.h in Headers */,
@@ -1183,6 +1191,7 @@
 				4D4FAD0D20A69CB300F08C89 /* node.cpp in Sources */,
 				B6FF63D21F91FC4E00D7058F /* ltablib.c in Sources */,
 				4D4703DB1FC4A1060088FAAF /* Array.c in Sources */,
+				4348C08D20BEE8580082667E /* texture_lua_binding.cpp in Sources */,
 				4D4703FD1FC4A1060088FAAF /* MeshAttachment.c in Sources */,
 				4D6782751FA5C0F7007D461F /* md5.c in Sources */,
 				B6FF63D01F91FC4E00D7058F /* lstrlib.c in Sources */,
@@ -1302,6 +1311,7 @@
 				4D4FAD0E20A69CB300F08C89 /* node.cpp in Sources */,
 				4D6782671FA5A8CE007D461F /* fpconv.c in Sources */,
 				4D4703FA1FC4A1060088FAAF /* Json.c in Sources */,
+				4348C08E20BEE8580082667E /* texture_lua_binding.cpp in Sources */,
 				B6FF63B61F91FC4D00D7058F /* lundump.c in Sources */,
 				4D47040C1FC4A1060088FAAF /* SkeletonBinary.c in Sources */,
 				4D4703F01FC4A1060088FAAF /* Event.c in Sources */,

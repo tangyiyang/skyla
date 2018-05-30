@@ -184,8 +184,14 @@ void node::remove_from_parent()
 
 vec2 node::world_to_local(float world_x, float world_y)
 {
-    affine_transform world_to_local = affine_transform::invert(local_to_world());
+    affine_transform world_to_local = affine_transform::invert(local_to_world_transform());
     return affine_transform::apply_transform(world_to_local, world_x, world_y);
+}
+
+vec2 node::local_to_world()
+{
+    affine_transform local_to_world = local_to_world_transform();
+    return affine_transform::apply_transform(local_to_world, 0, 0);
 }
 
 void node::run_action(action* act)
@@ -216,7 +222,7 @@ affine_transform node::transform_to(node* to)
     return ret;
 }
 
-affine_transform node::local_to_world()
+affine_transform node::local_to_world_transform()
 {
     return transform_to(this->get_root());
 }

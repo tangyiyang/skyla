@@ -31,6 +31,16 @@ static int lskyla_node_get_children(lua_State* L)
     return 1;
 }
 
+static int lskyla_node_local_to_world(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+    vec2 pos = n->local_to_world();
+    lua_pushnumber(L, pos.x);
+    lua_pushnumber(L, pos.y);
+    return 2;
+}
+
 static int lskyla_node_remove_all_children(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
@@ -266,6 +276,7 @@ int luaopen_skyla_node(lua_State* L)
         { "get_id",    lskyla_node_get_id },
         { "add_child", lskyla_node_add_child },
         { "get_children", lskyla_node_get_children },
+        { "local_to_world", lskyla_node_local_to_world },
         { "remove_all_children", lskyla_node_remove_all_children },
         { "set_visible", lskyla_node_set_visible},
         { "set_pos", lskyla_node_set_pos },

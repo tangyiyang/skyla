@@ -187,10 +187,14 @@ int main(int, char**)
 
             rt->draw(rendered_scene);
 
+            ImGui::Image((ImTextureID)((intptr_t)rt->_name),
+                         ImVec2(window_width, window_height),
+                         ImVec2(0, 1),
+                         ImVec2(1, 0));
+
+            ImGui::SetCursorPos(ImVec2(0, 0));
             lua_getglobal(L, "on_render_game_scene");
             lua_context::call_lua(L, 0, 0);
-
-            ImGui::Image((ImTextureID)((intptr_t)rt->_name), ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
 
         }
         ImGui::End();

@@ -50,8 +50,9 @@ public:
     void                      on_detach();
 
     vec2             world_to_local(float world_x, float world_y);
+    vec2             local_to_world();
     affine_transform transform_to(node* to);
-    affine_transform local_to_world();
+    affine_transform local_to_world_transform();
     rect             get_bounding_box();
 
 public:

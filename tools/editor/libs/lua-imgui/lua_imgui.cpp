@@ -16,6 +16,15 @@ int limgui_##call(lua_State* L) \
     return 0;\
 }
 
+#define IMPLEMENT_CALL_IMVEC2_RETURN_VOID(call) \
+int limgui_##call(lua_State* L) \
+{ \
+    lua_Number x = luaL_checknumber(L, 1);\
+    lua_Number y = luaL_checknumber(L, 2); \
+    ImGui::call(ImVec2(x, y)); \
+    return 0; \
+}
+
 IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(BeginMainMenuBar);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMainMenuBar);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMenu);
@@ -24,6 +33,7 @@ IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(IsItemActive);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(IsItemClicked);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(Separator);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(TreePop);
+IMPLEMENT_CALL_IMVEC2_RETURN_VOID(SetCursorPos);
 
 int limgui_Begin(lua_State* L)
 {
@@ -150,6 +160,21 @@ int limgui_InputText(lua_State* L)
         return 2;
     } else {
         luaL_error(L, "invalid args for InputText");
+    }
+    return 0;
+}
+
+int limgui_Image(lua_State* L)
+{
+    int n = lua_gettop(L);
+
+    if (n == 3) {
+        lua_Integer id = luaL_checkinteger(L, 1);
+        lua_Number width = luaL_checknumber(L, 2);
+        lua_Number height = luaL_checknumber(L, 3);
+        ImGui::Image((ImTextureID)(intptr_t)id, ImVec2(width, height));
+    } else {
+        luaL_error(L, "invalid args for Image");
     }
     return 0;
 }
@@ -321,11 +346,13 @@ int luaopen_imgui_core(lua_State* L)
         REGISTER_LIB_FUNC(InputText),
         REGISTER_LIB_FUNC(IsItemActive),
         REGISTER_LIB_FUNC(IsItemClicked),
+        REGISTER_LIB_FUNC(Image),
         REGISTER_LIB_FUNC(KeyCtrl),
         REGISTER_LIB_FUNC(KeySuper),
         REGISTER_LIB_FUNC(KeysDown),
         REGISTER_LIB_FUNC(MenuItem),
         REGISTER_LIB_FUNC(SameLine),
+        REGISTER_LIB_FUNC(SetCursorPos),
         REGISTER_LIB_FUNC(Separator),
         REGISTER_LIB_FUNC(SetColumnWidth),
         REGISTER_LIB_FUNC(SetWindowSize),

@@ -37,6 +37,12 @@ int lskyla_get_sandbox_path(lua_State* L)
     return 1;
 }
 
+int lskyla_get_texture_name(lua_State* L)
+{
+
+    return 1;
+}
+
 int luaopen_skyla_util(lua_State* L)
 {
 #ifdef luaL_checkversion
@@ -44,10 +50,11 @@ int luaopen_skyla_util(lua_State* L)
 #endif
 
     luaL_Reg lib[] = {
-        { "get_platform", lsea2d_util_get_platform },
-        { "add_search_path", lskyla_add_search_path },
-        { "get_sandbox_path", lskyla_get_sandbox_path },
-        { "load_file",  lskyla_util_load_file },
+        { "get_platform",     lsea2d_util_get_platform },
+        { "add_search_path",  lskyla_add_search_path   },
+        { "get_sandbox_path", lskyla_get_sandbox_path  },
+        { "load_file",        lskyla_util_load_file    },
+        { "get_texture_name", lskyla_get_texture_name  },
         { NULL, NULL },
     };
 
