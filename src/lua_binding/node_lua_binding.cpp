@@ -242,7 +242,7 @@ static int lskyla_node_get_id(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
     node* n = (node*)lua_touserdata(L, -1);
-    lua_pushnumber(L, n->get_id());
+    lua_pushinteger(L, n->get_id());
 
     return 1;
 }

@@ -47,6 +47,10 @@ function global_game_scene()
     return game_layer.__cobj
 end
 
+function on_render_game_scene()
+    skyla.dispatcher:emit("on_render_game_scene")
+end
+
 
 function game_scene_renderer.reset_child(child)
     local canvas = __scene_graph_canvas

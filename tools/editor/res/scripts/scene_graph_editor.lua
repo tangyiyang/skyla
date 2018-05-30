@@ -54,23 +54,33 @@ function draw_node(node_data)
     end
 end
 
+
+local _editing_node
+local function on_node_clicked(node, ...)
+    _editing_node = node
+    skyla.dispatcher:emit({name = "on_node_clicked"}, node, ...)
+end
+
+local function init_node_events(scene_node)
+    visit_children_recursive(scene_node, function(node)
+        node:on_touch(function(_, phase, x, y)
+            printf("phase = %d, x = %.2f, y = %.2f", phase, x, y)
+            on_node_clicked(node, phase, x, y)
+        end)
+    end)
+end
+
+
 local function load_scene(graph)
     local scene_loader = require("skyla.scene_loader")
     local game_scene_renderer = require "game_scene_renderer"
 
     require("skyla_util").add_search_path("example_project/")
+
     local node = scene_loader.load_from_data(graph)
     game_scene_renderer.reset_child(node)
 
-    local children = node:get_children()
-
-    print("after load children, n = ", #children)
-    for i = 1, #children do
-        local c = children[i]
-        c:on_touch(function(_, phase, x, y)
-            print("phase, x, y = ", phase, x, y)
-        end)
-    end
+    init_node_events(node)
 end
 
 function scene_graph_editor.load(file_full_path)

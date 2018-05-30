@@ -148,12 +148,15 @@ int main(int, char**)
 
     glfwSetCursorPosCallback(window, MousePosCallback);
 
+
     ImVec4 clear_color = ImColor(114, 144, 154);
 
     entry* game_entry = new entry();
     skyla::context* ctx = new skyla::context(game_entry);
     ctx->init(3, width, height);
     ctx->set_content_scale_factor(content_scale_factor);
+
+    lua_State* L = ctx->_lua_context->_lua_state;
 
     bool show_test_window = true;
 
@@ -184,7 +187,11 @@ int main(int, char**)
 
             rt->draw(rendered_scene);
 
-            ImGui::Image((ImTextureID)rt->_name, ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
+            lua_getglobal(L, "on_render_game_scene");
+            lua_context::call_lua(L, 0, 0);
+
+            ImGui::Image((ImTextureID)((intptr_t)rt->_name), ImVec2(window_width, window_height), ImVec2(0, 1), ImVec2(1, 0));
+
         }
         ImGui::End();
 

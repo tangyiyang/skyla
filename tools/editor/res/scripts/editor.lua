@@ -123,6 +123,8 @@ function editor.init()
     print("the settings")
     print_r(settings)
     reload_file_tree(settings.work_dir)
+
+    require("node_editor").init()
 end
 
 local checked = false

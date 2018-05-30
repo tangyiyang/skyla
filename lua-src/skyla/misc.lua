@@ -177,4 +177,14 @@ function misc.shuffle_pairs(t)
     return iter, t, nil
 end
 
+function misc.visit_children_recursive(node, func)
+    assert(func)
+    local children = node:get_children()
+    for i = 1, #children do
+        local c = children[i]
+        func(c)
+        misc.visit_children_recursive(c, func)
+    end
+end
+
 return misc
