@@ -48,8 +48,9 @@ public:
         _touchable_nodes.push_back(n);
     }
 
-    // for internal editor usage, user code shouldn't call this function in any case.
+    // for internal editor usage, user shouldn't call this function in any case.
     const std::vector<node*> touch_event_test(touch_event* event);
+
 private:
     void send_touch_events(touch_event* event);
 

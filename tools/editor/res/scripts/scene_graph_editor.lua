@@ -61,6 +61,16 @@ local function load_scene(graph)
     require("skyla_util").add_search_path("example_project/")
     local node = scene_loader.load_from_data(graph)
     game_scene_renderer.reset_child(node)
+
+    local children = node:get_children()
+
+    print("after load children, n = ", #children)
+    for i = 1, #children do
+        local c = children[i]
+        c:on_touch(function(_, phase, x, y)
+            print("phase, x, y = ", phase, x, y)
+        end)
+    end
 end
 
 function scene_graph_editor.load(file_full_path)

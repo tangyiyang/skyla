@@ -152,6 +152,11 @@ void node::add_child(node* child, uint32_t z_order/*= 0*/)
     _children.push_back(child);
 }
 
+const std::vector<node*>& node::get_children()
+{
+    return _children;
+}
+
 void node::remove_child(node* child)
 {
     child->_dirty_flags |= DIRTY_MARKED_RELEASE;

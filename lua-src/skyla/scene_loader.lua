@@ -79,7 +79,7 @@ local load_funcs = {
     ["sprite"] = load_sprite,
 }
 
-local function parse(ctx, opt)
+local function parse(ctx, opt, refs)
     local t = opt["type"]
     local f = load_funcs[t]
     if not f then
@@ -108,13 +108,14 @@ function scene_loader.load_from_data(data)
     }
 
     local opt = graph.data.setup
-    return parse(ctx, opt)
+    local refs = {}
+    return parse(ctx, opt, refs)
 end
 
 function scene_loader.load(file_path, cache)
     local data = util.load_file(file_path, cache)
     local graph = cjson.decode(data)
-    load_from_data(graph)
+    return load_from_data(graph)
 end
 
 return scene_loader

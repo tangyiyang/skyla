@@ -12,7 +12,6 @@ local function main()
         print(k, v)
     end
 
-
     local editor = require "editor"
 
     local function create_func(root)

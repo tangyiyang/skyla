@@ -42,11 +42,12 @@ public:
     virtual rect local_bounds();
 
 public:
-    void add_child(node* child, uint32_t z_order = 0);
-    void remove_child(node* child);
-    void remove_all_children();
-    void remove_from_parent();
-    void on_detach();
+    void                      add_child(node* child, uint32_t z_order = 0);
+    const std::vector<node*>& get_children();
+    void                      remove_child(node* child);
+    void                      remove_all_children();
+    void                      remove_from_parent();
+    void                      on_detach();
 
     vec2             world_to_local(float world_x, float world_y);
     affine_transform transform_to(node* to);

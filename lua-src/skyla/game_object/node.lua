@@ -22,7 +22,7 @@ local node = {
 
     get_bounding_box = C.get_bounding_box,
 
-    remove_all_children = C.remove_all_children,
+    remove_all_children = C.remove_all_children
 }
 
 function node.new(t)
@@ -38,6 +38,20 @@ function node:add_child(child, zorder)
     assert(child.__parent == nil)
     child.__parent = self
     C.add_child(self.__cobj, child.__cobj, zorder or 0)
+end
+
+function node:get_children()
+    local children = {}
+    local __children = C.get_children(self.__cobj)
+    for i = 1, #__children do
+        local c = {
+            __cobj = __children[i],
+            __parent = self,
+        }
+        setmetatable(c, {__index = node})
+        children[#children+1] = c
+    end
+    return children
 end
 
 function node:up_stage()

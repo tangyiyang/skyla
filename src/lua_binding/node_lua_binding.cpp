@@ -14,6 +14,23 @@ static int lskyla_node_add_child(lua_State* L)
     return 0;
 }
 
+static int lskyla_node_get_children(lua_State* L)
+{
+    node* n = (node*)lua_touserdata(L, 1);
+    const std::vector<node*>& children = n->get_children();
+    lua_pop(L, -1);
+    lua_newtable(L);
+    std::vector<node*>::const_iterator it = children.begin();
+    int i = 1;
+    for (; it != children.end(); ++it)
+    {
+        lua_pushinteger(L, i++);
+        lua_pushlightuserdata(L, *it);
+        lua_settable(L, -3);
+    }
+    return 1;
+}
+
 static int lskyla_node_remove_all_children(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
@@ -248,6 +265,7 @@ int luaopen_skyla_node(lua_State* L)
         { "new",         lskyla_node_new },
         { "get_id",    lskyla_node_get_id },
         { "add_child", lskyla_node_add_child },
+        { "get_children", lskyla_node_get_children },
         { "remove_all_children", lskyla_node_remove_all_children },
         { "set_visible", lskyla_node_set_visible},
         { "set_pos", lskyla_node_set_pos },
