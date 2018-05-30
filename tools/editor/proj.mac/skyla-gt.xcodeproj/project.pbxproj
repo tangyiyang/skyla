@@ -133,7 +133,6 @@
 		4D4C85EC20AFD08600B685F6 /* nfd_cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nfd_cocoa.m; sourceTree = "<group>"; };
 		4D4C85ED20AFD08600B685F6 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		4D4C85EE20AFD08600B685F6 /* nfd_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nfd_common.c; sourceTree = "<group>"; };
-		4D4C85F120AFD08700B685F6 /* stb_tilemap_editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_tilemap_editor.h; sourceTree = "<group>"; };
 		4D4C85F320AFD08700B685F6 /* lfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lfs.c; sourceTree = "<group>"; };
 		4D4C85F420AFD08700B685F6 /* lfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lfs.h; sourceTree = "<group>"; };
 		4D78A4C320A7327000BEFD9E /* example_project */ = {isa = PBXFileReference; lastKnownFileType = folder; name = example_project; path = ../../example_project; sourceTree = "<group>"; };
@@ -291,14 +290,6 @@
 			path = include;
 			sourceTree = "<group>";
 		};
-		4D4C85F020AFD08700B685F6 /* stb_tilemap_editor */ = {
-			isa = PBXGroup;
-			children = (
-				4D4C85F120AFD08700B685F6 /* stb_tilemap_editor.h */,
-			);
-			path = stb_tilemap_editor;
-			sourceTree = "<group>";
-		};
 		4D4C85F220AFD08700B685F6 /* lua-fs */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,7 +399,6 @@
 				4D4C85F220AFD08700B685F6 /* lua-fs */,
 				4D4C85E420AFD08600B685F6 /* lua-imgui */,
 				4D4C85E720AFD08600B685F6 /* nativefiledialog */,
-				4D4C85F020AFD08700B685F6 /* stb_tilemap_editor */,
 			);
 			name = libs;
 			path = ../libs;

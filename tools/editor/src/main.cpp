@@ -43,7 +43,7 @@ static void dispatch_mouse_event_to_canvas(const skyla::vec2& p)
 
     // TODO: this is an ugly simulation, written in quick and dirty way.
     // consider a better way in the furture. :)
-    if (!io.MouseDown[0] && pressing && moving) {
+    if (!io.MouseDown[0] && (pressing || moving)) {
         C->on_touch_ended(p.x, p.y);
         pressing = false;
         moving = false;

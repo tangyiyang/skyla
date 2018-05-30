@@ -143,8 +143,8 @@ function misc.order_pairs(t)
     end
 
     table.sort(ot, function(a, b)
-            return tostring(a) < tostring(b)
-        end)
+        return tostring(a) < tostring(b)
+    end)
 
     local index = 0
     local function iter()
