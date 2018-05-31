@@ -64,7 +64,6 @@ end
 local function init_node_events(scene_node)
     visit_children_recursive(scene_node, function(node)
         node:on_touch(function(_, phase, x, y)
-            printf("phase = %d, x = %.2f, y = %.2f", phase, x, y)
             on_node_clicked(node, phase, x, y)
         end)
     end)

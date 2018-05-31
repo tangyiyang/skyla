@@ -25,6 +25,15 @@ int limgui_##call(lua_State* L) \
     return 0; \
 }
 
+#define IMPLEMENT_CALL_VOID_RETURN_VEC2(call) \
+int limgui_##call(lua_State* L) \
+{ \
+    ImVec2 v = ImGui::call(); \
+    lua_pushnumber(L, v.x); \
+    lua_pushnumber(L, v.y); \
+    return 2; \
+}
+
 IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(BeginMainMenuBar);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMainMenuBar);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(EndMenu);
@@ -34,6 +43,7 @@ IMPLEMENT_CALL_PARAM_VOID_RETURN_BOOL_1(IsItemClicked);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(Separator);
 IMPLEMENT_CALL_PARAM_VOID_RETURN_VOID(TreePop);
 IMPLEMENT_CALL_IMVEC2_RETURN_VOID(SetCursorPos);
+IMPLEMENT_CALL_VOID_RETURN_VEC2(GetMouseDragDelta);
 
 int limgui_Begin(lua_State* L)
 {
@@ -339,10 +349,12 @@ int luaopen_imgui_core(lua_State* L)
         REGISTER_LIB_FUNC(BeginMainMenuBar),
         REGISTER_LIB_FUNC(Button),
         REGISTER_LIB_FUNC(Columns),
+        REGISTER_LIB_FUNC(CollapsingHeader),
         REGISTER_LIB_FUNC(Checkbox),
         REGISTER_LIB_FUNC(End),
         REGISTER_LIB_FUNC(EndMenu),
         REGISTER_LIB_FUNC(EndMainMenuBar),
+        REGISTER_LIB_FUNC(GetMouseDragDelta),
         REGISTER_LIB_FUNC(InputText),
         REGISTER_LIB_FUNC(IsItemActive),
         REGISTER_LIB_FUNC(IsItemClicked),
@@ -360,7 +372,6 @@ int luaopen_imgui_core(lua_State* L)
         REGISTER_LIB_FUNC(TreeNode),
         REGISTER_LIB_FUNC(TreeNodeEx),
         REGISTER_LIB_FUNC(TreePop),
-        REGISTER_LIB_FUNC(CollapsingHeader),
 
         { NULL, NULL },
     };

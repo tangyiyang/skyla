@@ -7,26 +7,24 @@ local cursor_start_y = 27
 local window_width = 1280
 local window_height = 720
 
+local game_to_window_scale = 2
+
 local function node_pos_to_window(node)
     -- node to world.
     local world_x, world_y = node:local_to_world()
 
-    printf("world_x, world_y = %.2f, %.2f", world_x, world_y)
-    local tx = world_x / 2
-    local ty = (window_height - world_y) / 2
-
-    printf("tx, ty = %.2f, %.2f", tx, ty)
+    local tx = world_x / game_to_window_scale
+    local ty = (window_height - world_y) / game_to_window_scale
 
     local x = tx + cursor_start_x
     local y = ty + cursor_start_y
 
-    printf("x, y = %.2f, %.2f", x, y)
     return x, y
 end
 
 local function node_size_to_window(node)
     local w, h = node:get_size()
-    return w / 2, h / 2
+    return w / game_to_window_scale, h / game_to_window_scale
 end
 
 function node_editor.init()
@@ -34,17 +32,12 @@ function node_editor.init()
 
     local editing_node
     skyla.dispatcher:on("on_node_clicked", function(_, node, phase, x, y)
-        printf("node = %d, phase = %d, x, y = %.2f, %.2f", node:get_id(), phase, x, y)
-
         editing_node = node
-
         node_pos_to_window(node)
     end)
 
-
     local btn_texture = skyla.texture.new("res/images/select_outline_green.png")
     local id = btn_texture:get_texture_opengl_id()
-    print("id = ", id)
     skyla.dispatcher:on("on_render_game_scene", function()
 
         if editing_node then
@@ -54,6 +47,17 @@ function node_editor.init()
 
             imgui.SetCursorPos(x, y-h)
             imgui.Image(id, w, h)
+
+            local x, y = imgui.GetMouseDragDelta()
+            if x ~= 0 and y ~= 0 then
+                y = -y -- imgui coord is upsidedown
+                x = x * game_to_window_scale
+                y = y * game_to_window_scale
+                editing_node:set_pos(editing_node.__ox + x, editing_node.__oy + y)
+            else
+                editing_node.__ox, editing_node.__oy = editing_node:get_pos()
+            end
+
         end
 
     end)
