@@ -1,5 +1,4 @@
-local game_scene_renderer = {
-}
+local game_scene_renderer = {}
 
 --[[
         FIXME: this is quite hacky, this function is called in
@@ -56,6 +55,7 @@ function game_scene_renderer.reset_child(child)
     local canvas = __scene_graph_canvas
     assert(canvas, "global game canvas not created.")
     if canvas.__user_child then
+        require("node_editor").reset()
         canvas.__user_child:remove_from_parent()
     end
     canvas.__user_child = child

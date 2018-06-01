@@ -25,7 +25,8 @@ local node = {
     get_pos = C.get_pos,
     get_bounding_box = C.get_bounding_box,
 
-    remove_all_children = C.remove_all_children
+    remove_from_parent = C.remove_from_parent,
+    remove_all_children = C.remove_all_children,
 }
 
 function node.new(t)

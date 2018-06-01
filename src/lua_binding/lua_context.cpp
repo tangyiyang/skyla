@@ -40,7 +40,6 @@ static int lskyla_inject(lua_State* L)
     lua_getfield(L, -1, "on_destory");
     lua_setfield(L, LUA_REGISTRYINDEX, CONTEXT_DESTROY);
 
-    STACK_DUMP(L);
     lua_pop(L, -1);
     return 0;
 }

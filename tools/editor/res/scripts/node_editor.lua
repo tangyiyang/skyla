@@ -8,6 +8,7 @@ local window_width = 1280
 local window_height = 720
 
 local game_to_window_scale = 2
+local editing_node
 
 local function node_pos_to_window(node)
     -- node to world.
@@ -27,9 +28,11 @@ local function node_size_to_window(node)
     return w / game_to_window_scale, h / game_to_window_scale
 end
 
-function node_editor.init()
+function node_editor.reset()
+    editing_node = nil
+end
 
-    local editing_node
+function node_editor.init()
     skyla.dispatcher:on("on_node_clicked", function(_, node, phase, x, y)
         editing_node = node
         node_pos_to_window(node)
