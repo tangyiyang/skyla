@@ -80,6 +80,11 @@ public:
         _visible = v;
     }
 
+    inline void set_swallow_touches(bool swallow)
+    {
+        _swallow_touches = swallow;
+    }
+
     inline void set_pos(float x, float y)
     {
         _pos = {x, y};
@@ -127,6 +132,16 @@ public:
         return _z_counter;
     }
 
+    inline bool is_swallow_touches()
+    {
+        return _swallow_touches;
+    }
+
+    inline bool is_touch_enabled()
+    {
+        return _touch_callback != nullptr;
+    }
+
     inline void set_zorder(uint32_t z)
     {
         _z_order = z;
@@ -168,6 +183,7 @@ protected:
     uint32_t             _dirty_flags;
 
     bool                 _visible;
+    bool                 _swallow_touches;
     vec2                 _pos;
     vec2                 _scale;
     vec2                 _anchor;

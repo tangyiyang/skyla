@@ -8,10 +8,9 @@ local game_objects = {}
 local function on_start()
     local ctx = require "skyla.context"
     local root = ctx:get_root()
+    _G["go"].ctx = ctx
 
     scene_create_func(root)
-
-    _G["go"].ctx = ctx
 end
 
 local function on_update(dt)

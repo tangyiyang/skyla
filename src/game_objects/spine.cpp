@@ -205,9 +205,4 @@ void spine_anim::hit_test(touch_handler* handler, touch_event* event)
 
 }
 
-void spine_anim::on_touch(touch_event* event)
-{
-
-}
-
 NS_SKYLA_END

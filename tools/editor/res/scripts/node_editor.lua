@@ -28,12 +28,18 @@ local function node_size_to_window(node)
 end
 
 function node_editor.init()
-    print("call node_editor.init")
 
     local editing_node
     skyla.dispatcher:on("on_node_clicked", function(_, node, phase, x, y)
         editing_node = node
         node_pos_to_window(node)
+    end)
+
+    local root = go.ctx:get_root()
+    root:on_touch(function(_, phase, _, _)
+        if phase == TOUCH_ENDED then
+            editing_node = nil
+        end
     end)
 
     local btn_texture = skyla.texture.new("res/images/select_outline_green.png")

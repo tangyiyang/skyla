@@ -75,6 +75,8 @@ void context::init_fundamental_components(const size& logic_size)
     _file_system->init();
     _camera->init_orthographic(logic_size.width, logic_size.height);
     _root->init();
+    _root->set_size(logic_size.width, logic_size.height);
+    _root->set_anchor(0, 0);
 
     _world_view_affine_transform = affine_transform::mk_translate(-logic_size.width/2,
                                                                   -logic_size.height/2);

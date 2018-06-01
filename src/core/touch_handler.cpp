@@ -53,7 +53,13 @@ void touch_handler::send_touch_events(touch_event* event)
 {
     std::vector<node*>::reverse_iterator it = _touchable_nodes.rbegin();
     for (; it != _touchable_nodes.rend(); ++it) {
-        (*it)->on_touch(event);
+        node* n = *it;
+        if (n->is_touch_enabled()) {
+            n->on_touch(event);
+            if (n->is_swallow_touches()) {
+                break;
+            }
+        }
     }
 }
 

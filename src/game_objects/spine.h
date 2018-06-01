@@ -49,7 +49,6 @@ public:
     bool update(float dt) override;
     void draw(render_state* rs) override;
     void hit_test(touch_handler* handler, touch_event* event) override;
-    void on_touch(touch_event* event) override;
 
 private:
     spAnimationState*    _state;
