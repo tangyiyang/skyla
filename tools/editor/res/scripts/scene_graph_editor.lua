@@ -1,8 +1,8 @@
 local cjson = require "cjson"
 
 local scene_graph_editor = {
-    scene_tree = {},
-    property_editer_info = {}
+    property_editer_info = {},
+    scene_data = {},
 }
 
 local function render_property_editor()
@@ -54,10 +54,10 @@ function draw_node(node_data)
     end
 end
 
-
-local _editing_node
+local editing_node
+local scene_root
 local function on_node_clicked(node, ...)
-    _editing_node = node
+    editing_node = node
     skyla.dispatcher:emit({name = "on_node_clicked"}, node, ...)
 end
 
@@ -78,8 +78,9 @@ local function load_scene(graph)
 
     local node = scene_loader.load_from_data(graph)
     game_scene_renderer.reset_child(node)
-
     init_node_events(node)
+
+    scene_root = node
 end
 
 function scene_graph_editor.load(file_full_path)
@@ -90,17 +91,19 @@ function scene_graph_editor.load(file_full_path)
     local data = file:read("*a")
     local decoded = cjson.decode(data)
     assert(decoded and next(decoded) and decoded.data.setup,
-           string.format("invalid file format: %s", file_full_path))
-    scene_graph_editor.scene_data = decoded
+            string.format("invalid file format: %s", file_full_path))
 
-    print("the scene data is")
-    print_r(decoded)
+    scene_graph_editor.scene_data = decoded
 
     load_scene(decoded)
 end
 
+function scene_graph_editor.graph_to_json(graph)
+
+end
+
 function scene_graph_editor.render()
-    if scene_graph_editor.scene_data then
+    if next(scene_graph_editor.scene_data) then
         imgui.Begin("SceneGraph")
 
         local setup_data = scene_graph_editor.scene_data.data.setup

@@ -30,7 +30,7 @@ function scroll_view:ctor(opt)
     local last_x, last_y
 
     self:on_touch(function (id, phase, x, y)
-        if phase == TOUCH_BEGIN then
+        if phase == TOUCH_BEGAN then
 
             last_x, last_y = x, y
 

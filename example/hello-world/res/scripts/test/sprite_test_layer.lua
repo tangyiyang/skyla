@@ -52,7 +52,7 @@ function sprite_test_layer:ctor()
     local w, h = visible_rect.width, visible_rect.height
 
     self:on_touch(function (_, phase, x, y)
-        if phase == TOUCH_BEGIN then
+        if phase == TOUCH_BEGAN then
             begin_time_stamp = os.time()
         elseif phase == TOUCH_ENDED then
             begin_time_stamp = nil

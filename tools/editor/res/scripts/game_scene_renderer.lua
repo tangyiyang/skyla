@@ -50,7 +50,6 @@ function on_render_game_scene()
     skyla.dispatcher:emit("on_render_game_scene")
 end
 
-
 function game_scene_renderer.reset_child(child)
     local canvas = __scene_graph_canvas
     assert(canvas, "global game canvas not created.")
@@ -61,6 +60,5 @@ function game_scene_renderer.reset_child(child)
     canvas.__user_child = child
     canvas:add_child(child)
 end
-
 
 return game_scene_renderer

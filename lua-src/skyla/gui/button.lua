@@ -71,7 +71,7 @@ function button:ctor(opt)
                 self:run_action(action.scale_to(0.1, 1.0, 1.0))
             end
             should_cancel = false
-        elseif phase == TOUCH_BEGIN then
+        elseif phase == TOUCH_BEGAN then
             start_x, start_y = x, y
             self:run_action(action.scale_to(0.1, 0.9, 0.9))
         elseif phase == TOUCH_MOVED then

@@ -13,7 +13,8 @@ setmetatable(scale9sprite, {__index = parent})
 
 function scale9sprite.new(...)
     local obj = {
-        __cobj = C.new(...)
+        __cobj = C.new(...),
+        __children = {},
     }
     setmetatable(obj, {__index = scale9sprite})
     return obj

@@ -16,6 +16,9 @@ end
 local function set_node(node, ctx, opt)
     assert(node)
 
+    print("set node opt , node, opt = ", node:get_id(), opt)
+    node:set_opt(opt)
+
     if opt.visible ~= nil then
         node:set_visible(opt.visible)
     end
@@ -47,7 +50,6 @@ end
 
 local function set_sprite(sprite, ctx, opt)
     assert(sprite)
-    set_node(sprite, ctx, opt)
 
     local t = opt.texture
     if t then
@@ -88,6 +90,7 @@ local function parse(ctx, opt, refs)
         f = load_node
     end
     local node = f(ctx, opt)
+    print("opt.id = ", opt.id)
 
     local children = opt.children
     if children then

@@ -34,8 +34,13 @@ end
 
 function node_editor.init()
     skyla.dispatcher:on("on_node_clicked", function(_, node, phase, x, y)
-        editing_node = node
-        node_pos_to_window(node)
+        if phase == TOUCH_BEGAN then
+            editing_node = node
+            node_pos_to_window(node)
+            print('----clicked----, node = ', node:get_id())
+            print("node._opt = ", node:get_opt())
+            print_r(node)
+        end
     end)
 
     local root = go.ctx:get_root()
@@ -66,9 +71,7 @@ function node_editor.init()
             else
                 editing_node.__ox, editing_node.__oy = editing_node:get_pos()
             end
-
         end
-
     end)
 end
 

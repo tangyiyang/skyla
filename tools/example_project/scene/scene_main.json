@@ -7,7 +7,6 @@
         "setup": {
             "id": 1,
             "type": "node",
-            "var": "root_node",
             "display_name": "root_node",
             "var": "root",
             "visible": true,

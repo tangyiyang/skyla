@@ -13,7 +13,8 @@ setmetatable(spine, {__index = parent})
 
 function spine.new(...)
     local obj = {
-        __cobj = C.new(...)
+        __cobj = C.new(...),
+        __children = {},
     }
     setmetatable(obj, {__index = spine})
     return obj

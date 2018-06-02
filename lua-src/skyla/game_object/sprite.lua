@@ -14,7 +14,8 @@ setmetatable(sprite, {__index = parent})
 
 function sprite.new(...)
     local obj = {
-        __cobj = C.new(...)
+        __cobj = C.new(...),
+        __children = {},
     }
     setmetatable(obj, {__index = sprite})
     return obj

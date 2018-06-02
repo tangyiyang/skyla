@@ -11,7 +11,8 @@ local context = {
 function context:get_root()
     if not self.__root then
         self.__root = node.new {
-            __cobj = C.get_root()
+            __cobj = C.get_root(),
+            __children = {}
         }
     end
     return self.__root

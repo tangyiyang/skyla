@@ -33,6 +33,7 @@ function node.new(t)
     local obj = t or {
         __cobj = C.new(),
         __parent = nil,
+        __children = {},
     }
     setmetatable(obj, {__index = node})
     return obj
@@ -42,27 +43,18 @@ function node:add_child(child, zorder)
     assert(child.__parent == nil)
     child.__parent = self
     C.add_child(self.__cobj, child.__cobj, zorder or 0)
+    self.__children[#self.__children+1] = child
 end
 
 function node:get_children()
-    local children = {}
-    local __children = C.get_children(self.__cobj)
-    for i = 1, #__children do
-        local c = {
-            __cobj = __children[i],
-            __parent = self,
-        }
-        setmetatable(c, {__index = node})
-        children[#children+1] = c
-    end
-    return children
+    return self.__children
 end
 
 function node:up_stage()
     director.up_stage(self)
 end
 
-function node:set_debug_aabb_visible(visible, recursive)
+function node:set_debug_aabb_visible(visible)
     if not self.__debug_aabb_node then
         local primitive = require "skyla.game_object.primitive"
         local box = primitive.new()
@@ -73,10 +65,16 @@ function node:set_debug_aabb_visible(visible, recursive)
     end
 
     self.__debug_aabb_node:set_visible(visible)
+end
 
-    if recursive then
+function node:set_opt(opt)
+    print("set node opt, id = ", self:get_id(), self)
+    self._opt = opt
+end
 
-    end
+function node:get_opt()
+    print("get node opt, id = ", self:get_id(), self)
+    return self._opt
 end
 
 return node
