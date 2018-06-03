@@ -9,7 +9,6 @@ Support MacOSX and iOS already, Android is on it's way.
 ## Must know
 Built with C++ and support script with Lua.
 Node based system(every gameobject is node).
-Scene graph Editor support build with imgui.
 
 ## Supported features (* means on the way)
 * Node Scene graph
@@ -26,7 +25,7 @@ Scene graph Editor support build with imgui.
 * **ParticleSystem (Transform feedback)
 
 ## Game Tool
-Thanks to imgui, it's such fantasic gui library.
+Thanks to imgui, it's such a fantasic gui library.
 The Game tool is written in Lua using the custom imgui luabindings. Check lua_imgui.cpp for more details.
 
 ![editor-screenshot](https://github.com/tangyiyang/skyla/blob/master/editor-screenshot.png?raw=true)
