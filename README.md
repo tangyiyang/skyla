@@ -24,3 +24,9 @@ Scene graph Editor support build with imgui.
 * *tiled map
 * *ParticleSystem (PointSprite)
 * **ParticleSystem (Transform feedback)
+
+## Game Tool
+Thanks to imgui, it's such fantasic gui library.
+The Game tool is written in Lua using the custom imgui luabindings. Check lua_imgui.cpp for more details.
+
+![editor-screenshot](https://github.com/tangyiyang/skyla/blob/master/editor-screenshot.png?raw=true)
