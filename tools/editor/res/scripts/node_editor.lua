@@ -1,3 +1,5 @@
+local vec_math = require "skyla.base.vec_math"
+
 local node_editor = {}
 
 -- TODO: get them from binding api.
@@ -9,6 +11,7 @@ local window_height = 720
 
 local game_to_window_scale = 2
 local editing_node
+local move_cmd = {}
 
 local function node_pos_to_window(node)
     -- node to world.
@@ -30,6 +33,7 @@ end
 
 function node_editor.reset()
     editing_node = nil
+    move_cmd = {}
 end
 
 function node_editor.init()
@@ -37,6 +41,18 @@ function node_editor.init()
         if phase == TOUCH_BEGAN then
             editing_node = node
             node_pos_to_window(node)
+            local x, y = node:get_pos()
+            move_cmd = {
+                type = "move_node",
+                node = node,
+                start_pos = {x = x, y = y}
+            }
+        elseif phase == TOUCH_ENDED then
+            if math.abs(x - move_cmd.start_pos.x) > 10 or
+               math.abs(y - move_cmd.start_pos.y) > 10 then
+                move_cmd.end_pos = {x = x, y = y}
+                skyla.dispatcher:emit({name = "move_node"}, move_cmd)
+            end
         end
     end)
 
@@ -56,7 +72,7 @@ function node_editor.init()
             local x, y = node_pos_to_window(editing_node)
             local w, h = node_size_to_window(editing_node)
 
-            imgui.SetCursorPos(x, y-h)
+            imgui.SetCursorPos(x, y - h)
             imgui.Image(id, w, h)
 
             local x, y = imgui.GetMouseDragDelta()

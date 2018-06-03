@@ -36,7 +36,6 @@ function director.start(create_func, update_callback, destroy_callback)
     skyla.texture = require("skyla.renderer.texture")
     skyla.dispatcher = require("skyla.event_dispatcher"){}
 
-
     local function inject(mod)
         for k, v in pairs(mod) do
             _G[k] = v

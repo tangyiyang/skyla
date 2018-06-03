@@ -1,9 +1,9 @@
 local skyla = require "skyla"
 local stack = require "skyla.base.stack"
 local lfs = require "lfs"
-local scene_graph_editor = require "scene_graph_editor"
 local record = require "record"
-
+local scene_graph_editor = require "scene_graph_editor"
+local stack = require "skyla.base.stack"
 
 local editor = {
     root_dir_name = "",
@@ -118,7 +118,39 @@ local function reload_file_tree(root_path)
     lfs.chdir(saved_dir)
 end
 
+local undo_funcs = {
+    ["move_node"] = function(cmd)
+        local x, y = cmd.start_pos.x, cmd.start_pos.y
+        printf("undo, x, y = %.2f, %.2f", x, y)
+        cmd.node:set_pos(x, y)
+    end,
+}
+
+local function undo(cmd)
+    local f = undo_funcs[cmd.type]
+    if f then
+        f(cmd)
+    else
+        printf("no undo cmd found for cmd.type = %s", cmd.type)
+    end
+end
+
+local cmd_stack
+
 function editor.init()
+    cmd_stack = stack.new()
+    skyla.dispatcher:on("move_node", function(_, cmd)
+        cmd_stack:push(cmd)
+    end)
+
+    skyla.dispatcher:on("super_z", function()
+        if not cmd_stack:empty() then
+            local cmd = cmd_stack:top()
+            undo(cmd)
+            cmd_stack:pop()
+        end
+    end)
+
     local settings = record.load_settings()
     print("the settings")
     print_r(settings)
@@ -188,10 +220,6 @@ local function pressed(key)
     return false
 end
 
-local function response_super_s()
-    skyla.dispatcher:emit({name = "super_s"})
-end
-
 local function response_to_shortcut()
     local super = imgui.KeySuper()
     local ctrl = imgui.KeyCtrl()
@@ -205,7 +233,7 @@ local function response_to_shortcut()
     end
 
     if super and pressed("Z") then
-        print("pressed super+z")
+        skyla.dispatcher:emit({name = "super_z"})
     end
 
     if super and pressed("C") then
@@ -217,7 +245,7 @@ local function response_to_shortcut()
     end
 
     if super and pressed("S") then
-        response_super_s()
+        skyla.dispatcher:emit({name = "super_s"})
     end
 
     if super and pressed("X") then
@@ -272,12 +300,6 @@ local function draw_tool_bar()
             w.func()
         end
     end
-
-    imgui.End()
-end
-
-local function draw_editor_scene()
-    imgui.Begin("Scene")
 
     imgui.End()
 end
@@ -376,12 +398,23 @@ local function draw_scene_graph()
     scene_graph_editor.render()
 end
 
+local function draw_cmd_stack()
+    if cmd_stack:length() > 0 then
+        imgui.Begin("cmd-stack", imgui.ImGuiWindowFlags_AlwaysUseWindowPadding)
+            cmd_stack:visit(function(cmd)
+                imgui.Text(cmd.type)
+            end)
+        imgui.End()
+    end
+end
+
 function editor.update(dt)
     response_to_shortcut()
     draw_menu()
     draw_tool_bar()
     draw_file_system()
     draw_scene_graph()
+    draw_cmd_stack()
 end
 
 function editor.destory()
