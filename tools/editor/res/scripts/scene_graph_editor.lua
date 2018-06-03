@@ -27,9 +27,7 @@ local function render_property_editor()
 end
 
 local function on_open_property_editor(node_tree_info)
-    print("click " .. node_tree_info.display_name)
     scene_graph_editor.property_editer_info = node_tree_info
-    print_r(node_tree_info)
 end
 
 local scene_tree_flags =   imgui.ImGuiTreeNodeFlags_OpenOnArrow
@@ -83,7 +81,7 @@ local function load_scene(graph)
     scene_root = node
 end
 
-function scene_graph_editor.load(file_full_path)
+function scene_graph_editor.init(file_full_path)
     -- we build a data structure to display the scene graph
     -- in order to not revisit the whole file every frame.
     print("file_full_path = ", file_full_path)
@@ -92,10 +90,21 @@ function scene_graph_editor.load(file_full_path)
     local decoded = cjson.decode(data)
     assert(decoded and next(decoded) and decoded.data.setup,
             string.format("invalid file format: %s", file_full_path))
+    file:close()
 
     scene_graph_editor.scene_data = decoded
 
     load_scene(decoded)
+
+    skyla.dispatcher:on("super_s", function()
+        local data = prettycjson(scene_graph_editor.scene_data)
+        if data and #data > 0 then
+            local file = assert(io.open(file_full_path, "w"))
+            assert(file:write(data))
+            file:flush()
+            file:close()
+        end
+    end)
 end
 
 function scene_graph_editor.graph_to_json(graph)

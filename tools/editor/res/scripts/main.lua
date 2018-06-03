@@ -4,8 +4,9 @@ local function main()
     local director = require "skyla.director"
 
     _G["imgui"] = require "imgui"
-    require "imgui_consts"
+    _G["prettycjson"] = require "prettycjson"
 
+    require "imgui_consts"
 
     print("package.preload: ")
     for k, v in pairs(package.preload) do

@@ -21,6 +21,7 @@
 #ifdef __cplusplus
 extern "C" {
 extern int luaopen_cjson(lua_State* L);
+extern int luaopen_cjson_safe(lua_State* L);
 }
 #endif
 
@@ -186,6 +187,7 @@ void lua_context::register_lua_extensions(lua_State* L)
 {
     luaL_Reg lua_modules[] = {
         { "cjson",              luaopen_cjson              },
+        { "cjson.safe",         luaopen_cjson_safe         },
         { "skyla",              luaopen_skyla              },
         { "skyla_node",         luaopen_skyla_node         },
         { "skyla_sprite",       luaopen_skyla_sprite       },

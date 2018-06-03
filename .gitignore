@@ -39,8 +39,5 @@ contents.xcworkspacedata
 
 # Intermediate Files
 .build/
-src/s2d_shaders/tmp
 
-# Ignore the copied files
-example/hello-world/res/scene 
-example/hello-world/res/scripts/seal2d
+

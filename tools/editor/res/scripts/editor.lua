@@ -154,7 +154,11 @@ local function on_open_file_menu()
         end
         imgui.EndMenu();
     end
-    if (imgui.MenuItem("Save", "Ctrl+S")) then end
+
+    if (imgui.MenuItem("Save", "Ctrl+S")) then
+
+    end
+
     if (imgui.MenuItem("Save As..")) then end
     imgui.Separator();
 
@@ -184,6 +188,10 @@ local function pressed(key)
     return false
 end
 
+local function response_super_s()
+    skyla.dispatcher:emit({name = "super_s"})
+end
+
 local function response_to_shortcut()
     local super = imgui.KeySuper()
     local ctrl = imgui.KeyCtrl()
@@ -209,7 +217,7 @@ local function response_to_shortcut()
     end
 
     if super and pressed("S") then
-        print("pressed super+s")
+        response_super_s()
     end
 
     if super and pressed("X") then
@@ -281,7 +289,7 @@ end
 local function proc_scene(full_relative_path)
     print("call proc_scene, full_relative_path = ", full_relative_path)
     local full_path = string.format("%s/%s", record.settings.work_dir, full_relative_path)
-    scene_graph_editor.load(full_path)
+    scene_graph_editor.init(full_path)
 end
 
 local function proc_png(full_relative_path)

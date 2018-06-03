@@ -37,9 +37,7 @@ function node_editor.init()
         if phase == TOUCH_BEGAN then
             editing_node = node
             node_pos_to_window(node)
-            print('----clicked----, node = ', node:get_id())
-            print("node._opt = ", node:get_opt())
-            print_r(node)
+            print_r(node._opt)
         end
     end)
 
@@ -67,7 +65,13 @@ function node_editor.init()
                 y = -y -- imgui coord is upsidedown
                 x = x * game_to_window_scale
                 y = y * game_to_window_scale
-                editing_node:set_pos(editing_node.__ox + x, editing_node.__oy + y)
+                local new_x = editing_node.__ox + x
+                local new_y = editing_node.__oy + y
+
+                -- set the node position and save to the opt
+                editing_node:set_pos(new_x, new_y)
+                editing_node._opt.position.x = new_x
+                editing_node._opt.position.y = new_y
             else
                 editing_node.__ox, editing_node.__oy = editing_node:get_pos()
             end

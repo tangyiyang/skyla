@@ -1,77 +1,77 @@
 {
-    "hash": "244e96571eebc53",
-    "version": "0.0.1",
-    "work_dir": "",
-    "data": {
-        "name": "default-scene-name",
-        "setup": {
-            "id": 1,
-            "type": "node",
-            "display_name": "root_node",
-            "var": "root",
-            "visible": true,
-            "scale": {
-                "x": 1.0,
-                "y": 1.0
-            },
-            "position": {
-                "x": 0.0,
-                "y": 0.0
-            },
-            "z_order": 0,
-            "size": {
-                "width": 1280,
-                "height": 720
-            },
-            "anchor": {
-                "x": 0.0,
-                "y": 0.0
-            },
-            "children": [
-                {
-                    "id": 3,
-                    "type": "sprite",
-                    "display_name": "bunny",
-                    "texture" : {
-                        "type": "full-image",
-                        "file": "images/bunny.png"
-                    },
-                    "position" : {
-                        "x": 100,
-                        "y": 100
-                    },
-                    "anchor" : {
-                        "x" : 0.5,
-                        "y" : 0.5
-                    }
-                },
-                {
-                    "id": 4,
-                    "type": "sprite",
-                    "display_name": "bunny2",
-                    "texture" : {
-                        "type": "full-image",
-                        "file": "images/bunny.png"
-                    },
-                    "position" : {
-                        "x": 200,
-                        "y": 200
-                    },
-                    "anchor" : {
-                        "x" : 0.5,
-                        "y" : 0.5
-                    }
-                }
-            ],
-            "layout": {
-                "pivot": 5
-            }
-        },
-        "animation": {
-            "timelines": {
-                "enter": {},
-                "exit": {}
-            }
-        }
-    }
+	"data": {
+		"animation": {
+			"timelines": {
+				"exit": 				{},
+				"enter": 				{}
+			}
+		},
+		"name": "default-scene-name",
+		"setup": {
+			"type": "node",
+			"children": [
+				{
+					"id": 3,
+					"position": {
+						"y": 281.7578125,
+						"x": 270.2890625
+					},
+					"texture": {
+						"type": "full-image",
+						"file": "images\/bunny.png"
+					},
+					"anchor": {
+						"y": 0.5,
+						"x": 0.5
+					},
+					"type": "sprite",
+					"display_name": "bunny"
+				},
+				{
+					"id": 4,
+					"position": {
+						"y": 562.8046875,
+						"x": 1157.2734375
+					},
+					"texture": {
+						"type": "full-image",
+						"file": "images\/bunny.png"
+					},
+					"anchor": {
+						"y": 0.5,
+						"x": 0.5
+					},
+					"type": "sprite",
+					"display_name": "bunny2"
+				}
+			],
+			"size": {
+				"width": 1280,
+				"height": 720
+			},
+			"z_order": 0,
+			"var": "root",
+			"visible": true,
+			"id": 1,
+			"scale": {
+				"y": 1,
+				"x": 1
+			},
+			"layout": {
+				"pivot": 5
+			},
+			"anchor": {
+				"y": 0,
+				"x": 0
+			},
+			"position": {
+				"y": 0,
+				"x": 0
+			},
+			"display_name": "root_node"
+		}
+	},
+	"version": "0.0.1",
+	"work_dir": "",
+	"hash": "244e96571eebc53"
 }
