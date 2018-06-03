@@ -1,34 +1,40 @@
 local cjson = require "cjson"
 
 local scene_graph_editor = {
-    property_editer_info = {},
     scene_data = {},
 }
 
+local editing_node
 local function render_property_editor()
-    local editor_info = scene_graph_editor.property_editer_info
-    imgui.Begin("Property")
+    if editing_node then
+        imgui.Begin("Property")
 
-    -- Everybody needs "Code" and "Node"
-    if imgui.CollapsingHeader("Code") then
-        imgui.InputText("Script", "main_scene.lua")
-        imgui.InputText("Var", "_root")
+        -- Everybody needs "Code" and "Node"
+        if imgui.CollapsingHeader("Code") then
+            local ok, text
+            ok, text = imgui.InputText("script", "")
+            if ok then
+                print("script = ", text)
+                editing_node._opt.script = text
+            end
+
+            imgui.InputText("var", "")
+        end
+
+        if imgui.CollapsingHeader("node") then
+            local checked = imgui.Checkbox("Visible", editing_node:is_visible())
+            editing_node:set_visible(checked)
+            editing_node._opt.visible = checked
+        end
+
+        if editing_node.type == "Sprite" then
+
+        end
+
+        imgui.End()
     end
-
-    if imgui.CollapsingHeader("Node") then
-        editor_info.visible = imgui.Checkbox("Visible", editor_info.visible)
-    end
-
-    if editor_info.type == "Sprite" then
-
-    end
-
-    imgui.End()
 end
 
-local function on_open_property_editor(node_tree_info)
-    scene_graph_editor.property_editer_info = node_tree_info
-end
 
 local scene_tree_flags =   imgui.ImGuiTreeNodeFlags_OpenOnArrow
                          | imgui.ImGuiTreeNodeFlags_OpenOnDoubleClick
@@ -36,9 +42,6 @@ local draw_node
 function draw_node(node_data)
     if node_data and node_data.children then
         local opened = imgui.TreeNodeEx(node_data.display_name, scene_tree_flags)
-        if imgui.IsItemClicked() then
-            on_open_property_editor(node_data)
-        end
         if opened then
             for i, child in ipairs(node_data.children) do
                 draw_node(child)
@@ -47,12 +50,11 @@ function draw_node(node_data)
         end
     else
         if imgui.Button(node_data.display_name) then
-            on_open_property_editor(node_data)
+            print("click button ", node_data.display_name)
         end
     end
 end
 
-local editing_node
 local scene_root
 local function on_node_clicked(node, ...)
     editing_node = node

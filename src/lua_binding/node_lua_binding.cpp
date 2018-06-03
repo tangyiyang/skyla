@@ -76,6 +76,14 @@ static int lskyla_node_set_size(lua_State* L)
     return 0;
 }
 
+static int lskyla_nod_is_visible(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+    lua_pushboolean(L, n->is_visible());
+    return 1;
+}
+
 static int lskyla_node_get_size(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
@@ -293,6 +301,7 @@ int luaopen_skyla_node(lua_State* L)
         { "set_rotation", lskyla_node_set_rotation },
         { "set_scale", lskyla_node_set_scale },
         { "set_size", lskyla_node_set_size },
+        { "is_visible", lskyla_nod_is_visible },
         { "get_size", lskyla_node_get_size },
         { "get_pos", lskyla_node_get_pos },
         { "get_bounding_box", lskyla_node_get_bounding_box },

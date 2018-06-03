@@ -37,7 +37,6 @@ function node_editor.init()
         if phase == TOUCH_BEGAN then
             editing_node = node
             node_pos_to_window(node)
-            print_r(node._opt)
         end
     end)
 

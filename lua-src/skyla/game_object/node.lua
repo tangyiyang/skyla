@@ -10,6 +10,15 @@ local node = {
 
     local_to_world = C.local_to_world,
 
+    get_bounding_box = C.get_bounding_box,
+    get_id = C.get_id,
+    get_size = C.get_size,
+    get_pos = C.get_pos,
+    is_visible = C.is_visible,
+
+    remove_from_parent = C.remove_from_parent,
+    remove_all_children = C.remove_all_children,
+
     run_action = C.run_action,
     stop_all_actions = C.stop_all_actions,
 
@@ -19,14 +28,6 @@ local node = {
     set_scale = C.set_scale,
     set_size = C.set_size,
     set_visible = C.set_visible,
-
-    get_id = C.get_id,
-    get_size = C.get_size,
-    get_pos = C.get_pos,
-    get_bounding_box = C.get_bounding_box,
-
-    remove_from_parent = C.remove_from_parent,
-    remove_all_children = C.remove_all_children,
 }
 
 function node.new(t)

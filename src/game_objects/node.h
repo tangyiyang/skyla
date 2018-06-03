@@ -65,6 +65,11 @@ public:
         return _id;
     }
 
+    inline bool is_visible()
+    {
+        return _visible;
+    }
+
     inline const vec2& get_pos()
     {
         return _pos;
