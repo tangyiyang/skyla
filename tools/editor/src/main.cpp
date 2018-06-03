@@ -130,7 +130,7 @@ int main(int, char**)
 
     int width = WINDOW_WIDTH;
     int height = WINDOW_HEIGHT;
-    GLFWwindow* window = glfwCreateWindow(width, height, "ImGui OpenGL3 example", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(width, height, "Skyla Game Tool", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
     gl3wInit();

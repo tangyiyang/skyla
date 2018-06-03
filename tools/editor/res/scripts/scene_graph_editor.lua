@@ -21,7 +21,7 @@ local function render_property_editor()
             imgui.InputText("var", "")
         end
 
-        if imgui.CollapsingHeader("node") then
+        if imgui.CollapsingHeader("Node") then
             local checked = imgui.Checkbox("Visible", editing_node:is_visible())
             editing_node:set_visible(checked)
             editing_node._opt.visible = checked

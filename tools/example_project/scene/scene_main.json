@@ -26,7 +26,7 @@
 						"x": 270.2890625
 					},
 					"id": 3,
-					"visible": false,
+					"visible": true,
 					"display_name": "bunny",
 					"anchor": {
 						"y": 0.5,
