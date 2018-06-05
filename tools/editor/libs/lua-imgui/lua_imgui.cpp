@@ -219,6 +219,23 @@ int limgui_KeysDown(lua_State* L)
     return 1;
 }
 
+
+int limgui_KeysPressed(lua_State* L)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    int n = sizeof(io.KeysDown) / sizeof(*io.KeysDown);
+    lua_newtable(L);
+    int index = 1;
+    for (int i = 0; i < n; ++i) {
+        if (ImGui::IsKeyPressed(i, true)) {
+            lua_pushinteger(L, index++);
+            lua_pushnumber(L, i);
+            lua_settable(L, -3);
+        }
+    }
+    return 1;
+}
+
 int limgui_MenuItem(lua_State* L)
 {
     int n = lua_gettop(L);
@@ -362,6 +379,7 @@ int luaopen_imgui_core(lua_State* L)
         REGISTER_LIB_FUNC(KeyCtrl),
         REGISTER_LIB_FUNC(KeySuper),
         REGISTER_LIB_FUNC(KeysDown),
+        REGISTER_LIB_FUNC(KeysPressed),
         REGISTER_LIB_FUNC(MenuItem),
         REGISTER_LIB_FUNC(SameLine),
         REGISTER_LIB_FUNC(SetCursorPos),

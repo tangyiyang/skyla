@@ -208,7 +208,7 @@ local function on_open_file_menu()
 end
 
 local function pressed(key)
-    local keys = imgui.KeysDown()
+    local keys = imgui.KeysPressed()
 
     local t = string.byte(key)
     for i = 1, #keys do
