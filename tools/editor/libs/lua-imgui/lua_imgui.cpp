@@ -159,12 +159,14 @@ int limgui_Checkbox(lua_State* L)
 int limgui_InputText(lua_State* L)
 {
     int n = lua_gettop(L);
-    if (n == 2) {
-        char buf[512] = "";
+    char buf[512] = "";
+
+    if (n >= 2) {
         size_t len = 0;
         luaL_checklstring(L, 2, &len);
         strncpy(buf, luaL_checkstring(L, 2), len);
-        bool ret = ImGui::InputText(luaL_checkstring(L, 1), buf, 512);
+        lua_Integer flag = n == 3 ? luaL_checkinteger(L, 3) : 0;
+        bool ret = ImGui::InputText(luaL_checkstring(L, 1), buf, 512, flag);
         lua_pushboolean(L, ret);
         lua_pushlstring(L, buf, strlen(buf));
         return 2;

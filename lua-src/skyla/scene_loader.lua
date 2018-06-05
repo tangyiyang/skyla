@@ -18,7 +18,7 @@ local function set_node(node, ctx, opt)
 
     print("set node opt , node, opt = ", node:get_id(), opt)
     node:set_opt(opt)
-    opt._node = node
+    opt.__node__ = node
 
     if opt.visible ~= nil then
         node:set_visible(opt.visible)

@@ -14,6 +14,7 @@ local node = {
     get_id = C.get_id,
     get_size = C.get_size,
     get_pos = C.get_pos,
+    get_scale = C.get_scale,
     is_visible = C.is_visible,
 
     remove_from_parent = C.remove_from_parent,
@@ -69,12 +70,10 @@ function node:set_debug_aabb_visible(visible)
 end
 
 function node:set_opt(opt)
-    print("set node opt, id = ", self:get_id(), self)
     self._opt = opt
 end
 
 function node:get_opt()
-    print("get node opt, id = ", self:get_id(), self)
     return self._opt
 end
 

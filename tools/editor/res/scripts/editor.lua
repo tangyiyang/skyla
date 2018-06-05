@@ -3,6 +3,8 @@ local stack = require "skyla.base.stack"
 local lfs = require "lfs"
 local record = require "record"
 local scene_graph_editor = require "scene_graph_editor"
+local property_editor = require "property_editor"
+local node_editor = require("node_editor")
 local stack = require "skyla.base.stack"
 
 local editor = {
@@ -156,7 +158,8 @@ function editor.init()
     print_r(settings)
     reload_file_tree(settings.work_dir)
 
-    require("node_editor").init()
+    node_editor.init()
+    property_editor.init()
 end
 
 local checked = false
@@ -224,37 +227,15 @@ local function response_to_shortcut()
     local super = imgui.KeySuper()
     local ctrl = imgui.KeyCtrl()
 
-    if super and pressed("O") then
-        print("pressed super+o")
-    end
-
-    if super and pressed("A") then
-        print("pressed super+a")
-    end
-
     if super and pressed("Z") then
         skyla.dispatcher:emit({name = "super_z"})
     end
 
-    if super and pressed("C") then
-        print("pressed super+c")
-    end
-
-    if super and pressed("V") then
-        print("pressed super+v")
-    end
-
     if super and pressed("S") then
+        print("super s pressed")
         skyla.dispatcher:emit({name = "super_s"})
     end
 
-    if super and pressed("X") then
-        print("pressed super+x")
-    end
-
-    if super and pressed("Y") then
-        print("pressed super+y")
-    end
 end
 
 local function draw_menu()
@@ -381,8 +362,6 @@ local function draw_file_system()
         record.settings.work_dir = dir
         record.save()
         reload_file_tree(dir)
-        print("the file tree is")
-        print_r(editor.file_tree)
     end
     imgui.SameLine()
     imgui.InputText("path", record.settings.work_dir)
@@ -396,6 +375,7 @@ end
 
 local function draw_scene_graph()
     scene_graph_editor.render()
+    property_editor.render()
 end
 
 local function draw_cmd_stack()

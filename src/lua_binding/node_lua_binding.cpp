@@ -95,6 +95,17 @@ static int lskyla_node_get_size(lua_State* L)
     return 2;
 }
 
+static int lskyla_node_get_scale(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+    const vec2& s = n->get_scale();
+    lua_pushnumber(L, s.x);
+    lua_pushnumber(L, s.y);
+
+    return 2;
+}
+
 static int lskyla_node_get_pos(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
@@ -303,6 +314,7 @@ int luaopen_skyla_node(lua_State* L)
         { "set_size", lskyla_node_set_size },
         { "is_visible", lskyla_nod_is_visible },
         { "get_size", lskyla_node_get_size },
+        { "get_scale", lskyla_node_get_scale },
         { "get_pos", lskyla_node_get_pos },
         { "get_bounding_box", lskyla_node_get_bounding_box },
         { "on_touch", lskyla_node_on_touch },
