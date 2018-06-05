@@ -118,7 +118,7 @@ end
 function scene_loader.load(file_path, cache)
     local data = util.load_file(file_path, cache)
     local graph = cjson.decode(data)
-    return load_from_data(graph)
+    return scene_loader.load_from_data(graph)
 end
 
 return scene_loader
