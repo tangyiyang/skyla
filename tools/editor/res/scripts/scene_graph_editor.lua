@@ -18,7 +18,7 @@ function draw_node(node_data)
         end
     else
         if imgui.Button(node_data.display_name) then
-            editing_node = node_data._node
+            editing_node = node_data.__node__
             skyla.dispatcher:emit({name = "on_editing_node_changed"}, editing_node)
         end
     end
