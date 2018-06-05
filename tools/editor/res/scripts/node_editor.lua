@@ -56,6 +56,10 @@ function node_editor.init()
         end
     end)
 
+    skyla.dispatcher:on("on_editing_node_changed", function(_, new_node)
+        editing_node = new_node
+    end)
+
     local root = go.ctx:get_root()
     root:on_touch(function(_, phase, _, _)
         if phase == TOUCH_ENDED then

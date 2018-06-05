@@ -18,6 +18,7 @@ local function set_node(node, ctx, opt)
 
     print("set node opt , node, opt = ", node:get_id(), opt)
     node:set_opt(opt)
+    opt._node = node
 
     if opt.visible ~= nil then
         node:set_visible(opt.visible)
@@ -111,6 +112,9 @@ function scene_loader.load_from_data(data)
     }
 
     local opt = graph.data.setup
+    -- node have ref to opt,
+    -- opt have weak ref to node.???
+    -- setmetatable(opt, {__mode = "v"})
     local refs = {}
     return parse(ctx, opt, refs)
 end
