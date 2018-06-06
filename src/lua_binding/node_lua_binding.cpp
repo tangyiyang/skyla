@@ -129,6 +129,15 @@ static int lskyla_node_get_bounding_box(lua_State* L)
     return 4;
 }
 
+static int lskyla_node_get_rotation(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+
+    lua_pushnumber(L, n->get_rotation());
+    return 1;
+}
+
 static int lskyla_node_set_pos(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
@@ -299,8 +308,8 @@ int luaopen_skyla_node(lua_State* L)
 #endif
 
     luaL_Reg lib[] = {
-        { "new",         lskyla_node_new },
-        { "get_id",    lskyla_node_get_id },
+        { "new", lskyla_node_new },
+        { "get_id", lskyla_node_get_id },
         { "add_child", lskyla_node_add_child },
         { "get_children", lskyla_node_get_children },
         { "local_to_world", lskyla_node_local_to_world },
@@ -317,6 +326,7 @@ int luaopen_skyla_node(lua_State* L)
         { "get_scale", lskyla_node_get_scale },
         { "get_pos", lskyla_node_get_pos },
         { "get_bounding_box", lskyla_node_get_bounding_box },
+        { "get_rotation", lskyla_node_get_rotation },
         { "on_touch", lskyla_node_on_touch },
         { "on_update", lsea2d_node_on_update },
         { "run_action", lskyla_node_run_action },

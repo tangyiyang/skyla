@@ -27,8 +27,9 @@ local function node_pos_to_window(node)
 end
 
 local function node_size_to_window(node)
+    local scale_x, scale_y = node:get_scale()
     local w, h = node:get_size()
-    return w / game_to_window_scale, h / game_to_window_scale
+    return w * scale_x / game_to_window_scale, h * scale_y/ game_to_window_scale
 end
 
 function node_editor.reset()
@@ -77,6 +78,7 @@ function node_editor.init()
             local w, h = node_size_to_window(editing_node)
 
             imgui.SetCursorPos(x, y - h)
+            -- TODO: if a node is rotated, we need to draw a rotated image using imgui.draw_list
             imgui.Image(id, w, h)
 
             local x, y = imgui.GetMouseDragDelta()

@@ -127,6 +127,11 @@ public:
         _size = {width, height};
     }
 
+    inline float get_rotation()
+    {
+        return _rotation;
+    }
+
     inline uint32_t get_zorder()
     {
         return _z_order;

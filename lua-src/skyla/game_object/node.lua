@@ -15,6 +15,7 @@ local node = {
     get_size = C.get_size,
     get_pos = C.get_pos,
     get_scale = C.get_scale,
+    get_rotation = C.get_rotation,
     is_visible = C.is_visible,
 
     remove_from_parent = C.remove_from_parent,

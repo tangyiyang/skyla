@@ -95,8 +95,8 @@ function scene_graph_editor.init(file_full_path)
     load_scene(decoded)
 
     skyla.dispatcher:on("super_s", function()
-        local copied = scene_copy(scene_graph_editor.scene_data)
-        local data = prettycjson(copied)
+        local raw_data = scene_copy(scene_graph_editor.scene_data)
+        local data = prettycjson(raw_data)
 
         if data and #data > 0 then
             local file = assert(io.open(file_full_path, "w"))

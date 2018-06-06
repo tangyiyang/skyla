@@ -1,86 +1,90 @@
 {
 	"version": "0.0.1",
-	"work_dir": "",
 	"hash": "244e96571eebc53",
 	"data": {
-		"name": "default-scene-name",
+		"animation": {
+			"timelines": {
+				"enter": 				{},
+				"exit": 				{}
+			}
+		},
 		"setup": {
+			"z_order": 0,
+			"display_name": "root_node",
+			"children": [
+				{
+					"display_name": "bunny",
+					"visible": true,
+					"position": {
+						"y": 244.234375,
+						"x": 413.6796875
+					},
+					"type": "sprite",
+					"anchor": {
+						"y": 0.5,
+						"x": 0.5
+					},
+					"id": 3,
+					"texture": {
+						"file": "images\/bunny.png",
+						"type": "full-image"
+					},
+					"rotation": 50,
+					"scale": {
+						"y": 5,
+						"x": 5
+					}
+				},
+				{
+					"display_name": "bunny2",
+					"visible": true,
+					"position": {
+						"y": 409.3125,
+						"x": 956.671875
+					},
+					"type": "sprite",
+					"anchor": {
+						"y": 0.5,
+						"x": 0.5
+					},
+					"id": 4,
+					"texture": {
+						"file": "images\/bunny.png",
+						"type": "full-image"
+					},
+					"rotation": 0,
+					"scale": {
+						"y": 3,
+						"x": 3
+					}
+				}
+			],
+			"visible": true,
+			"scale": {
+				"y": 1,
+				"x": 1
+			},
+			"var": "root",
 			"position": {
 				"y": 0,
 				"x": 0
 			},
 			"id": 1,
-			"visible": true,
-			"z_order": 0,
-			"layout": {
-				"pivot": 5
-			},
-			"display_name": "root_node",
-			"type": "node",
 			"anchor": {
 				"y": 0,
 				"x": 0
 			},
-			"var": "root",
-			"scale": {
-				"y": 1,
-				"x": 1
+			"rotation": 0,
+			"layout": {
+				"pivot": 5
 			},
 			"size": {
-				"width": 1280,
-				"height": 720
+				"height": 720,
+				"width": 1280
 			},
-			"children": [
-				{
-					"display_name": "bunny",
-					"scale": {
-						"y": 5,
-						"x": 5
-					},
-					"type": "sprite",
-					"anchor": {
-						"y": 0.5,
-						"x": 0.5
-					},
-					"position": {
-						"y": 244.234375,
-						"x": 413.6796875
-					},
-					"id": 3,
-					"visible": true,
-					"texture": {
-						"type": "full-image",
-						"file": "images\/bunny.png"
-					}
-				},
-				{
-					"display_name": "bunny2",
-					"type": "sprite",
-					"anchor": {
-						"y": 0.5,
-						"x": 0.5
-					},
-					"position": {
-						"y": 562.8046875,
-						"x": 1157.2734375
-					},
-					"scale": {
-						"y": 1,
-						"x": 1
-					},
-					"id": 4,
-					"texture": {
-						"type": "full-image",
-						"file": "images\/bunny.png"
-					}
-				}
-			]
+			"type": "node"
 		},
-		"animation": {
-			"timelines": {
-				"exit": 				{},
-				"enter": 				{}
-			}
-		}
-	}
+		"name": "default-scene-name"
+	},
+	"work_dir": ""
 }

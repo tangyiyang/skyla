@@ -55,6 +55,11 @@ function property_editor.render()
                 editing_node:set_scale(scale_x, value)
             end)
 
+            local rotation = editing_node:get_rotation()
+            imgui_helper.decimal_input("rotation", rotation, function(value)
+                editing_node._opt.rotation = value
+                editing_node:set_rotation(value)
+            end)
         end
 
         if editing_node.type == "Sprite" then
