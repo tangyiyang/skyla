@@ -34,12 +34,18 @@ public:
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
+    inline const std::string& get_file_path()
+    {
+        return _file;
+    }
+
 public:
     texture_id_t    _id;
     size            _size;
     GLuint          _name;
     bool            _upside_down; /* if a texture is upside-down, render-texture is true.*/
     bool            _premultiply_alpha;
+    std::string     _file; /* file name of texture. Empty string if texture is initialized from raw data*/
 
     static texture_id_t _texture_id_counter;
 };

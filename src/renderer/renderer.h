@@ -107,6 +107,11 @@ public:
         _blend_mode = _texture->_premultiply_alpha ? BLEND_MODE_NORMAL : BLEND_MODE_ALPHA;
     }
 
+    texture* get_texture()
+    {
+        return _texture;
+    }
+
 public:
     blend_mode _blend_mode;
     texture*   _texture;

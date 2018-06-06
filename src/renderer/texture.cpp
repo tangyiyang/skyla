@@ -73,6 +73,7 @@ bool texture::init(const char* file)
     if (f) {
         this->init(f->_buffer, (int)f->_size);
         f->release();
+        _file = file;
         return true;
     } else {
         LOGE("file: %s, could not be located.", file);

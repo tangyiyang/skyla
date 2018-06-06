@@ -80,6 +80,15 @@ static int lskyla_sprite_set_texture(lua_State* L)
     return 0;
 }
 
+static int lskyla_sprite_get_texture(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    sprite* s = (sprite*)lua_touserdata(L, -1);
+
+    lua_pushlightuserdata(L, s->get_texture());
+    return 1;
+}
+
 static int lskyla_sprite_set_blend_mode(lua_State* L)
 {
     int n = lua_gettop(L);
@@ -110,6 +119,7 @@ int luaopen_skyla_sprite(lua_State* L)
         { "set_texture",        lskyla_sprite_set_texture },
         { "set_color",          lskyla_sprite_set_color},
         { "set_blend_mode",     lskyla_sprite_set_blend_mode},
+        { "get_texture",        lskyla_sprite_get_texture},
         { NULL, NULL },
     };
 

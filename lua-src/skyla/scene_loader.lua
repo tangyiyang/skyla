@@ -54,7 +54,7 @@ local function set_sprite(sprite, ctx, opt)
 
     local t = opt.texture
     if t then
-        if t.type == "full-image" then
+        if t.type == "image" then
             sprite:set_texture(res_full_path(ctx, t.file))
         elseif t.type == "atlas" then
             sprite:set_texture("#" .. t.sprite_frame_name)

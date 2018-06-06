@@ -51,6 +51,10 @@ public:
     void set_texture_with_frame(sprite_frame* frame);
     void set_texture_rect(texture* tex, const rect& r);
 
+    inline sprite_frame* get_frame()
+    {
+        return _frame;
+    }
 public:
     inline void set_color(uint32_t color)
     {
@@ -72,6 +76,7 @@ private:
 
 public:
     pos_tex_color_vertex _quad[4];
+    sprite_frame*        _frame;
 };
 
 NS_SKYLA_END

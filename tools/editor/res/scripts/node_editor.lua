@@ -69,7 +69,7 @@ function node_editor.init()
     end)
 
     local btn_texture = skyla.texture.new("res/images/select_outline_green.png")
-    local id = btn_texture:get_texture_opengl_id()
+    local id = btn_texture:get_opengl_id()
     skyla.dispatcher:on("on_render_game_scene", function()
 
         if editing_node then

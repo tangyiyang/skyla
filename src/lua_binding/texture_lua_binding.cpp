@@ -22,12 +22,21 @@ int lskyla_new_texture(lua_State* L)
     return 0;
 }
 
-int lskyla_get_texture_opengl_id(lua_State* L)
+int lskyla_get_opengl_id(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
     texture* b = (texture*)lua_touserdata(L, -1);
 
     lua_pushinteger(L, b->_name);
+    return 1;
+}
+
+int lskyla_get_file_path(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    texture* b = (texture*)lua_touserdata(L, -1);
+
+    lua_pushstring(L, b->get_file_path().c_str());
     return 1;
 }
 
@@ -39,7 +48,8 @@ int luaopen_skyla_texture(lua_State* L)
 
     luaL_Reg lib[] = {
         { "new",                    lskyla_new_texture },
-        { "get_texture_opengl_id",  lskyla_get_texture_opengl_id },
+        { "get_opengl_id",          lskyla_get_opengl_id },
+        { "get_file_path",          lskyla_get_file_path },
         { NULL, NULL },
     };
 
