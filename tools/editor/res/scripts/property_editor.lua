@@ -60,6 +60,18 @@ function property_editor.render()
                 editing_node._opt.rotation = value
                 editing_node:set_rotation(value)
             end)
+
+            local anchor_x, anchor_y = editing_node:get_anchor()
+
+            imgui_helper.decimal_input("anchor_x", anchor_x, function(value)
+                editing_node._opt.anchor.x = value
+                editing_node:set_anchor(value, anchor_y)
+            end)
+
+            imgui_helper.decimal_input("anchor_y", anchor_y, function(value)
+                editing_node._opt.anchor.y = value
+                editing_node:set_anchor(anchor_x, value)
+            end)
         end
 
         if editing_node.type == "Sprite" then

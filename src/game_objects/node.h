@@ -75,6 +75,11 @@ public:
         return _pos;
     }
 
+    inline const vec2& get_anchor()
+    {
+        return _anchor;
+    }
+
     inline const vec2& get_scale()
     {
         return _scale;

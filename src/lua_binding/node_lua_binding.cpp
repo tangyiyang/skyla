@@ -117,6 +117,17 @@ static int lskyla_node_get_pos(lua_State* L)
     return 2;
 }
 
+static int lskyla_node_get_anchor(lua_State* L)
+{
+    lua_getfield(L, 1, "__cobj");
+    node* n = (node*)lua_touserdata(L, -1);
+    const vec2& p = n->get_anchor();
+    lua_pushnumber(L, p.x);
+    lua_pushnumber(L, p.y);
+
+    return 2;
+}
+
 static int lskyla_node_get_bounding_box(lua_State* L)
 {
     lua_getfield(L, 1, "__cobj");
@@ -325,6 +336,7 @@ int luaopen_skyla_node(lua_State* L)
         { "get_size", lskyla_node_get_size },
         { "get_scale", lskyla_node_get_scale },
         { "get_pos", lskyla_node_get_pos },
+        { "get_anchor", lskyla_node_get_anchor },
         { "get_bounding_box", lskyla_node_get_bounding_box },
         { "get_rotation", lskyla_node_get_rotation },
         { "on_touch", lskyla_node_on_touch },
