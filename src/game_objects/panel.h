@@ -8,7 +8,8 @@
 #define skyla_panel_h
 
 #include "skyla_common.h"
-#include "game_objects/node.h"
+
+#include "node.h"
 
 NS_SKYLA
 

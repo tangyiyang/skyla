@@ -7,7 +7,8 @@
 #ifndef skyla_particle_h
 #define skyla_particle_h
 
-#include "game_objects/node.h"
+#include "node.h"
+
 #include "renderer/quad_renderer.h"
 
 NS_SKYLA

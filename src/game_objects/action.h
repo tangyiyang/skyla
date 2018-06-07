@@ -7,8 +7,8 @@
 #define skyla_action_h
 
 #include "skyla_common.h"
-#include "game_objects/node.h"
 #include "core/timer.h"
+#include "game_objects/node.h"
 
 NS_SKYLA
 

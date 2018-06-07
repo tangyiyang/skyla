@@ -1,4 +1,5 @@
-#include "renderer/texture.h"
+#include "texture.h"
+
 #include "core/util.h"
 
 #define STB_IMAGE_IMPLEMENTATION

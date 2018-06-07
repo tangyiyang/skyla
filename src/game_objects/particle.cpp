@@ -1,7 +1,8 @@
+#include "particle.h"
+
 #include "cJSON.h"
 #include "skyla_context.h"
 #include "core/util.h"
-#include "game_objects/particle.h"
 
 NS_SKYLA
 

@@ -1,4 +1,5 @@
 #include "sprite_lua_binding.h"
+
 #include "game_objects/sprite.h"
 #include "skyla_context.h"
 

@@ -9,7 +9,8 @@
 #ifndef skyla_sprite_h
 #define skyla_sprite_h
 
-#include "game_objects/node.h"
+#include "node.h"
+
 #include "renderer/texture.h"
 #include "renderer/program.h"
 #include "renderer/render_state.h"

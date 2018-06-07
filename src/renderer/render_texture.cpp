@@ -1,6 +1,7 @@
+#include "render_texture.h"
+
 #include "core/util.h"
 #include "skyla_context.h"
-#include "render_texture.h"
 
 NS_SKYLA
 

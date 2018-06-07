@@ -1,4 +1,4 @@
-#include "renderer/quad_renderer.h"
+#include "quad_renderer.h"
 #include "skyla_context.h"
 
 NS_SKYLA

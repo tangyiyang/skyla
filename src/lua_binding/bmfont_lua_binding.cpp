@@ -1,4 +1,5 @@
 #include "bmfont_lua_binding.h"
+
 #include "game_objects/bmfont.h"
 
 #if (SKYLA_ENABLE_LUA == 1)

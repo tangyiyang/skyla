@@ -1,4 +1,5 @@
 #include "node_lua_binding.h"
+
 #include "game_objects/node.h"
 
 #if (SKYLA_ENABLE_LUA == 1)

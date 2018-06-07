@@ -1,4 +1,4 @@
-#include "game_objects/panel.h"
+#include "panel.h"
 
 NS_SKYLA
 

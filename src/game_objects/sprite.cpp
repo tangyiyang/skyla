@@ -1,4 +1,5 @@
 #include "game_objects/sprite.h"
+
 #include "skyla_context.h"
 #include "core/util.h"
 #include "cJSON.h"

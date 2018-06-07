@@ -1,5 +1,6 @@
-#include "game_objects/primitive_node.h"
 #include "primitive_node_lua_binding.h"
+
+#include "game_objects/primitive_node.h"
 
 #if (SKYLA_ENABLE_LUA == 1)
 

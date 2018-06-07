@@ -1,5 +1,6 @@
-#include "skyla_context.h"
 #include "render_state.h"
+
+#include "skyla_context.h"
 #include "renderer/quad_renderer.h"
 #include "line_renderer.h"
 #include "game_objects/sprite.h"

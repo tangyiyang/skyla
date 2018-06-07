@@ -8,7 +8,8 @@
 #define skyla_touch_handler_h
 
 #include "skyla_common.h"
-#include "core/util.h"
+
+#include "util.h"
 
 NS_SKYLA
 

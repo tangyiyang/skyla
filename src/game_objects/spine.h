@@ -9,9 +9,9 @@
 
 #ifdef SKYLA_ENABLE_SPINE
 
-#include "spine/AtlasAttachmentLoader.h"
-#include "spine/extension.h"
 #include "spine/spine.h"
+#include "spine/extension.h"
+#include "spine/AtlasAttachmentLoader.h"
 
 #include "skyla_common.h"
 #include "game_objects/node.h"

@@ -7,7 +7,7 @@
 #ifndef skyla_scale9sprite_h
 #define skyla_scale9sprite_h
 
-#include "game_objects/sprite.h"
+#include "sprite.h"
 
 NS_SKYLA
 

@@ -1,4 +1,5 @@
 #include "spine_lua_binding.h"
+
 #include "game_objects/spine.h"
 
 #if (SKYLA_ENABLE_LUA == 1)

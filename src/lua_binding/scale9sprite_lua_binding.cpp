@@ -1,4 +1,5 @@
 #include "scale9sprite_lua_binding.h"
+
 #include "game_objects/scale9sprite.h"
 #include "skyla_context.h"
 

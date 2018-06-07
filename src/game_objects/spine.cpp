@@ -1,6 +1,6 @@
-#include "core/util.h"
-
 #include "spine.h"
+
+#include "core/util.h"
 
 NS_SKYLA
 

@@ -1,4 +1,5 @@
 #include "timer_lua_binding.h"
+
 #include "core/timer.h"
 
 #if (SKYLA_ENABLE_LUA == 1)

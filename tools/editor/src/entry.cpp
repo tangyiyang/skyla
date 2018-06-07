@@ -1,7 +1,7 @@
 #include "entry.h"
-#include "lua_editor.h"
 
 #include "level_editor_common.h"
+#include "lua_editor.h"
 #include "lua_imgui.h"
 #include "lfs.h"
 

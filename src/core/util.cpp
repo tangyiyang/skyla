@@ -1,9 +1,9 @@
+#include "util.h"
+
 #include "md5.h"
 
 #include "platform.h"
 #include "skyla_context.h"
-
-#include "core/util.h"
 
 #include <zlib.h> /*It looks like every platform has libz, all we need is to link with -lz.*/
 

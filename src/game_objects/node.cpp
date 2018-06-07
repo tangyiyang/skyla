@@ -1,6 +1,7 @@
+#include "node.h"
+
 #include "skyla_context.h"
 #include "core/util.h"
-#include "node.h"
 #include "action.h"
 
 NS_SKYLA

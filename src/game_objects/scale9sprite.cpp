@@ -1,5 +1,6 @@
+#include "scale9sprite.h"
+
 #include "skyla_context.h"
-#include "game_objects/scale9sprite.h"
 
 NS_SKYLA
 

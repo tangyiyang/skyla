@@ -1,4 +1,5 @@
-#include "core/timer.h"
+#include "timer.h"
+
 #include "skyla_context.h"
 
 NS_SKYLA
