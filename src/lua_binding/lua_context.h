@@ -35,13 +35,13 @@ extern "C" {
         }while(0); \
 
 
-#define STACK_DUMP(L) lua_context::stackDump(L);
+#define STACK_DUMP(L) lua_context::dump_stack(L);
 NS_SKYLA
 
 class context;
 class lua_context {
 public:
-    static void stackDump (lua_State* L);
+    static void dump_stack(lua_State* L);
     static int call_lua(lua_State* L, int n, int r);
 
 public:

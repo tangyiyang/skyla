@@ -103,7 +103,7 @@ static int luaopen_skyla(lua_State* L)
     return 1;
 }
 
-void lua_context::stackDump (lua_State* L)
+void lua_context::dump_stack(lua_State* L)
 {
     int i;
     int top = lua_gettop(L);
