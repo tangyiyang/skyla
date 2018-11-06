@@ -27,7 +27,7 @@
 					"id": 3,
 					"texture": {
 						"file": "images\/bunny.png",
-						"type": "full-image"
+						"type": "image"
 					},
 					"rotation": 50,
 					"scale": {
@@ -50,7 +50,7 @@
 					"id": 4,
 					"texture": {
 						"file": "images\/bunny.png",
-						"type": "full-image"
+						"type": "image"
 					},
 					"rotation": 0,
 					"scale": {
